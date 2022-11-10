@@ -4,26 +4,29 @@
     <groupId>com.shoptao.application.Application</groupId>
     <artifactId>DuAn1_ShopTao</artifactId>
     <version>1.0-SNAPSHOT</version>
+    
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.32.Final</version>
+            <type>jar</type>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>9.4.1.jre8</version>            
+        </dependency>
+    </dependencies>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <exec.mainClass>com.shoptao.application.Application.DuAn1_ShopTao</exec.mainClass>
+        <exec.mainClass>com.shoptao.application.Application</exec.mainClass>
     </properties>
     
-    <dependencies>
-        <!--import hibernate core-->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.6.9.Final</version>
-        </dependency>
-        
-        <!--import sql driver-->
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>9.4.1.jre16</version>
-        </dependency>
-    </dependencies>
 </project>
