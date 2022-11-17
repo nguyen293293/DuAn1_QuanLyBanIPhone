@@ -46,6 +46,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         btnEditMauSac = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jPasswordField1 = new javax.swing.JPasswordField();
@@ -118,6 +119,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
         txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSeacrch.setBorder(null);
+        txtSeacrch.setOpaque(false);
         txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSeacrchMouseClicked(evt);
@@ -222,9 +224,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jRadioButton1.setText("Đang làm");
+        jRadioButton1.setOpaque(false);
 
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jRadioButton2.setText("Đã nghỉ");
+        jRadioButton2.setOpaque(false);
 
         btnEditMauSac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_eye_35px.png"))); // NOI18N
         btnEditMauSac.addActionListener(new java.awt.event.ActionListener() {
@@ -233,11 +237,15 @@ public class NhanVienPanel extends javax.swing.JPanel {
             }
         });
 
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
         jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jRadioButton3.setText("Nam");
+        jRadioButton3.setOpaque(false);
 
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jRadioButton4.setText("Nữ");
+        jRadioButton4.setOpaque(false);
 
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
@@ -262,8 +270,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
                         .addGap(74, 74, 74))
                     .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
                     .addComponent(jTextField4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+=======
+                    .addComponent(jTextField4)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+>>>>>>> 5b7ca750c82badbfba5522342806cb3efb9ec504
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
@@ -322,7 +336,9 @@ public class NhanVienPanel extends javax.swing.JPanel {
                             .addComponent(jRadioButton3)
                             .addComponent(jRadioButton4))
                         .addGap(35, 35, 35)
-                        .addComponent(jLabel5)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -381,6 +397,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;

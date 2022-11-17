@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\Duan1\Duan1\src\main\java\com\shoptao\view\SanPhamPanel.java
 D:\Duan1\Duan1\src\main\java\com\shoptao\view\DashBoard.java
 D:\Duan1\Duan1\src\main\java\com\shoptao\view\NhanVienPanel.java
@@ -27,3 +28,26 @@ D:\Duan1\Duan1\src\main\java\com\shoptao\domainmodel\SanPham.java
 D:\Duan1\Duan1\src\main\java\com\shoptao\services\interfaces\impl\MauSacService.java
 D:\Duan1\Duan1\src\main\java\com\shoptao\application\Application.java
 D:\Duan1\Duan1\src\main\java\com\shoptao\view\HoaDonPanel.java
+=======
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\SanPham.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\HibernateUtil.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\KhuyenMai.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\application\Application.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\MauSac.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\DongSPDialog.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\test.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\NhanVienPanel.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\MauSacDialog.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\SanPhamPanel.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\HoaDonChiTiet.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\KhachHangPanel.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\DashBoard.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\ThongKePanel.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\test.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\HoaDonPanel.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\DongSanPham.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\KhachHang.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\HoaDon.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\test.java
+E:\DuAn1\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\NhanVien.java
+>>>>>>> 5b7ca750c82badbfba5522342806cb3efb9ec504

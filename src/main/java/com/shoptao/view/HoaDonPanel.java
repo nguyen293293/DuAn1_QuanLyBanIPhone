@@ -21,13 +21,13 @@ public class HoaDonPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cboTrangThai = new javax.swing.JComboBox<>();
         txtSeacrch = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jdcTuNgay = new com.toedter.calendar.JDateChooser();
+        jdcDenNgay = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
@@ -38,12 +38,6 @@ public class HoaDonPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Trạng thái");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 40, -1, -1));
-
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(758, 33, 180, 40));
-
-        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel1.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 33, 180, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Từ");
@@ -64,10 +58,16 @@ public class HoaDonPanel extends javax.swing.JPanel {
                 txtSeacrchMouseClicked(evt);
             }
         });
-        jPanel1.add(txtSeacrch, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 130, 30));
+        jPanel1.add(txtSeacrch, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 130, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/searchbar1.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+
+        jdcTuNgay.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(jdcTuNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 170, 30));
+
+        jdcDenNgay.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel1.add(jdcDenNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 40, 160, 30));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,8 +131,6 @@ public class HoaDonPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboTrangThai;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -140,6 +138,8 @@ public class HoaDonPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdcDenNgay;
+    private com.toedter.calendar.JDateChooser jdcTuNgay;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtSeacrch;
     // End of variables declaration//GEN-END:variables
