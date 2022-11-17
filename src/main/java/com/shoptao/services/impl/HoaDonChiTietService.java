@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.shoptao.services.interfaces.impl;
+package com.shoptao.services.impl;
 
 /**
  *
  * @author haih7
  */
-public class NhanVienService {
+public class HoaDonChiTietService {
     
 }
