@@ -11,8 +11,12 @@ import java.util.List;
  * @author haih7
  */
 public interface ChungService<T> {
-     List<T> getList();
-   String add(T t);
+    
+    List<T> getList();
+    
+    String add(T t);
+    
     String update( T t);
+    
     T getOne(String id);
 }
