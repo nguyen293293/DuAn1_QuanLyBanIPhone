@@ -1,19 +1,43 @@
 package com.shoptao.view;
 
+import com.shoptao.services.impl.KhachHangService;
+import com.shoptao.services.interfaces.ChungService;
+import com.shoptao.utilities.DialogHelper;
+import com.shoptao.viewmodel.KhachHangViewModel;
+import java.awt.Font;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nguyen293
  */
 public class KhachHangPanel extends javax.swing.JPanel {
-
+    
+    private final ChungService chungService;
+    private List<KhachHangViewModel> listKhachHang;
+    private DefaultTableModel tableModel;
+    
     public KhachHangPanel() {
         initComponents();
+        init();
+        
+        chungService = new KhachHangService();
+        
+        listKhachHang = chungService.getList();
+        loadDataToTable(listKhachHang);
     }
 
+    private void init() {
+        tblKhachHang.getTableHeader().setFont(new Font("Arial", 1, 20));
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         btnRefresh = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
@@ -48,16 +72,31 @@ public class KhachHangPanel extends javax.swing.JPanel {
         btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_Refresh_Love_60px_1.png"))); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         btnThem.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_edit_property_60px.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -106,11 +145,15 @@ public class KhachHangPanel extends javax.swing.JPanel {
             }
         });
         tblKhachHang.setRowHeight(25);
+        tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKhachHangMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblKhachHang);
 
         txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSeacrch.setBorder(null);
-        txtSeacrch.setOpaque(false);
         txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSeacrchMouseClicked(evt);
@@ -195,13 +238,14 @@ public class KhachHangPanel extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel13.setText("Trạng thái");
 
+        buttonGroup1.add(rdDangHD);
         rdDangHD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        rdDangHD.setSelected(true);
         rdDangHD.setText("Đang hoạt động");
-        rdDangHD.setOpaque(false);
 
+        buttonGroup1.add(rdNgungHD);
         rdNgungHD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdNgungHD.setText("Ngừng hoạt động");
-        rdNgungHD.setOpaque(false);
 
         txtDiaChi.setColumns(20);
         txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -308,11 +352,44 @@ public class KhachHangPanel extends javax.swing.JPanel {
         txtSeacrch.setText("");
     }//GEN-LAST:event_txtSeacrchMouseClicked
 
+    private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
+        // TODO add your handling code here:
+        showDetail();
+    }//GEN-LAST:event_tblKhachHangMouseClicked
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        JTextField[] txts = {txtMa, txtHoTen, txtSoDienThoai};
+        for (JTextField txt : txts) {
+            txt.setText("");
+        }
+        txtDiaChi.setText("");
+        jdcNgaySinh.setDate(new Date());
+        rdDangHD.setSelected(true);
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        String message = chungService.add(getModel());
+        listKhachHang = chungService.getList();
+        loadDataToTable(listKhachHang);
+        DialogHelper.alert(null, message, "Thông báo");
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        String message = chungService.update(getModel());
+        listKhachHang = chungService.getList();
+        loadDataToTable(listKhachHang);
+        DialogHelper.alert(null, message, "Thông báo");
+    }//GEN-LAST:event_btnSuaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
@@ -338,4 +415,37 @@ public class KhachHangPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtSeacrch;
     private javax.swing.JTextField txtSoDienThoai;
     // End of variables declaration//GEN-END:variables
+
+    private void loadDataToTable(List<KhachHangViewModel> listKhachHang) {
+        tableModel = (DefaultTableModel) tblKhachHang.getModel();
+        tableModel.setRowCount(0);
+        for (KhachHangViewModel x : listKhachHang) {
+            tableModel.addRow(x.toDataRow());
+        }
+    }
+
+    private void showDetail() {
+        int index = tblKhachHang.getSelectedRow();
+        
+        txtMa.setText(tblKhachHang.getValueAt(index, 0)+"");
+        txtHoTen.setText(tblKhachHang.getValueAt(index, 1)+"");
+        jdcNgaySinh.setDate((Date) tblKhachHang.getValueAt(index, 2));
+        txtSoDienThoai.setText(tblKhachHang.getValueAt(index, 3)+"");
+        txtDiaChi.setText(tblKhachHang.getValueAt(index, 4)+"");
+        rdDangHD.setSelected(tblKhachHang.getValueAt(index, 5).equals(0));
+        rdDangHD.setSelected(!tblKhachHang.getValueAt(index, 5).equals(0));
+    }
+    
+    private KhachHangViewModel getModel(){
+        KhachHangViewModel khachHang = new KhachHangViewModel();
+        
+        khachHang.setMa(txtMa.getText());
+        khachHang.setHoten(txtHoTen.getText());
+        khachHang.setNgaysinh(jdcNgaySinh.getDate());
+        khachHang.setSdt(txtSoDienThoai.getText());
+        khachHang.setDiachi(txtDiaChi.getText());
+        khachHang.setTrangthai(rdDangHD.isSelected() ? 0 : 1);
+        
+        return khachHang;
+    }
 }

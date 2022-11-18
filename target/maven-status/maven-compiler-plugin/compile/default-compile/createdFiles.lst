@@ -1,5 +1,4 @@
 com\shoptao\domainmodel\NhanVien.class
-com\shoptao\services\interfaces\impl\NhanVienService.class
 com\shoptao\view\HoaDonPanel$2.class
 com\shoptao\view\DashBoard$3.class
 com\shoptao\domainmodel\KhachHang.class
@@ -16,7 +15,6 @@ com\shoptao\view\DashBoard$2.class
 com\shoptao\view\DashBoard$9.class
 com\shoptao\view\KhachHangPanel.class
 com\shoptao\viewmodel\test.class
-com\shoptao\repositories\test.class
 com\shoptao\view\ThongKePanel.class
 com\shoptao\view\KhachHangPanel$2.class
 com\shoptao\view\DongSPDialog.class
@@ -34,17 +32,11 @@ com\shoptao\view\DashBoard$10.class
 com\shoptao\view\DashBoard$5.class
 com\shoptao\view\HoaDonPanel$1.class
 com\shoptao\view\MauSacDialog$2.class
-com\shoptao\services\interfaces\impl\KhuyenMaiService.class
-com\shoptao\services\interfaces\impl\SanPhamService.class
-com\shoptao\services\interfaces\impl\HoaDonChiTietService.class
 com\shoptao\utilities\HibernateUtil.class
 com\shoptao\view\DashBoard$7.class
-com\shoptao\services\interfaces\impl\DongSanPhamService.class
 com\shoptao\view\SanPhamPanel$3.class
 com\shoptao\domainmodel\HoaDon.class
 com\shoptao\view\DashBoard$4.class
-com\shoptao\services\interfaces\impl\KhachHangService.class
-com\shoptao\services\interfaces\impl\HoaDonService.class
 com\shoptao\view\HoaDonPanel.class
 com\shoptao\view\MauSacDialog$2$1.class
 com\shoptao\domainmodel\HoaDonChiTiet.class
@@ -53,4 +45,3 @@ com\shoptao\view\SanPhamPanel.class
 com\shoptao\application\Application.class
 com\shoptao\view\NhanVienPanel$2.class
 com\shoptao\domainmodel\KhuyenMai.class
-com\shoptao\services\interfaces\impl\MauSacService.class

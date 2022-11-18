@@ -297,9 +297,9 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
         lblTitle.setText("Khách hàng");
-//        pnlRoot.removeAll();
-//        pnlRoot.add(new KhachHangPanel());
-//        pnlRoot.validate();
+        pnlRoot.removeAll();
+        pnlRoot.add(new KhachHangPanel());
+        pnlRoot.validate();
         cardLayout.show(pnlRoot, "khachhang");
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
