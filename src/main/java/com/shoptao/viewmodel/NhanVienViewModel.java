@@ -123,4 +123,9 @@ public class NhanVienViewModel {
     public void setTrangthai(int trangthai) {
         this.trangthai = trangthai;
     }
+    
+    public Object[] toDataRow(){
+        return new Object[]{ma, hoten, gioitinh, ngaysinh,
+            sdt, email, diachi, matkhau, vaitro, trangthai};
+    }
 }

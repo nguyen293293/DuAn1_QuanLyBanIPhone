@@ -18,5 +18,7 @@ public interface ChungService<T> {
     
     String update( T t);
     
-    T getOne(String id);
+    T getOne(String ma);
+    
+    List<T> search(String ma);
 }
