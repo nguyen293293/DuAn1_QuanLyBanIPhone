@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.shoptao.repositories.impl;
+package com.shoptao.repositories;
 
-import com.shoptao.domainmodel.DongSanPham;
+import com.shoptao.domainmodel.MauSac;
 import com.shoptao.utilities.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,25 +12,25 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 /**
  *
  * @author haih7
  */
-public class DongSanPhamRepository implements ChungRepository<DongSanPham>{
+public class MauSacRepository implements ChungRepository<MauSac>{
 
     @Override
-    public List<DongSanPham> getList() {
-        List<DongSanPham> list = new ArrayList<>();
+    public List<MauSac> getList() {
+     List<MauSac> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From DongSanPham");
+            Query query = session.createQuery("From MauSac");
             list = query.getResultList();
         }
-        return list;   }
+        return list;
+    }
 
     @Override
-    public String add(DongSanPham t) {
-         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+    public String add(MauSac t) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
             session.save(t);
@@ -41,35 +41,42 @@ public class DongSanPhamRepository implements ChungRepository<DongSanPham>{
                return "That bai";
             }
         
-         }
+      
+        
+    }
 
     @Override
-    public String update(DongSanPham t) {
+    public String update(MauSac t) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
+            
             session.update(t);
              trans.commit();
-           return "Thanh cong";
+           return "ThanhCong";
             } catch (Exception e) {
                 e.printStackTrace();
-               return "That bai";
-            }}
+               return "ThatBai";
+            }
+        
+       }
 
     @Override
-    public DongSanPham getOne(String ma) {
-        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+    public MauSac getOne(String ma) {
+         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Transaction trans = session.beginTransaction();
             Query query = session.createQuery("FROM SanPham where ma =: ma");
             query.setParameter("ma", ma);
-            DongSanPham dongSanPham = (DongSanPham) query.getSingleResult();
+            MauSac mauSac = (MauSac) query.getSingleResult();
             trans.commit();
-            return dongSanPham;
-        }  }
+            return mauSac;
+        }    }
 
     @Override
-    public List<DongSanPham> Search(String search) {
+    public List<MauSac> Search(String search) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    
+    
 }

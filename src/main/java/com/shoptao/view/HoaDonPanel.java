@@ -1,15 +1,31 @@
 package com.shoptao.view;
 
+import com.shoptao.services.impl.HoaDonService;
+import com.shoptao.services.interfaces.ChungService;
+import com.shoptao.viewmodel.HoaDonViewModel;
 import java.awt.Font;
+import java.util.List;
 import javax.swing.plaf.basic.BasicTableUI;
+import javax.swing.table.DefaultTableModel;
 
 public class HoaDonPanel extends javax.swing.JPanel {
 
+    private final ChungService service;
+    private List<HoaDonViewModel> listHoaDon;
+    private DefaultTableModel tableModel;
+    
     public HoaDonPanel() {
         initComponents();
+        init();
         
-        tblHoaDon.getTableHeader().setFont(new Font("Arial", 1, 22));
-        tblHoaDon.setOpaque(false);
+        service = new HoaDonService();
+        
+        listHoaDon = service.getList();
+        loadDataToTable(listHoaDon);
+    }
+    
+    public void init(){
+        tblHoaDon.getTableHeader().setFont(new Font("Arial", 1, 20));
         tblHoaDon.setUI(new BasicTableUI());
         
         txtSeacrch.setText("Mã HD");
@@ -53,6 +69,12 @@ public class HoaDonPanel extends javax.swing.JPanel {
 
         txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSeacrch.setBorder(null);
+        txtSeacrch.setOpaque(false);
+        txtSeacrch.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSeacrchCaretUpdate(evt);
+            }
+        });
         txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSeacrchMouseClicked(evt);
@@ -75,17 +97,17 @@ public class HoaDonPanel extends javax.swing.JPanel {
         tblHoaDon.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         tblHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã hóa đơn", "Nhân viên", "Khách hàng", "Ngày tạo", "Tình trạng"
+                "Mã hóa đơn", "Nhân viên", "Khách hàng", "Ngày tạo", "Tình trạng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -94,31 +116,27 @@ public class HoaDonPanel extends javax.swing.JPanel {
         });
         tblHoaDon.setRowHeight(25);
         jScrollPane1.setViewportView(tblHoaDon);
-        if (tblHoaDon.getColumnModel().getColumnCount() > 0) {
-            tblHoaDon.getColumnModel().getColumn(0).setMinWidth(15);
-            tblHoaDon.getColumnModel().getColumn(0).setMaxWidth(80);
-        }
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 46, 1300, 550));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 46, 1430, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1386, Short.MAX_VALUE))
-                .addGap(85, 85, 85))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1526, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -127,6 +145,17 @@ public class HoaDonPanel extends javax.swing.JPanel {
         if(!txtSeacrch.getText().equals("Mã HD")) return;
         txtSeacrch.setText("");
     }//GEN-LAST:event_txtSeacrchMouseClicked
+
+    private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
+//        if(listHoaDon == null) return;
+//        String ma = txtSeacrch.getText();
+//        if (ma.isEmpty()) {
+//            listHoaDon = service.getList();
+//        } else {
+//            listHoaDon = service.search(ma);
+//        }
+//        loadDataToTable(listHoaDon);
+    }//GEN-LAST:event_txtSeacrchCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -143,4 +172,12 @@ public class HoaDonPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtSeacrch;
     // End of variables declaration//GEN-END:variables
+
+    private void loadDataToTable(List<HoaDonViewModel> listHoaDon) {
+        tableModel = (DefaultTableModel) tblHoaDon.getModel();
+        tableModel.setRowCount(0);
+        for (HoaDonViewModel x : listHoaDon) {
+            tableModel.addRow(x.toDataRow());
+        }
+    }
 }

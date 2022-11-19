@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.shoptao.repositories.impl;
+package com.shoptao.repositories;
 
-import com.shoptao.domainmodel.MauSac;
+import com.shoptao.domainmodel.SanPham;
 import com.shoptao.utilities.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,21 +16,23 @@ import org.hibernate.Transaction;
  *
  * @author haih7
  */
-public class MauSacRepository implements ChungRepository<MauSac>{
+public class SanPhamRepository implements ChungRepository<SanPham>{
 
     @Override
-    public List<MauSac> getList() {
-     List<MauSac> list = new ArrayList<>();
+    public List<SanPham> getList() {
+        
+         List<SanPham> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From MauSac");
+            Query query = session.createQuery("From SanPham");
             list = query.getResultList();
         }
         return list;
-    }
+        }
 
     @Override
-    public String add(MauSac t) {
-        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+    public String add(SanPham t) {
+        
+         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
             session.save(t);
@@ -43,40 +45,53 @@ public class MauSacRepository implements ChungRepository<MauSac>{
         
       
         
-    }
+         }
+    
 
     @Override
-    public String update(MauSac t) {
+    public String update(SanPham t) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
-            
             session.update(t);
              trans.commit();
-           return "ThanhCong";
+           return "Thanh cong";
             } catch (Exception e) {
                 e.printStackTrace();
-               return "ThatBai";
+               return "That bai";
             }
         
-       }
+      
+           }
 
     @Override
-    public MauSac getOne(String ma) {
+    public SanPham getOne(String ma) {
          try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Transaction trans = session.beginTransaction();
             Query query = session.createQuery("FROM SanPham where ma =: ma");
             query.setParameter("ma", ma);
-            MauSac mauSac = (MauSac) query.getSingleResult();
+            SanPham sanPham = (SanPham) query.getSingleResult();
             trans.commit();
-            return mauSac;
-        }    }
+            return sanPham;
+        } }
 
-    @Override
-    public List<MauSac> Search(String search) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    
+   public List<SanPham> Search(String search){
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Transaction trans = session.beginTransaction();
+            if (search == null) {
+                search = "%";
+            }else{
+                search = "%" + search + "%";
+            }
+            Query query = session.createQuery("FROM SanPham where ma like: search or ten like: search or dungluong like: search ");
+            query.setParameter("search", search);
+            query.setParameter("search", search);
+            query.setParameter("search", search);
+            List<SanPham> sanPhams =  query.getResultList();
+            trans.commit();
+            
+            return sanPhams;
+        }
+   }
     
 }

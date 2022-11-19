@@ -1,6 +1,9 @@
 package com.shoptao.view;
 
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -12,21 +15,38 @@ import javax.swing.plaf.basic.BasicButtonUI;
  */
 public class DashBoard extends javax.swing.JFrame {
 
+    private CardLayout cardLayout;
+
     public DashBoard() {
         this.setUndecorated(true);
         initComponents();
         init();
-        
+
     }
 
     private void init() {
         this.setLocation(0, 0);
-        
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Gets the width and height
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        // Subtract height of taskbar from height in my case 50 
+        this.setSize((int) width, (int) height - 50);
+        this.setLocationRelativeTo(null);  // Set frame at center of the screen
+
         btnClose.setOpaque(false);
         btnClose.setContentAreaFilled(false);
         btnClose.setBorderPainted(false);
-        
+
         addMouseHover();
+
+        cardLayout = (CardLayout) pnlRoot.getLayout();
+        pnlRoot.add("hoadon", new HoaDonPanel());
+        pnlRoot.add("sanpham", new SanPhamPanel());
+        pnlRoot.add("nhanvien", new NhanVienPanel());
+        pnlRoot.add("khachhang", new KhachHangPanel());
+        pnlRoot.add("thongke", new ThongKePanel());
     }
 
     @SuppressWarnings("unchecked")
@@ -212,7 +232,7 @@ public class DashBoard extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(695, 695, 695)
                 .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 816, Short.MAX_VALUE)
                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -233,11 +253,10 @@ public class DashBoard extends javax.swing.JFrame {
 
         getContentPane().add(pnlTop, java.awt.BorderLayout.PAGE_START);
 
-        pnlRoot.setLayout(new java.awt.BorderLayout());
+        pnlRoot.setLayout(new java.awt.CardLayout());
         getContentPane().add(pnlRoot, java.awt.BorderLayout.CENTER);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -250,16 +269,18 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
         lblTitle.setText("Hoá đơn");
-        pnlRoot.removeAll();
-        pnlRoot.add(new HoaDonPanel());
-        pnlRoot.validate();
+//        pnlRoot.removeAll();
+//        pnlRoot.add(new HoaDonPanel());
+//        pnlRoot.validate();
+        cardLayout.show(pnlRoot, "hoadon");
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
         lblTitle.setText("Sản phẩm");
-        pnlRoot.removeAll();
-        pnlRoot.add(new SanPhamPanel());
-        pnlRoot.validate();
+//        pnlRoot.removeAll();
+//        pnlRoot.add(new SanPhamPanel());
+//        pnlRoot.validate();
+        cardLayout.show(pnlRoot, "sanpham");
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
@@ -268,23 +289,26 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
         lblTitle.setText("Nhân viên");
-        pnlRoot.removeAll();
-        pnlRoot.add(new NhanVienPanel());
-        pnlRoot.validate();
+//        pnlRoot.removeAll();
+//        pnlRoot.add(new NhanVienPanel());
+//        pnlRoot.validate();
+        cardLayout.show(pnlRoot, "nhanvien");
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
         lblTitle.setText("Khách hàng");
-        pnlRoot.removeAll();
-        pnlRoot.add(new KhachHangPanel());
-        pnlRoot.validate();
+//        pnlRoot.removeAll();
+//        pnlRoot.add(new KhachHangPanel());
+//        pnlRoot.validate();
+        cardLayout.show(pnlRoot, "khachhang");
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         lblTitle.setText("Thống kê");
-        pnlRoot.removeAll();
-        pnlRoot.add(new ThongKePanel());
-        pnlRoot.validate();
+//        pnlRoot.removeAll();
+//        pnlRoot.add(new ThongKePanel());
+//        pnlRoot.validate();
+        cardLayout.show(pnlRoot, "thongke");
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     public static void main(String args[]) {
@@ -332,12 +356,13 @@ public class DashBoard extends javax.swing.JFrame {
         for (JButton btn : btns) {
             btn.setUI(new BasicButtonUI());
             btn.setBackground(Color.WHITE);
-            
+
             btn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     btn.setBackground(Color.red);
                 }
+
                 @Override
                 public void mouseExited(MouseEvent e) {
                     btn.setBackground(Color.WHITE);

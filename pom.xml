@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.shoptao.application.Application</groupId>
-    <artifactId>DuAn1_ShopTao</artifactId>
+    <artifactId>DuAn1_QuanLyBanIPhone</artifactId>
     <version>1.0-SNAPSHOT</version>
     
     <dependencies>
@@ -13,13 +13,6 @@
             <version>5.4.32.Final</version>
             <type>jar</type>
         </dependency>
-        
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
@@ -28,19 +21,23 @@
             <version>9.4.1.jre8</version>            
         </dependency>
         
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
-	<groupId>com.toedter</groupId>
-	<artifactId>jcalendar</artifactId>
-	<version>1.4</version>
-</dependency>
-<!-- Thanks for using https://jar-download.com -->
-
-<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE130</version>
         </dependency>
-
     </dependencies>
     
     <properties>
@@ -49,5 +46,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <exec.mainClass>com.shoptao.application.Application</exec.mainClass>
     </properties>
-    
+    <name>DuAn1_QuanLyBanIPhone</name>
+    <repositories>
+        <repository>
+            <id>unknown-jars-temp-repo</id>
+            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
+            <url>file:${project.basedir}/lib</url>
+        </repository>
+    </repositories>
 </project>
