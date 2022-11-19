@@ -12,7 +12,9 @@ import java.util.List;
  */
 public interface ChungRepository<T> {
     List<T> getList();
-   String add(T t);
+    String add(T t);
     String update( T t);
     T getOne(String id);
+    
+    List<T> Search(String search);
 }

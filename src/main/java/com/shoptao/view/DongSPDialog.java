@@ -1,17 +1,64 @@
 package com.shoptao.view;
 
+import com.shoptao.services.impl.DongSanPhamService;
+import com.shoptao.viewmodel.DongSanPhamViewModle;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nguyen293
  */
 public class DongSPDialog extends javax.swing.JDialog {
-
+ public DongSanPhamService dongSanPhamService = new DongSanPhamService();
+    private DefaultTableModel defaultTableModel = new DefaultTableModel();
+ List<DongSanPhamViewModle> list;
     public DongSPDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Dòng sản phẩm");
         setLocationRelativeTo(null);
+        
+        list = dongSanPhamService.getList();
+        loadData(list);
     }
+    
+     public void loadData(List<DongSanPhamViewModle> list){
+        defaultTableModel = (DefaultTableModel) tblDongSanPham.getModel();
+        defaultTableModel.setRowCount(0);
+        int i = 0;
+        for (DongSanPhamViewModle mauSacViewModel : list) {
+            defaultTableModel.addRow(new Object[]{
+                i = i +1,
+                mauSacViewModel.getMa(),
+                mauSacViewModel.getTen()
+            });
+        }
+    }
+    
+    public void showDetail(){
+        int index = tblDongSanPham.getSelectedRow();
+        List<DongSanPhamViewModle> list = dongSanPhamService.getList();
+        DongSanPhamViewModle dongSanPhamViewModle= list.get(index);
+        txtMa.setText(dongSanPhamViewModle.getMa());
+        txtTen.setText(dongSanPhamViewModle.getTen());
+    }
+    
+    
+    
+    
+    public DongSanPhamViewModle getModel(){
+       
+        DongSanPhamViewModle x = new DongSanPhamViewModle(txtMa.getText(),txtTen.getText());
+        return  x;
+    }
+    
+    public void clear(){
+         txtMa.setText("");
+        txtTen.setText("");
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -96,6 +143,11 @@ public class DongSPDialog extends javax.swing.JDialog {
             }
         });
         tblDongSanPham.setRowHeight(25);
+        tblDongSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDongSanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDongSanPham);
         if (tblDongSanPham.getColumnModel().getColumnCount() > 0) {
             tblDongSanPham.getColumnModel().getColumn(0).setMaxWidth(60);
@@ -122,12 +174,27 @@ public class DongSPDialog extends javax.swing.JDialog {
 
         btnRefresh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         btnThem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -181,6 +248,33 @@ public class DongSPDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblDongSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDongSanPhamMouseClicked
+        // TODO add your handling code here:
+        
+        showDetail();
+    }//GEN-LAST:event_tblDongSanPhamMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+           JOptionPane.showMessageDialog(this, dongSanPhamService.add(getModel()));
+        list = dongSanPhamService.getList();
+        loadData(list);
+        clear();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(this, dongSanPhamService.update(getModel()));
+        list = dongSanPhamService.getList();
+        loadData(list);
+        clear();
+                  
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+clear();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

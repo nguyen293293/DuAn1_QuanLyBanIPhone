@@ -1,16 +1,62 @@
 package com.shoptao.view;
 
+import com.shoptao.services.impl.MauSacService;
+import com.shoptao.viewmodel.MauSacViewModel;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nguyen293
  */
 public class MauSacDialog extends javax.swing.JDialog {
 
+    public MauSacService mauSacService = new MauSacService();
+    private DefaultTableModel defaultTableModel = new DefaultTableModel();
+
+    List<MauSacViewModel> list;
+
     public MauSacDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Màu sắc");
+//         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        list = mauSacService.getList();
+        loadData(list);
+    }
+
+    public void loadData(List<MauSacViewModel> list) {
+        defaultTableModel = (DefaultTableModel) tblMauSac.getModel();
+        defaultTableModel.setRowCount(0);
+        int i = 0;
+        for (MauSacViewModel mauSacViewModel : list) {
+            defaultTableModel.addRow(new Object[]{
+                i = i + 1,
+                mauSacViewModel.getMa(),
+                mauSacViewModel.getTen()
+            });
+        }
+    }
+
+    public void showDetail() {
+        int index = tblMauSac.getSelectedRow();
+        List<MauSacViewModel> list = mauSacService.getList();
+        MauSacViewModel mauSacViewModel = list.get(index);
+        txtMa.setText(mauSacViewModel.getMa());
+        txtTen.setText(mauSacViewModel.getTen());
+    }
+
+    public MauSacViewModel getModel() {
+
+        MauSacViewModel x = new MauSacViewModel(txtMa.getText(), txtTen.getText());
+        return x;
+    }
+
+    public void clear() {
+        txtMa.setText("");
+        txtTen.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -96,6 +142,11 @@ public class MauSacDialog extends javax.swing.JDialog {
             }
         });
         tblMauSac.setRowHeight(25);
+        tblMauSac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMauSacMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblMauSac);
         if (tblMauSac.getColumnModel().getColumnCount() > 0) {
             tblMauSac.getColumnModel().getColumn(0).setMaxWidth(60);
@@ -125,9 +176,19 @@ public class MauSacDialog extends javax.swing.JDialog {
 
         btnThem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -181,6 +242,29 @@ public class MauSacDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMauSacMouseClicked
+        // TODO add your handling code here:
+        showDetail();
+    }//GEN-LAST:event_tblMauSacMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, mauSacService.add(getModel()));
+        list = mauSacService.getList();
+        loadData(list);
+        clear();
+
+
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, mauSacService.update(getModel()));
+        list = mauSacService.getList();
+        loadData(list);
+        clear();
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
