@@ -5,8 +5,8 @@
 package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.MauSac;
-import com.shoptao.repositories.impl.MauSacRepository;
-import com.shoptao.services.interfaces.ChungService;
+import com.shoptao.repositories.MauSacRepository;
+import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.MauSacViewModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class MauSacService implements ChungService<MauSacViewModel>{
     }
 
     @Override
-    public List<MauSacViewModel> Search(String search) {
+    public List<MauSacViewModel> search(String ma) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

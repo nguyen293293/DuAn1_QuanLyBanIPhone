@@ -6,7 +6,7 @@ package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.KhachHang;
 import com.shoptao.repositories.KhachHangRepository;
-import com.shoptao.services.interfaces.ChungService;
+import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.KhachHangViewModel;
 import java.util.ArrayList;
 import java.util.List;

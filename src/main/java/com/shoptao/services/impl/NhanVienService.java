@@ -2,7 +2,7 @@ package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.NhanVien;
 import com.shoptao.repositories.NhanVienRepository;
-import com.shoptao.services.interfaces.ChungService;
+import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.NhanVienViewModel;
 import java.util.ArrayList;
 import java.util.List;

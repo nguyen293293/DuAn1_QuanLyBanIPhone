@@ -21,38 +21,37 @@ import javax.swing.table.DefaultTableModel;
  * @author haih7
  */
 public class SanPhamPanel extends javax.swing.JPanel {
-    
+
     public SanPhamService sanPhamService = new SanPhamService();
     public DongSanPhamService dongSanPhamService = new DongSanPhamService();
     public KhuyenMaiService khuyenMaiService = new KhuyenMaiService();
     public MauSacService mauSacService = new MauSacService();
-     
-     private DefaultTableModel defaultTableModel = new DefaultTableModel();
-     private DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
-     private ButtonGroup buttonGroup = new ButtonGroup();
+
+    private DefaultTableModel defaultTableModel = new DefaultTableModel();
+    private DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
+    private ButtonGroup buttonGroup = new ButtonGroup();
 
     List<MauSacViewModel> listMSVM;
 //    List<KhuyViewModel> list;
     List<DongSanPhamViewModle> listDSPVM;
     List<SanPhamViewModle> listSPVM;
-    
 
     public SanPhamPanel() {
         initComponents();
         init();
         selectRD();
-        
-        
+
         listMSVM = mauSacService.getList();
         listDSPVM = dongSanPhamService.getList();
         listSPVM = sanPhamService.getList();
 //        listMS = mauSacService.getList();
-        
+
         loadData(listSPVM);
         loadCBMauSac(listMSVM);
         loadCBDongSanPham(listDSPVM);
     }
-        private void init() {
+
+    private void init() {
 
         JButton btns[] = {btnEditDongSP, btnEditMauSac};
         for (JButton btn : btns) {
@@ -61,110 +60,105 @@ public class SanPhamPanel extends javax.swing.JPanel {
             btn.setBorderPainted(false);
         }
     }
-        
-        public void selectRD(){
-           buttonGroup.add(rd_dangBan);
-           buttonGroup.add(rd_ngungBan);
+
+    public void selectRD() {
+        buttonGroup.add(rd_dangBan);
+        buttonGroup.add(rd_ngungBan);
+    }
+
+    public void loadData(List<SanPhamViewModle> listspvm) {
+        defaultTableModel = (DefaultTableModel) tblSanPham.getModel();
+        defaultTableModel.setRowCount(0);
+        int i = 0;
+        for (SanPhamViewModle sanPhamViewModle : listSPVM) {
+            defaultTableModel.addRow(new Object[]{
+                i++,
+                sanPhamViewModle.getMa(),
+                sanPhamViewModle.getTen(),
+                sanPhamViewModle.getDungluong(),
+                sanPhamViewModle.getSoluongton(),
+                sanPhamViewModle.getGianhap(),
+                sanPhamViewModle.getGiaban(),
+                sanPhamViewModle.getMota(),
+                sanPhamViewModle.getAnhsanpham(),
+                sanPhamViewModle.getBarcode(),
+                sanPhamViewModle.getTrangthai() == 0 ? "Đang bán" : "Ngừng bán",
+                sanPhamViewModle.getTendongsanpham(),
+                sanPhamViewModle.getTenkhuyenmai(),
+                sanPhamViewModle.getTenmausac()
+
+            });
         }
-        
-        public void loadData(List<SanPhamViewModle> listspvm){
-            defaultTableModel = (DefaultTableModel) tblSanPham.getModel();
-            defaultTableModel.setRowCount(0);
-            int i = 0;
-            for (SanPhamViewModle sanPhamViewModle : listSPVM) {
-                defaultTableModel.addRow(new Object[]{
-                    i++,
-                    sanPhamViewModle.getMa(),
-                    sanPhamViewModle.getTen(),
-                    sanPhamViewModle.getDungluong(),
-                    sanPhamViewModle.getSoluongton(),
-                    sanPhamViewModle.getGianhap(),
-                    sanPhamViewModle.getGiaban(),
-                    sanPhamViewModle.getMota(),
-                    sanPhamViewModle.getAnhsanpham(),
-                    sanPhamViewModle.getBarcode(),
-                    sanPhamViewModle.getTrangthai() == 0?"Đang bán":"Ngừng bán",
-                    sanPhamViewModle.getTendongsanpham(),
-                    sanPhamViewModle.getTenkhuyenmai(),
-                    sanPhamViewModle.getTenmausac()
-                    
-                    
-                    
-                });
-            }
+    }
+
+    public void loadCBMauSac(List<MauSacViewModel> listMSVM) {
+        defaultComboBoxModel = (DefaultComboBoxModel) cb_mauSac.getModel();
+        for (MauSacViewModel mauSacViewModel : listMSVM) {
+            defaultComboBoxModel.addElement(mauSacViewModel.getTen());
         }
-        
-        public void loadCBMauSac(List<MauSacViewModel> listMSVM){
-            defaultComboBoxModel = (DefaultComboBoxModel) cb_mauSac.getModel();
-            for (MauSacViewModel mauSacViewModel : listMSVM) {
-                defaultComboBoxModel.addElement(mauSacViewModel.getTen());
-            }
+    }
+
+    public void loadCBDongSanPham(List<DongSanPhamViewModle> listDSPVM) {
+        defaultComboBoxModel = (DefaultComboBoxModel) cb_dongSP.getModel();
+        for (DongSanPhamViewModle dongSanPhamViewModle : listDSPVM) {
+            defaultComboBoxModel.addElement(dongSanPhamViewModle.getTen());
         }
-        public void loadCBDongSanPham(List<DongSanPhamViewModle> listDSPVM){
-            defaultComboBoxModel = (DefaultComboBoxModel) cb_dongSP.getModel();
-            for (DongSanPhamViewModle dongSanPhamViewModle : listDSPVM) {
-                defaultComboBoxModel.addElement(dongSanPhamViewModle.getTen());
-            }
+    }
+
+    public SanPhamViewModle getModel() {
+        int index = tblSanPham.getSelectedRow();
+        String ma = txt_ma.getText();
+        String ten = txt_ten.getText();
+        String dungLuong = txt_dungLuong.getText();
+        int soLuongTon = Integer.parseInt(txt_soLuong.getText());
+        BigDecimal giaNhap = BigDecimal.valueOf(Double.parseDouble(txt_giaNhap.getText()));
+        BigDecimal giaBan = BigDecimal.valueOf(Double.parseDouble(txt_giaBan.getText()));
+        String mota = ta_moTa.getText();
+        String anhSanPham = lb_anh.getText();
+
+        int trangThai = 0;
+        if (rd_dangBan.isSelected()) {
+            trangThai = 1;
+        } else {
+            trangThai = 0;
         }
-        
-        public SanPhamViewModle getModel(){
-            int index = tblSanPham.getSelectedRow();
-            String ma = txt_ma.getText();
-            String ten = txt_ten.getText();
-            String dungLuong = txt_dungLuong.getText();
-            int soLuongTon = Integer.parseInt(txt_soLuong.getText());
-            BigDecimal giaNhap = BigDecimal.valueOf(Double.parseDouble(txt_giaNhap.getText()));
-            BigDecimal giaBan = BigDecimal.valueOf(Double.parseDouble(txt_giaBan.getText()));
-            String mota = ta_moTa.getText();
-            String anhSanPham = lb_anh.getText();
-            
-            int trangThai = 0;
-            if (rd_dangBan.isSelected()) {
-                trangThai = 1;
-            }else{
-                trangThai = 0;
-            }
-            
-            int indexDongSP = cb_dongSP.getSelectedIndex();
-            List<DongSanPhamViewModle> dongSanPhamViewModles = dongSanPhamService.getList();
-            DongSanPhamViewModle  dongSanPhamViewModle = dongSanPhamViewModles.get(indexDongSP);
-            String tenDongSanPham = dongSanPhamViewModle.getTen();
-            
-             int indexMauSac = cb_mauSac.getSelectedIndex();
-            List<MauSacViewModel> mauSacViewModels = mauSacService.getList();
-            MauSacViewModel  mauSacViewModel = mauSacViewModels.get(indexMauSac);
-            String tenMauSac= mauSacViewModel.getTen();
-            
-            SanPhamViewModle sanPhamViewModle = new SanPhamViewModle(ma, ten, dungLuong, soLuongTon, giaNhap, giaBan,mota, anhSanPham, null, trangThai, tenDongSanPham, null, tenMauSac);
-            return sanPhamViewModle;
-        }
-        
-        public void showDetail(){
-            int index = tblSanPham.getSelectedRow();
-            List<SanPhamViewModle> listSPVM = sanPhamService.getList();
-            SanPhamViewModle x = listSPVM.get(index);
-            txt_ma.setText(x.getMa());
-            txt_ten.setText(x.getTen());
-            txt_dungLuong.setText(x.getDungluong());
-            txt_soLuong.setText(String.valueOf(x.getSoluongton()));
-            txt_giaNhap.setText(String.valueOf(x.getGianhap()));
-            txt_giaBan.setText(String.valueOf(x.getGiaban()));
+
+        int indexDongSP = cb_dongSP.getSelectedIndex();
+        List<DongSanPhamViewModle> dongSanPhamViewModles = dongSanPhamService.getList();
+        DongSanPhamViewModle dongSanPhamViewModle = dongSanPhamViewModles.get(indexDongSP);
+        String tenDongSanPham = dongSanPhamViewModle.getTen();
+
+        int indexMauSac = cb_mauSac.getSelectedIndex();
+        List<MauSacViewModel> mauSacViewModels = mauSacService.getList();
+        MauSacViewModel mauSacViewModel = mauSacViewModels.get(indexMauSac);
+        String tenMauSac = mauSacViewModel.getTen();
+
+        SanPhamViewModle sanPhamViewModle = new SanPhamViewModle(ma, ten, dungLuong, soLuongTon, giaNhap, giaBan, mota, anhSanPham, null, trangThai, tenDongSanPham, null, tenMauSac);
+        return sanPhamViewModle;
+    }
+
+    public void showDetail() {
+        int index = tblSanPham.getSelectedRow();
+        List<SanPhamViewModle> listSPVM = sanPhamService.getList();
+        SanPhamViewModle x = listSPVM.get(index);
+        txt_ma.setText(x.getMa());
+        txt_ten.setText(x.getTen());
+        txt_dungLuong.setText(x.getDungluong());
+        txt_soLuong.setText(String.valueOf(x.getSoluongton()));
+        txt_giaNhap.setText(String.valueOf(x.getGianhap()));
+        txt_giaBan.setText(String.valueOf(x.getGiaban()));
 //            ta_moTa.setText(x.get);
 //            lb_anh.setText(x.getMa());
-            cb_dongSP.setSelectedItem(x.getTendongsanpham());
+        cb_dongSP.setSelectedItem(x.getTendongsanpham());
 //            cb.setText(x.getMa());
-            cb_mauSac.setSelectedItem(x.getTenmausac());
-            int trangThai =(x.getTrangthai());
-            if (trangThai==1) {
-                rd_dangBan.setSelected(true);
-            }else{
-                rd_ngungBan.setSelected(true);
-            }
+        cb_mauSac.setSelectedItem(x.getTenmausac());
+        int trangThai = (x.getTrangthai());
+        if (trangThai == 1) {
+            rd_dangBan.setSelected(true);
+        } else {
+            rd_ngungBan.setSelected(true);
         }
-    
-    
-
-
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -207,10 +201,10 @@ public class SanPhamPanel extends javax.swing.JPanel {
         btnEditMauSac = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ta_moTa = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -244,6 +238,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
 
         txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSeacrch.setBorder(null);
+        txtSeacrch.setOpaque(false);
         txtSeacrch.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txtSeacrchCaretUpdate(evt);
@@ -297,22 +292,22 @@ public class SanPhamPanel extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1516, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txtSeacrch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton4)))
+                        .addComponent(jButton4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtSeacrch)
+                        .addGap(5, 5, 5)))
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
@@ -399,16 +394,6 @@ public class SanPhamPanel extends javax.swing.JPanel {
         ta_moTa.setRows(5);
         jScrollPane2.setViewportView(ta_moTa);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
-        jButton2.setText("Thêm");
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -433,7 +418,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
                                 .addComponent(cb_dongSP, 0, 219, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEditDongSP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -447,23 +432,18 @@ public class SanPhamPanel extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addComponent(rd_ngungBan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_giaBan)
-                            .addComponent(txt_giaNhap)
-                            .addComponent(txt_soLuong)
-                            .addComponent(txt_namBh)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(cb_mauSac, 0, 221, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                        .addComponent(lb_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_giaBan)
+                    .addComponent(txt_giaNhap)
+                    .addComponent(txt_soLuong)
+                    .addComponent(txt_namBh)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(172, 172, 172))))
+                        .addComponent(cb_mauSac, 0, 221, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addComponent(lb_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,7 +484,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(19, 19, 19)
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel11)
@@ -515,16 +495,11 @@ public class SanPhamPanel extends javax.swing.JPanel {
                             .addComponent(btnEditMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(lb_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(rd_dangBan)
-                            .addComponent(rd_ngungBan))
-                        .addGap(92, 92, 92))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(53, 53, 53))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(rd_dangBan)
+                    .addComponent(rd_ngungBan))
+                .addGap(71, 71, 71))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
@@ -539,6 +514,16 @@ public class SanPhamPanel extends javax.swing.JPanel {
         jButton3.setText("Sửa");
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
+        jButton2.setText("Thêm");
+        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -547,7 +532,8 @@ public class SanPhamPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -555,9 +541,11 @@ public class SanPhamPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jButton1)
-                .addGap(175, 175, 175)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(55, 55, 55)
                 .addComponent(jButton3)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -566,22 +554,22 @@ public class SanPhamPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27))
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -611,13 +599,13 @@ public class SanPhamPanel extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         String search = txtSeacrch.getText();
-      List<SanPhamViewModle> sanPhamVM =   sanPhamService.Search(search);
+        List<SanPhamViewModle> sanPhamVM = sanPhamService.search(search);
         loadData(listSPVM);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         JOptionPane.showMessageDialog(this, sanPhamService.add(getModel()));
+        JOptionPane.showMessageDialog(this, sanPhamService.add(getModel()));
         listSPVM = sanPhamService.getList();
         loadData(listSPVM);
 //        clear();
@@ -627,7 +615,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         // TODO add your handling code here:
         showDetail();
-        
+
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
 

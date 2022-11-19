@@ -12,51 +12,47 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 /**
  *
  * @author haih7
  */
-public class DongSanPhamRepository implements ChungRepository<DongSanPham>{
+public class DongSanPhamRepository {
 
-    @Override
     public List<DongSanPham> getList() {
         List<DongSanPham> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Query query = session.createQuery("From DongSanPham");
             list = query.getResultList();
         }
-        return list;   }
+        return list;
+    }
 
-    @Override
     public String add(DongSanPham t) {
-         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
             session.save(t);
-             trans.commit();
-           return "Thanh cong";
-            } catch (Exception e) {
-                e.printStackTrace();
-               return "That bai";
-            }
-        
-         }
+            trans.commit();
+            return "Thanh cong";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "That bai";
+        }
+    }
 
-    @Override
     public String update(DongSanPham t) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
             session.update(t);
-             trans.commit();
-           return "Thanh cong";
-            } catch (Exception e) {
-                e.printStackTrace();
-               return "That bai";
-            }}
+            trans.commit();
+            return "Thanh cong";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "That bai";
+        }
+    }
 
-    @Override
     public DongSanPham getOne(String ma) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Transaction trans = session.beginTransaction();
@@ -65,9 +61,9 @@ public class DongSanPhamRepository implements ChungRepository<DongSanPham>{
             DongSanPham dongSanPham = (DongSanPham) query.getSingleResult();
             trans.commit();
             return dongSanPham;
-        }  }
+        }
+    }
 
-    @Override
     public List<DongSanPham> Search(String search) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

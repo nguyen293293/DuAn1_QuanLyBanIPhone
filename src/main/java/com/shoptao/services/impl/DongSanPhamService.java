@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.DongSanPham;
-import com.shoptao.repositories.impl.ChungRepository;
-import com.shoptao.repositories.impl.DongSanPhamRepository;
-import com.shoptao.services.interfaces.ChungService;
+import com.shoptao.repositories.DongSanPhamRepository;
+import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.DongSanPhamViewModle;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +57,7 @@ public class DongSanPhamService implements ChungService<DongSanPhamViewModle>{
     }
 
     @Override
-    public List<DongSanPhamViewModle> Search(String search) {
+    public List<DongSanPhamViewModle> search(String search) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

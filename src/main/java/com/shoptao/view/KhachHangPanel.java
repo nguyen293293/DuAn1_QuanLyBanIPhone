@@ -1,7 +1,7 @@
 package com.shoptao.view;
 
 import com.shoptao.services.impl.KhachHangService;
-import com.shoptao.services.interfaces.ChungService;
+import com.shoptao.services.ChungService;
 import com.shoptao.utilities.DialogHelper;
 import com.shoptao.viewmodel.KhachHangViewModel;
 import java.awt.Font;

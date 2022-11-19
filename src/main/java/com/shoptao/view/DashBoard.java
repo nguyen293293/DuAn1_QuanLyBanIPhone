@@ -25,7 +25,7 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void init() {
-        this.setLocation(0, 0);
+//        this.setLocation(0, 0);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Gets the width and height
