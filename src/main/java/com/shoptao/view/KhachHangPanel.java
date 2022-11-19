@@ -15,17 +15,17 @@ import javax.swing.table.DefaultTableModel;
  * @author nguyen293
  */
 public class KhachHangPanel extends javax.swing.JPanel {
-    
+
     private final ChungService chungService;
     private List<KhachHangViewModel> listKhachHang;
     private DefaultTableModel tableModel;
-    
+
     public KhachHangPanel() {
         initComponents();
         init();
-        
+
         chungService = new KhachHangService();
-        
+
         listKhachHang = chungService.getList();
         loadDataToTable(listKhachHang);
     }
@@ -33,6 +33,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
     private void init() {
         tblKhachHang.getTableHeader().setFont(new Font("Arial", 1, 20));
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -154,6 +155,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
         txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSeacrch.setBorder(null);
+        txtSeacrch.setOpaque(false);
         txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSeacrchMouseClicked(evt);
@@ -242,10 +244,14 @@ public class KhachHangPanel extends javax.swing.JPanel {
         rdDangHD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdDangHD.setSelected(true);
         rdDangHD.setText("Đang hoạt động");
+        rdDangHD.setOpaque(false);
+        rdDangHD.setPreferredSize(null);
 
         buttonGroup1.add(rdNgungHD);
         rdNgungHD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdNgungHD.setText("Ngừng hoạt động");
+        rdNgungHD.setOpaque(false);
+        rdNgungHD.setPreferredSize(null);
 
         txtDiaChi.setColumns(20);
         txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
@@ -284,9 +290,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane2))
                         .addGap(72, 72, 72))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(rdDangHD)
+                        .addComponent(rdDangHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
-                        .addComponent(rdNgungHD)
+                        .addComponent(rdNgungHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -313,8 +319,8 @@ public class KhachHangPanel extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(rdDangHD)
-                    .addComponent(rdNgungHD))
+                    .addComponent(rdDangHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdNgungHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -353,12 +359,10 @@ public class KhachHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSeacrchMouseClicked
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
-        // TODO add your handling code here:
         showDetail();
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        // TODO add your handling code here:
         JTextField[] txts = {txtMa, txtHoTen, txtSoDienThoai};
         for (JTextField txt : txts) {
             txt.setText("");
@@ -369,7 +373,6 @@ public class KhachHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
         String message = chungService.add(getModel());
         listKhachHang = chungService.getList();
         loadDataToTable(listKhachHang);
@@ -377,7 +380,6 @@ public class KhachHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
         String message = chungService.update(getModel());
         listKhachHang = chungService.getList();
         loadDataToTable(listKhachHang);
@@ -426,26 +428,26 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void showDetail() {
         int index = tblKhachHang.getSelectedRow();
-        
-        txtMa.setText(tblKhachHang.getValueAt(index, 0)+"");
-        txtHoTen.setText(tblKhachHang.getValueAt(index, 1)+"");
+
+        txtMa.setText(tblKhachHang.getValueAt(index, 0) + "");
+        txtHoTen.setText(tblKhachHang.getValueAt(index, 1) + "");
         jdcNgaySinh.setDate((Date) tblKhachHang.getValueAt(index, 2));
-        txtSoDienThoai.setText(tblKhachHang.getValueAt(index, 3)+"");
-        txtDiaChi.setText(tblKhachHang.getValueAt(index, 4)+"");
+        txtSoDienThoai.setText(tblKhachHang.getValueAt(index, 3) + "");
+        txtDiaChi.setText(tblKhachHang.getValueAt(index, 4) + "");
         rdDangHD.setSelected(tblKhachHang.getValueAt(index, 5).equals(0));
         rdDangHD.setSelected(!tblKhachHang.getValueAt(index, 5).equals(0));
     }
-    
-    private KhachHangViewModel getModel(){
+
+    private KhachHangViewModel getModel() {
         KhachHangViewModel khachHang = new KhachHangViewModel();
-        
+
         khachHang.setMa(txtMa.getText());
         khachHang.setHoten(txtHoTen.getText());
         khachHang.setNgaysinh(jdcNgaySinh.getDate());
         khachHang.setSdt(txtSoDienThoai.getText());
         khachHang.setDiachi(txtDiaChi.getText());
         khachHang.setTrangthai(rdDangHD.isSelected() ? 0 : 1);
-        
+
         return khachHang;
     }
 }

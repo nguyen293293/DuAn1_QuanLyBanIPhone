@@ -16,7 +16,7 @@ public interface ChungService<T> {
     
     String add(T t);
     
-    String update( T t);
+    String update(T t);
     
     T getOne(String ma);
     
