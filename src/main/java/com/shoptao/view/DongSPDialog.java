@@ -11,54 +11,57 @@ import javax.swing.table.DefaultTableModel;
  * @author nguyen293
  */
 public class DongSPDialog extends javax.swing.JDialog {
- public DongSanPhamService dongSanPhamService = new DongSanPhamService();
+
+    public DongSanPhamService dongSanPhamService = new DongSanPhamService();
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
- List<DongSanPhamViewModle> list;
-    public DongSPDialog(java.awt.Frame parent, boolean modal) {
+    List<DongSanPhamViewModle> list;
+    SanPhamPanel sp;
+
+    public DongSPDialog(java.awt.Frame parent, boolean modal, SanPhamPanel sp) {
         super(parent, modal);
         initComponents();
+        
+        this.sp = sp;
+        
         setTitle("Dòng sản phẩm");
         setLocationRelativeTo(null);
-        
+
         list = dongSanPhamService.getList();
         loadData(list);
     }
-    
-     public void loadData(List<DongSanPhamViewModle> list){
+
+    public void loadData(List<DongSanPhamViewModle> list) {
         defaultTableModel = (DefaultTableModel) tblDongSanPham.getModel();
         defaultTableModel.setRowCount(0);
         int i = 0;
         for (DongSanPhamViewModle mauSacViewModel : list) {
             defaultTableModel.addRow(new Object[]{
-                i = i +1,
+                i = i + 1,
                 mauSacViewModel.getMa(),
                 mauSacViewModel.getTen()
             });
         }
+        this.sp.loadCBDongSanPham(list);
     }
-    
-    public void showDetail(){
+
+    public void showDetail() {
         int index = tblDongSanPham.getSelectedRow();
         List<DongSanPhamViewModle> list = dongSanPhamService.getList();
-        DongSanPhamViewModle dongSanPhamViewModle= list.get(index);
+        DongSanPhamViewModle dongSanPhamViewModle = list.get(index);
         txtMa.setText(dongSanPhamViewModle.getMa());
         txtTen.setText(dongSanPhamViewModle.getTen());
     }
-    
-    
-    
-    
-    public DongSanPhamViewModle getModel(){
-       
-        DongSanPhamViewModle x = new DongSanPhamViewModle(txtMa.getText(),txtTen.getText());
-        return  x;
+
+    public DongSanPhamViewModle getModel() {
+
+        DongSanPhamViewModle x = new DongSanPhamViewModle(txtMa.getText(), txtTen.getText());
+        return x;
     }
-    
-    public void clear(){
-         txtMa.setText("");
+
+    public void clear() {
+        txtMa.setText("");
         txtTen.setText("");
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -251,13 +254,13 @@ public class DongSPDialog extends javax.swing.JDialog {
 
     private void tblDongSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDongSanPhamMouseClicked
         // TODO add your handling code here:
-        
+
         showDetail();
     }//GEN-LAST:event_tblDongSanPhamMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-           JOptionPane.showMessageDialog(this, dongSanPhamService.add(getModel()));
+        JOptionPane.showMessageDialog(this, dongSanPhamService.add(getModel()));
         list = dongSanPhamService.getList();
         loadData(list);
         clear();
@@ -265,55 +268,55 @@ public class DongSPDialog extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-         JOptionPane.showMessageDialog(this, dongSanPhamService.update(getModel()));
+        JOptionPane.showMessageDialog(this, dongSanPhamService.update(getModel()));
         list = dongSanPhamService.getList();
         loadData(list);
         clear();
-                  
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-clear();        // TODO add your handling code here:
+        clear();        // TODO add your handling code here:
     }//GEN-LAST:event_btnRefreshActionPerformed
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DongSPDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DongSPDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DongSPDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DongSPDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DongSPDialog dialog = new DongSPDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(DongSPDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(DongSPDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(DongSPDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(DongSPDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                DongSPDialog dialog = new DongSPDialog(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
