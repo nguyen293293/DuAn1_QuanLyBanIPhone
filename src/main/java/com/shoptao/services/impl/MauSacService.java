@@ -33,7 +33,7 @@ public class MauSacService implements ChungService<MauSacViewModel>{
           }
 
     @Override
-    public String add(MauSacViewModel t) {
+    public String add(MauSacViewModel t, Object ...obj) {
         
        
          String isSave = mauSacRepository.add(new MauSac("", t.getMa(), t.getTen()));
@@ -46,7 +46,7 @@ public class MauSacService implements ChungService<MauSacViewModel>{
     } 
 
     @Override
-    public String update(MauSacViewModel t) {
+    public String update(MauSacViewModel t, Object ...obj) {
        MauSac mausac = new MauSac("null", t.getMa(), t.getTen());
           for (MauSac x : mauSacRepository.getList()) {
             if (x.getMa().equals(mausac.getMa())) {

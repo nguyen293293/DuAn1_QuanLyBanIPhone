@@ -36,7 +36,7 @@ public class KhachHangService implements ChungService<KhachHangViewModel>{
     }
 
     @Override
-    public String add(KhachHangViewModel t) {
+    public String add(KhachHangViewModel t, Object ...obj) {
         KhachHang khachHang = new KhachHang(null, t.getMa(), t.getHoten(),
                 t.getNgaysinh(), t.getSdt(), t.getDiachi(), t.getTrangthai());
         boolean isAdd = khachHangRepository.save(khachHang);
@@ -44,7 +44,7 @@ public class KhachHangService implements ChungService<KhachHangViewModel>{
     }
 
     @Override
-    public String update(KhachHangViewModel t) {
+    public String update(KhachHangViewModel t, Object ...obj) {
         KhachHang khachHang = new KhachHang(null, t.getMa(), t.getHoten(),
                 t.getNgaysinh(), t.getSdt(), t.getDiachi(), t.getTrangthai());
         for (KhachHang x : khachHangRepository.getList()) {

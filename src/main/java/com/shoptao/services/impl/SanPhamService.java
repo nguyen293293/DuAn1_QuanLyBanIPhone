@@ -41,7 +41,7 @@ public class SanPhamService implements ChungService<SanPhamViewModle> {
     }
 
     @Override
-    public String add(SanPhamViewModle t) {
+    public String add(SanPhamViewModle t, Object ...obj) {
 //        DongSanPham dongSanPham = dongSanPhamRepository.getOne(t.getTendongsanpham());
 //        MauSac mauSac = mauSacRepository.getOne(t.getTenmausac());
 //        SanPham sanPham = new SanPham(null, t.getMa(), t.getTen(), t.getDungluong(), t.getSoluongton(), t.getGianhap(), t.getGiaban(), "null", t.getAnhsanpham(),t.getBarcode(), t.getTrangthai(), null, null, null);
@@ -57,7 +57,7 @@ public class SanPhamService implements ChungService<SanPhamViewModle> {
     }
 
     @Override
-    public String update(SanPhamViewModle t) {
+    public String update(SanPhamViewModle t, Object ...obj) {
 
         return "Thêm thất bại";
     }

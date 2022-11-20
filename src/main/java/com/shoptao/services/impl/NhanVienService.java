@@ -34,7 +34,7 @@ public class NhanVienService implements ChungService<NhanVienViewModel> {
     }
 
     @Override
-    public String add(NhanVienViewModel t) {
+    public String add(NhanVienViewModel t, Object ...obj) {
         NhanVien nhanVien = new NhanVien(null, t.getMa(), t.getHoten(), t.getGioitinh(),
                 t.getNgaysinh(), t.getSdt(), t.getEmail(), t.getDiachi(), t.getMatkhau(),
                 t.getVaitro(), t.getTrangthai());
@@ -43,7 +43,7 @@ public class NhanVienService implements ChungService<NhanVienViewModel> {
     }
 
     @Override
-    public String update(NhanVienViewModel t) {
+    public String update(NhanVienViewModel t, Object ...obj) {
         NhanVien nhanVien = new NhanVien(null, t.getMa(), t.getHoten(), t.getGioitinh(),
                 t.getNgaysinh(), t.getSdt(), t.getEmail(), t.getDiachi(), t.getMatkhau(),
                 t.getVaitro(), t.getTrangthai());

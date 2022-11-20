@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.shoptao.services;
 
 import java.util.List;
@@ -14,9 +10,9 @@ public interface ChungService<T> {
     
     List<T> getList();
     
-    String add(T t);
+    String add(T t, Object ...obj);
     
-    String update(T t);
+    String update(T t, Object ...obj);
     
     T getOne(String ma);
     

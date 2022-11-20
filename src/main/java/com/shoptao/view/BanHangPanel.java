@@ -33,6 +33,7 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
     public BanHangPanel() {
         initComponents();
         initWebcam();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -143,7 +144,7 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
                         .addComponent(pnlChiTietHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
     }// </editor-fold>//GEN-END:initComponents
 

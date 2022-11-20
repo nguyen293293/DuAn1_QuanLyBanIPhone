@@ -32,6 +32,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void init() {
         tblKhachHang.getTableHeader().setFont(new Font("Arial", 1, 20));
+        txtSeacrch.setOpaque(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -155,7 +156,6 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
         txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSeacrch.setBorder(null);
-        txtSeacrch.setOpaque(false);
         txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSeacrchMouseClicked(evt);

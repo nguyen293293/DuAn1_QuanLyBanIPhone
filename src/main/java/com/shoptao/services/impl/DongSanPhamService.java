@@ -28,7 +28,7 @@ public class DongSanPhamService implements ChungService<DongSanPhamViewModle>{
         return list;}
 
     @Override
-    public String add(DongSanPhamViewModle t) {
+    public String add(DongSanPhamViewModle t, Object ...obj) {
         String isSave = dongSanPhamRepository.add(new DongSanPham("", t.getMa(), t.getTen()));
         if (isSave.equals("Thanh cong")) {
             return "Thêm thành công";
@@ -37,7 +37,7 @@ public class DongSanPhamService implements ChungService<DongSanPhamViewModle>{
         }  }
 
     @Override
-    public String update(DongSanPhamViewModle t) {
+    public String update(DongSanPhamViewModle t, Object ...obj) {
      DongSanPham dongSanPham =  new DongSanPham("null", t.getMa(), t.getTen());
         for (DongSanPham x : dongSanPhamRepository.getList()) {
             if (x.getMa().equals(dongSanPham.getMa())) {

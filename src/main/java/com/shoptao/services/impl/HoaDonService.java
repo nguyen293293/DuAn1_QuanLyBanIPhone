@@ -30,12 +30,12 @@ public class HoaDonService implements ChungService<HoaDonViewModel> {
     }
 
     @Override
-    public String add(HoaDonViewModel t) {
+    public String add(HoaDonViewModel t, Object ...obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String update(HoaDonViewModel t) {
+    public String update(HoaDonViewModel t, Object ...obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
