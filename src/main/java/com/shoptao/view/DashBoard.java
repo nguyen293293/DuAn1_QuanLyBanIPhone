@@ -42,6 +42,7 @@ public class DashBoard extends javax.swing.JFrame {
         addMouseHover();
 
         cardLayout = (CardLayout) pnlRoot.getLayout();
+        pnlRoot.add("banhang", new BanHangPanel());
         pnlRoot.add("hoadon", new HoaDonPanel());
         pnlRoot.add("sanpham", new SanPhamPanel());
         pnlRoot.add("nhanvien", new NhanVienPanel());
@@ -261,10 +262,12 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
         lblTitle.setText("Bán hàng");
+        cardLayout.show(pnlRoot, "banhang");
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
