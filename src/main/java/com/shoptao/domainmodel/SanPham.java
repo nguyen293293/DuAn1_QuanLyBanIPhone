@@ -2,7 +2,6 @@ package com.shoptao.domainmodel;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +13,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.type.descriptor.sql.VarbinaryTypeDescriptor;
 
 /**
  *
@@ -46,7 +44,7 @@ public class SanPham implements Serializable {
     private BigDecimal giaban;
     
     private String mota;
-    private String anhsanpham;
+    private byte[] anhsanpham;
     
     private String barcode;
     

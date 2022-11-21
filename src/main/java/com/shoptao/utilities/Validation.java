@@ -34,7 +34,7 @@ public class Validation {
             }
         }
         if (count != 0) {
-            DialogHelper.warring(null, "Không được để trống dữu liệu", "Lỗi");
+            DialogHelper.warring(null, "Không được để trống dữ liệu", "Lỗi");
             return false;
         }else{
             return true;
@@ -43,7 +43,7 @@ public class Validation {
 
     public static boolean CheckTrongTextArea(JTextArea txtFiled) {
         if (txtFiled.getText().isEmpty()) {
-            DialogHelper.warring(null, "Không được để trống dữu liệu", "Lỗi");
+            DialogHelper.warring(null, "Không được để trống dữ liệu", "Lỗi");
             txtFiled.requestFocus();
             txtFiled.setBorder(new LineBorder(Color.red));
             return false;
@@ -69,7 +69,7 @@ public class Validation {
 
     public static boolean CheckTrongLable(JLabel lblFiled) {
         if (lblFiled.getText().isEmpty()) {
-            DialogHelper.warring(null, "Không được để trống dữu liệu", "Lỗi");
+            DialogHelper.warring(null, "Không được để trống dữ liệu", "Lỗi");
             return false;
         } else {
             return true;

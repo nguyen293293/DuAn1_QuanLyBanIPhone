@@ -29,12 +29,9 @@ public class DongSanPhamService implements ChungService<DongSanPhamViewModle>{
 
     @Override
     public String add(DongSanPhamViewModle t, Object ...obj) {
-        String isSave = dongSanPhamRepository.add(new DongSanPham("", t.getMa(), t.getTen()));
-        if (isSave.equals("Thanh cong")) {
-            return "Thêm thành công";
-        } else {
-            return "Thêm thất bại";
-        }  }
+        boolean isSave = dongSanPhamRepository.add(new DongSanPham("", t.getMa(), t.getTen()));
+        return isSave ? "Thêm thành công" : "Thêm thất bại";
+    }
 
     @Override
     public String update(DongSanPhamViewModle t, Object ...obj) {
@@ -44,12 +41,9 @@ public class DongSanPhamService implements ChungService<DongSanPhamViewModle>{
                 dongSanPham.setId(x.getId());
             }
           }
-         String isUpdate = dongSanPhamRepository.update(dongSanPham);
-        if (isUpdate.equals("Thanh cong")) {
-            return "Cập nhật thành công";
-        } else {
-            return "Cập nhật thất bại";
-        } }
+         boolean isUpdate = dongSanPhamRepository.update(dongSanPham);
+        return isUpdate ? "Sửa thành công" : "Sửa thất bại";
+         }
 
     @Override
     public DongSanPhamViewModle getOne(String id) {

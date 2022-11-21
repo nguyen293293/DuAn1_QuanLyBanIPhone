@@ -27,30 +27,30 @@ public class MauSacRepository {
         return list;
     }
 
-    public String add(MauSac t) {
+    public boolean add(MauSac t) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
             session.save(t);
             trans.commit();
-            return "Thanh cong";
-        } catch (Exception e) {
+           return true;
+        }catch(Exception e){
             e.printStackTrace();
-            return "That bai";
+            return false;
         }
     }
 
-    public String update(MauSac t) {
+    public boolean update(MauSac t) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
 
             session.update(t);
             trans.commit();
-            return "ThanhCong";
-        } catch (Exception e) {
+          return true;
+        }catch(Exception e){
             e.printStackTrace();
-            return "ThatBai";
+            return false;
         }
 
     }

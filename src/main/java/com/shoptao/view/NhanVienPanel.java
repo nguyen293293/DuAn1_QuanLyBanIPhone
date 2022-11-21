@@ -544,7 +544,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         int index = tblNhanVien.getSelectedRow();
         
         txtMa.setText(tblNhanVien.getValueAt(index, 0)+"");
-        txtHoTen.setText(tblNhanVien.getValueAt(index, 0)+"");
+        txtHoTen.setText(tblNhanVien.getValueAt(index, 1)+"");
         jdcNgaySinh.setDate((Date) tblNhanVien.getValueAt(index, 3));
         txtSdt.setText(tblNhanVien.getValueAt(index, 4)+"");
         txtEmail.setText(tblNhanVien.getValueAt(index, 5)+"");

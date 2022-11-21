@@ -53,7 +53,6 @@ public class MauSacDialog extends javax.swing.JDialog {
     }
 
     public MauSacViewModel getModel() {
-
         MauSacViewModel x = new MauSacViewModel(txtMa.getText(), txtTen.getText());
         return x;
     }

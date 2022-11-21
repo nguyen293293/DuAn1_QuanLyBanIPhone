@@ -36,12 +36,8 @@ public class MauSacService implements ChungService<MauSacViewModel>{
     public String add(MauSacViewModel t, Object ...obj) {
         
        
-         String isSave = mauSacRepository.add(new MauSac("", t.getMa(), t.getTen()));
-        if (isSave.equals("Thanh cong")) {
-            return "Thêm thành công";
-        } else {
-            return "Thêm thất bại";
-        }
+         boolean isSave = mauSacRepository.add(new MauSac("", t.getMa(), t.getTen()));
+       return isSave ? "Thêm thành công" : "Thêm thất bại";
     
     } 
 
@@ -53,12 +49,8 @@ public class MauSacService implements ChungService<MauSacViewModel>{
                 mausac.setId(x.getId());
             }
           }
-            String isUpdate = mauSacRepository.update(mausac);
-        if (isUpdate.equals("Thanh cong")) {
-            return "Cap nhat thành công";
-        } else {
-            return "Cap nhat thất bại";
-        }
+            boolean isUpdate = mauSacRepository.update(mausac);
+         return isUpdate ? "Sửa thành công" : "Sửa thất bại";
           
     }
 

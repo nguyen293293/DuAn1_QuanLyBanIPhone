@@ -69,7 +69,7 @@ public class NhanVienService implements ChungService<NhanVienViewModel> {
         List<NhanVienViewModel> listNhanVienVM = new ArrayList<>();
 
         for (NhanVien x : nhanVienRepository.getList()) {
-            if (x.getMa().startsWith(ma.toUpperCase())) {
+            if (x.getMa().startsWith(ma)) {
                 listNhanVienVM.add(new NhanVienViewModel(x.getMa(), x.getHoten(), x.getGioitinh(),
                         x.getNgaysinh(), x.getSdt(), x.getEmail(), x.getDiachi(), x.getMatkhau(),
                         x.getVaitro(), x.getTrangthai()));

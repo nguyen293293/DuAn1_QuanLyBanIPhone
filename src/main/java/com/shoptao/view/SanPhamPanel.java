@@ -1,19 +1,29 @@
 package com.shoptao.view;
 
-import com.shoptao.domainmodel.SanPham;
+import com.shoptao.repositories.SanPhamRepository;
 import com.shoptao.services.impl.DongSanPhamService;
 import com.shoptao.services.impl.KhuyenMaiService;
 import com.shoptao.services.impl.MauSacService;
 import com.shoptao.services.impl.SanPhamService;
+import com.shoptao.utilities.ImageHelper;
 import com.shoptao.viewmodel.DongSanPhamViewModle;
 import com.shoptao.viewmodel.MauSacViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +31,8 @@ import javax.swing.table.DefaultTableModel;
  * @author haih7
  */
 public class SanPhamPanel extends javax.swing.JPanel {
+    
+   
 
     public SanPhamService sanPhamService = new SanPhamService();
     public DongSanPhamService dongSanPhamService = new DongSanPhamService();
@@ -31,10 +43,11 @@ public class SanPhamPanel extends javax.swing.JPanel {
     private DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
     private ButtonGroup buttonGroup = new ButtonGroup();
 
-    List<MauSacViewModel> listMSVM;
+    private byte[] ImageByte;
+    List<MauSacViewModel> listMSVM = new ArrayList<>();
 //    List<KhuyViewModel> list;
-    List<DongSanPhamViewModle> listDSPVM;
-    List<SanPhamViewModle> listSPVM;
+    List<DongSanPhamViewModle> listDSPVM = new ArrayList<>();
+    List<SanPhamViewModle> listSPVM = new ArrayList<>();
 
     public SanPhamPanel() {
         initComponents();
@@ -44,12 +57,13 @@ public class SanPhamPanel extends javax.swing.JPanel {
         listMSVM = mauSacService.getList();
         listDSPVM = dongSanPhamService.getList();
         listSPVM = sanPhamService.getList();
-//        listMS = mauSacService.getList();
 
         loadData(listSPVM);
         loadCBMauSac(listMSVM);
         loadCBDongSanPham(listDSPVM);
+ 
     }
+    
 
     private void init() {
 
@@ -59,9 +73,10 @@ public class SanPhamPanel extends javax.swing.JPanel {
             btn.setContentAreaFilled(false);
             btn.setBorderPainted(false);
         }
-        
+
         rd_dangBan.setOpaque(false);
         rd_ngungBan.setOpaque(false);
+
     }
 
     public void selectRD() {
@@ -69,7 +84,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
         buttonGroup.add(rd_ngungBan);
     }
 
-    public void loadData(List<SanPhamViewModle> listspvm) {
+    public void loadData(List<SanPhamViewModle> listSPVM) {
         defaultTableModel = (DefaultTableModel) tblSanPham.getModel();
         defaultTableModel.setRowCount(0);
         int i = 0;
@@ -109,9 +124,12 @@ public class SanPhamPanel extends javax.swing.JPanel {
             defaultComboBoxModel.addElement(dongSanPhamViewModle.getTen());
         }
     }
+    
+       
 
     public SanPhamViewModle getModel() {
         int index = tblSanPham.getSelectedRow();
+    
         String ma = txt_ma.getText();
         String ten = txt_ten.getText();
         String dungLuong = txt_dungLuong.getText();
@@ -119,30 +137,17 @@ public class SanPhamPanel extends javax.swing.JPanel {
         BigDecimal giaNhap = BigDecimal.valueOf(Double.parseDouble(txt_giaNhap.getText()));
         BigDecimal giaBan = BigDecimal.valueOf(Double.parseDouble(txt_giaBan.getText()));
         String mota = ta_moTa.getText();
-        String anhSanPham = lb_anh.getText();
-
         int trangThai = 0;
         if (rd_dangBan.isSelected()) {
             trangThai = 1;
         } else {
             trangThai = 0;
         }
-
-        int indexDongSP = cb_dongSP.getSelectedIndex();
-        List<DongSanPhamViewModle> dongSanPhamViewModles = dongSanPhamService.getList();
-        DongSanPhamViewModle dongSanPhamViewModle = dongSanPhamViewModles.get(indexDongSP);
-        String tenDongSanPham = dongSanPhamViewModle.getTen();
-
-        int indexMauSac = cb_mauSac.getSelectedIndex();
-        List<MauSacViewModel> mauSacViewModels = mauSacService.getList();
-        MauSacViewModel mauSacViewModel = mauSacViewModels.get(indexMauSac);
-        String tenMauSac = mauSacViewModel.getTen();
-
-        SanPhamViewModle sanPhamViewModle = new SanPhamViewModle(ma, ten, dungLuong, soLuongTon, giaNhap, giaBan, mota, anhSanPham, null, trangThai, tenDongSanPham, null, tenMauSac);
+        SanPhamViewModle sanPhamViewModle = new SanPhamViewModle(ma, ten, dungLuong, soLuongTon, giaNhap, giaBan, mota, ImageByte, null, trangThai, null, null, null);
         return sanPhamViewModle;
     }
 
-    public void showDetail() {
+    public void showDetail() throws IOException {
         int index = tblSanPham.getSelectedRow();
         List<SanPhamViewModle> listSPVM = sanPhamService.getList();
         SanPhamViewModle x = listSPVM.get(index);
@@ -152,10 +157,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
         txt_soLuong.setText(String.valueOf(x.getSoluongton()));
         txt_giaNhap.setText(String.valueOf(x.getGianhap()));
         txt_giaBan.setText(String.valueOf(x.getGiaban()));
-//            ta_moTa.setText(x.get);
-//            lb_anh.setText(x.getMa());
         cb_dongSP.setSelectedItem(x.getTendongsanpham());
-//            cb.setText(x.getMa());
         cb_mauSac.setSelectedItem(x.getTenmausac());
         int trangThai = (x.getTrangthai());
         if (trangThai == 1) {
@@ -163,6 +165,8 @@ public class SanPhamPanel extends javax.swing.JPanel {
         } else {
             rd_ngungBan.setSelected(true);
         }
+        Image img = ImageHelper.createImageFromByteArray(x.getAnhsanpham(), "jpg");
+        lb_anh.setIcon(new ImageIcon(img));
     }
 
     @SuppressWarnings("unchecked")
@@ -242,7 +246,6 @@ public class SanPhamPanel extends javax.swing.JPanel {
 
         txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSeacrch.setBorder(null);
-        txtSeacrch.setOpaque(false);
         txtSeacrch.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 txtSeacrchCaretUpdate(evt);
@@ -278,7 +281,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(txtSeacrch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(525, 525, 525)
+                        .addGap(518, 518, 518)
                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,6 +329,27 @@ public class SanPhamPanel extends javax.swing.JPanel {
         txt_ten.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         txt_dungLuong.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txt_dungLuong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txt_dungLuongMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txt_dungLuongMouseReleased(evt);
+            }
+        });
+        txt_dungLuong.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                txt_dungLuongCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txt_dungLuongInputMethodTextChanged(evt);
+            }
+        });
+        txt_dungLuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_dungLuongActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("Năm BH");
@@ -346,10 +370,25 @@ public class SanPhamPanel extends javax.swing.JPanel {
         txt_soLuong.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         txt_namBh.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txt_namBh.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_namBhCaretUpdate(evt);
+            }
+        });
+        txt_namBh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_namBhMouseClicked(evt);
+            }
+        });
 
         lb_anh.setBackground(new java.awt.Color(0, 204, 102));
         lb_anh.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lb_anh.setOpaque(true);
+        lb_anh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_anhMouseClicked(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel11.setText("Dòng SP");
@@ -413,31 +452,31 @@ public class SanPhamPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEditDongSP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
                             .addComponent(jLabel12))
-                        .addGap(36, 36, 36))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_giaBan)
+                            .addComponent(txt_giaNhap)
+                            .addComponent(txt_soLuong)
+                            .addComponent(txt_namBh)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(cb_mauSac, 0, 221, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEditMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                        .addComponent(lb_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(rd_dangBan)
                         .addGap(40, 40, 40)
                         .addComponent(rd_ngungBan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_giaBan)
-                    .addComponent(txt_giaNhap)
-                    .addComponent(txt_soLuong)
-                    .addComponent(txt_namBh)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(cb_mauSac, 0, 221, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                .addComponent(lb_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(120, 782, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,6 +546,11 @@ public class SanPhamPanel extends javax.swing.JPanel {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_edit_property_60px.png"))); // NOI18N
         jButton3.setText("Sửa");
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
@@ -524,11 +568,15 @@ public class SanPhamPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,10 +618,16 @@ public class SanPhamPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSeacrchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchMouseClicked
-        if (!txtSeacrch.getText().equals("Mã HD")) {
-            return;
-        }
-        txtSeacrch.setText("");
+//        String search = txtSeacrch.getText();
+//        System.out.println(search);
+//        List<SanPhamViewModle> sanPhamViewModles = sanPhamService.search(search);
+//
+//        loadData(sanPhamViewModles);
+
+// if (!txtSeacrch.getText().equals("Mã HD")) {
+//            return;
+//        }
+//        txtSeacrch.setText("");
     }//GEN-LAST:event_txtSeacrchMouseClicked
 
     private void btnEditDongSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDongSPActionPerformed
@@ -587,12 +641,25 @@ public class SanPhamPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditMauSacActionPerformed
 
     private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
-        // TODO add your handling code here:
+
+//        String maSP = txtSeacrch.getText();
+//        List<SanPhamViewModle> list = new ArrayList<>();
+//        if (maSP.isEmpty()) {
+//            list = sanPhamService.getList();
+//        } else {
+//            list = sanPhamService.search(maSP);
+//        }
+//        loadData(list);
+
+//          List<SanPhamViewModle> list =    sanPhamService.search(txtSeacrch.getText());
+//        loadData(list);
     }//GEN-LAST:event_txtSeacrchCaretUpdate
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, sanPhamService.add(getModel()));
+        int indexDongSP = cb_dongSP.getSelectedIndex();
+        int indexMauSac = cb_mauSac.getSelectedIndex();
+        JOptionPane.showMessageDialog(this, sanPhamService.add(getModel(), indexDongSP, indexMauSac));
         listSPVM = sanPhamService.getList();
         loadData(listSPVM);
 //        clear();
@@ -600,10 +667,93 @@ public class SanPhamPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
-        // TODO add your handling code here:
-        showDetail();
+        try {
+            // TODO add your handling code here:
+            showDetail();
+        } catch (IOException ex) {
+            Logger.getLogger(SanPhamPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_tblSanPhamMouseClicked
+
+    private void lb_anhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_anhMouseClicked
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    return f.getName().toLowerCase().endsWith(".jpg");
+                }
+            }
+
+            @Override
+            public String getDescription() {
+                return "Image File (*.jpg)";
+            }
+        });
+        if (chooser.showOpenDialog(this) == JFileChooser.CANCEL_OPTION) {
+            return;
+        }
+        File file = chooser.getSelectedFile();
+        try {
+            ImageIcon icon = new ImageIcon(file.getPath());
+            Image img = ImageHelper.resize(icon.getImage(), 140, 160);
+            ImageIcon resizedIcon = new ImageIcon(img);
+            lb_anh.setIcon(resizedIcon);
+            ImageByte = ImageHelper.toByteArray(img, "jpg");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+    }//GEN-LAST:event_lb_anhMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+
+        int indexDongSP = cb_dongSP.getSelectedIndex();
+        int indexMauSac = cb_mauSac.getSelectedIndex();
+        JOptionPane.showMessageDialog(this, sanPhamService.update(getModel(), indexDongSP, indexMauSac));
+        listSPVM = sanPhamService.getList();
+        loadData(listSPVM);
+//        clear();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txt_namBhCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_namBhCaretUpdate
+
+    }//GEN-LAST:event_txt_namBhCaretUpdate
+
+    private void txt_namBhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_namBhMouseClicked
+
+    }//GEN-LAST:event_txt_namBhMouseClicked
+
+    private void txt_dungLuongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_dungLuongMouseExited
+        // TODO add your handling code here:
+                
+
+    }//GEN-LAST:event_txt_dungLuongMouseExited
+
+    private void txt_dungLuongMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_dungLuongMouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txt_dungLuongMouseReleased
+
+    private void txt_dungLuongInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txt_dungLuongInputMethodTextChanged
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_txt_dungLuongInputMethodTextChanged
+
+    private void txt_dungLuongCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txt_dungLuongCaretPositionChanged
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_txt_dungLuongCaretPositionChanged
+
+    private void txt_dungLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dungLuongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_dungLuongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

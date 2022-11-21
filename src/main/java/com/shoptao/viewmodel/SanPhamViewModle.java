@@ -31,7 +31,7 @@ public class SanPhamViewModle {
     
     private BigDecimal giaban;
    private String mota;
-    private String anhsanpham;
+    private byte[] anhsanpham;
     
     private String barcode;
     

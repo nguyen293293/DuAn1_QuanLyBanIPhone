@@ -14,14 +14,23 @@ import org.hibernate.Transaction;
  */
 public class SanPhamRepository {
 
-    public List<SanPham> getList() {
+    public SanPhamRepository() {
+    }
 
-        List<SanPham> list = new ArrayList<>();
+
+    
+
+    public List<SanPham> getList() {
+        
+        
+
+        List<SanPham> listSP = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Query query = session.createQuery("From SanPham");
-            list = query.getResultList();
+            listSP = query.getResultList();
         }
-        return list;
+       
+        return listSP;
     }
 
     public String add(SanPham t) {
@@ -65,22 +74,24 @@ public class SanPhamRepository {
     }
 
     public List<SanPham> search(String search) {
-        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+      try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Transaction trans = session.beginTransaction();
             if (search == null) {
                 search = "%";
             } else {
                 search = "%" + search + "%";
             }
-            Query query = session.createQuery("FROM SanPham where ma like: search or ten like: search or dungluong like: search ");
+//or ten like: search or dungluong like: search
+            Query query = session.createQuery("From SanPham where ma like: search");
             query.setParameter("search", search);
-            query.setParameter("search", search);
-            query.setParameter("search", search);
-            List<SanPham> sanPhams = query.getResultList();
+//            query.setParameter("search", search);
+//            query.setParameter("search", search);
+            List<SanPham> x = query.getResultList();
+          
             trans.commit();
+            session.close();
+            return x;
+        }  
 
-            return sanPhams;
-        }
-    }
-
+}
 }

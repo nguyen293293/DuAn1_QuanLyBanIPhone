@@ -27,29 +27,29 @@ public class DongSanPhamRepository {
         return list;
     }
 
-    public String add(DongSanPham t) {
+    public boolean add(DongSanPham t) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
             session.save(t);
             trans.commit();
-            return "Thanh cong";
-        } catch (Exception e) {
+            return true;
+        }catch(Exception e){
             e.printStackTrace();
-            return "That bai";
+            return false;
         }
     }
 
-    public String update(DongSanPham t) {
+    public boolean update(DongSanPham t) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
             session.update(t);
             trans.commit();
-            return "Thanh cong";
-        } catch (Exception e) {
+           return true;
+        }catch(Exception e){
             e.printStackTrace();
-            return "That bai";
+            return false;
         }
     }
 
