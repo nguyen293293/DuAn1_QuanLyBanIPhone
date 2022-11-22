@@ -41,7 +41,9 @@ public class HoaDonService implements ChungService<HoaDonViewModel> {
 
     @Override
     public HoaDonViewModel getOne(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        HoaDon hoaDon = hoaDonRepository.getOne(ma);
+        return new HoaDonViewModel(hoaDon.getMa(), hoaDon.getNgaytao(), hoaDon.getNgaythanhtoan(),
+                hoaDon.getTrangthai(), hoaDon.getKhachhang().getHoten(), hoaDon.getNhanvien().getHoten());
     }
 
     @Override

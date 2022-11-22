@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class HoaDonPanel extends javax.swing.JPanel {
 
-    private final ChungService service;
+    private final ChungService<HoaDonViewModel> service;
     private List<HoaDonViewModel> listHoaDon;
     private DefaultTableModel tableModel;
     
@@ -115,6 +115,11 @@ public class HoaDonPanel extends javax.swing.JPanel {
             }
         });
         tblHoaDon.setRowHeight(25);
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblHoaDon);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 46, 1430, 550));
@@ -156,6 +161,14 @@ public class HoaDonPanel extends javax.swing.JPanel {
 //        }
 //        loadDataToTable(listHoaDon);
     }//GEN-LAST:event_txtSeacrchCaretUpdate
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        if(tblHoaDon.getRowCount() < 0) return;
+        int index = tblHoaDon.getSelectedRow();
+        HoaDonViewModel hoaDon = service.getOne((String) tblHoaDon.getValueAt(index, 0));
+        HoaDonChiTietDialog hoaDonChiTietDialog = new HoaDonChiTietDialog(null, true, hoaDon);
+        hoaDonChiTietDialog.setVisible(true);
+    }//GEN-LAST:event_tblHoaDonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -76,6 +76,8 @@ public class SanPhamPanel extends javax.swing.JPanel {
 
         rd_dangBan.setOpaque(false);
         rd_ngungBan.setOpaque(false);
+        
+        txtSeacrch.setOpaque(false);
 
     }
 
@@ -87,7 +89,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
     public void loadData(List<SanPhamViewModle> listSPVM) {
         defaultTableModel = (DefaultTableModel) tblSanPham.getModel();
         defaultTableModel.setRowCount(0);
-        int i = 0;
+        int i = 1;
         for (SanPhamViewModle sanPhamViewModle : listSPVM) {
             defaultTableModel.addRow(new Object[]{
                 i++,
@@ -654,17 +656,14 @@ public class SanPhamPanel extends javax.swing.JPanel {
 
     private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
 
-//        String maSP = txtSeacrch.getText();
-//        List<SanPhamViewModle> list = new ArrayList<>();
-//        if (maSP.isEmpty()) {
-//            list = sanPhamService.getList();
-//        } else {
-//            list = sanPhamService.search(maSP);
-//        }
-//        loadData(list);
-
-//          List<SanPhamViewModle> list =    sanPhamService.search(txtSeacrch.getText());
-//        loadData(list);
+        String maSP = txtSeacrch.getText();
+        List<SanPhamViewModle> list = new ArrayList<>();
+        if (maSP.isEmpty()) {
+            list = sanPhamService.getList();
+        } else {
+            list = sanPhamService.search(maSP);
+        }
+        loadData(list);
     }//GEN-LAST:event_txtSeacrchCaretUpdate
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
