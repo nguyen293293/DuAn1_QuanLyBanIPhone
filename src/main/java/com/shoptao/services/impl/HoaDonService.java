@@ -24,7 +24,7 @@ public class HoaDonService implements ChungService<HoaDonViewModel> {
         List<HoaDonViewModel> list = new ArrayList<>();
         for (HoaDon x : hoaDonRepository.getList()) {
             list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
-                    x.getKhachhang().getHoten(), x.getKhachhang().getHoten()));
+                    x.getKhachhang().getHoten(), x.getNhanvien().getHoten()));
         }
         return list;
     }
