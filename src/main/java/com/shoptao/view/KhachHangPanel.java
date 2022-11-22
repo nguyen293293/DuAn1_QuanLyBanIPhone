@@ -244,13 +244,11 @@ public class KhachHangPanel extends javax.swing.JPanel {
         rdDangHD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdDangHD.setSelected(true);
         rdDangHD.setText("Đang hoạt động");
-        rdDangHD.setOpaque(false);
         rdDangHD.setPreferredSize(null);
 
         buttonGroup1.add(rdNgungHD);
         rdNgungHD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdNgungHD.setText("Ngừng hoạt động");
-        rdNgungHD.setOpaque(false);
         rdNgungHD.setPreferredSize(null);
 
         txtDiaChi.setColumns(20);
@@ -260,6 +258,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
         txtDiaChi.setWrapStyleWord(true);
         jScrollPane2.setViewportView(txtDiaChi);
 
+        jdcNgaySinh.setDateFormatString("dd, MM, yyyy");
         jdcNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
