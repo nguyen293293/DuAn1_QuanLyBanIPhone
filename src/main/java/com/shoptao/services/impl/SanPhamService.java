@@ -68,10 +68,15 @@ sanPham.setSoluongton(t.getSoluongton());
 sanPham.setGianhap(t.getGianhap());
 sanPham.setGiaban(t.getGiaban());
 sanPham.setBarcode(t.getBarcode());
+sanPham.setAnhsanpham(t.getAnhsanpham());
+sanPham.setMota(t.getMota());
 sanPham.setTrangthai(t.getTrangthai());
 sanPham.setDongsanpham(ds);
 sanPham.setKhuyenmai(null);
 sanPham.setMausac(ms);
+
+
+
           for (SanPham x : sanPhamRepository.getList()) {
             if (x.getMa().equals(sanPham.getMa())) {
                 sanPham.setId(x.getId());
