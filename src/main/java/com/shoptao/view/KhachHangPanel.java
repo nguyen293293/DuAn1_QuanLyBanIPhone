@@ -268,7 +268,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
         txtDiaChi.setWrapStyleWord(true);
         jScrollPane2.setViewportView(txtDiaChi);
 
-        jdcNgaySinh.setDateFormatString("dd, MM, yyyy");
+        jdcNgaySinh.setDateFormatString("dd-MM-yyyy");
         jdcNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

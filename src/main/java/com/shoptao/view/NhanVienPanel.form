@@ -405,13 +405,13 @@
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="rdDangLam" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="44" max="32767" attributes="0"/>
                           <Component id="rdDaNghi" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtSdt" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="txtPassword" min="-2" pref="231" max="-2" attributes="0"/>
+                          <Component id="txtPassword" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnHidePass" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
