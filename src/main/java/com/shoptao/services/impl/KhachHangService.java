@@ -65,7 +65,16 @@ public class KhachHangService implements ChungService<KhachHangViewModel>{
 
     @Override
     public List<KhachHangViewModel> search(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<KhachHangViewModel> listKhachHangVM = new ArrayList<>();
+        
+        for (KhachHang x : khachHangRepository.getList()) {
+            if (x.getMa().startsWith(ma)) {
+                listKhachHangVM.add(new KhachHangViewModel(x.getMa(), x.getHoten(),
+                    x.getNgaysinh(), x.getSdt(), x.getDiachi(), x.getTrangthai()));
+            }
+        }
+        
+        return listKhachHangVM;
     }
     
     
