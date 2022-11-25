@@ -10,7 +10,9 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import com.shoptao.services.ChungService;
 import com.shoptao.utilities.DialogHelper;
+import com.shoptao.viewmodel.HoaDonViewModel;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.Executor;
@@ -26,7 +28,6 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
 
     private WebcamPanel webcamPanel = null;
     private Webcam webcam = null;
-
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
 
