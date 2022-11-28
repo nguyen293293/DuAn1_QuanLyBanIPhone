@@ -1,6 +1,6 @@
 package com.shoptao.utilities;
 
-import com.shoptao.services.ChungService;
+import com.shoptao.services.ChungServices;
 import com.shoptao.services.impl.NhanVienService;
 import com.shoptao.viewmodel.NhanVienViewModel;
 import java.awt.Component;
@@ -149,7 +149,7 @@ public class Validation {
     }
     
     public static boolean checkTrungMaNV(String ma){
-        ChungService<NhanVienViewModel> service = new NhanVienService();
+        ChungServices<NhanVienViewModel> service = new NhanVienService();
         for (NhanVienViewModel x : service.getList()) {
             if(x.getMa().equals(ma)){
                 DialogHelper.alert(null, "Mã nhân viên đã tồn tại", "Lỗi!");
@@ -160,7 +160,7 @@ public class Validation {
     }
     
     public static boolean checkTrungSDTNV(String sdt){
-        ChungService<NhanVienViewModel> service = new NhanVienService();
+        ChungServices<NhanVienViewModel> service = new NhanVienService();
         for (NhanVienViewModel x : service.getList()) {
             if(x.getSdt().equals(sdt)){
                 DialogHelper.alert(null, "Số điện thoại đã tồn tại", "Lỗi!");
@@ -171,7 +171,7 @@ public class Validation {
     }
     
     public static boolean checkTrungEmail(String email){
-        ChungService<NhanVienViewModel> service = new NhanVienService();
+        ChungServices<NhanVienViewModel> service = new NhanVienService();
         for (NhanVienViewModel x : service.getList()) {
             if(x.getEmail().equals(email)){
                 DialogHelper.alert(null, "Email đã tồn tại", "Lỗi!");

@@ -1,7 +1,6 @@
 package com.shoptao.view;
 
 import com.shoptao.services.impl.NhanVienService;
-import com.shoptao.services.ChungService;
 import com.shoptao.utilities.DialogHelper;
 import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.NhanVienViewModel;
@@ -10,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import com.shoptao.services.ChungServices;
 
 /**
  *
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class NhanVienPanel extends javax.swing.JPanel {
 
-    private final ChungService chungService;
+    private final ChungServices chungService;
     private List<NhanVienViewModel> listNhanVien;
     private DefaultTableModel tableModel;
 

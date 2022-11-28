@@ -18,47 +18,48 @@ import org.hibernate.annotations.GenericGenerator;
  *
  * @author nguyen293
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Entity
-@Table(name = "SanPham")
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Getter
+    @Setter
+    @Entity
+    @Table(name = "SanPham")
 public class SanPham implements Serializable {
-    
+
     @Id
     @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
     @GeneratedValue(generator = "generator")
     private String id;
-    
+
     private String ma;
-    
+
     private String ten;
-    
+
     private String dungluong;
-    
+
     private int soluongton;
-    
+    private int nambaohanh;
+
     private BigDecimal gianhap;
-    
+
     private BigDecimal giaban;
-    
+
     private String mota;
     private byte[] anhsanpham;
-    
+
     private String barcode;
-    
+
     private int trangthai;
-    
+
     @ManyToOne
     @JoinColumn(name = "iddongsanpham")
     private DongSanPham dongsanpham;
-    
-    @ManyToOne
-    @JoinColumn(name = "idkhuyenmai")
-    private KhuyenMai khuyenmai;
-    
+
     @ManyToOne
     @JoinColumn(name = "idmausac")
     private MauSac mausac;
+    
+
+ 
+
 }

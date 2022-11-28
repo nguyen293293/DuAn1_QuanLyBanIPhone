@@ -2,16 +2,16 @@ package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.DongSanPham;
 import com.shoptao.repositories.DongSanPhamRepository;
-import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.DongSanPhamViewModle;
 import java.util.ArrayList;
 import java.util.List;
+import com.shoptao.services.ChungServices;
 
 /**
  *
  * @author haih7
  */
-public class DongSanPhamService implements ChungService<DongSanPhamViewModle>{
+public class DongSanPhamService implements ChungServices<DongSanPhamViewModle>{
     public DongSanPhamRepository dongSanPhamRepository = new DongSanPhamRepository();
 
     public DongSanPhamService() {
@@ -52,6 +52,11 @@ public class DongSanPhamService implements ChungService<DongSanPhamViewModle>{
 
     @Override
     public List<DongSanPhamViewModle> search(String search) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

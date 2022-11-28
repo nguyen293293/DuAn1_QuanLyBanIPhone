@@ -19,6 +19,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SanPhamViewModle {
+    
+    private String id;
       private String ma;
     
     private String ten;
@@ -26,6 +28,8 @@ public class SanPhamViewModle {
     private String dungluong;
     
     private int soluongton;
+    
+    private int nambaohanh;
     
     private BigDecimal gianhap;
     
@@ -40,7 +44,6 @@ public class SanPhamViewModle {
   
     private String tendongsanpham;
     
-   private String tenkhuyenmai;
     private String tenmausac;
     
     

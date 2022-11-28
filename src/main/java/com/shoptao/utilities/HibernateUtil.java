@@ -4,11 +4,13 @@ import com.shoptao.domainmodel.DongSanPham;
 import com.shoptao.domainmodel.HoaDon;
 import com.shoptao.domainmodel.HoaDonChiTiet;
 import com.shoptao.domainmodel.ImeiDaBan;
+import com.shoptao.domainmodel.Imei;
 import com.shoptao.domainmodel.KhachHang;
 import com.shoptao.domainmodel.KhuyenMai;
 import com.shoptao.domainmodel.MauSac;
 import com.shoptao.domainmodel.NhanVien;
 import com.shoptao.domainmodel.SanPham;
+import com.shoptao.domainmodel.SanPhamKhuyenMai;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -43,6 +45,8 @@ public class HibernateUtil {
         conf.addAnnotatedClass(SanPham.class);
         conf.addAnnotatedClass(HoaDon.class);
         conf.addAnnotatedClass(HoaDonChiTiet.class);
+        conf.addAnnotatedClass(SanPhamKhuyenMai.class);
+        conf.addAnnotatedClass(Imei.class);
 
         conf.addAnnotatedClass(ImeiDaBan.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()

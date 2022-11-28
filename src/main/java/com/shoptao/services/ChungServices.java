@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author haih7
  */
-public interface ChungService<T> {
+public interface ChungServices<T> {
     
     List<T> getList();
     
@@ -17,4 +17,6 @@ public interface ChungService<T> {
     T getOne(String ma);
     
     List<T> search(String ma);
+    
+    String delete(String id);
 }

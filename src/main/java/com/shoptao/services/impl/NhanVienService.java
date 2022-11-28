@@ -2,16 +2,16 @@ package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.NhanVien;
 import com.shoptao.repositories.NhanVienRepository;
-import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.NhanVienViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import com.shoptao.services.ChungServices;
 
 /**
  *
  * @author haih7
  */
-public class NhanVienService implements ChungService<NhanVienViewModel> {
+public class NhanVienService implements ChungServices<NhanVienViewModel> {
 
     private final NhanVienRepository nhanVienRepository;
 
@@ -76,5 +76,10 @@ public class NhanVienService implements ChungService<NhanVienViewModel> {
             }
         }
         return listNhanVienVM;
+    }
+
+    @Override
+    public String delete(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
