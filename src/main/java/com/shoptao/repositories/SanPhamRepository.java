@@ -1,5 +1,6 @@
 package com.shoptao.repositories;
 
+import com.shoptao.domainmodel.KhachHang;
 import com.shoptao.domainmodel.SanPham;
 import com.shoptao.utilities.HibernateUtil;
 import java.util.ArrayList;
@@ -21,9 +22,6 @@ public class SanPhamRepository {
     
 
     public List<SanPham> getList() {
-        
-        
-
         List<SanPham> listSP = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Query query = session.createQuery("From SanPham");
@@ -94,4 +92,24 @@ public class SanPhamRepository {
         }  
 
 }
+    
+    //getList chứa km và notkm
+    
+     public List<SanPham> getListKM(){
+        List<SanPham> list = new ArrayList<>();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("From SanPham where idkhuyenmai is not null");
+            list = query.getResultList();
+        }
+        return list;
+    }
+     
+         public List<SanPham> getListNotKM(){
+        List<SanPham> list = new ArrayList<>();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("From SanPham where idkhuyenmai is null");
+            list = query.getResultList();
+        }
+        return list;
+    }
 }

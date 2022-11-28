@@ -6,16 +6,16 @@ package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.MauSac;
 import com.shoptao.repositories.MauSacRepository;
-import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.MauSacViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import com.shoptao.services.ChungServices;
 
 /**
  *
  * @author haih7
  */
-public class MauSacService implements ChungService<MauSacViewModel>{
+public class MauSacService implements ChungServices<MauSacViewModel>{
 
     public MauSacService() {
     }
@@ -61,6 +61,11 @@ public class MauSacService implements ChungService<MauSacViewModel>{
 
     @Override
     public List<MauSacViewModel> search(String ma) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

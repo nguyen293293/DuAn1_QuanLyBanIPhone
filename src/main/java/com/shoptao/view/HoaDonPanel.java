@@ -1,16 +1,16 @@
 package com.shoptao.view;
 
 import com.shoptao.services.impl.HoaDonService;
-import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import java.awt.Font;
 import java.util.List;
 import javax.swing.plaf.basic.BasicTableUI;
 import javax.swing.table.DefaultTableModel;
+import com.shoptao.services.ChungServices;
 
 public class HoaDonPanel extends javax.swing.JPanel {
 
-    private final ChungService<HoaDonViewModel> service;
+    private final ChungServices<HoaDonViewModel> service;
     private List<HoaDonViewModel> listHoaDon;
     private DefaultTableModel tableModel;
     

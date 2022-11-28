@@ -2,16 +2,16 @@ package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.HoaDon;
 import com.shoptao.repositories.HoaDonRepository;
-import com.shoptao.services.ChungService;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import com.shoptao.services.ChungServices;
 
 /**
  *
  * @author nguyen293
  */
-public class HoaDonService implements ChungService<HoaDonViewModel> {
+public class HoaDonService implements ChungServices<HoaDonViewModel> {
 
     private final HoaDonRepository hoaDonRepository;
 
@@ -53,6 +53,11 @@ public class HoaDonService implements ChungService<HoaDonViewModel> {
             list.add(x);
         }
         return list;
+    }
+
+    @Override
+    public String delete(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

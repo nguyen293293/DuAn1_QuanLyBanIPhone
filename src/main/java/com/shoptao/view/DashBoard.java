@@ -48,6 +48,7 @@ public class DashBoard extends javax.swing.JFrame {
         pnlRoot.add("nhanvien", new NhanVienPanel());
         pnlRoot.add("khachhang", new KhachHangPanel());
         pnlRoot.add("thongke", new ThongKePanel());
+        pnlRoot.add("khuyenmai", new SanPhamKhuyenMaiPanel());
     }
 
     @SuppressWarnings("unchecked")
@@ -288,6 +289,8 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
         lblTitle.setText("Khuyến mãi");
+        
+          cardLayout.show(pnlRoot, "khuyenmai");
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
