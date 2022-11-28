@@ -1,5 +1,8 @@
 package com.shoptao.utilities;
 
+import com.shoptao.services.ChungService;
+import com.shoptao.services.impl.NhanVienService;
+import com.shoptao.viewmodel.NhanVienViewModel;
 import java.awt.Component;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
@@ -26,29 +29,21 @@ public class Validation {
     }
 
     public static boolean CheckTrongText(JTextField... txtFiled) {
-        int count = 0;
         for (int i = 0; i < txtFiled.length; i++) {
             JTextField txt = txtFiled[i];
             if (txt.getText().isEmpty()) {
-                count++;
+                DialogHelper.warring(null, "Không được để trống dữ liệu", "Lỗi");
+                return false;
             }
         }
-        if (count != 0) {
-            DialogHelper.warring(null, "Không được để trống dữ liệu", "Lỗi");
-            return false;
-        }else{
-            return true;
-        }
+        return true;
     }
 
     public static boolean CheckTrongTextArea(JTextArea txtFiled) {
         if (txtFiled.getText().isEmpty()) {
             DialogHelper.warring(null, "Không được để trống dữ liệu", "Lỗi");
-            txtFiled.requestFocus();
-            txtFiled.setBorder(new LineBorder(Color.red));
             return false;
         } else {
-            txtFiled.setBorder(new LineBorder(Color.green));
             return true;
         }
 
@@ -56,12 +51,9 @@ public class Validation {
 
     public static boolean CheckTrongJDate(JDateChooser txtFiled) {
         if (txtFiled.getDate().equals("")) {
-            DialogHelper.warring(null, "Không được để trống dữu liệu", "Lỗi");
-            txtFiled.requestFocus();
-            txtFiled.setBorder(new LineBorder(Color.red));
+            DialogHelper.warring(null, "Không được để trống dữ liệu", "Lỗi");
             return false;
         } else {
-            txtFiled.setBorder(new LineBorder(Color.green));
             return true;
         }
 
@@ -117,106 +109,76 @@ public class Validation {
                 checkl = true;
             }
         } catch (Exception e) {
-            DialogHelper.warring(filed, "Sai định dạng", "Lỗi!!!");
+            DialogHelper.warring(null, "Sai định dạng", "Lỗi!!!");
             filed.setBorder(new LineBorder(Color.red));
             checkl = false;
         }
         return checkl;
     }
 
-    public static boolean checkNumberSo(JTextField filed, int so2, String mess) {
-        boolean checkl = true;
+    public static boolean checkNumberSo(JTextField filed) {
         try {
             double so = Double.parseDouble(filed.getText());
-            so2 = 0;
-            if (so < 0 || so > so2) {
-                DialogHelper.warring(null, mess, "Lỗi!");
-                filed.requestFocus();
-                filed.setBorder(new LineBorder(Color.red));
-                checkl = false;
-            } else {
-                filed.setBorder(new LineBorder(Color.green));
-                checkl = true;
-            }
+            return true;
         } catch (Exception e) {
-            DialogHelper.warring(filed, "Sai định dạng", "Lỗi!!!");
-            filed.setBorder(new LineBorder(Color.red));
-            checkl = false;
+            DialogHelper.warring(null, "Nhập số", "Lỗi!!!");
+            return false;
         }
-        return checkl;
     }
 
     public static boolean checkEmail(JTextField filed) {
-        boolean flag = true;
         Pattern pt = Pattern.compile("\\w+@\\w+(\\.\\w+){1,2}");
         Matcher mt = pt.matcher(filed.getText());
         if (!mt.find()) {
             DialogHelper.warring(null, "Email không đúng định dạng", "Lỗi!");
-            filed.requestFocus();
-            filed.setBorder(new LineBorder(Color.red));
-            flag = false;
+            return false;
         } else {
-            filed.setBorder(new LineBorder(Color.green));
-            flag = true;
+            return true;
         }
-        return flag;
     }
-//   public static boolean checkDate( JTextField txtString){
-//       boolean flag = true;
-//       try {
-//           SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-//           String fmadate = sdf.format(sdf.parse(txtString.getText()));
-//           if(fmadate.equals(txtString.getText())){
-//               flag = true;
-//               txtString.setBorder(new LineBorder(Color.white));
-//           }else{
-//               DialogHelper.warring(null, "Dữ liệu không đúng định dạng", "Lỗi!");
-//               txtString.requestFocus();
-//               txtString.setBorder(new LineBorder(Color.red));
-//               flag = false;
-//           }
-//       } catch (Exception e) {
-//            DialogHelper.warring(null, "Dữ liệu không đúng định dạng", "Lỗi!");
-//               txtString.setBorder(new LineBorder(Color.red));
-//               flag = false;
-//       }
-//       return flag;
-//   }
 
     public static boolean checkSoDT(JTextField filed) {
         Pattern pt = Pattern.compile("^0[3,9,8]\\d{8}");
         Matcher mt = pt.matcher(filed.getText());
-        boolean flag = true;
         if (!mt.find()) {
             DialogHelper.warring(null, "SDT không đúng định dạng (10 số và bắt đầu 03, 08, 09)", "Lỗi!");
-            filed.requestFocus();
-            filed.setBorder(new LineBorder(Color.red));
-            flag = false;
+            return false;
         } else {
-            filed.setBorder(new LineBorder(Color.green));
-            flag = true;
+            return true;
         }
-        return flag;
     }
-
-    public static boolean checkNumber1(Component parent, JTextField filed, String messenger, String titel) {
-        boolean checkl = true;
-        try {
-            double so = Double.parseDouble(filed.getText());
-            if (so < 0) {
-                DialogHelper.warring(parent, messenger, titel);
-                filed.setBorder(new LineBorder(Color.red));
-                checkl = false;
-            } else {
-                filed.setBorder(new LineBorder(Color.green));
-                checkl = true;
+    
+    public static boolean checkTrungMaNV(String ma){
+        ChungService<NhanVienViewModel> service = new NhanVienService();
+        for (NhanVienViewModel x : service.getList()) {
+            if(x.getMa().equals(ma)){
+                DialogHelper.alert(null, "Mã nhân viên đã tồn tại", "Lỗi!");
+                return true;
             }
-        } catch (Exception e) {
-            DialogHelper.warring(filed, "Giá phải là số!!", "Lỗi!!!");
-            filed.setBorder(new LineBorder(Color.red));
-            checkl = false;
         }
-        return checkl;
+        return false;
+    }
+    
+    public static boolean checkTrungSDTNV(String sdt){
+        ChungService<NhanVienViewModel> service = new NhanVienService();
+        for (NhanVienViewModel x : service.getList()) {
+            if(x.getSdt().equals(sdt)){
+                DialogHelper.alert(null, "Số điện thoại đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkTrungEmail(String email){
+        ChungService<NhanVienViewModel> service = new NhanVienService();
+        for (NhanVienViewModel x : service.getList()) {
+            if(x.getEmail().equals(email)){
+                DialogHelper.alert(null, "Email đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
     }
 
 //    public static boolean checkTrungSDTNV(String sdt) {

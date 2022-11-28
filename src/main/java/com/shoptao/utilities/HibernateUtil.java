@@ -3,6 +3,7 @@ package com.shoptao.utilities;
 import com.shoptao.domainmodel.DongSanPham;
 import com.shoptao.domainmodel.HoaDon;
 import com.shoptao.domainmodel.HoaDonChiTiet;
+import com.shoptao.domainmodel.ImeiDaBan;
 import com.shoptao.domainmodel.KhachHang;
 import com.shoptao.domainmodel.KhuyenMai;
 import com.shoptao.domainmodel.MauSac;
@@ -43,6 +44,7 @@ public class HibernateUtil {
         conf.addAnnotatedClass(HoaDon.class);
         conf.addAnnotatedClass(HoaDonChiTiet.class);
 
+        conf.addAnnotatedClass(ImeiDaBan.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
 
