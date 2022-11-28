@@ -156,9 +156,19 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
         txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtSeacrch.setBorder(null);
+        txtSeacrch.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSeacrchCaretUpdate(evt);
+            }
+        });
         txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtSeacrchMouseClicked(evt);
+            }
+        });
+        txtSeacrch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSeacrchActionPerformed(evt);
             }
         });
 
@@ -258,7 +268,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
         txtDiaChi.setWrapStyleWord(true);
         jScrollPane2.setViewportView(txtDiaChi);
 
-        jdcNgaySinh.setDateFormatString("dd, MM, yyyy");
+        jdcNgaySinh.setDateFormatString("dd-MM-yyyy");
         jdcNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -384,6 +394,21 @@ public class KhachHangPanel extends javax.swing.JPanel {
         loadDataToTable(listKhachHang);
         DialogHelper.alert(null, message, "Thông báo");
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void txtSeacrchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSeacrchActionPerformed
+
+    private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
+        // TODO add your handling code here:
+        String maKH = txtSeacrch.getText();
+        if (maKH.isEmpty()) {
+            listKhachHang = chungService.getList();
+        }else {
+            listKhachHang = chungService.search(maKH);
+        }
+        loadDataToTable(listKhachHang);
+    }//GEN-LAST:event_txtSeacrchCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

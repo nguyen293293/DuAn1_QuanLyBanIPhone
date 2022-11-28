@@ -4,11 +4,9 @@
  */
 package com.shoptao.services;
 
-import com.shoptao.domainmodel.KhuyenMai;
 import com.shoptao.viewmodel.KhuyenMaiViewModle;
 import com.shoptao.viewmodel.SanPhamKhuyenMaiViewModle;
 import com.shoptao.viewmodel.SanPhamViewModle;
-import java.util.List;
 
 /**
  *
@@ -17,5 +15,4 @@ import java.util.List;
 public interface vcl<T> {
     String add(SanPhamKhuyenMaiViewModle t,SanPhamViewModle spvm,KhuyenMaiViewModle km);
     
-//    String Delete()
 }
