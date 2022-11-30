@@ -1,6 +1,8 @@
 package com.shoptao.view;
 
 import com.shoptao.services.impl.MauSacService;
+import com.shoptao.utilities.DialogHelper;
+import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.MauSacViewModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -60,6 +62,13 @@ public class MauSacDialog extends javax.swing.JDialog {
     public void clear() {
         txtMa.setText("");
         txtTen.setText("");
+    }
+    private boolean validation(){
+        if(!Validation.CheckTrongText(txtMa, txtTen)){
+            return false;
+        }
+        
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -253,6 +262,8 @@ public class MauSacDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        if(!validation()) return;
+        
         JOptionPane.showMessageDialog(this, mauSacService.add(getModel()));
         list = mauSacService.getList();
         loadData(list);
@@ -263,6 +274,13 @@ public class MauSacDialog extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        if(tblMauSac.getSelectedRow() < 0){
+            DialogHelper.alert(null, "Chọn dòng sản phẩm cần sửa", "Thông báo");
+            return;
+        }
+        
+        if(!validation()) return;
+        
         JOptionPane.showMessageDialog(this, mauSacService.update(getModel()));
         list = mauSacService.getList();
         loadData(list);

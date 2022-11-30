@@ -1,6 +1,8 @@
 package com.shoptao.view;
 
 import com.shoptao.services.impl.DongSanPhamService;
+import com.shoptao.utilities.DialogHelper;
+import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.DongSanPhamViewModle;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -61,6 +63,14 @@ public class DongSPDialog extends javax.swing.JDialog {
     public void clear() {
         txtMa.setText("");
         txtTen.setText("");
+    }
+    
+    private boolean validation(){
+        if(!Validation.CheckTrongText(txtMa, txtTen)){
+            return false;
+        }
+        
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -260,6 +270,8 @@ public class DongSPDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        if(!validation()) return;
+        
         JOptionPane.showMessageDialog(this, dongSanPhamService.add(getModel()));
         list = dongSanPhamService.getList();
         loadData(list);
@@ -268,6 +280,13 @@ public class DongSPDialog extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        if(tblDongSanPham.getSelectedRow() < 0){
+            DialogHelper.alert(null, "Chọn dòng sản phẩm cần sửa", "Thông báo");
+            return;
+        }
+        
+        if(!validation()) return;
+        
         JOptionPane.showMessageDialog(this, dongSanPhamService.update(getModel()));
         list = dongSanPhamService.getList();
         loadData(list);

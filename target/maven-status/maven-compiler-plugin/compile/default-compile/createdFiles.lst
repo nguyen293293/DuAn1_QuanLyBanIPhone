@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 com\shoptao\domainmodel\NhanVien.class
 com\shoptao\view\SanPhamKhuyenMaiPanel$5.class
 com\shoptao\view\DashBoard$3.class
@@ -9,6 +8,7 @@ com\shoptao\domainmodel\KhachHang.class
 com\shoptao\viewmodel\SanPhamViewModle.class
 com\shoptao\services\impl\SanPhamService.class
 com\shoptao\view\LoginForm.class
+com\shoptao\view\SanPhamPanel$19.class
 com\shoptao\domainmodel\MauSac.class
 com\shoptao\view\ImeiSPDialog$3.class
 com\shoptao\view\KhachHangPanel$3.class
@@ -25,14 +25,17 @@ com\shoptao\view\DashBoard$9.class
 com\shoptao\view\KhuyenMaiDialog$2.class
 com\shoptao\view\KhachHangPanel.class
 com\shoptao\repositories\KhuyenMaiRepository.class
+com\shoptao\view\SanPhamKhuyenMaiPanel$8.class
 com\shoptao\view\ThongKePanel.class
 com\shoptao\view\BanHangPanel.class
+com\shoptao\view\KhuyenMaiDialog$8.class
 com\shoptao\view\SanPhamPanel$5.class
 com\shoptao\view\DongSPDialog.class
 com\shoptao\repositories\SanPhamKhuyenMaiRepository.class
 com\shoptao\repositories\HoaDonRepository.class
 com\shoptao\view\DashBoard$6.class
 com\shoptao\view\MauSacDialog$3.class
+com\shoptao\view\SanPhamKhuyenMaiPanel$10.class
 com\shoptao\view\DashBoard$1.class
 com\shoptao\view\KhachHangPanel$8.class
 com\shoptao\domainmodel\SanPham.class
@@ -100,6 +103,7 @@ com\shoptao\repositories\ImeiRepository.class
 com\shoptao\view\SanPhamKhuyenMaiPanel$1.class
 com\shoptao\utilities\DialogHelper.class
 com\shoptao\view\KhachHangPanel$2.class
+com\shoptao\view\SanPhamPanel$18.class
 com\shoptao\view\DashBoard.class
 com\shoptao\view\NhanVienPanel$8.class
 com\shoptao\view\SanPhamPanel$10.class
@@ -111,7 +115,7 @@ com\shoptao\view\SanPhamPanel$2.class
 com\shoptao\domainmodel\SanPhamKhuyenMai.class
 com\shoptao\services\ChungServices.class
 com\shoptao\view\DashBoard$10.class
-com\shoptao\services\vcl.class
+com\shoptao\view\KhuyenMaiDialog$7.class
 com\shoptao\view\DashBoard$5.class
 com\shoptao\view\HoaDonPanel$4.class
 com\shoptao\view\SanPhamPanel$17.class
@@ -131,6 +135,7 @@ com\shoptao\view\KhachHangPanel$4.class
 com\shoptao\repositories\NhanVienRepository.class
 com\shoptao\view\ImeiSPDialog$2.class
 com\shoptao\view\SanPhamKhuyenMaiPanel$3.class
+com\shoptao\view\SanPhamKhuyenMaiPanel$9.class
 com\shoptao\view\KhuyenMaiDialog.class
 com\shoptao\view\HoaDonPanel.class
 com\shoptao\services\impl\HoaDonChiTietService.class
@@ -138,5 +143,3 @@ com\shoptao\viewmodel\HoaDonViewModel.class
 com\shoptao\view\NhanVienPanel$2.class
 com\shoptao\repositories\SanPhamRepository.class
 com\shoptao\viewmodel\MauSacViewModel.class
-=======
->>>>>>> fb59f33bfc1db47431a219903239a4d7183f9173
