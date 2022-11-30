@@ -17,7 +17,7 @@ public class HoaDonRepository {
     public List<HoaDon> getList(){
         List<HoaDon> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From HoaDon");
+            Query query = session.createQuery("From HoaDon order by ma asc");
             list = query.getResultList();
         }
         return list;

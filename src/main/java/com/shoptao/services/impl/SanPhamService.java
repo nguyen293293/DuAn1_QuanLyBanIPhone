@@ -38,7 +38,12 @@ public class SanPhamService implements ChungServices<SanPhamViewModle> {
         List<SanPhamViewModle> listSPVM = new ArrayList<>();
 
         for (SanPham sanPham : sanPhamRepository.getList()) {
-            listSPVM.add(new SanPhamViewModle(sanPham.getId(),sanPham.getMa(), sanPham.getTen(), sanPham.getDungluong(), sanPham.getSoluongton(),sanPham.getNambaohanh(), sanPham.getGianhap(), sanPham.getGiaban(), sanPham.getMota(), sanPham.getAnhsanpham(), sanPham.getBarcode(), sanPham.getTrangthai(), sanPham.getDongsanpham().getTen(), sanPham.getMausac().getTen()));
+            listSPVM.add(new SanPhamViewModle(sanPham.getId(), sanPham.getMa(),
+                    sanPham.getTen(), sanPham.getDungluong(), sanPham.getSoluongton(),
+                    sanPham.getNambaohanh(), sanPham.getGianhap(), sanPham.getGiaban(),
+                    sanPham.getMota(), sanPham.getAnhsanpham(), sanPham.getBarcode(),
+                    sanPham.getTrangthai(), sanPham.getDongsanpham().getTen(),
+                    sanPham.getMausac().getTen()));
         }
         return listSPVM;
     }

@@ -17,5 +17,7 @@ public class ImeiDaBanViewModel {
     
     private String maimei;
     
+    private String idHDCT;
+    
     private int trangthai;
 }

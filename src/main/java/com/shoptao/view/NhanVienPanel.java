@@ -454,11 +454,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         if(!validation()) return;
         
-        if(Validation.checkTrungMaNV(txtMa.getText())) return;
+        if(Validation.checkTrungMaNhanVien(txtMa.getText())) return;
         
-        if(Validation.checkTrungSDTNV(txtSdt.getText())) return;
+        if(Validation.checkTrungSDTNhanVien(txtSdt.getText())) return;
         
-        if(Validation.checkTrungEmail(txtEmail.getText()))return;
+        if(Validation.checkTrungEmailNhanVien(txtEmail.getText()))return;
         
         String message = chungService.add(getModel());
         listNhanVien = chungService.getList();

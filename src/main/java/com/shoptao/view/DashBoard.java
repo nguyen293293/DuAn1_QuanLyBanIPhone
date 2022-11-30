@@ -44,11 +44,11 @@ public class DashBoard extends javax.swing.JFrame {
         cardLayout = (CardLayout) pnlRoot.getLayout();
         pnlRoot.add("banhang", new BanHangPanel());
         pnlRoot.add("hoadon", new HoaDonPanel());
-//        pnlRoot.add("sanpham", new SanPhamPanel());
+        pnlRoot.add("sanpham", new SanPhamPanel());
         pnlRoot.add("nhanvien", new NhanVienPanel());
         pnlRoot.add("khachhang", new KhachHangPanel());
         pnlRoot.add("thongke", new ThongKePanel());
-        pnlRoot.add("khuyenmai", new SanPhamKhuyenMaiPanel());
+//        pnlRoot.add("khuyenmai", new SanPhamKhuyenMaiPanel());
     }
 
     @SuppressWarnings("unchecked")

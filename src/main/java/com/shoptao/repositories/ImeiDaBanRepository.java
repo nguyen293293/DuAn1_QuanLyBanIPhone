@@ -37,11 +37,14 @@ public class ImeiDaBanRepository {
         }
     }
     
-    public boolean delete(ImeiDaBan imeiDaBan) {
+    public boolean delete(String imei) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
-            session.delete(imeiDaBan);
+            String hql = "DELETE HoaDonChiTiet hd where maimei = :imei";
+            Query query = session.createQuery(hql);
+            query.setParameter("imei", imei);
+            query.executeUpdate();
             trans.commit();
             return true;
         }catch(Exception e){

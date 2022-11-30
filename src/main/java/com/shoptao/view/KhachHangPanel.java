@@ -135,7 +135,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã hóa đơn", "Nhân viên", "Khách hàng", "Ngày tạo", "Tình trạng"
+                "Mã", "Họ tên", "Ngày sinh", "Số điện thoại", "Địa chỉ", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,24 +26,24 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "HoaDon")
 public class HoaDon implements Serializable {
-    
+
     @Id
     @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
     @GeneratedValue(generator = "generator")
     private String id;
-    
+
     private String ma;
-    
+
     private Date ngaytao;
-    
+
     private Date ngaythanhtoan;
-    
+
     private int trangthai;
-    
+
     @ManyToOne
     @JoinColumn(name = "idkhachhang")
     private KhachHang khachhang;
-    
+
     @ManyToOne
     @JoinColumn(name = "idnhanvien")
     private NhanVien nhanvien;

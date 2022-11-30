@@ -24,6 +24,14 @@ public class HoaDonChiTietRepository {
         return list;
     }
     
+    public HoaDonChiTiet getOne(String idHDCT){
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("From HoaDonChiTiet where id = :idHDCT");
+            query.setParameter("idHDCT", idHDCT);
+            return (HoaDonChiTiet) query.getSingleResult();
+        }
+    }
+    
     public boolean add(HoaDonChiTiet hdct){
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();

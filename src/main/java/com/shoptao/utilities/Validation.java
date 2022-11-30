@@ -1,7 +1,9 @@
 package com.shoptao.utilities;
 
 import com.shoptao.services.ChungServices;
+import com.shoptao.services.impl.KhachHangService;
 import com.shoptao.services.impl.NhanVienService;
+import com.shoptao.viewmodel.KhachHangViewModel;
 import com.shoptao.viewmodel.NhanVienViewModel;
 import java.awt.Component;
 import javax.swing.JTextField;
@@ -148,7 +150,7 @@ public class Validation {
         }
     }
     
-    public static boolean checkTrungMaNV(String ma){
+    public static boolean checkTrungMaNhanVien(String ma){
         ChungServices<NhanVienViewModel> service = new NhanVienService();
         for (NhanVienViewModel x : service.getList()) {
             if(x.getMa().equals(ma)){
@@ -159,7 +161,7 @@ public class Validation {
         return false;
     }
     
-    public static boolean checkTrungSDTNV(String sdt){
+    public static boolean checkTrungSDTNhanVien(String sdt){
         ChungServices<NhanVienViewModel> service = new NhanVienService();
         for (NhanVienViewModel x : service.getList()) {
             if(x.getSdt().equals(sdt)){
@@ -170,7 +172,7 @@ public class Validation {
         return false;
     }
     
-    public static boolean checkTrungEmail(String email){
+    public static boolean checkTrungEmailNhanVien(String email){
         ChungServices<NhanVienViewModel> service = new NhanVienService();
         for (NhanVienViewModel x : service.getList()) {
             if(x.getEmail().equals(email)){
@@ -181,24 +183,25 @@ public class Validation {
         return false;
     }
 
-//    public static boolean checkTrungSDTNV(String sdt) {
-//        UserDAO dao = new UserDAO();
-//        List<UserModel> list = dao.select();
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).getSdt().trim().equals(sdt)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//    public static boolean checkTrungEmailNV(String email) {
-//        UserDAO dao = new UserDAO();
-//        List<UserModel> list = dao.select();
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).getEmail().trim().equals(email)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public static boolean checkTrungMaKhachHang(String ma){
+        ChungServices<KhachHangViewModel> service = new KhachHangService();
+        for (KhachHangViewModel x : service.getList()) {
+            if(x.getMa().equals(ma)){
+                DialogHelper.alert(null, "Mã khách hàng đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkTrungSDTKhachHang(String sdt){
+        ChungServices<KhachHangViewModel> service = new KhachHangService();
+        for (KhachHangViewModel x : service.getList()) {
+            if(x.getSdt().equals(sdt)){
+                DialogHelper.alert(null, "Số điện thoại đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
 }
