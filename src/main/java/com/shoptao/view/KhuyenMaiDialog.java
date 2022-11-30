@@ -168,7 +168,8 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_khuyenmai = new javax.swing.JTable();
-        txt_serachKhuyenMai = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtSeacrch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -272,16 +273,23 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tb_khuyenmai);
 
-        txt_serachKhuyenMai.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        txt_serachKhuyenMai.setBorder(null);
-        txt_serachKhuyenMai.addCaretListener(new javax.swing.event.CaretListener() {
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/searchbar1.png"))); // NOI18N
+
+        txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtSeacrch.setBorder(null);
+        txtSeacrch.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txt_serachKhuyenMaiCaretUpdate(evt);
+                txtSeacrchCaretUpdate(evt);
             }
         });
-        txt_serachKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+        txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSeacrchMouseClicked(evt);
+            }
+        });
+        txtSeacrch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_serachKhuyenMaiActionPerformed(evt);
+                txtSeacrchActionPerformed(evt);
             }
         });
 
@@ -329,8 +337,11 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
                         .addComponent(jLabel8)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_serachKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtSeacrch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(423, 423, 423))
         );
         jPanel1Layout.setVerticalGroup(
@@ -377,11 +388,13 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRefresh))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(txt_serachKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(txtSeacrch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -422,7 +435,7 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         
         if(tb_khuyenmai.getSelectedRow() < 0) {
-            DialogHelper.alert(null, "Chọn nhân viên cần sửa", "Thông báo");
+            DialogHelper.alert(null, "Chọn khuyến mại cần sửa", "Thông báo");
             return;
         }
         if(!validation()) return;
@@ -450,9 +463,10 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
         refresh();// TODO add your handling code here:
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    private void txt_serachKhuyenMaiCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_serachKhuyenMaiCaretUpdate
-
-        String maKM = txt_serachKhuyenMai.getText();
+    private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
+        // TODO add your handling code here:
+        
+        String maKM = txtSeacrch.getText();
         List<KhuyenMaiViewModle> list = new ArrayList<>();
         if (maKM.isEmpty()) {
             list = khuyenMaiService.getList();
@@ -460,11 +474,18 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
             list = khuyenMaiService.search(maKM);
         }
         loadDataKM(list);
-    }//GEN-LAST:event_txt_serachKhuyenMaiCaretUpdate
+    }//GEN-LAST:event_txtSeacrchCaretUpdate
 
-    private void txt_serachKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_serachKhuyenMaiActionPerformed
+    private void txtSeacrchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchMouseClicked
+        if (!txtSeacrch.getText().equals("Mã HD")) {
+            return;
+        }
+        txtSeacrch.setText("");
+    }//GEN-LAST:event_txtSeacrchMouseClicked
+
+    private void txtSeacrchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_serachKhuyenMaiActionPerformed
+    }//GEN-LAST:event_txtSeacrchActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRefresh;
@@ -474,6 +495,7 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
@@ -484,10 +506,10 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser jdc_ngayBatDau;
     private com.toedter.calendar.JDateChooser jdc_ngayKetThuc;
     private javax.swing.JTable tb_khuyenmai;
+    private javax.swing.JTextField txtSeacrch;
     private javax.swing.JTextField txt_dieuKienGiamGia;
     private javax.swing.JTextField txt_giaTri;
     private javax.swing.JTextField txt_ma;
-    private javax.swing.JTextField txt_serachKhuyenMai;
     private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables
 }

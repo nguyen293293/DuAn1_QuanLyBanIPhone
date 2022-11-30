@@ -85,6 +85,8 @@ public class DongSPDialog extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDongSanPham = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        txtSeacrch = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnRefresh = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
@@ -166,6 +168,26 @@ public class DongSPDialog extends javax.swing.JDialog {
             tblDongSanPham.getColumnModel().getColumn(0).setMaxWidth(60);
         }
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/searchbar1.png"))); // NOI18N
+
+        txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtSeacrch.setBorder(null);
+        txtSeacrch.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSeacrchCaretUpdate(evt);
+            }
+        });
+        txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSeacrchMouseClicked(evt);
+            }
+        });
+        txtSeacrch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSeacrchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -174,12 +196,24 @@ public class DongSPDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtSeacrch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
+                    .addComponent(txtSeacrch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -297,6 +331,22 @@ public class DongSPDialog extends javax.swing.JDialog {
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         clear();        // TODO add your handling code here:
     }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtSeacrchCaretUpdate
+
+    private void txtSeacrchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchMouseClicked
+        if (!txtSeacrch.getText().equals("Mã HD")) {
+            return;
+        }
+        txtSeacrch.setText("");
+    }//GEN-LAST:event_txtSeacrchMouseClicked
+
+    private void txtSeacrchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSeacrchActionPerformed
 //
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
@@ -342,6 +392,7 @@ public class DongSPDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -349,6 +400,7 @@ public class DongSPDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDongSanPham;
     private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtSeacrch;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 }
