@@ -2,12 +2,12 @@ package com.shoptao.view;
 
 import com.shoptao.services.impl.NhanVienService;
 import com.shoptao.utilities.DialogHelper;
+import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.NhanVienViewModel;
 import java.awt.Font;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import com.shoptao.services.ChungServices;
 
@@ -73,12 +73,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         rdDangLam = new javax.swing.JRadioButton();
         rdDaNghi = new javax.swing.JRadioButton();
-        btnHidePass = new javax.swing.JButton();
         jdcNgaySinh = new com.toedter.calendar.JDateChooser();
         rdNam = new javax.swing.JRadioButton();
         rdNu = new javax.swing.JRadioButton();
-        txtPassword = new javax.swing.JPasswordField();
         cboVaiTro = new javax.swing.JComboBox<>();
+        txtPassword = new javax.swing.JTextField();
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -290,13 +289,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
         rdDaNghi.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdDaNghi.setText("Đã nghỉ");
 
-        btnHidePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_eye_35px.png"))); // NOI18N
-        btnHidePass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHidePassActionPerformed(evt);
-            }
-        });
-
         jdcNgaySinh.setDateFormatString("dd-MM-yyyy");
         jdcNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
@@ -309,11 +301,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
         rdNu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdNu.setText("Nữ");
 
-        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        txtPassword.setText("abcdef");
-
         cboVaiTro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cboVaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lý", "Nhân viên" }));
+
+        txtPassword.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -353,11 +344,8 @@ public class NhanVienPanel extends javax.swing.JPanel {
                         .addComponent(rdDaNghi))
                     .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtSdt, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtPassword)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnHidePass, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cboVaiTro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cboVaiTro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(72, 72, 72))
         );
         jPanel1Layout.setVerticalGroup(
@@ -377,12 +365,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(cboVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnHidePass, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel9)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -444,14 +430,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
         txtSeacrch.setText("");
     }//GEN-LAST:event_txtSeacrchMouseClicked
 
-    private void btnHidePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHidePassActionPerformed
-        if (txtPassword.getEchoChar() != '\u0000') {
-            txtPassword.setEchoChar('\u0000');
-        } else {
-            txtPassword.setEchoChar((Character) UIManager.get("PasswordField.echoChar"));
-        }
-    }//GEN-LAST:event_btnHidePassActionPerformed
-
     private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
         String maNV = txtSeacrch.getText();
         if (maNV.isEmpty()) {
@@ -479,6 +457,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        if(!validation()) return;
+        
+        if(Validation.checkTrungMaNV(txtMa.getText())) return;
+        
+        if(Validation.checkTrungSDTNV(txtSdt.getText())) return;
+        
+        if(Validation.checkTrungEmail(txtEmail.getText()))return;
+        
         String message = chungService.add(getModel());
         listNhanVien = chungService.getList();
         loadDataToTable(listNhanVien);
@@ -486,6 +472,12 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        if(tblNhanVien.getSelectedRow() < 0) {
+            DialogHelper.alert(null, "Chọn nhân viên cần sửa", "Thông báo");
+            return;
+        }
+        if(!validation()) return;
+        
         String message = chungService.update(getModel());
         listNhanVien = chungService.getList();
         loadDataToTable(listNhanVien);
@@ -498,7 +490,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHidePass;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
@@ -533,7 +524,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JTextField txtMa;
-    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtSdt;
     private javax.swing.JTextField txtSeacrch;
     // End of variables declaration//GEN-END:variables
@@ -574,9 +565,30 @@ public class NhanVienPanel extends javax.swing.JPanel {
         nhanVien.setGioitinh(rdNam.isSelected() ? "Nam" : "Nữ");
         nhanVien.setNgaysinh(jdcNgaySinh.getDate());
         nhanVien.setVaitro(cboVaiTro.getSelectedItem()+"");
-        nhanVien.setMatkhau(new String(txtPassword.getPassword()));
+        nhanVien.setMatkhau(txtPassword.getText());
         nhanVien.setTrangthai(rdDangLam.isSelected() ? 0 : 1);
         
         return nhanVien;
     }
+    
+    private boolean validation(){
+        if(!Validation.CheckTrongText(txtMa, txtHoTen, txtDiaChi, txtSdt, txtEmail, txtPassword)){
+            return false;
+        }
+        
+        if(!Validation.CheckTrongJDate(jdcNgaySinh)){
+            return false;
+        }
+        
+        if(!Validation.checkSoDT(txtSdt)){
+            return false;
+        }
+        
+        if(!Validation.checkEmail(txtEmail)){
+            return false;
+        }
+        
+        return true;
+    }
+    
 }

@@ -1,5 +1,13 @@
 package com.shoptao.view;
 
+import com.shoptao.services.ChungServices;
+import com.shoptao.services.InterfaceHoaDonChiTietService;
+import com.shoptao.services.impl.HoaDonChiTietService;
+import com.shoptao.viewmodel.HoaDonChiTietViewModel;
+import com.shoptao.viewmodel.HoaDonViewModel;
+import java.awt.Font;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import java.awt.Font;
 import com.shoptao.services.ChungServices;
@@ -11,17 +19,22 @@ import com.shoptao.services.ChungServices;
 public class HoaDonChiTietDialog extends javax.swing.JDialog {
     
     private HoaDonViewModel hoaDon = new HoaDonViewModel();
-
+    private InterfaceHoaDonChiTietService hoaDonChiTietService;
+    private List<HoaDonChiTietViewModel> listHoaDonChiTiet;
+    private DefaultTableModel tableModel;
+    
     public HoaDonChiTietDialog(java.awt.Frame parent, boolean modal, HoaDonViewModel hoaDon) {
         super(parent, modal);
         initComponents();
         init();
         
+        hoaDonChiTietService = new HoaDonChiTietService();
+        
         this.hoaDon = hoaDon;
-        lblMaHoaDon.setText(hoaDon.getMa());
-        lblTenNhanVien.setText(hoaDon.getTenNhanVien());
-        lblTenKhachHang.setText(hoaDon.getTenKhachHang());
-        lblNgayTao.setText(hoaDon.getNgaytao()+"");
+        showDetail(this.hoaDon);
+        
+        listHoaDonChiTiet = hoaDonChiTietService.getList(this.hoaDon.getMa());
+        loadDataToTable(listHoaDonChiTiet);
     }
 
     public void init(){
@@ -106,8 +119,8 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
                             .addComponent(lblTenKhachHang))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
                         .addGap(61, 61, 61)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTongTien)
@@ -138,6 +151,7 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
+        tblHoaDonChiTiet.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         tblHoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -157,6 +171,7 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblHoaDonChiTiet.setRowHeight(24);
         jScrollPane1.setViewportView(tblHoaDonChiTiet);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -200,48 +215,6 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(HoaDonChiTietDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(HoaDonChiTietDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(HoaDonChiTietDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(HoaDonChiTietDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                HoaDonChiTietDialog dialog = new HoaDonChiTietDialog(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -258,4 +231,19 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblTongTien;
     private javax.swing.JTable tblHoaDonChiTiet;
     // End of variables declaration//GEN-END:variables
+
+    private void showDetail(HoaDonViewModel hoaDon){
+        lblMaHoaDon.setText(hoaDon.getMa());
+        lblTenNhanVien.setText(hoaDon.getTenNhanVien());
+        lblTenKhachHang.setText(hoaDon.getTenKhachHang());
+        lblNgayTao.setText(hoaDon.getNgaytao()+"");
+    }
+    
+    private void loadDataToTable(List<HoaDonChiTietViewModel> listHoaDonChiTiet) {
+        tableModel = (DefaultTableModel) tblHoaDonChiTiet.getModel();
+        tableModel.setRowCount(0);
+        for (HoaDonChiTietViewModel x : listHoaDonChiTiet) {
+            tableModel.addRow(x.toDataRow(tblHoaDonChiTiet));
+        }
+    }
 }

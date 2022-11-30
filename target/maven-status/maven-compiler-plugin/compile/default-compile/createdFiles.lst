@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 com\shoptao\domainmodel\NhanVien.class
 com\shoptao\view\SanPhamKhuyenMaiPanel$5.class
 com\shoptao\view\DashBoard$3.class
@@ -137,3 +138,5 @@ com\shoptao\viewmodel\HoaDonViewModel.class
 com\shoptao\view\NhanVienPanel$2.class
 com\shoptao\repositories\SanPhamRepository.class
 com\shoptao\viewmodel\MauSacViewModel.class
+=======
+>>>>>>> fb59f33bfc1db47431a219903239a4d7183f9173
