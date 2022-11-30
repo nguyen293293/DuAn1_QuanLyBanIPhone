@@ -9,10 +9,8 @@ import com.shoptao.domainmodel.SanPham;
 import com.shoptao.domainmodel.SanPhamKhuyenMai;
 import com.shoptao.repositories.KhuyenMaiRepository;
 import com.shoptao.repositories.SanPhamKhuyenMaiRepository;
-import com.shoptao.services.vcl;
-import com.shoptao.viewmodel.KhuyenMaiViewModle;
+import com.shoptao.repositories.SanPhamRepository;
 import com.shoptao.viewmodel.SanPhamKhuyenMaiViewModle;
-import com.shoptao.viewmodel.SanPhamViewModle;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -22,13 +20,14 @@ import com.shoptao.services.ChungServices;
  *
  * @author haih7
  */
-public class SanPhamKhuyenMaiService implements ChungServices<SanPhamKhuyenMaiViewModle>,vcl<SanPhamKhuyenMaiViewModle> {
+public class SanPhamKhuyenMaiService implements ChungServices<SanPhamKhuyenMaiViewModle> {
 
     public SanPhamKhuyenMaiService() {
     }
     ModelMapper modelMapper = new ModelMapper();
     public SanPhamKhuyenMaiRepository sanPhamKhuyenMaiRepository = new SanPhamKhuyenMaiRepository();
     public KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
+    public SanPhamRepository sanPhamRepository = new SanPhamRepository();
 
     @Override
     public List<SanPhamKhuyenMaiViewModle> getList() {
@@ -57,56 +56,22 @@ public class SanPhamKhuyenMaiService implements ChungServices<SanPhamKhuyenMaiVi
 
     @Override
     public String add(SanPhamKhuyenMaiViewModle t, Object... obj) {
+        boolean isSave;
 
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-
-    }
-  
-
-//    @Override
-//    public String ( List<SanPhamViewModle> list,KhuyenMaiViewModle km) {
-//        
-//        ModelMapper modelMapper = new ModelMapper();
-//        KhuyenMaiService khuyenMaiService = new KhuyenMaiService();
-//        khuyenMaiService.add(km);
-//        KhuyenMai khuyenMai = modelMapper.map(km, KhuyenMai.class);
-//                for (KhuyenMai x : khuyenMaiRepository.getList()) {
-//            if (x.getMa().equals(khuyenMai.getMa())) {
-//                khuyenMai.setId(x.getId());
-//            }
-//        }
-//
-//        for (SanPhamViewModle t : list) {
-//            SanPham sp = modelMapper.map(t, SanPham.class);
-//             BigDecimal giatri = BigDecimal.valueOf(khuyenMai.getGiatri());
-//            BigDecimal sotienconlai = sp.getGiaban().subtract(giatri);
-//            BigDecimal dongia = sp.getGiaban();
-//             SanPhamKhuyenMai spkm = new SanPhamKhuyenMai("",sp,khuyenMai,dongia,sotienconlai,t.getTrangthai());
-//            isSave =  sanPhamKhuyenMaiRepository.add(spkm);
-//        }
-//
-//       return isSave ?"Thêm thành công" : "Thêm thất bại";
-//    }
-    @Override
-    public String add(SanPhamKhuyenMaiViewModle t, SanPhamViewModle spvm, KhuyenMaiViewModle km) {
-          boolean isSave;
-        SanPham sp = modelMapper.map(spvm, SanPham.class);
-        KhuyenMaiService khuyenMaiService = new KhuyenMaiService();
-        khuyenMaiService.add(km);
-        KhuyenMai khuyenMai = modelMapper.map(km, KhuyenMai.class);
-        for (KhuyenMai x : khuyenMaiRepository.getList()) {
-            if (x.getMa().equals(khuyenMai.getMa())) {
-                khuyenMai.setId(x.getId());
-            }
-        }
-        SanPhamKhuyenMai spkm = new SanPhamKhuyenMai("", sp, khuyenMai, t.getDongia(), t.getSotienconlai(), t.getTrangthai());
-        isSave = sanPhamKhuyenMaiRepository.add(spkm);
+        SanPham sp = sanPhamRepository.getList().get((int) obj[0]);
+        KhuyenMai km = khuyenMaiRepository.getList().get((int) obj[1]);
+        System.out.println(t.getTensanpham());
+        SanPhamKhuyenMai sanPhamKhuyenMai = modelMapper.map(t, SanPhamKhuyenMai.class);
+        sanPhamKhuyenMai.setKhuyenmai(km);
+        sanPhamKhuyenMai.setSanpham(sp);
+        isSave = sanPhamKhuyenMaiRepository.add(sanPhamKhuyenMai);
         return isSave ? "Thêm thành công" : "Thêm thất bại";
+
     }
 
     @Override
     public String delete(String id) {
-    boolean isDel = sanPhamKhuyenMaiRepository.delete(id);
+        boolean isDel = sanPhamKhuyenMaiRepository.delete(id);
         if (isDel) {
             return "Xóa thành công";
         } else {

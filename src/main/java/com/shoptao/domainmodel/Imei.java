@@ -27,7 +27,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Setter
 @Entity
 @Table(name = "Imei")
-public class Imei implements Serializable{
+public class Imei implements Serializable {
 
     @Id
     @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
@@ -41,4 +41,9 @@ public class Imei implements Serializable{
     @ManyToOne
     @JoinColumn(name = "idsanpham")
     private SanPham sanpham;
+
+    public Imei(int trangthai) {
+        this.trangthai = trangthai;
+    }
+
 }

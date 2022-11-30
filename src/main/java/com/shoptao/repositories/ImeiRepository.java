@@ -63,7 +63,22 @@ public class ImeiRepository {
 //        }
 //    }
 
-    public List<Imei> Search(String search) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    public List<Imei> Search(String search) {
+//        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+//            Transaction trans = session.beginTransaction();
+//           
+//            Query query = session.createQuery("FROM Imei AS p WHERE p.sanpham.idsanpham =: search");
+//            query.setParameter("search", search);
+//
+//            List<Imei> x = query.getResultList();
+//          
+//            trans.commit();
+//            session.close();
+//            return x;
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }  
+//        return null;
+//    
+//    }
 }

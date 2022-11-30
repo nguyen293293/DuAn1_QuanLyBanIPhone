@@ -18,46 +18,38 @@ import com.shoptao.services.ChungServices;
  *
  * @author haih7
  */
-public class ImeiService implements ChungServices<ImeiViewModel>{
- ModelMapper modelMapper = new ModelMapper();
+public class ImeiService implements ChungServices<ImeiViewModel> {
+
     public ImeiService() {
     }
-    
+    ModelMapper modelMapper = new ModelMapper();
     public ImeiRepository imeiRepository = new ImeiRepository();
     public SanPhamRepository sanPhamRepository = new SanPhamRepository();
+
     @Override
     public List<ImeiViewModel> getList() {
-         List<ImeiViewModel> list = new ArrayList<>();
+        List<ImeiViewModel> list = new ArrayList<>();
         List<Imei> listIm = imeiRepository.getList();
-        
+
         for (Imei imei : listIm) {
-            list.add(new ImeiViewModel(imei.getMaimei(), imei.getTrangthai(),imei.getSanpham().getTen()));
+            list.add(new ImeiViewModel(imei.getMaimei(), imei.getTrangthai(), imei.getSanpham().getTen()));
         }
         return list;
-          }
+    }
 
     @Override
-    public String add(ImeiViewModel t, Object ...obj) {
-        
+    public String add(ImeiViewModel t, Object... obj) {
+
         SanPham sp = sanPhamRepository.getList().get((int) obj[0]);
-         boolean isSave = imeiRepository.add(new Imei("", t.getMaimei(), t.getTrangthai(),sp));
-       return isSave ? "Thêm thành công" : "Thêm thất bại";
-    
-    } 
+        boolean isSave = imeiRepository.add(new Imei("", t.getMaimei(), t.getTrangthai(), sp));
+        return isSave ? "Thêm thành công" : "Thêm thất bại";
+
+    }
 
     @Override
-    public String update(ImeiViewModel t, Object ...obj) {
-//       MauSac mausac = new MauSac("null", t.getMa(), t.getTen());
-//          for (MauSac x : mauSacRepository.getList()) {
-//            if (x.getMa().equals(mausac.getMa())) {
-//                mausac.setId(x.getId());
-//            }
-//          }
-//            boolean isUpdate = mauSacRepository.update(mausac);
-//         return isUpdate ? "Sửa thành công" : "Sửa thất bại";
+    public String update(ImeiViewModel t, Object... obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
-          
     }
 
     @Override
@@ -66,13 +58,19 @@ public class ImeiService implements ChungServices<ImeiViewModel>{
     }
 
     @Override
-    public List<ImeiViewModel> search(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<ImeiViewModel> search(String id) {
+        List<ImeiViewModel> listv = new ArrayList<>();
+        for (Imei x : imeiRepository.getList()) {
+            if (x.getSanpham().getId().equals(id)) {
+                listv.add(new ImeiViewModel(x.getMaimei(), x.getTrangthai(), x.getSanpham().getTen()));
+            }
+        }
+        return listv;
     }
 
     @Override
     public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
