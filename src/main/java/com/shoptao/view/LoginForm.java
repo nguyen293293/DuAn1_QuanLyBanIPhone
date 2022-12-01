@@ -57,6 +57,7 @@ public class LoginForm extends javax.swing.JFrame {
         lblPass.setText("Pass :");
 
         pfPass.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        pfPass.setText("abcdef");
 
         lblQuenMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblQuenMatKhau.setText("Quên mật khẩu ?");
