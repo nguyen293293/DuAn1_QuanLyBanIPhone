@@ -48,7 +48,7 @@ public class DashBoard extends javax.swing.JFrame {
         pnlRoot.add("nhanvien", new NhanVienPanel());
         pnlRoot.add("khachhang", new KhachHangPanel());
         pnlRoot.add("thongke", new ThongKePanel());
-//        pnlRoot.add("khuyenmai", new SanPhamKhuyenMaiPanel());
+        pnlRoot.add("khuyenmai", new SanPhamKhuyenMaiPanel());
     }
 
     @SuppressWarnings("unchecked")

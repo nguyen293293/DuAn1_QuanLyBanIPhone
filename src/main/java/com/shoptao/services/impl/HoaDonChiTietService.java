@@ -27,18 +27,18 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
         this.hoaDonRepository = new HoaDonRepository();
         this.sanPhamRepository = new SanPhamRepository();
     }
-    
+
     @Override
     public List<HoaDonChiTietViewModel> getList(String maHD) {
         List<HoaDonChiTietViewModel> list = new ArrayList<>();
         for (HoaDonChiTiet x : repository.getListbyMaHD(maHD)) {
-            list.add(new HoaDonChiTietViewModel(x.getSanpham().getMa(),
+            list.add(new HoaDonChiTietViewModel(x.getId(), x.getSanpham().getMa(),
                     x.getSanpham().getTen(), x.getSoluong(),
                     x.getDongia(), null));
         }
         return list;
     }
-    
+
     @Override
     public boolean add(HoaDonChiTietViewModel t, Object... obj) {
         HoaDon hoaDon = hoaDonRepository.getOne((String) obj[0]);
@@ -61,8 +61,21 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
     }
 
     @Override
-    public boolean deleteAll(String maHD) {
-        return repository.deleteAll(maHD);
+    public boolean delete(String idHDCT) {
+        return repository.delete(idHDCT);
+    }
+
+    @Override
+    public boolean checkSPisEmpty(String maHoaDon, int indexSanPham) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public HoaDonChiTietViewModel getOne(String id) {
+        HoaDonChiTiet hd = repository.getOne(id);
+        return new HoaDonChiTietViewModel(hd.getId(), hd.getSanpham().getMa(),
+                hd.getSanpham().getTen(), hd.getSoluong(),
+                hd.getDongia(), null);
     }
 
 }

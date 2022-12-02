@@ -10,6 +10,8 @@ import java.util.List;
 public interface InterfaceHoaDonChiTietService {
 
     List<HoaDonChiTietViewModel> getList(String maHD);
+    
+    HoaDonChiTietViewModel getOne(String id);
 
     boolean add(HoaDonChiTietViewModel t, Object... obj);
     
@@ -17,5 +19,7 @@ public interface InterfaceHoaDonChiTietService {
     
     boolean delete(int index, String maHD);
     
-    boolean deleteAll(String maHD);
+    boolean delete(String idHDCT);
+    
+    boolean checkSPisEmpty(String maHoaDon, int indexSanPham);
 }

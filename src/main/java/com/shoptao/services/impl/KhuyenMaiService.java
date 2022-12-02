@@ -16,45 +16,44 @@ import com.shoptao.services.ChungServices;
  *
  * @author haih7
  */
-public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle>{
+public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle> {
 
     public KhuyenMaiService() {
     }
-    
+
     ModelMapper modelMapper = new ModelMapper();
-    
+
     public KhuyenMaiRepository khuyenMaiRepository = new KhuyenMaiRepository();
 
     @Override
     public List<KhuyenMaiViewModle> getList() {
-      List<KhuyenMaiViewModle> list = new ArrayList<>();
-        
+        List<KhuyenMaiViewModle> list = new ArrayList<>();
+
         for (KhuyenMai khuyenmai : khuyenMaiRepository.getList()) {
-            list.add(new KhuyenMaiViewModle(khuyenmai.getId(),khuyenmai.getMa(),khuyenmai.getTen(),khuyenmai.getGiatri(),khuyenmai.getHinhthucgiamgia(),khuyenmai.getDieukiengiamgia(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTrangthai()));
+            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(), khuyenmai.getTrangthai()));
         }
-        return list;  
+        return list;
     }
 
     @Override
     public String add(KhuyenMaiViewModle t, Object... obj) {
         KhuyenMai km = modelMapper.map(t, KhuyenMai.class);
-//          boolean isSave = khuyenMaiRepository.add(new KhuyenMai(t.getId(), t.getMa(), t.getTen(),t.getGiatri(),t.getHinhthucgiamgia(),t.getDieukiengiamgia(),t.getNgaybatdau(),t.getNgayketthuc(),t.getTrangthai()));
-             boolean isSave = khuyenMaiRepository.add(km);
-        return isSave ? "Thêm thành công" : "Thêm thất bại";  }
+        boolean isSave = khuyenMaiRepository.add(km);
+        return isSave ? "Thêm thành công" : "Thêm thất bại";
+    }
 
     @Override
     public String update(KhuyenMaiViewModle t, Object... obj) {
-//        KhuyenMai khuyenMai = new KhuyenMai(t.getId(), t.getMa(), t.getTen(),t.getGiatri(),t.getHinhthucgiamgia(),t.getDieukiengiamgia(),t.getNgaybatdau(),t.getNgayketthuc(),0);
         KhuyenMai khuyenMai = modelMapper.map(t, KhuyenMai.class);
 
-          for (KhuyenMai x : khuyenMaiRepository.getList()) {
+        for (KhuyenMai x : khuyenMaiRepository.getList()) {
             if (x.getMa().equals(khuyenMai.getMa())) {
                 khuyenMai.setId(x.getId());
             }
-          }
-            boolean isUpdate = khuyenMaiRepository.update(khuyenMai);
-         return isUpdate ? "Sửa thành công" : "Sửa thất bại";
-          }
+        }
+        boolean isUpdate = khuyenMaiRepository.update(khuyenMai);
+        return isUpdate ? "Sửa thành công" : "Sửa thất bại";
+    }
 
     @Override
     public KhuyenMaiViewModle getOne(String ma) {
@@ -63,12 +62,19 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle>{
 
     @Override
     public List<KhuyenMaiViewModle> search(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<KhuyenMaiViewModle> listKMVM = new ArrayList<>();
+
+        for (KhuyenMaiViewModle x : getList()) {
+            if (x.getMa().startsWith(ma)) {
+                listKMVM.add(x);
+            }
+        }
+        return listKMVM;
     }
 
     @Override
     public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

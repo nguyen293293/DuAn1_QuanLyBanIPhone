@@ -5,6 +5,7 @@ import com.shoptao.domainmodel.ImeiDaBan;
 import com.shoptao.repositories.HoaDonChiTietRepository;
 import com.shoptao.repositories.ImeiDaBanRepository;
 import com.shoptao.services.ChungServices;
+import com.shoptao.services.InterfaceImeiDaBanService;
 import com.shoptao.viewmodel.ImeiDaBanViewModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author nguyen293
  */
-public class ImeiDaBanService implements ChungServices<ImeiDaBanViewModel>{
+public class ImeiDaBanService implements InterfaceImeiDaBanService {
 
     private final ImeiDaBanRepository imeiDaBanRepository;
     private final HoaDonChiTietRepository hDCTRepository;
@@ -22,33 +23,18 @@ public class ImeiDaBanService implements ChungServices<ImeiDaBanViewModel>{
         this.imeiDaBanRepository = new ImeiDaBanRepository();
         this.hDCTRepository = new HoaDonChiTietRepository();
     }
-    
-    @Override
-    public List<ImeiDaBanViewModel> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
-    public String add(ImeiDaBanViewModel t, Object... obj) {
+    public boolean add(ImeiDaBanViewModel t) {
         HoaDonChiTiet hdct = hDCTRepository.getOne(t.getIdHDCT());
         ImeiDaBan imeiDaBan = new ImeiDaBan(null,
                 t.getMaimei(), 0, hdct);
-        
-        return imeiDaBanRepository.add(imeiDaBan) ? "Thành công" : "Thất bại";
+
+        return imeiDaBanRepository.add(imeiDaBan);
     }
 
     @Override
-    public String update(ImeiDaBanViewModel t, Object... obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ImeiDaBanViewModel getOne(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<ImeiDaBanViewModel> search(String idHDCT) {     
+    public List<ImeiDaBanViewModel> search(String idHDCT) {
         List<ImeiDaBanViewModel> list = new ArrayList<>();
         for (ImeiDaBan x : imeiDaBanRepository.getList(idHDCT)) {
             list.add(new ImeiDaBanViewModel(x.getMaimei(), idHDCT, 0));
@@ -57,8 +43,13 @@ public class ImeiDaBanService implements ChungServices<ImeiDaBanViewModel>{
     }
 
     @Override
-    public String delete(String imei) {
-        return imeiDaBanRepository.delete(imei) ? "Thành công" : "Thất bại";
+    public boolean deleteByImei(String maImei) {
+        return imeiDaBanRepository.delete(maImei);
     }
-    
+
+    @Override
+    public boolean deleteByIdHDCT(String idHDCT) {
+        return imeiDaBanRepository.deleteByIdHDCT(idHDCT);
+    }
+
 }

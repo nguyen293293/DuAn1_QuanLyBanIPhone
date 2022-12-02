@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import com.shoptao.services.ChungServices;
+import com.shoptao.utilities.Validation;
 
 /**
  *
@@ -382,6 +383,11 @@ public class KhachHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        
+        if(!validation()) return;
+        
+//        if(Validation.checkTrungSDTNV(txtSoDienThoai.getText())) return;
+        
         String message = chungService.add(getModel());
         listKhachHang = chungService.getList();
         loadDataToTable(listKhachHang);
@@ -389,6 +395,12 @@ public class KhachHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        if(tblKhachHang.getSelectedRow() < 0){
+            DialogHelper.alert(null, "Chọn khách hàng cần sửa", "Thông báo");
+            return;
+        }
+        if(!validation()) return;
+        
         String message = chungService.update(getModel());
         listKhachHang = chungService.getList();
         loadDataToTable(listKhachHang);
@@ -473,5 +485,21 @@ public class KhachHangPanel extends javax.swing.JPanel {
         khachHang.setTrangthai(rdDangHD.isSelected() ? 0 : 1);
 
         return khachHang;
+    }
+    
+    private boolean validation(){
+        if(!Validation.CheckTrongText(txtMa, txtHoTen, txtSoDienThoai)){
+            return false;
+        }
+        
+        if(!Validation.CheckTrongJDate(jdcNgaySinh)){
+            return false;
+        }
+        
+        if(!Validation.checkSoDT(txtSoDienThoai)){
+            return false;
+        }
+        
+        return true;
     }
 }

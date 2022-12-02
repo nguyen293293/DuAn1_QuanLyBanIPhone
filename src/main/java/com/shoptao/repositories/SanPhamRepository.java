@@ -63,9 +63,9 @@ public class SanPhamRepository {
     public SanPham getOne(String ma) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Transaction trans = session.beginTransaction();
-            Query query = session.createQuery("FROM SanPham where ma =: ma");
+            Query query = session.createQuery("FROM SanPham where ma = :ma");
             query.setParameter("ma", ma);
-            SanPham sanPham = (SanPham) query.getSingleResult();
+            SanPham sanPham = (SanPham) query.getResultList().get(0);
             trans.commit();
             return sanPham;
         }

@@ -52,7 +52,7 @@ public class Validation {
     }
 
     public static boolean CheckTrongJDate(JDateChooser txtFiled) {
-        if (txtFiled.getDate().equals("")) {
+        if (txtFiled.getDate() == null) {
             DialogHelper.warring(null, "Không được để trống dữ liệu", "Lỗi");
             return false;
         } else {

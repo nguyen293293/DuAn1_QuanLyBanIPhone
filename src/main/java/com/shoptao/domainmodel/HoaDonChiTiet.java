@@ -26,9 +26,9 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "HoaDonChiTiet")
 public class HoaDonChiTiet implements Serializable {
     
+//    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+//    @GeneratedValue(generator = "generator")
     @Id
-    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-    @GeneratedValue(generator = "generator")
     private String id;
     
     @ManyToOne

@@ -25,9 +25,10 @@ public class HoaDonRepository {
     
     public HoaDon getOne(String mahd) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From HoaDon n where n.ma = :mahd");
+            Query query = session.createQuery("From HoaDon n where n.ma = :mahd order by n.ma asc");
             query.setParameter("mahd", mahd);
-            return (HoaDon) query.getSingleResult();
+            System.out.println("HoaDonrepo : " + query.getResultList().size());
+            return (HoaDon) query.getResultList().get(0);
         }
     }
     

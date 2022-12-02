@@ -1,6 +1,8 @@
 package com.shoptao.view;
 
 import com.shoptao.services.impl.MauSacService;
+import com.shoptao.utilities.DialogHelper;
+import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.MauSacViewModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -61,6 +63,13 @@ public class MauSacDialog extends javax.swing.JDialog {
         txtMa.setText("");
         txtTen.setText("");
     }
+    private boolean validation(){
+        if(!Validation.CheckTrongText(txtMa, txtTen)){
+            return false;
+        }
+        
+        return true;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -74,6 +83,8 @@ public class MauSacDialog extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMauSac = new javax.swing.JTable();
+        txtSeacrch = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnRefresh = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
@@ -155,6 +166,26 @@ public class MauSacDialog extends javax.swing.JDialog {
             tblMauSac.getColumnModel().getColumn(0).setMaxWidth(60);
         }
 
+        txtSeacrch.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txtSeacrch.setBorder(null);
+        txtSeacrch.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSeacrchCaretUpdate(evt);
+            }
+        });
+        txtSeacrch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSeacrchMouseClicked(evt);
+            }
+        });
+        txtSeacrch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSeacrchActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/searchbar1.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -163,12 +194,26 @@ public class MauSacDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtSeacrch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtSeacrch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -238,8 +283,8 @@ public class MauSacDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -253,6 +298,8 @@ public class MauSacDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        if(!validation()) return;
+        
         JOptionPane.showMessageDialog(this, mauSacService.add(getModel()));
         list = mauSacService.getList();
         loadData(list);
@@ -263,11 +310,34 @@ public class MauSacDialog extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        if(tblMauSac.getSelectedRow() < 0){
+            DialogHelper.alert(null, "Chọn màu sắc cần sửa", "Thông báo");
+            return;
+        }
+        
+        if(!validation()) return;
+        
         JOptionPane.showMessageDialog(this, mauSacService.update(getModel()));
         list = mauSacService.getList();
         loadData(list);
         clear();
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtSeacrchCaretUpdate
+
+    private void txtSeacrchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchMouseClicked
+        if (!txtSeacrch.getText().equals("Mã HD")) {
+            return;
+        }
+        txtSeacrch.setText("");
+    }//GEN-LAST:event_txtSeacrchMouseClicked
+
+    private void txtSeacrchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSeacrchActionPerformed
 //
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
@@ -314,6 +384,7 @@ public class MauSacDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -321,6 +392,7 @@ public class MauSacDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblMauSac;
     private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtSeacrch;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 }

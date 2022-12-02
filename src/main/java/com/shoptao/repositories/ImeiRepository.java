@@ -17,7 +17,8 @@ import org.hibernate.Transaction;
  * @author haih7
  */
 public class ImeiRepository {
-      public List<Imei> getList() {
+
+    public List<Imei> getList() {
         List<Imei> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Query query = session.createQuery("From Imei");
@@ -33,7 +34,7 @@ public class ImeiRepository {
             session.save(t);
             trans.commit();
             return true;
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -45,8 +46,25 @@ public class ImeiRepository {
             trans.begin();
             session.update(t);
             trans.commit();
-           return true;
-        }catch(Exception e){
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateTrangThai(Imei t) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction trans = session.getTransaction();
+            trans.begin();
+            String hql = "UPDATE Imei i set i.trangthai = :tt where i.id = :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("tt", t.getTrangthai());
+            query.setParameter("id", t.getId());
+            query.executeUpdate();
+            trans.commit();
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -62,8 +80,22 @@ public class ImeiRepository {
 //            return dongSanPham;
 //        }
 //    }
-
-    public List<Imei> Search(String search) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    public List<Imei> Search(String search) {
+//        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+//            Transaction trans = session.beginTransaction();
+//           
+//            Query query = session.createQuery("FROM Imei AS p WHERE p.sanpham.idsanpham =: search");
+//            query.setParameter("search", search);
+//
+//            List<Imei> x = query.getResultList();
+//          
+//            trans.commit();
+//            session.close();
+//            return x;
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }  
+//        return null;
+//    
+//    }
 }

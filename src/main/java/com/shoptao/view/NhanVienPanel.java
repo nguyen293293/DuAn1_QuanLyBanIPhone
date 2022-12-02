@@ -180,6 +180,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 txtSeacrchMouseClicked(evt);
             }
         });
+        txtSeacrch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSeacrchActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/searchbar1.png"))); // NOI18N
 
@@ -478,6 +483,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
         loadDataToTable(listNhanVien);
         DialogHelper.alert(null, message, "Thông báo");
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void txtSeacrchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSeacrchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

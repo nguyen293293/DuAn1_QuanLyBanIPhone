@@ -17,6 +17,8 @@ import lombok.Setter;
 @Setter
 public class HoaDonChiTietViewModel {
 
+    private String id;
+    
     private String maSanPham;
 
     private String tenSanPham;

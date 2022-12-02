@@ -13,7 +13,7 @@ public interface BanHangService {
     
     List<HoaDonViewModel> getListHoaDon();
     
-    boolean addHoaDon(HoaDonViewModel hoaDon, String maNhanVien);
+    boolean addHoaDon(HoaDonViewModel hoaDon, String maNhanVien, String maKhachHang);
     
     boolean updateHoaDon(HoaDonViewModel hoaDon, String maKhachHang);
     
@@ -23,11 +23,15 @@ public interface BanHangService {
     
     List<HoaDonChiTietViewModel> getListHDCT(String maHD);
     
-    boolean addHDCT(String maHD, String maSanPham, HoaDonChiTietViewModel hdct);
+    boolean addHDCT(String maHD, HoaDonChiTietViewModel hdct);
     
     boolean updateHDCT(int index, int soLuong);
+    
+    boolean updateHDCT(String id, int soLuong);
     
     boolean deleteHDCT(int index);
     
     boolean deleteAllHDCT(String maHD);
+    
+    String checkSPisEmpty(String maHoaDon, int indexSanPham);
 }

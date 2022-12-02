@@ -41,7 +41,7 @@ public class ImeiDaBanRepository {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
-            String hql = "DELETE HoaDonChiTiet hd where maimei = :imei";
+            String hql = "DELETE ImeiDaBan where maimei = :imei";
             Query query = session.createQuery(hql);
             query.setParameter("imei", imei);
             query.executeUpdate();
@@ -52,4 +52,21 @@ public class ImeiDaBanRepository {
             return false;
         }
     }
+    
+    public boolean deleteByIdHDCT(String idHDCT) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction trans = session.getTransaction();
+            trans.begin();
+            String hql = "DELETE ImeiDaBan where idhoadonchitiet = :idHDCT";
+            Query query = session.createQuery(hql);
+            query.setParameter("idHDCT", idHDCT);
+            query.executeUpdate();
+            trans.commit();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
 }

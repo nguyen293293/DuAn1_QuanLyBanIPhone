@@ -1,5 +1,6 @@
 package com.shoptao.repositories;
 
+import com.shoptao.domainmodel.HoaDon;
 import com.shoptao.domainmodel.HoaDonChiTiet;
 import com.shoptao.utilities.HibernateUtil;
 import java.util.ArrayList;
@@ -26,9 +27,10 @@ public class HoaDonChiTietRepository {
     
     public HoaDonChiTiet getOne(String idHDCT){
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            System.out.println("HoaDOnChiTIetRepo : 29 : idHDCT" + idHDCT);
             Query query = session.createQuery("From HoaDonChiTiet where id = :idHDCT");
             query.setParameter("idHDCT", idHDCT);
-            return (HoaDonChiTiet) query.getSingleResult();
+            return (HoaDonChiTiet) query.getResultList().get(0);
         }
     }
     
@@ -71,13 +73,13 @@ public class HoaDonChiTietRepository {
         }
     }
     
-    public boolean deleteAll(String maHD){
+    public boolean delete(String idHDCT){
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction trans = session.getTransaction();
             trans.begin();
-            String hql = "DELETE HoaDonChiTiet hd where hd.hoadon.ma = :mahd";
+            String hql = "DELETE HoaDonChiTiet where id = :idHDCT";
             Query query = session.createQuery(hql);
-            query.setParameter("mahd", maHD);
+            query.setParameter("idHDCT", idHDCT);
             query.executeUpdate();
             trans.commit();
             return true;
