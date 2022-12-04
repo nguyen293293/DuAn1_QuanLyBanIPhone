@@ -11,6 +11,9 @@ public interface InterfaceHoaDonChiTietService {
 
     List<HoaDonChiTietViewModel> getList(String maHD);
     
+            List<HoaDonChiTietViewModel> getListHDCT();
+
+    
     HoaDonChiTietViewModel getOne(String id);
 
     boolean add(HoaDonChiTietViewModel t, Object... obj);

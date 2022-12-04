@@ -17,7 +17,7 @@ import com.shoptao.services.impl.ImeiDaBanService;
 import com.shoptao.services.impl.KhachHangService;
 import com.shoptao.utilities.DialogHelper;
 import com.shoptao.utilities.JasperReports;
-import com.shoptao.utilities.Validation;
+import com.shoptao.utilities.UserHelper;
 import com.shoptao.viewmodel.HoaDonChiTietViewModel;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import com.shoptao.viewmodel.KhachHangViewModel;
@@ -776,7 +776,7 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
         hoaDon.setNgaytao(new Date());
         hoaDon.setNgaythanhtoan(new Date());
 
-        String maNhanVien = "NV01";
+        String maNhanVien = UserHelper.USER.getMa();
 
         if (!banHangService.addHoaDon(hoaDon, maNhanVien, khachHang.getMa())) {
             DialogHelper.alert(null, "Lỗi tạo hoá đơn", "Lỗi");

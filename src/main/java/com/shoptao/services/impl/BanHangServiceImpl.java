@@ -14,7 +14,6 @@ import com.shoptao.services.BanHangService;
 import com.shoptao.viewmodel.HoaDonChiTietViewModel;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,9 +114,8 @@ public class BanHangServiceImpl implements BanHangService {
     public List<HoaDonChiTietViewModel> getListHDCT(String maHD) {
         List<HoaDonChiTietViewModel> list = new ArrayList<>();
         for (HoaDonChiTiet x : hoaDonChiTietRepository.getListbyMaHD(maHD)) {
-            list.add(new HoaDonChiTietViewModel(x.getId(), x.getSanpham().getMa(),
-                    x.getSanpham().getTen(), x.getSoluong(),
-                    x.getDongia(), null));
+            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
+         list.add(hd);
         }
         return list;
     }
@@ -138,7 +136,7 @@ public class BanHangServiceImpl implements BanHangService {
         hdct.setSoluong(soLuong);
 
         return hoaDonChiTietRepository.update(hdct);
-    }
+    }   
     
     @Override
     public boolean updateHDCT(String id, int soLuong) {

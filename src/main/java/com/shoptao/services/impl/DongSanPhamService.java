@@ -51,9 +51,15 @@ public class DongSanPhamService implements ChungServices<DongSanPhamViewModle>{
     }
 
     @Override
-    public List<DongSanPhamViewModle> search(String search) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public List<DongSanPhamViewModle> search(String ten) {
+         List<DongSanPhamViewModle> listDSPVM = new ArrayList<>();
+
+        for (DongSanPhamViewModle x : getList()) {
+            if (x.getTen().startsWith(ten)) {
+                listDSPVM.add(x);
+            }
+        }
+        return listDSPVM;   }
 
     @Override
     public String delete(String id) {

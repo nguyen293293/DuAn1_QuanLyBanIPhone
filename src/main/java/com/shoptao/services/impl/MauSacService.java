@@ -60,9 +60,16 @@ public class MauSacService implements ChungServices<MauSacViewModel>{
     }
 
     @Override
-    public List<MauSacViewModel> search(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public List<MauSacViewModel> search(String ten) {
+ 
+        List<MauSacViewModel> listMSVM = new ArrayList<>();
+
+        for (MauSacViewModel x : getList()) {
+            if (x.getTen().startsWith(ten)) {
+                listMSVM.add(x);
+            }
+        }
+        return listMSVM;}
 
     @Override
     public String delete(String id) {

@@ -7,7 +7,6 @@ package com.shoptao.view;
 import com.shoptao.services.impl.KhuyenMaiService;
 import com.shoptao.services.impl.SanPhamKhuyenMaiService;
 import com.shoptao.services.impl.SanPhamService;
-import com.shoptao.utilities.DialogHelper;
 import com.shoptao.viewmodel.KhuyenMaiViewModle;
 import com.shoptao.viewmodel.SanPhamKhuyenMaiViewModle;
 import com.shoptao.viewmodel.SanPhamViewModle;
@@ -120,20 +119,18 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        btnThem = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_khuyenMai = new javax.swing.JTable();
-        txtSeacrchKM = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tb_sanPham = new javax.swing.JTable();
-        txtSeacrchSP = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        txt_serachKhuyenMai = new javax.swing.JTextField();
+        txt_searchSanPham = new javax.swing.JTextField();
         btnkhuyenmai = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -141,13 +138,13 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
-        btnThem.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
-        btnThem.setText("Thêm");
-        btnThem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
+        jButton2.setText("Thêm");
+        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -164,8 +161,6 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-
-        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
 
         tb_khuyenMai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,55 +180,22 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tb_khuyenMai);
 
-        txtSeacrchKM.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        txtSeacrchKM.setBorder(null);
-        txtSeacrchKM.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtSeacrchKMCaretUpdate(evt);
-            }
-        });
-        txtSeacrchKM.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtSeacrchKMMouseClicked(evt);
-            }
-        });
-        txtSeacrchKM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSeacrchKMActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/searchbar1.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txtSeacrchKM, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(txtSeacrchKM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
-
-        jPanel4.setBackground(new java.awt.Color(204, 255, 204));
 
         tb_sanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -256,54 +218,48 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(tb_sanPham);
 
-        txtSeacrchSP.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        txtSeacrchSP.setBorder(null);
-        txtSeacrchSP.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtSeacrchSPCaretUpdate(evt);
-            }
-        });
-        txtSeacrchSP.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtSeacrchSPMouseClicked(evt);
-            }
-        });
-        txtSeacrchSP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSeacrchSPActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/searchbar1.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txtSeacrchSP, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(txtSeacrchSP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        txt_serachKhuyenMai.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txt_serachKhuyenMai.setBorder(null);
+        txt_serachKhuyenMai.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_serachKhuyenMaiCaretUpdate(evt);
+            }
+        });
+        txt_serachKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_serachKhuyenMaiActionPerformed(evt);
+            }
+        });
+
+        txt_searchSanPham.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        txt_searchSanPham.setBorder(null);
+        txt_searchSanPham.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txt_searchSanPhamCaretUpdate(evt);
+            }
+        });
+        txt_searchSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_searchSanPhamActionPerformed(evt);
+            }
+        });
 
         btnkhuyenmai.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnkhuyenmai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_edit_property_60px.png"))); // NOI18N
@@ -323,10 +279,14 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_serachKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(572, 572, 572))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_searchSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(226, 226, 226))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(286, 286, 286)
                 .addComponent(btnkhuyenmai, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,16 +296,20 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(300, 300, 300)
-                                .addComponent(jLabel8))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)))
-                .addGap(18, 18, 18)
-                .addComponent(btnkhuyenmai, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(300, 300, 300)
+                        .addComponent(jLabel8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(9, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_serachKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_searchSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnkhuyenmai)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -393,7 +357,7 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -409,13 +373,13 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(btnThem)
+                        .addComponent(jButton2)
                         .addGap(33, 33, 33)
                         .addComponent(btn_xoa))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -436,16 +400,8 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
-        if (tb_khuyenMai.getSelectedRow() < 0) {
-            DialogHelper.alert(null, "Chọn khuyến mại muốn thêm", "Thông báo");
-            return;
-        }
-        if (tb_sanPham.getSelectedRow() < 0) {
-            DialogHelper.alert(null, "Chọn sản phẩn muốn thêm khuyến mại", "Thông báo");
-            return;
-        }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
         KhuyenMaiViewModle khuyenMai = khuyenMaiService.getList().get(indexKhuyenMai);
         List<Integer> listSelectSP = getModelListSanPham();
         List<SanPhamViewModle> list = sanPhamService.getList();
@@ -462,18 +418,18 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
             }
             BigDecimal dongia = list.get(i).getGiaban();
             SanPhamKhuyenMaiViewModle spkmvm = new SanPhamKhuyenMaiViewModle("", list.get(i).getTen(), khuyenMai.getTen(), dongia, sotienconlai, list.get(i).getTrangthai());
+//            SanPhamViewModle sanPhamViewModle = list.get(i);
+//            sanPhamViewModle.setGiaban(sotienconlai);
+//            sanPhamService.update(sanPhamViewModle);
             sanPhamKhuyenMaiService.add(spkmvm, i, indexKhuyenMai);
         }
         loadDataSPKM(sanPhamKhuyenMaiService.getList());
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
-        if (tb_sanPhamKhuyenMai.getSelectedRow() < 0) {
-            DialogHelper.alert(null, "Chọn sản phẩm khuyến mại cần xoá", "Thông báo");
-            return;
-        }
         JOptionPane.showMessageDialog(this, sanPhamKhuyenMaiService.delete(getId()));
+        
         List<SanPhamKhuyenMaiViewModle> list = sanPhamKhuyenMaiService.getList();
         loadDataSPKM(list);
     }//GEN-LAST:event_btn_xoaActionPerformed
@@ -493,10 +449,17 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
         indexSanPhamKhuyenMai = tb_sanPhamKhuyenMai.getSelectedRow();
     }//GEN-LAST:event_tb_sanPhamKhuyenMaiMouseClicked
 
-    private void txtSeacrchKMCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchKMCaretUpdate
+    private void txt_serachKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_serachKhuyenMaiActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_txt_serachKhuyenMaiActionPerformed
 
-        String maKM = txtSeacrchKM.getText();
+    private void txt_searchSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchSanPhamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_searchSanPhamActionPerformed
+
+    private void txt_serachKhuyenMaiCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_serachKhuyenMaiCaretUpdate
+
+        String maKM = txt_serachKhuyenMai.getText();
         List<KhuyenMaiViewModle> list = new ArrayList<>();
         if (maKM.isEmpty()) {
             list = khuyenMaiService.getList();
@@ -504,22 +467,11 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
             list = khuyenMaiService.search(maKM);
         }
         loadDataKM(list);
-    }//GEN-LAST:event_txtSeacrchKMCaretUpdate
+    }//GEN-LAST:event_txt_serachKhuyenMaiCaretUpdate
 
-    private void txtSeacrchKMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchKMMouseClicked
-        if (!txtSeacrchKM.getText().equals("Mã HD")) {
-            return;
-        }
-        txtSeacrchKM.setText("");
-    }//GEN-LAST:event_txtSeacrchKMMouseClicked
+    private void txt_searchSanPhamCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchSanPhamCaretUpdate
 
-    private void txtSeacrchKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrchKMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSeacrchKMActionPerformed
-
-    private void txtSeacrchSPCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchSPCaretUpdate
-        // TODO add your handling code here:
-        String maSP = txtSeacrchSP.getText();
+        String maSP = txt_searchSanPham.getText();
         List<SanPhamViewModle> list = new ArrayList<>();
         if (maSP.isEmpty()) {
             list = sanPhamService.getList();
@@ -527,23 +479,13 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
             list = sanPhamService.search(maSP);
         }
         loadDataSP(list);
-    }//GEN-LAST:event_txtSeacrchSPCaretUpdate
-
-    private void txtSeacrchSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchSPMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSeacrchSPMouseClicked
-
-    private void txtSeacrchSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrchSPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSeacrchSPActionPerformed
+    }//GEN-LAST:event_txt_searchSanPhamCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
     private javax.swing.JButton btn_xoa;
     private javax.swing.JButton btnkhuyenmai;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -556,7 +498,7 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
     private javax.swing.JTable tb_khuyenMai;
     private javax.swing.JTable tb_sanPham;
     private javax.swing.JTable tb_sanPhamKhuyenMai;
-    private javax.swing.JTextField txtSeacrchKM;
-    private javax.swing.JTextField txtSeacrchSP;
+    private javax.swing.JTextField txt_searchSanPham;
+    private javax.swing.JTextField txt_serachKhuyenMai;
     // End of variables declaration//GEN-END:variables
 }

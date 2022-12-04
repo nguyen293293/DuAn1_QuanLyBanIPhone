@@ -3,8 +3,9 @@ package com.shoptao.view;
 import com.shoptao.services.impl.ImeiService;
 import com.shoptao.services.impl.SanPhamService;
 import com.shoptao.utilities.ReadExcelHelper;
-import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.ImeiViewModel;
+import com.shoptao.viewmodel.SanPhamViewModle;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
  * @author nguyen293
  */
 public class ImeiSPDialog extends javax.swing.JDialog {
+
+    SanPhamViewModle spvmtest = new SanPhamViewModle();
 
     public ImeiService imeiService = new ImeiService();
     public SanPhamService sanPhamService = new SanPhamService();
@@ -48,7 +51,8 @@ public class ImeiSPDialog extends javax.swing.JDialog {
             });
         }
         this.sp.loadCBSoLuongImei(list);
-        this.sp.loadData(sanPhamService.getList());
+//        this.sp.loadData(sanPhamService.getList());
+
     }
 
     public ImeiViewModel getModel() {
@@ -61,13 +65,19 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         txtMa.setText("");
     }
 
-    private boolean validation(){
-        if(!Validation.CheckTrongText(txtMa)){
-            return false;
+    //số lượng imei của 1 sản phẩm trạng thái = 0
+    public int sizeList() {
+        List<ImeiViewModel> listImvm = new ArrayList<>();
+        listImeiOfIdSanPham = imeiService.search(sanPhamService.getList().get(indexsp).getId());
+        for (ImeiViewModel imeiViewModel : listImeiOfIdSanPham) {
+            if (imeiViewModel.getTrangthai() == 0) {
+                listImvm.add(imeiViewModel);
+            }
         }
-        return true;
+        int soLuong = (listImvm.size());
+        return soLuong;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -236,14 +246,16 @@ public class ImeiSPDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if(!validation()) return;
-        if (Validation.checkTrungMaIMEI(txtMa.getText())) return;
-        
 //        int index = new SanPhamPanel().getindexsp();
         JOptionPane.showMessageDialog(this, imeiService.add(getModel(), indexsp));
         List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());
+
         loadData(list);
+        this.sp.setSoLuongAndUpdateSp(sizeList());
+
         refesh();
+
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -257,11 +269,10 @@ public class ImeiSPDialog extends javax.swing.JDialog {
             }
 
         }
+                this.sp.setSoLuongAndUpdateSp(sizeList());
 
         List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());
         loadData(list);
-
-// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

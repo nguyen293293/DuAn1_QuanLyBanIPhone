@@ -8,7 +8,6 @@ import com.shoptao.repositories.HoaDonRepository;
 import com.shoptao.repositories.SanPhamRepository;
 import com.shoptao.services.InterfaceHoaDonChiTietService;
 import com.shoptao.viewmodel.HoaDonChiTietViewModel;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +28,11 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
     }
 
     @Override
-    public List<HoaDonChiTietViewModel> getList(String maHD) {
+      public List<HoaDonChiTietViewModel> getList(String maHD) {
         List<HoaDonChiTietViewModel> list = new ArrayList<>();
         for (HoaDonChiTiet x : repository.getListbyMaHD(maHD)) {
-            list.add(new HoaDonChiTietViewModel(x.getId(), x.getSanpham().getMa(),
-                    x.getSanpham().getTen(), x.getSoluong(),
-                    x.getDongia(), null));
+            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
+         list.add(hd);
         }
         return list;
     }
@@ -72,10 +70,18 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
 
     @Override
     public HoaDonChiTietViewModel getOne(String id) {
-        HoaDonChiTiet hd = repository.getOne(id);
-        return new HoaDonChiTietViewModel(hd.getId(), hd.getSanpham().getMa(),
-                hd.getSanpham().getTen(), hd.getSoluong(),
-                hd.getDongia(), null);
+        HoaDonChiTiet x = repository.getOne(id);
+            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
+         return hd;
     }
 
+    @Override
+    public List<HoaDonChiTietViewModel> getListHDCT() {
+         List<HoaDonChiTietViewModel> list = new ArrayList<>();
+        for (HoaDonChiTiet x : repository.getListHDCT()) {
+            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
+         list.add(hd);
+        }
+        return list;
+    }
 }

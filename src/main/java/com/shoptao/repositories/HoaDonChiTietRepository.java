@@ -25,6 +25,15 @@ public class HoaDonChiTietRepository {
         return list;
     }
     
+           public List<HoaDonChiTiet> getListHDCT(){
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("From HoaDonChiTiet");
+            list = query.getResultList();
+        }
+        return list;
+    }
+    
     public HoaDonChiTiet getOne(String idHDCT){
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             System.out.println("HoaDOnChiTIetRepo : 29 : idHDCT" + idHDCT);
