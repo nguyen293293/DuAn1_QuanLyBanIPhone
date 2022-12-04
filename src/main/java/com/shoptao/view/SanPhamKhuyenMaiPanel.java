@@ -7,6 +7,7 @@ package com.shoptao.view;
 import com.shoptao.services.impl.KhuyenMaiService;
 import com.shoptao.services.impl.SanPhamKhuyenMaiService;
 import com.shoptao.services.impl.SanPhamService;
+import com.shoptao.utilities.DialogHelper;
 import com.shoptao.viewmodel.KhuyenMaiViewModle;
 import com.shoptao.viewmodel.SanPhamKhuyenMaiViewModle;
 import com.shoptao.viewmodel.SanPhamViewModle;
@@ -119,7 +120,7 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -140,13 +141,13 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
-        jButton2.setText("Thêm");
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
+        btnThem.setText("Thêm");
+        btnThem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
 
@@ -392,7 +393,7 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -408,7 +409,7 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jButton2)
+                        .addComponent(btnThem)
                         .addGap(33, 33, 33)
                         .addComponent(btn_xoa))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -435,8 +436,16 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        
+        if (tb_khuyenMai.getSelectedRow() < 0) {
+            DialogHelper.alert(null, "Chọn khuyến mại muốn thêm", "Thông báo");
+            return;
+        }
+        if (tb_sanPham.getSelectedRow() < 0) {
+            DialogHelper.alert(null, "Chọn sản phẩn muốn thêm khuyến mại", "Thông báo");
+            return;
+        }
         KhuyenMaiViewModle khuyenMai = khuyenMaiService.getList().get(indexKhuyenMai);
         List<Integer> listSelectSP = getModelListSanPham();
         List<SanPhamViewModle> list = sanPhamService.getList();
@@ -456,10 +465,14 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
             sanPhamKhuyenMaiService.add(spkmvm, i, indexKhuyenMai);
         }
         loadDataSPKM(sanPhamKhuyenMaiService.getList());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnThemActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
+        if (tb_sanPhamKhuyenMai.getSelectedRow() < 0) {
+            DialogHelper.alert(null, "Chọn sản phẩm khuyến mại cần xoá", "Thông báo");
+            return;
+        }
         JOptionPane.showMessageDialog(this, sanPhamKhuyenMaiService.delete(getId()));
         List<SanPhamKhuyenMaiViewModle> list = sanPhamKhuyenMaiService.getList();
         loadDataSPKM(list);
@@ -526,9 +539,9 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnThem;
     private javax.swing.JButton btn_xoa;
     private javax.swing.JButton btnkhuyenmai;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;

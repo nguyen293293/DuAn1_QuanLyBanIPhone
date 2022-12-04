@@ -300,6 +300,8 @@ public class MauSacDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(!validation()) return;
         
+        if(Validation.checkTrungMaMS(txtMa.getText())) return;
+        
         JOptionPane.showMessageDialog(this, mauSacService.add(getModel()));
         list = mauSacService.getList();
         loadData(list);

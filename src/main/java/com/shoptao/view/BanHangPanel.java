@@ -70,7 +70,7 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
     public BanHangPanel() {
         initComponents();
         init();
-//        initWebcam();
+        initWebcam();
 
         this.banHangService = new BanHangServiceImpl();
         this.imeiDaBanService = new ImeiDaBanService();
@@ -1003,17 +1003,25 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
             try {
                 result = new MultiFormatReader().decode(bitmap);
             } catch (NotFoundException e) {
+                continue;
             }
 
             if (result != null) {
-                listSanPham = banHangService.getListSanPham();
-                for (int i = 0; i < listSanPham.size(); i++) {
-                    SanPhamViewModle get = listSanPham.get(i);
-                    if (get.getBarcode().equals(result)) {
-                        System.out.println(result + " - " + get.getBarcode());
-                        addImei(i);
-                    }
+                int index = banHangService.getSanPhambyBarcode(result.toString());
+                if(index >= 0){
+                    addImei(index);
+                }else{
+                    continue;
                 }
+                
+//                listSanPham = banHangService.getListSanPham();
+//                for (int i = 0; i < listSanPham.size(); i++) {
+//                    SanPhamViewModle get = listSanPham.get(i);
+//                    if (get.getBarcode().equals(result)) {
+//                        System.out.println(result + " - " + get.getBarcode());
+//                        addImei(i);
+//                    }
+//                }
             }
         } while (true);
     }

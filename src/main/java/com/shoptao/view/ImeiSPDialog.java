@@ -3,6 +3,7 @@ package com.shoptao.view;
 import com.shoptao.services.impl.ImeiService;
 import com.shoptao.services.impl.SanPhamService;
 import com.shoptao.utilities.ReadExcelHelper;
+import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.ImeiViewModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -60,6 +61,13 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         txtMa.setText("");
     }
 
+    private boolean validation(){
+        if(!Validation.CheckTrongText(txtMa)){
+            return false;
+        }
+        return true;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -228,6 +236,9 @@ public class ImeiSPDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        if(!validation()) return;
+        if (Validation.checkTrungMaIMEI(txtMa.getText())) return;
+        
 //        int index = new SanPhamPanel().getindexsp();
         JOptionPane.showMessageDialog(this, imeiService.add(getModel(), indexsp));
         List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());

@@ -180,4 +180,16 @@ public class BanHangServiceImpl implements BanHangService {
         return list;
     }
 
+    @Override
+    public int getSanPhambyBarcode(String barcode) {
+        for (int i = 0; i < getListSanPham().size(); i++) {
+            Object sp = getListSanPham().get(i);
+            if(getListSanPham().get(i).getBarcode().equalsIgnoreCase(barcode)){
+                return i;
+            }
+            
+        }
+        return -1;
+    }
+
 }

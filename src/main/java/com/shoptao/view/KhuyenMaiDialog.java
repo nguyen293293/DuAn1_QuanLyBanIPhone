@@ -135,6 +135,14 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
             return false;
         }
         
+        if (!Validation.checkNumberSo(txt_dieuKienGiamGia)) {
+            return false;
+       }
+        
+        if (!Validation.checkNumberSo(txt_giaTri)) {
+            return false;
+       }
+        
         return true;
     }
     
@@ -423,6 +431,8 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         if(!validation()) return;
+        
+        if(Validation.checkTrungMaKM(txt_ma.getText())) return;
         
         JOptionPane.showMessageDialog(this, khuyenMaiService.add(getModelKM()));
         refresh();

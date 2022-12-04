@@ -306,6 +306,8 @@ public class DongSPDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(!validation()) return;
         
+        if(Validation.checkTrungMaDSP(txtMa.getText())) return;
+        
         JOptionPane.showMessageDialog(this, dongSanPhamService.add(getModel()));
         list = dongSanPhamService.getList();
         loadData(list);

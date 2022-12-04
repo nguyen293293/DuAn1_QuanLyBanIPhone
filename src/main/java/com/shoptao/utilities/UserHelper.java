@@ -11,13 +11,14 @@ import com.shoptao.domainmodel.NhanVien;
  * @author DEll
  */
 public class UserHelper {
+    
     public static NhanVien USER = null;
     
     public static void logout(){
         UserHelper.USER = null;
     }
     
-    public static  boolean isLogin(){
+    public static boolean isLogin(){
         return UserHelper.USER != null;
     }
 }

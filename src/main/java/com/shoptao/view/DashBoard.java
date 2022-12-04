@@ -1,7 +1,8 @@
 package com.shoptao.view;
 
+import com.shoptao.utilities.DialogHelper;
 import com.shoptao.utilities.HibernateUtil;
-import java.awt.CardLayout;
+import com.shoptao.utilities.UserHelper;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -16,12 +17,11 @@ import javax.swing.plaf.basic.BasicButtonUI;
  */
 public class DashBoard extends javax.swing.JFrame {
 
-    private CardLayout cardLayout;
-
     public DashBoard() {
         this.setUndecorated(true);
         initComponents();
         init();
+        lblTenNhanVien.setText(UserHelper.USER.getHoten());
 
     }
 
@@ -68,9 +68,9 @@ public class DashBoard extends javax.swing.JFrame {
         btnKhachHang = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTenNhanVien = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnDangXUat = new javax.swing.JButton();
         pnlTop = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
@@ -155,15 +155,19 @@ public class DashBoard extends javax.swing.JFrame {
         });
         jPanel3.add(btnThongKe);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Phan Văn Nguyên");
+        lblTenNhanVien.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblTenNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton1.setText("Bản thân");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jButton2.setText("Đăng xuất");
+        btnDangXUat.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnDangXUat.setText("Đăng xuất");
+        btnDangXUat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXUatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -172,21 +176,21 @@ public class DashBoard extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTenNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(btnDangXUat)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTenNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnDangXUat)
                     .addComponent(jButton1))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -266,64 +270,104 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
-        System.exit(0);
+        UserHelper.logout();
+        new LoginForm().setVisible(true);
+//        System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
+        if(UserHelper.isLogin() == false) {
+            DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
+            pnlRoot.removeAll();
+            return;
+        }
         lblTitle.setText("Bán hàng");
         pnlRoot.removeAll();
         pnlRoot.add(new BanHangPanel());
         pnlRoot.validate();
-//        cardLayout.show(pnlRoot, "banhang");
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
+        if(UserHelper.isLogin() == false) {
+            DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
+            pnlRoot.removeAll();
+            return;
+        }
         lblTitle.setText("Hoá đơn");
         pnlRoot.removeAll();
         pnlRoot.add(new HoaDonPanel());
         pnlRoot.validate();
-//        cardLayout.show(pnlRoot, "hoadon");
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
+        if(UserHelper.isLogin() == false) {
+            DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
+            pnlRoot.removeAll();
+            return;
+        }
         lblTitle.setText("Sản phẩm");
         pnlRoot.removeAll();
         pnlRoot.add(new SanPhamPanel());
         pnlRoot.validate();
-//        cardLayout.show(pnlRoot, "sanpham");
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
+        if(UserHelper.isLogin() == false) {
+            DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
+            pnlRoot.removeAll();
+            return;
+        }
         lblTitle.setText("Khuyến mãi");
         pnlRoot.removeAll();
         pnlRoot.add(new KhachHangPanel());
         pnlRoot.validate();
-//          cardLayout.show(pnlRoot, "khuyenmai");
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
+        if(UserHelper.isLogin() == false) {
+            DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
+            pnlRoot.removeAll();
+            return;
+        }
+        if(!UserHelper.USER.getVaitro().equals("Quản lý")){
+            DialogHelper.alert(this, "Vui lòng sử dụng tài khoản quản lý", "Lỗi");
+            return;
+        }
         lblTitle.setText("Nhân viên");
         pnlRoot.removeAll();
         pnlRoot.add(new NhanVienPanel());
         pnlRoot.validate();
-//        cardLayout.show(pnlRoot, "nhanvien");
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
+        if(UserHelper.isLogin() == false) {
+            DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
+            pnlRoot.removeAll();
+            return;
+        }
         lblTitle.setText("Khách hàng");
         pnlRoot.removeAll();
         pnlRoot.add(new KhachHangPanel());
         pnlRoot.validate();
-//        cardLayout.show(pnlRoot, "khachhang");
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        if(UserHelper.isLogin() == false) {
+            DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
+            pnlRoot.removeAll();
+            return;
+        }
         lblTitle.setText("Thống kê");
         pnlRoot.removeAll();
         pnlRoot.add(new ThongKePanel());
         pnlRoot.validate();
-//        cardLayout.show(pnlRoot, "thongke");
     }//GEN-LAST:event_btnThongKeActionPerformed
+
+    private void btnDangXUatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXUatActionPerformed
+        this.dispose();
+        UserHelper.logout();
+        new LoginForm().setVisible(true);
+    }//GEN-LAST:event_btnDangXUatActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -346,6 +390,7 @@ public class DashBoard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBanHang;
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnDangXUat;
     private javax.swing.JButton btnHoaDon;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnKhuyenMai;
@@ -353,11 +398,10 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnThongKe;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblTenNhanVien;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlRoot;

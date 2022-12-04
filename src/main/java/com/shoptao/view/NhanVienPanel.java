@@ -461,9 +461,9 @@ public class NhanVienPanel extends javax.swing.JPanel {
         
         if(Validation.checkTrungMaNhanVien(txtMa.getText())) return;
         
-        if(Validation.checkTrungSDTNhanVien(txtSdt.getText())) return;
+        if(Validation.checkTrungSDTNV(txtSdt.getText())) return;
         
-        if(Validation.checkTrungEmailNhanVien(txtEmail.getText()))return;
+        if(Validation.checkTrungEmail(txtEmail.getText()))return;
         
         String message = chungService.add(getModel());
         listNhanVien = chungService.getList();
