@@ -1,5 +1,6 @@
 package com.shoptao.view;
 
+import com.shoptao.utilities.HibernateUtil;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,16 +40,18 @@ public class DashBoard extends javax.swing.JFrame {
         btnClose.setContentAreaFilled(false);
         btnClose.setBorderPainted(false);
 
+        HibernateUtil.getSessionFactory();
+        
         addMouseHover();
 
-        cardLayout = (CardLayout) pnlRoot.getLayout();
-        pnlRoot.add("banhang", new BanHangPanel());
-        pnlRoot.add("hoadon", new HoaDonPanel());
-        pnlRoot.add("sanpham", new SanPhamPanel());
-        pnlRoot.add("nhanvien", new NhanVienPanel());
-        pnlRoot.add("khachhang", new KhachHangPanel());
-        pnlRoot.add("thongke", new ThongKePanel());
-        pnlRoot.add("khuyenmai", new SanPhamKhuyenMaiPanel());
+//        cardLayout = (CardLayout) pnlRoot.getLayout();
+//        pnlRoot.add("banhang", new BanHangPanel());
+//        pnlRoot.add("hoadon", new HoaDonPanel());
+//        pnlRoot.add("sanpham", new SanPhamPanel());
+//        pnlRoot.add("nhanvien", new NhanVienPanel());
+//        pnlRoot.add("khachhang", new KhachHangPanel());
+//        pnlRoot.add("thongke", new ThongKePanel());
+//        pnlRoot.add("khuyenmai", new SanPhamKhuyenMaiPanel());
     }
 
     @SuppressWarnings("unchecked")
@@ -268,53 +271,58 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
         lblTitle.setText("Bán hàng");
-        cardLayout.show(pnlRoot, "banhang");
+        pnlRoot.removeAll();
+        pnlRoot.add(new BanHangPanel());
+        pnlRoot.validate();
+//        cardLayout.show(pnlRoot, "banhang");
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
         lblTitle.setText("Hoá đơn");
-//        pnlRoot.removeAll();
-//        pnlRoot.add(new HoaDonPanel());
-//        pnlRoot.validate();
-        cardLayout.show(pnlRoot, "hoadon");
+        pnlRoot.removeAll();
+        pnlRoot.add(new HoaDonPanel());
+        pnlRoot.validate();
+//        cardLayout.show(pnlRoot, "hoadon");
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
         lblTitle.setText("Sản phẩm");
-//        pnlRoot.removeAll();
-//        pnlRoot.add(new SanPhamPanel());
-//        pnlRoot.validate();
-        cardLayout.show(pnlRoot, "sanpham");
+        pnlRoot.removeAll();
+        pnlRoot.add(new SanPhamPanel());
+        pnlRoot.validate();
+//        cardLayout.show(pnlRoot, "sanpham");
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
         lblTitle.setText("Khuyến mãi");
-        
-          cardLayout.show(pnlRoot, "khuyenmai");
+        pnlRoot.removeAll();
+        pnlRoot.add(new KhachHangPanel());
+        pnlRoot.validate();
+//          cardLayout.show(pnlRoot, "khuyenmai");
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
         lblTitle.setText("Nhân viên");
-//        pnlRoot.removeAll();
-//        pnlRoot.add(new NhanVienPanel());
-//        pnlRoot.validate();
-        cardLayout.show(pnlRoot, "nhanvien");
+        pnlRoot.removeAll();
+        pnlRoot.add(new NhanVienPanel());
+        pnlRoot.validate();
+//        cardLayout.show(pnlRoot, "nhanvien");
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
         lblTitle.setText("Khách hàng");
-//        pnlRoot.removeAll();
-//        pnlRoot.add(new KhachHangPanel());
-//        pnlRoot.validate();
-        cardLayout.show(pnlRoot, "khachhang");
+        pnlRoot.removeAll();
+        pnlRoot.add(new KhachHangPanel());
+        pnlRoot.validate();
+//        cardLayout.show(pnlRoot, "khachhang");
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
         lblTitle.setText("Thống kê");
-//        pnlRoot.removeAll();
-//        pnlRoot.add(new ThongKePanel());
-//        pnlRoot.validate();
-        cardLayout.show(pnlRoot, "thongke");
+        pnlRoot.removeAll();
+        pnlRoot.add(new ThongKePanel());
+        pnlRoot.validate();
+//        cardLayout.show(pnlRoot, "thongke");
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     public static void main(String args[]) {

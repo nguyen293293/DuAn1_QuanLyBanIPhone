@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import java.awt.Font;
 import com.shoptao.services.ChungServices;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -35,10 +37,17 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
         
         listHoaDonChiTiet = hoaDonChiTietService.getList(this.hoaDon.getMa());
         loadDataToTable(listHoaDonChiTiet);
+        
+        BigDecimal tongTien = new BigDecimal(0);
+        for (HoaDonChiTietViewModel x : listHoaDonChiTiet) {
+            tongTien = tongTien.add(x.getTongTien());
+        }
+        lblTongTien.setText(tongTien+"");
     }
 
     public void init(){
         tblHoaDonChiTiet.getTableHeader().setFont(new Font("Arial", 1, 22));
+        setLocationRelativeTo(null);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -117,7 +126,7 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTenNhanVien)
                             .addComponent(lblTenKhachHang))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
@@ -160,7 +169,7 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Tổng tiền"
+                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Tổng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -236,7 +245,7 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
         lblMaHoaDon.setText(hoaDon.getMa());
         lblTenNhanVien.setText(hoaDon.getTenNhanVien());
         lblTenKhachHang.setText(hoaDon.getTenKhachHang());
-        lblNgayTao.setText(hoaDon.getNgaytao()+"");
+        lblNgayTao.setText(new SimpleDateFormat("dd - MM - yyyy").format(hoaDon.getNgaytao()));
     }
     
     private void loadDataToTable(List<HoaDonChiTietViewModel> listHoaDonChiTiet) {

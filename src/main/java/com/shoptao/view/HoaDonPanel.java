@@ -165,6 +165,7 @@ public class HoaDonPanel extends javax.swing.JPanel {
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         if(tblHoaDon.getRowCount() < 0) return;
         int index = tblHoaDon.getSelectedRow();
+        if(Integer.valueOf(tblHoaDon.getValueAt(index, 4)+"") != 1) return;
         HoaDonViewModel hoaDon = service.getOne((String) tblHoaDon.getValueAt(index, 0));
         HoaDonChiTietDialog hoaDonChiTietDialog = new HoaDonChiTietDialog(null, true, hoaDon);
         hoaDonChiTietDialog.setVisible(true);

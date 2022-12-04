@@ -20,6 +20,7 @@ E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\Imei.ja
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\HibernateUtil.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\SanPhamKhuyenMaiRepository.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\KhachHangDialog.java
+E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\InterfaceImeiDaBanService.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\SanPhamKhuyenMai.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\BanHangService.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\ImeiSPDialog.java
@@ -51,6 +52,7 @@ E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\MauSacVie
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\SanPhamPanel.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\NhanVienRepository.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\impl\HoaDonChiTietService.java
+E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\JasperReports.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\ImeiBHDialog.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\KhuyenMai.java
 E:\DuAn1\aaa\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\DialogHelper.java

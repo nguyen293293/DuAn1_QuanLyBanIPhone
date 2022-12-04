@@ -19,6 +19,8 @@ public interface BanHangService {
     
     List<SanPhamViewModle> getListSanPham();
     
+    List<SanPhamViewModle> searchSanPham(String ma);
+    
     boolean updateSanPham(SanPhamViewModle sanPham);
     
     List<HoaDonChiTietViewModel> getListHDCT(String maHD);

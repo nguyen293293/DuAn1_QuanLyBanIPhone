@@ -169,4 +169,15 @@ public class BanHangServiceImpl implements BanHangService {
         return null;
     }
 
+    @Override
+    public List<SanPhamViewModle> searchSanPham(String ma) {
+        List<SanPhamViewModle> list = new ArrayList<>();
+        for (SanPhamViewModle x : getListSanPham()) {
+            if(x.getTen().substring(7).toLowerCase().startsWith(ma.toLowerCase())){
+                list.add(x);
+            }
+        }
+        return list;
+    }
+
 }

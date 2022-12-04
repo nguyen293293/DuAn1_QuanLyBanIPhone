@@ -36,49 +36,50 @@ import javax.swing.table.TableColumnModel;
  * @author nguyen293
  */
 public class ImeiBHDialog extends javax.swing.JDialog {
-    
+
     private final ChungServices<ImeiViewModel> imeiService;
     private final ChungServices<SanPhamViewModle> sanPhamService;
     private final InterfaceImeiDaBanService imeiDaBanService;
     private final InterfaceHoaDonChiTietService hDCTSerive;
     private final BanHangService banHangService;
-    
+
     BanHangPanel banHangPanel;
-    
+
     private List<ImeiViewModel> listImei = new ArrayList<>();
     private List<ImeiDaBanViewModel> listImeiDaBan = new ArrayList<>();
-    
+
     SanPhamViewModle sanPhamViewModle;
     HoaDonChiTietViewModel hoaDonChiTietViewModel;
-    
+
     String idHDCT = null;
     String maHoaDon = null;
-    
+
     public ImeiBHDialog(java.awt.Frame parent, boolean modal, BanHangPanel banHangPanel, int indexSanPham, String idHDCT) {
         super(parent, modal);
         initComponents();
-        
+        setLocationRelativeTo(null);
+
         this.banHangPanel = banHangPanel;
-        
+
         this.imeiService = new ImeiService();
         this.sanPhamService = new SanPhamService();
         this.hDCTSerive = new HoaDonChiTietService();
         this.banHangService = new BanHangServiceImpl();
         this.imeiDaBanService = new ImeiDaBanService();
-        
+
         this.maHoaDon = banHangPanel.maHoaDon;
         this.idHDCT = idHDCT;
-        
+
         sanPhamViewModle = banHangService.getListSanPham().get(indexSanPham);
-        
+
         showDetail(sanPhamViewModle);
-        
+
         listImei = imeiService.search(sanPhamViewModle.getId());
         loadDataComboBox(listImei);
-        
+
         listImeiDaBan = imeiDaBanService.search(idHDCT);
         loadDataTable(listImeiDaBan);
-        
+
     }
 
 //    private void init(){
@@ -95,7 +96,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         this.hDCTSerive = new HoaDonChiTietService();
         this.banHangService = new BanHangServiceImpl();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -280,30 +281,29 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String maImei = (String) cboImei.getSelectedItem();
-        
+
         if (maImei == null) {
             return;
         }
-        
+
         ImeiDaBanViewModel imeiDaBan = new ImeiDaBanViewModel(maImei, idHDCT, 0);
         imeiDaBanService.add(imeiDaBan);
-        
+
         ImeiViewModel imei = new ImeiViewModel();
         imei.setMaimei(maImei);
         imei.setTrangthai(1);
         String update = imeiService.update(imei);
-        System.out.println("ImeiBH - 255: " + update);
-        
+
         listImei = imeiService.search(sanPhamViewModle.getId());
         loadDataComboBox(listImei);
-        
+
         listImeiDaBan = imeiDaBanService.search(idHDCT);
         loadDataTable(listImeiDaBan);
-        
+
         int soLuong = listImeiDaBan.size();
         banHangService.updateHDCT(idHDCT, soLuong);
-        
-        sanPhamViewModle.setSoluongton(sanPhamViewModle.getSoluongton() - soLuong);
+
+        sanPhamViewModle.setSoluongton(sanPhamViewModle.getSoluongton() - 1);
         banHangService.updateSanPham(sanPhamViewModle);
 
 //        for (int i = 0; i < banHangService.getListHDCT(banHangPanel.maHoaDon).size(); i++) {
@@ -320,6 +320,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 //            }
 //        }
         banHangPanel.loadDataHoaDonChiTiet(banHangService.getListHDCT(banHangPanel.maHoaDon));
+        banHangPanel.loadDataSanPham(banHangService.getListSanPham());
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -343,93 +344,70 @@ public class ImeiBHDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnXoaTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTatCaActionPerformed
-        
+
+        if (listImeiDaBan.isEmpty()) {
+            return;
+        }
+
         for (ImeiDaBanViewModel x : listImeiDaBan) {
             ImeiViewModel imei = new ImeiViewModel();
             imei.setMaimei(x.getMaimei());
             imei.setTrangthai(0);
             imeiService.update(imei);
         }
-        
+
         imeiDaBanService.deleteByIdHDCT(idHDCT);
-        
+
         listImei = imeiService.search(sanPhamViewModle.getId());
         loadDataComboBox(listImei);
-        
-        sanPhamViewModle.setSoluongton(listImei.size());
+
+        int soluongimei = 0;
+        for (ImeiViewModel imei : listImei) {
+            if (imei.getTrangthai() == 0) {
+                soluongimei += 1;
+            }
+        }
+        sanPhamViewModle.setSoluongton(soluongimei);
         banHangService.updateSanPham(sanPhamViewModle);
-        
+
         listImeiDaBan = imeiDaBanService.search(idHDCT);
         loadDataTable(listImeiDaBan);
-        
+
         int soLuong = listImeiDaBan.size();
         banHangService.updateHDCT(idHDCT, soLuong);
 
-//        for (int i = 0; i < banHangService.getListHDCT(banHangPanel.maHoaDon).size(); i++) {
-//            HoaDonChiTietViewModel x = banHangService.getListHDCT(banHangPanel.maHoaDon).get(i);
-//            if (x.getSoluong() <= 0) {
-//                hDCTSerive.delete(i, maHoaDon);
-//            }
-//        }
         banHangPanel.loadDataHoaDonChiTiet(banHangService.getListHDCT(banHangPanel.maHoaDon));
+        banHangPanel.loadDataSanPham(banHangService.getListSanPham());
     }//GEN-LAST:event_btnXoaTatCaActionPerformed
-    
+
     public void removeAll(String maHoaDon) {
         List<HoaDonChiTietViewModel> listHoaDonChiTiet = banHangService.getListHDCT(maHoaDon);
         for (HoaDonChiTietViewModel hdct : listHoaDonChiTiet) {
-            
+
             for (ImeiDaBanViewModel imeiDaBan : imeiDaBanService.search(hdct.getId())) {
                 ImeiViewModel imei = new ImeiViewModel();
                 imei.setMaimei(imeiDaBan.getMaimei());
                 imei.setTrangthai(0);
                 imeiService.update(imei);
             }
-            
-            imeiDaBanService.deleteByIdHDCT(hdct.getId());
-            
-            SanPhamViewModle sanPhamVM = sanPhamService.getOne(hdct.getMaSanPham());
-            
-            listImei = imeiService.search(sanPhamVM.getId());
-            
-            sanPhamVM.setSoluongton(listImei.size());
-            banHangService.updateSanPham(sanPhamVM);
-            
-            hDCTSerive.delete(hdct.getId());
-            
-        }
-        
-//        banHangPanel.loadDataHoaDonChiTiet(banHangService.getListHDCT(banHangPanel.maHoaDon));
-//        banHangPanel.loadDataSanPham(banHangService.getListSanPham());
 
-//        for (ImeiDaBanViewModel x : listImeiDaBan) {
-//            ImeiViewModel imei = new ImeiViewModel();
-//            imei.setMaimei(x.getMaimei());
-//            imei.setTrangthai(0);
-//            imeiService.update(imei);
-//        }
-//
-//        imeiDaBanService.deleteByIdHDCT(idHDCT);
-//
-//        listImei = imeiService.search(sanPhamViewModle.getId());
-//        loadDataComboBox(listImei);
-//
-//        sanPhamViewModle.setSoluongton(listImei.size());
-//        banHangService.updateSanPham(sanPhamViewModle);
-//
-//        listImeiDaBan = imeiDaBanService.search(idHDCT);
-//        loadDataTable(listImeiDaBan);
-//
-//        int soLuong = listImeiDaBan.size();
-//        banHangService.updateHDCT(idHDCT, soLuong);
-//
-//        for (int i = 0; i < banHangService.getListHDCT(banHangPanel.maHoaDon).size(); i++) {
-//            HoaDonChiTietViewModel x = banHangService.getListHDCT(banHangPanel.maHoaDon).get(i);
-//            if (x.getSoluong() <= 0) {
-//                hDCTSerive.delete(i, maHoaDon);
-//            }
-//        }
-//
-//        banHangPanel.loadDataHoaDonChiTiet(banHangService.getListHDCT(banHangPanel.maHoaDon));
+            imeiDaBanService.deleteByIdHDCT(hdct.getId());
+
+            SanPhamViewModle sanPhamVM = sanPhamService.getOne(hdct.getMaSanPham());
+
+            listImei = imeiService.search(sanPhamVM.getId());
+
+            int soluongimei = 0;
+            for (ImeiViewModel imei : listImei) {
+                if (imei.getTrangthai() == 0) {
+                    soluongimei += 1;
+                }
+            }
+            sanPhamVM.setSoluongton(soluongimei);
+            banHangService.updateSanPham(sanPhamVM);
+
+            hDCTSerive.delete(hdct.getId());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -450,19 +428,19 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 
     private void loadDataComboBox(List<ImeiViewModel> list) {
         cboImei.removeAllItems();
-        
+
         for (ImeiViewModel x : list) {
             if (x.getTrangthai() == 0) {
                 cboImei.addItem(x.getMaimei());
             }
         }
     }
-    
+
     private void showDetail(SanPhamViewModle sp) {
         lblSanPham.setText(sp.getTen() + " - " + sp.getSoluongton() + " - " + sp.getTenmausac());
         lblSoLuong.setText(sp.getSoluongton() + "");
     }
-    
+
     private void loadDataTable(List<ImeiDaBanViewModel> list) {
         DefaultTableModel tableModel = (DefaultTableModel) tbImeiDaBan.getModel();
         tableModel.setRowCount(0);
@@ -473,41 +451,49 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 //        ButtonColumn buttonColumn = new ButtonColumn(tbImeiDaBan, 2);
 
     }
-    
-    public void removeImeiDaban(int index) {
-//        index = tbImeiDaBan.getSelectedRow();
 
-        String maImei = (String) tbImeiDaBan.getValueAt(0, 1);
-        
+    public void removeImeiDaban(int index) {
+        index = tbImeiDaBan.getSelectedRow();
+        if (index < 0) {
+            return;
+        }
+        String maImei = (String) tbImeiDaBan.getValueAt(index, 1);
+
         imeiDaBanService.deleteByImei(maImei);
-        
+
         ImeiViewModel imei = new ImeiViewModel();
         imei.setMaimei(maImei);
         imei.setTrangthai(0);
         imeiService.update(imei);
-        
+
         listImei = imeiService.search(sanPhamViewModle.getId());
         loadDataComboBox(listImei);
-        
-        sanPhamViewModle.setSoluongton(listImei.size());
-        banHangService.updateSanPham(sanPhamViewModle);
-        
-        listImeiDaBan = imeiDaBanService.search(idHDCT);
-        loadDataTable(listImeiDaBan);
-        
-        int soLuong = listImeiDaBan.size();
-        banHangService.updateHDCT(idHDCT, soLuong);
-        
-        for (int i = 0; i < banHangService.getListHDCT(banHangPanel.maHoaDon).size(); i++) {
-            HoaDonChiTietViewModel x = banHangService.getListHDCT(banHangPanel.maHoaDon).get(i);
-            if (x.getSoluong() <= 0) {
-                hDCTSerive.delete(i, maHoaDon);
+
+        int soluongimei = 0;
+        for (ImeiViewModel imeiVM : listImei) {
+            if (imeiVM.getTrangthai() == 0) {
+                soluongimei += 1;
             }
         }
-        
+        sanPhamViewModle.setSoluongton(soluongimei);
+        banHangService.updateSanPham(sanPhamViewModle);
+
+        listImeiDaBan = imeiDaBanService.search(idHDCT);
+        loadDataTable(listImeiDaBan);
+
+        int soLuong = listImeiDaBan.size();
+        banHangService.updateHDCT(idHDCT, soLuong);
+
+//        for (int i = 0; i < banHangService.getListHDCT(banHangPanel.maHoaDon).size(); i++) {
+//            HoaDonChiTietViewModel x = banHangService.getListHDCT(banHangPanel.maHoaDon).get(i);
+//            if (x.getSoluong() <= 0) {
+//                hDCTSerive.delete(i, maHoaDon);
+//            }
+//        }
         banHangPanel.loadDataHoaDonChiTiet(banHangService.getListHDCT(banHangPanel.maHoaDon));
+        banHangPanel.loadDataSanPham(banHangService.getListSanPham());
     }
-    
+
 }
 
 /*

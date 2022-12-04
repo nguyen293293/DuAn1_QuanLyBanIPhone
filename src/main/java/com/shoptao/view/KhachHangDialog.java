@@ -21,6 +21,7 @@ public class KhachHangDialog extends javax.swing.JDialog {
     public KhachHangDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
 
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,7 +44,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbKhachHang = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
         btnXacNhan = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -57,7 +57,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
         txtDiaChi = new javax.swing.JTextField();
         btnRefresh = new javax.swing.JButton();
         btnThemKhachHang = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jdcNgaySinh = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -91,8 +90,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
             tbKhachHang.getColumnModel().getColumn(0).setMaxWidth(95);
         }
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-
         btnXacNhan.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnXacNhan.setText("Xác nhận");
         btnXacNhan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -108,10 +105,9 @@ public class KhachHangDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnXacNhan)))
                 .addContainerGap())
         );
@@ -119,11 +115,9 @@ public class KhachHangDialog extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXacNhan))
+                .addComponent(btnXacNhan)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -168,8 +162,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setText("Quản lý khách hàng");
-
         jdcNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -179,9 +171,7 @@ public class KhachHangDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(166, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(67, 67, 67)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRefresh)
                         .addGap(56, 56, 56)
                         .addComponent(btnThemKhachHang))
@@ -199,7 +189,7 @@ public class KhachHangDialog extends javax.swing.JDialog {
                             .addComponent(txtHoTen)
                             .addComponent(txtSoDienThoai)
                             .addComponent(txtDiaChi)
-                            .addComponent(jdcNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jdcNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE))))
                 .addGap(53, 53, 53))
         );
         jPanel3Layout.setVerticalGroup(
@@ -225,11 +215,10 @@ public class KhachHangDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh)
-                    .addComponent(btnThemKhachHang)
-                    .addComponent(jButton4))
+                    .addComponent(btnThemKhachHang))
                 .addGap(33, 33, 33))
         );
 
@@ -345,7 +334,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnThemKhachHang;
     private javax.swing.JButton btnXacNhan;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -356,7 +344,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private com.toedter.calendar.JDateChooser jdcNgaySinh;
     private javax.swing.JTable tbKhachHang;
     private javax.swing.JTextField txtDiaChi;

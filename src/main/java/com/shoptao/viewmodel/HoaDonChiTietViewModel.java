@@ -35,6 +35,6 @@ public class HoaDonChiTietViewModel {
     
     public Object[] toDataRow(JTable table){
         return new Object[]{table.getRowCount() + 1, maSanPham, tenSanPham,
-            soluong, dongia, tongTien};
+            soluong, dongia, getTongTien()};
     }
 }
