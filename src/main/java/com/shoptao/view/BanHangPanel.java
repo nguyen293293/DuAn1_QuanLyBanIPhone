@@ -995,6 +995,8 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
                 if ((image = webcam.getImage()) == null) {
                     continue;
                 }
+            }else{
+                return;
             }
 
             LuminanceSource source = new BufferedImageLuminanceSource(image);

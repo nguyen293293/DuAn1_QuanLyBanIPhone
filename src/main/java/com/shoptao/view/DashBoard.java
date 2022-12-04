@@ -1,5 +1,6 @@
 package com.shoptao.view;
 
+import com.github.sarxos.webcam.Webcam;
 import com.shoptao.utilities.DialogHelper;
 import com.shoptao.utilities.HibernateUtil;
 import com.shoptao.utilities.UserHelper;
@@ -269,6 +270,7 @@ public class DashBoard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        Webcam.getWebcams().get(0).close();
         this.dispose();
         UserHelper.logout();
         new LoginForm().setVisible(true);
@@ -295,6 +297,7 @@ public class DashBoard extends javax.swing.JFrame {
         }
         lblTitle.setText("Hoá đơn");
         pnlRoot.removeAll();
+        Webcam.getWebcams().get(0).close();
         pnlRoot.add(new HoaDonPanel());
         pnlRoot.validate();
     }//GEN-LAST:event_btnHoaDonActionPerformed
@@ -306,6 +309,7 @@ public class DashBoard extends javax.swing.JFrame {
             return;
         }
         lblTitle.setText("Sản phẩm");
+        Webcam.getWebcams().get(0).close();
         pnlRoot.removeAll();
         pnlRoot.add(new SanPhamPanel());
         pnlRoot.validate();
@@ -318,8 +322,9 @@ public class DashBoard extends javax.swing.JFrame {
             return;
         }
         lblTitle.setText("Khuyến mãi");
+        Webcam.getWebcams().get(0).close();
         pnlRoot.removeAll();
-        pnlRoot.add(new KhachHangPanel());
+        pnlRoot.add(new SanPhamKhuyenMaiPanel());
         pnlRoot.validate();
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
@@ -334,6 +339,7 @@ public class DashBoard extends javax.swing.JFrame {
             return;
         }
         lblTitle.setText("Nhân viên");
+        Webcam.getWebcams().get(0).close();
         pnlRoot.removeAll();
         pnlRoot.add(new NhanVienPanel());
         pnlRoot.validate();
@@ -346,6 +352,7 @@ public class DashBoard extends javax.swing.JFrame {
             return;
         }
         lblTitle.setText("Khách hàng");
+        Webcam.getWebcams().get(0).close();
         pnlRoot.removeAll();
         pnlRoot.add(new KhachHangPanel());
         pnlRoot.validate();
@@ -358,12 +365,14 @@ public class DashBoard extends javax.swing.JFrame {
             return;
         }
         lblTitle.setText("Thống kê");
+        Webcam.getWebcams().get(0).close();
         pnlRoot.removeAll();
         pnlRoot.add(new ThongKePanel());
         pnlRoot.validate();
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnDangXUatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXUatActionPerformed
+        Webcam.getWebcams().get(0).close();
         this.dispose();
         UserHelper.logout();
         new LoginForm().setVisible(true);
