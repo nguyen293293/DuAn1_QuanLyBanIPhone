@@ -386,7 +386,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
         
         if(!validation()) return;
         
-        if(Validation.checkTrungSDTNV(txtSoDienThoai.getText())) return;
+        if(Validation.checkTrungMaKH(txtMa.getText())) return;
+        
+        if(Validation.checkTrungSDTKH(txtSoDienThoai.getText())) return;
         
         String message = chungService.add(getModel());
         listKhachHang = chungService.getList();

@@ -1,8 +1,20 @@
 package com.shoptao.utilities;
 
 import com.shoptao.services.ChungServices;
+import com.shoptao.services.impl.DongSanPhamService;
+import com.shoptao.services.impl.ImeiService;
+import com.shoptao.services.impl.KhachHangService;
+import com.shoptao.services.impl.KhuyenMaiService;
+import com.shoptao.services.impl.MauSacService;
 import com.shoptao.services.impl.NhanVienService;
+import com.shoptao.services.impl.SanPhamService;
+import com.shoptao.viewmodel.DongSanPhamViewModle;
+import com.shoptao.viewmodel.ImeiViewModel;
+import com.shoptao.viewmodel.KhachHangViewModel;
+import com.shoptao.viewmodel.KhuyenMaiViewModle;
+import com.shoptao.viewmodel.MauSacViewModel;
 import com.shoptao.viewmodel.NhanVienViewModel;
+import com.shoptao.viewmodel.SanPhamViewModle;
 import java.awt.Component;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
@@ -159,9 +171,86 @@ public class Validation {
         return false;
     }
     
+    public static boolean checkTrungMaKH(String ma){
+        ChungServices<KhachHangViewModel> service = new KhachHangService();
+        for (KhachHangViewModel x : service.getList()) {
+            if(x.getMa().equals(ma)){
+                DialogHelper.alert(null, "Mã khách hàng đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkTrungMaSP(String ma){
+        ChungServices<SanPhamViewModle> service = new SanPhamService();
+        for (SanPhamViewModle x : service.getList()) {
+            if(x.getMa().equals(ma)){
+                DialogHelper.alert(null, "Mã sản phẩm đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkTrungMaKM(String ma){
+        ChungServices<KhuyenMaiViewModle> service = new KhuyenMaiService();
+        for (KhuyenMaiViewModle x : service.getList()) {
+            if(x.getMa().equals(ma)){
+                DialogHelper.alert(null, "Mã khuyến mại đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkTrungMaDSP(String ma){
+        ChungServices<DongSanPhamViewModle> service = new DongSanPhamService();
+        for (DongSanPhamViewModle x : service.getList()) {
+            if(x.getMa().equals(ma)){
+                DialogHelper.alert(null, "Mã dòng sản phẩm đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkTrungMaMS(String ma){
+        ChungServices<MauSacViewModel> service = new MauSacService();
+        for (MauSacViewModel x : service.getList()) {
+            if(x.getMa().equals(ma)){
+                DialogHelper.alert(null, "Mã màu sắc đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkTrungMaIMEI(String ma){
+        ChungServices<ImeiViewModel> service = new ImeiService();
+        for (ImeiViewModel x : service.getList()) {
+            if(x.getMaimei().equals(ma)){
+                DialogHelper.alert(null, "Mã Imei đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public static boolean checkTrungSDTNV(String sdt){
         ChungServices<NhanVienViewModel> service = new NhanVienService();
         for (NhanVienViewModel x : service.getList()) {
+            if(x.getSdt().equals(sdt)){
+                DialogHelper.alert(null, "Số điện thoại đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean checkTrungSDTKH(String sdt){
+        ChungServices<KhachHangViewModel> service = new KhachHangService();
+        for (KhachHangViewModel x : service.getList()) {
             if(x.getSdt().equals(sdt)){
                 DialogHelper.alert(null, "Số điện thoại đã tồn tại", "Lỗi!");
                 return true;
