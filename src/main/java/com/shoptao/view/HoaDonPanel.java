@@ -191,7 +191,9 @@ public class HoaDonPanel extends javax.swing.JPanel {
         tableModel = (DefaultTableModel) tblHoaDon.getModel();
         tableModel.setRowCount(0);
         for (HoaDonViewModel x : listHoaDon) {
-            tableModel.addRow(x.toDataRow());
+            if(x.getTrangthai() != 0){
+                tableModel.addRow(x.toDataRow());
+            }
         }
     }
 }

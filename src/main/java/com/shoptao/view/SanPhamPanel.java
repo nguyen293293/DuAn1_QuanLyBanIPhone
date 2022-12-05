@@ -237,6 +237,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
@@ -471,9 +472,12 @@ public class SanPhamPanel extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel13.setText("Trạng thái");
 
+        buttonGroup1.add(rd_dangBan);
         rd_dangBan.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        rd_dangBan.setSelected(true);
         rd_dangBan.setText("Đang bán");
 
+        buttonGroup1.add(rd_ngungBan);
         rd_ngungBan.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rd_ngungBan.setText("Ngừng bán");
 
@@ -873,6 +877,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnEditDongSP;
     private javax.swing.JButton btnEditMauSac;
     private javax.swing.JButton btnsoluongton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cb_dongSP;
     private javax.swing.JComboBox<String> cb_mauSac;
     private javax.swing.JComboBox<String> cb_soLuongImei;

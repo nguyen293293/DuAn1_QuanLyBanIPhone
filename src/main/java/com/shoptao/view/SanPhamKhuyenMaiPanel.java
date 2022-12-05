@@ -7,6 +7,7 @@ package com.shoptao.view;
 import com.shoptao.services.impl.KhuyenMaiService;
 import com.shoptao.services.impl.SanPhamKhuyenMaiService;
 import com.shoptao.services.impl.SanPhamService;
+import com.shoptao.utilities.DialogHelper;
 import com.shoptao.viewmodel.KhuyenMaiViewModle;
 import com.shoptao.viewmodel.SanPhamKhuyenMaiViewModle;
 import com.shoptao.viewmodel.SanPhamViewModle;
@@ -401,7 +402,17 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        
+        if (tb_khuyenMai.getSelectedRow() < 0) {
+            DialogHelper.alert(null, "Chọn khuyến mại muốn thêm", "Thông báo");
+            return;
+        }
+        
+        if (tb_sanPham.getSelectedRow() < 0) {
+            DialogHelper.alert(null, "Chọn sản phẩm muốnt thêm khuyến mại", "Thông báo");
+            return;
+        }
+        
         KhuyenMaiViewModle khuyenMai = khuyenMaiService.getList().get(indexKhuyenMai);
         List<Integer> listSelectSP = getModelListSanPham();
         List<SanPhamViewModle> list = sanPhamService.getList();
@@ -428,6 +439,10 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
+        if (tb_sanPhamKhuyenMai.getSelectedRow() < 0) {
+            DialogHelper.alert(null, "Chọn sản phẩm khuyến mại muốn xoá", "Thông báo");
+            return;
+        }
         JOptionPane.showMessageDialog(this, sanPhamKhuyenMaiService.delete(getId()));
         
         List<SanPhamKhuyenMaiViewModle> list = sanPhamKhuyenMaiService.getList();

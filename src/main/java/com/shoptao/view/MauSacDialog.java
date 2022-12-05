@@ -4,6 +4,7 @@ import com.shoptao.services.impl.MauSacService;
 import com.shoptao.utilities.DialogHelper;
 import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.MauSacViewModel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -327,7 +328,14 @@ public class MauSacDialog extends javax.swing.JDialog {
 
     private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
         // TODO add your handling code here:
-        
+        String tenMauSac = txtSeacrch.getText();
+        List<MauSacViewModel> list = new ArrayList<>();
+        if (tenMauSac.isEmpty()) {
+            list = mauSacService.getList();
+        } else {
+            list = mauSacService.search(tenMauSac);
+        }
+        loadData(list);
     }//GEN-LAST:event_txtSeacrchCaretUpdate
 
     private void txtSeacrchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchMouseClicked

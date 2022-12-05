@@ -123,7 +123,6 @@ com\shoptao\view\KhuyenMaiDialog$2.class
 com\shoptao\view\KhachHangPanel.class
 com\shoptao\view\SanPhamKhuyenMaiPanel$8.class
 com\shoptao\view\ThongKePanel.class
-com\shoptao\view\SanPhamKhuyenMaiPanel$12.class
 com\shoptao\view\BanHangPanel.class
 com\shoptao\view\KhuyenMaiDialog$8.class
 com\shoptao\view\DongSPDialog.class
@@ -144,7 +143,6 @@ com\shoptao\view\BanHangPanel$13.class
 com\shoptao\view\ImeiBHDialog$2.class
 com\shoptao\view\SanPhamKhuyenMaiPanel.class
 com\shoptao\view\BanHangPanel$6.class
-com\shoptao\view\KhuyenMaiDialog$9.class
 com\shoptao\domainmodel\ImeiDaBan.class
 com\shoptao\domainmodel\HoaDon.class
 com\shoptao\view\KhachHangDialog$5.class
@@ -165,7 +163,6 @@ com\shoptao\view\SanPhamPanel$12.class
 com\shoptao\services\impl\BanHangServiceImpl.class
 com\shoptao\viewmodel\HoaDonChiTietViewModel.class
 com\shoptao\view\HoaDonChiTietDialog$1.class
-com\shoptao\view\SanPhamKhuyenMaiPanel$11.class
 com\shoptao\view\KhuyenMaiDialog$4.class
 com\shoptao\view\NhanVienPanel$7.class
 com\shoptao\view\BanHangPanel$11.class

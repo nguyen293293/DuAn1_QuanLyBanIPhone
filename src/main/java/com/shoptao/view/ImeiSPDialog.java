@@ -3,6 +3,7 @@ package com.shoptao.view;
 import com.shoptao.services.impl.ImeiService;
 import com.shoptao.services.impl.SanPhamService;
 import com.shoptao.utilities.ReadExcelHelper;
+import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.ImeiViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
 import java.util.ArrayList;
@@ -44,11 +45,13 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         defaultTableModel.setRowCount(0);
         int i = 0;
         for (ImeiViewModel ImeiViewModel : list) {
-            defaultTableModel.addRow(new Object[]{
+            if (ImeiViewModel.getTrangthai() == 0) {
+                defaultTableModel.addRow(new Object[]{
                 i = i + 1,
                 ImeiViewModel.getMaimei()
 
             });
+            }
         }
         this.sp.loadCBSoLuongImei(list);
 //        this.sp.loadData(sanPhamService.getList());
@@ -246,6 +249,12 @@ public class ImeiSPDialog extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        if (!Validation.CheckTrongText(txtMa)) {
+            return;
+        }
+        if (Validation.checkTrungMaIMEI(txtMa.getText())) {
+            return;
+        }
 //        int index = new SanPhamPanel().getindexsp();
         JOptionPane.showMessageDialog(this, imeiService.add(getModel(), indexsp));
         List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());

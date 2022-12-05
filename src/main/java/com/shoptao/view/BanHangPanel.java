@@ -701,7 +701,7 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
             loadDataHoaDon(listHoaDon);
             clearForm();
 
-            tbChiTietHoaDon.removeAll();
+            tableModelCTHD.setRowCount(0);
             
             JasperReports.exportToPdf(maHoaDon);
             maHoaDon = null;
@@ -942,12 +942,12 @@ public class BanHangPanel extends javax.swing.JPanel implements Runnable, Thread
             });
         }
     }
-
+DefaultTableModel tableModelCTHD;
     public void loadDataHoaDonChiTiet(List<HoaDonChiTietViewModel> listHDCT) {
-        DefaultTableModel tableModelSanPham = (DefaultTableModel) tbChiTietHoaDon.getModel();
-        tableModelSanPham.setRowCount(0);
+        tableModelCTHD = (DefaultTableModel) tbChiTietHoaDon.getModel();
+        tableModelCTHD.setRowCount(0);
         for (HoaDonChiTietViewModel x : listHDCT) {
-            tableModelSanPham.addRow(new Object[]{
+            tableModelCTHD.addRow(new Object[]{
                 tbChiTietHoaDon.getRowCount() + 1, x.getMaSanPham(), x.getTenSanPham(),
                 x.getSoluong(), x.getDongia(), x.getTongTien()
             });
