@@ -1,6 +1,7 @@
 package com.shoptao.application;
 
 import com.shoptao.view.DashBoard;
+import com.shoptao.view.LoginForm;
 
 
 /**
@@ -10,7 +11,7 @@ import com.shoptao.view.DashBoard;
 public class Application {
     
     public static void main(String[] args) {
-        new DashBoard().setVisible(true);
+        new LoginForm().setVisible(true);
     }
 }
  
