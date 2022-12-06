@@ -19,7 +19,6 @@ public class MauSacDialog extends javax.swing.JDialog {
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
 
     List<MauSacViewModel> list;
-    
     SanPhamPanel sp;
 
     public MauSacDialog(java.awt.Frame parent, boolean modal, SanPhamPanel sp) {
@@ -27,6 +26,7 @@ public class MauSacDialog extends javax.swing.JDialog {
         initComponents();
         this.sp = sp;
         setTitle("Màu sắc");
+        txtSeacrch.setOpaque(false);
 //         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         list = mauSacService.getList();

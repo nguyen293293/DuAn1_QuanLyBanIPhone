@@ -124,8 +124,16 @@ public class NhanVienViewModel {
         this.trangthai = trangthai;
     }
     
+    public String getTenTrangThai() {
+        if (trangthai == 0) {
+            return "Đang làm";
+        }else {
+            return "Nghỉ làm";
+        }
+    }
+    
     public Object[] toDataRow(){
         return new Object[]{ma, hoten, gioitinh, ngaysinh,
-            sdt, email, diachi, matkhau, vaitro, trangthai};
+            sdt, email, diachi, matkhau, vaitro, getTenTrangThai()};
     }
 }

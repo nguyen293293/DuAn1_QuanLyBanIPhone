@@ -28,7 +28,7 @@ public class DongSPDialog extends javax.swing.JDialog {
         
         setTitle("Dòng sản phẩm");
         setLocationRelativeTo(null);
-
+        txtSeacrch.setOpaque(false);
         list = dongSanPhamService.getList();
         loadData(list);
     }

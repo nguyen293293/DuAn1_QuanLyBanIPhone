@@ -84,7 +84,18 @@ public class HoaDonViewModel {
         this.tenNhanVien = tenNhanVien;
     }
     
+    
+    public String getTenTrangThai() {
+        if (trangthai == 0) {
+            return "Chưa thanh toán";
+        }else if(trangthai == 1){
+            return "Đã thanh toán";
+        }else{
+            return "Đã huỷ";
+        }
+    }
+    
     public Object[] toDataRow(){
-        return new Object[]{ma, tenNhanVien, tenKhachHang, ngaytao, trangthai};
+        return new Object[]{ma, tenNhanVien, tenKhachHang, ngaytao, getTenTrangThai()};
     }
 }
