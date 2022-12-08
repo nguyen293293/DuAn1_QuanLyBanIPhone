@@ -101,6 +101,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         txtPfPass.setBackground(new java.awt.Color(204, 255, 204));
         txtPfPass.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtPfPass.setText("123");
         txtPfPass.setBorder(null);
 
         btnHide.setBackground(new java.awt.Color(204, 255, 204));
@@ -156,6 +157,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         txtUser.setBackground(new java.awt.Color(204, 255, 204));
         txtUser.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtUser.setText("NV01");
         txtUser.setToolTipText("");
         txtUser.setBorder(null);
 
@@ -204,7 +206,7 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUser)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -214,7 +216,7 @@ public class LoginForm extends javax.swing.JFrame {
                     .addComponent(btnHide, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuenMatKhau)
                     .addComponent(btnSignUp))

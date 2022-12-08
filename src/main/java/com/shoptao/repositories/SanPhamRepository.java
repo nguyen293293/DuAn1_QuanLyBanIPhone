@@ -18,9 +18,6 @@ public class SanPhamRepository {
     public SanPhamRepository() {
     }
 
-
-    
-
     public List<SanPham> getList() {
         List<SanPham> listSP = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {

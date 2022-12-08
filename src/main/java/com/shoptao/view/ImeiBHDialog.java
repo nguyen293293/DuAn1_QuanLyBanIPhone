@@ -9,9 +9,11 @@ import com.shoptao.services.impl.HoaDonChiTietService;
 import com.shoptao.services.impl.ImeiDaBanService;
 import com.shoptao.services.impl.ImeiService;
 import com.shoptao.services.impl.SanPhamService;
+import com.shoptao.viewmodel.HDCTBanHangViewModel;
 import com.shoptao.viewmodel.HoaDonChiTietViewModel;
 import com.shoptao.viewmodel.ImeiDaBanViewModel;
 import com.shoptao.viewmodel.ImeiViewModel;
+import com.shoptao.viewmodel.SanPhamBanHangViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -37,7 +39,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class ImeiBHDialog extends javax.swing.JDialog {
 
-    private final ChungServices<ImeiViewModel> imeiService;
+    private final ImeiService imeiService;
     private final ChungServices<SanPhamViewModle> sanPhamService;
     private final InterfaceImeiDaBanService imeiDaBanService;
     private final InterfaceHoaDonChiTietService hDCTSerive;
@@ -48,13 +50,13 @@ public class ImeiBHDialog extends javax.swing.JDialog {
     private List<ImeiViewModel> listImei = new ArrayList<>();
     private List<ImeiDaBanViewModel> listImeiDaBan = new ArrayList<>();
 
-    SanPhamViewModle sanPhamViewModle;
-    HoaDonChiTietViewModel hoaDonChiTietViewModel;
+    SanPhamBanHangViewModel sanPham;
+    HDCTBanHangViewModel hoaDonChiTiet;
 
     String idHDCT = null;
     String maHoaDon = null;
 
-    public ImeiBHDialog(java.awt.Frame parent, boolean modal, BanHangPanel banHangPanel, int indexSanPham, String idHDCT) {
+    public ImeiBHDialog(java.awt.Frame parent, boolean modal, BanHangPanel banHangPanel, String maSanPham, String idHDCT) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -70,11 +72,11 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         this.maHoaDon = banHangPanel.maHoaDon;
         this.idHDCT = idHDCT;
 
-        sanPhamViewModle = banHangService.getListSanPham().get(indexSanPham);
+        sanPham = banHangService.getOneSanPham(maSanPham);
 
-        showDetail(sanPhamViewModle);
+        showDetail(sanPham);
 
-        listImei = imeiService.search(sanPhamViewModle.getId());
+        listImei = imeiService.searchImeiByMa(sanPham.getMasanpham());
         loadDataComboBox(listImei);
 
         listImeiDaBan = imeiDaBanService.search(idHDCT);
@@ -294,7 +296,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         imei.setTrangthai(1);
         String update = imeiService.update(imei);
 
-        listImei = imeiService.search(sanPhamViewModle.getId());
+        listImei = imeiService.searchImeiByMa(sanPham.getMasanpham());
         loadDataComboBox(listImei);
 
         listImeiDaBan = imeiDaBanService.search(idHDCT);
@@ -303,22 +305,9 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         int soLuong = listImeiDaBan.size();
         banHangService.updateHDCT(idHDCT, soLuong);
 
-        sanPhamViewModle.setSoluongton(sanPhamViewModle.getSoluongton() - 1);
-        banHangService.updateSanPham(sanPhamViewModle);
+        sanPham.setSoluong(sanPham.getSoluong()- 1);
+        banHangService.updateSanPham(sanPham);
 
-//        for (int i = 0; i < banHangService.getListHDCT(banHangPanel.maHoaDon).size(); i++) {
-//            HoaDonChiTietViewModel x = banHangService.getListHDCT(banHangPanel.maHoaDon).get(i);
-//            if (x.getSoluong() <= 0) {
-//                banHangService.deleteHDCT(i);
-//                return;
-//            }
-//        }
-//        for (int i = 0; i < banHangService.getListHDCT(banHangPanel.maHoaDon).size(); i++) {
-//            HoaDonChiTietViewModel x = banHangService.getListHDCT(banHangPanel.maHoaDon).get(i);
-//            if(x.getMaSanPham().equals(sanPhamViewModle.getMa())){
-//                return;
-//            }
-//        }
         banHangPanel.loadDataHoaDonChiTiet(banHangService.getListHDCT(banHangPanel.maHoaDon));
         banHangPanel.loadDataSanPham(banHangService.getListSanPham());
     }//GEN-LAST:event_btnAddActionPerformed
@@ -329,7 +318,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 //            banHangService.deleteHDCT(i);
 //        }
         for (int i = 0; i < banHangService.getListHDCT(banHangPanel.maHoaDon).size(); i++) {
-            HoaDonChiTietViewModel x = banHangService.getListHDCT(banHangPanel.maHoaDon).get(i);
+            HDCTBanHangViewModel x = banHangService.getListHDCT(banHangPanel.maHoaDon).get(i);
             if (x.getSoluong() <= 0) {
                 hDCTSerive.delete(i, maHoaDon);
                 banHangPanel.loadDataHoaDonChiTiet(banHangService.getListHDCT(banHangPanel.maHoaDon));
@@ -358,7 +347,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 
         imeiDaBanService.deleteByIdHDCT(idHDCT);
 
-        listImei = imeiService.search(sanPhamViewModle.getId());
+        listImei = imeiService.searchImeiByMa(sanPham.getMasanpham());
         loadDataComboBox(listImei);
 
         int soluongimei = 0;
@@ -367,8 +356,8 @@ public class ImeiBHDialog extends javax.swing.JDialog {
                 soluongimei += 1;
             }
         }
-        sanPhamViewModle.setSoluongton(soluongimei);
-        banHangService.updateSanPham(sanPhamViewModle);
+        sanPham.setSoluong(soluongimei);
+        banHangService.updateSanPham(sanPham);
 
         listImeiDaBan = imeiDaBanService.search(idHDCT);
         loadDataTable(listImeiDaBan);
@@ -381,8 +370,8 @@ public class ImeiBHDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnXoaTatCaActionPerformed
 
     public void removeAll(String maHoaDon) {
-        List<HoaDonChiTietViewModel> listHoaDonChiTiet = banHangService.getListHDCT(maHoaDon);
-        for (HoaDonChiTietViewModel hdct : listHoaDonChiTiet) {
+        List<HDCTBanHangViewModel> listHoaDonChiTiet = banHangService.getListHDCT(maHoaDon);
+        for (HDCTBanHangViewModel hdct : listHoaDonChiTiet) {
 
             for (ImeiDaBanViewModel imeiDaBan : imeiDaBanService.search(hdct.getId())) {
                 ImeiViewModel imei = new ImeiViewModel();
@@ -393,9 +382,9 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 
             imeiDaBanService.deleteByIdHDCT(hdct.getId());
 
-            SanPhamViewModle sanPhamVM = sanPhamService.getOne(hdct.getMaSanPham());
+            SanPhamBanHangViewModel sanPhamVM = banHangService.getOneSanPham(hdct.getMasanpham());
 
-            listImei = imeiService.search(sanPhamVM.getId());
+            listImei = imeiService.searchImeiByMa(hdct.getMasanpham());
 
             int soluongimei = 0;
             for (ImeiViewModel imei : listImei) {
@@ -403,7 +392,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
                     soluongimei += 1;
                 }
             }
-            sanPhamVM.setSoluongton(soluongimei);
+            sanPhamVM.setSoluong(soluongimei);
             banHangService.updateSanPham(sanPhamVM);
 
             hDCTSerive.delete(hdct.getId());
@@ -436,9 +425,9 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         }
     }
 
-    private void showDetail(SanPhamViewModle sp) {
-        lblSanPham.setText(sp.getTen() + " - " + sp.getSoluongton() + " - " + sp.getTenmausac());
-        lblSoLuong.setText(sp.getSoluongton() + "");
+    private void showDetail(SanPhamBanHangViewModel sp) {
+        lblSanPham.setText(sp.getTensanpham()+ " - " + sp.getSoluong()+ " - " + sp.getTenmausac());
+        lblSoLuong.setText(sp.getSoluong()+ "");
     }
 
     private void loadDataTable(List<ImeiDaBanViewModel> list) {
@@ -466,7 +455,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         imei.setTrangthai(0);
         imeiService.update(imei);
 
-        listImei = imeiService.search(sanPhamViewModle.getId());
+        listImei = imeiService.searchImeiByMa(sanPham.getMasanpham());
         loadDataComboBox(listImei);
 
         int soluongimei = 0;
@@ -475,8 +464,8 @@ public class ImeiBHDialog extends javax.swing.JDialog {
                 soluongimei += 1;
             }
         }
-        sanPhamViewModle.setSoluongton(soluongimei);
-        banHangService.updateSanPham(sanPhamViewModle);
+        sanPham.setSoluong(soluongimei);
+        banHangService.updateSanPham(sanPham);
 
         listImeiDaBan = imeiDaBanService.search(idHDCT);
         loadDataTable(listImeiDaBan);

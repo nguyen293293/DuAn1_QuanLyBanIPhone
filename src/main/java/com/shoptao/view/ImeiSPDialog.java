@@ -44,11 +44,14 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         defaultTableModel.setRowCount(0);
         int i = 0;
         for (ImeiViewModel ImeiViewModel : list) {
-            defaultTableModel.addRow(new Object[]{
-                i = i + 1,
-                ImeiViewModel.getMaimei()
+            if (ImeiViewModel.getTrangthai() == 0) {
 
-            });
+                defaultTableModel.addRow(new Object[]{
+                    i = i + 1,
+                    ImeiViewModel.getMaimei()
+
+                });
+            }
         }
         this.sp.loadCBSoLuongImei(list);
 //        this.sp.loadData(sanPhamService.getList());
@@ -269,7 +272,7 @@ public class ImeiSPDialog extends javax.swing.JDialog {
             }
 
         }
-                this.sp.setSoLuongAndUpdateSp(sizeList());
+        this.sp.setSoLuongAndUpdateSp(sizeList());
 
         List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());
         loadData(list);

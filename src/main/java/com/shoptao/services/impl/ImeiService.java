@@ -79,5 +79,15 @@ public class ImeiService implements ChungServices<ImeiViewModel> {
     public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public List<ImeiViewModel> searchImeiByMa(String maSanPham) {
+        List<ImeiViewModel> listv = new ArrayList<>();
+        for (Imei x : imeiRepository.getList()) {
+            if (x.getSanpham().getId().equals(maSanPham)) {
+                listv.add(new ImeiViewModel(x.getMaimei(), x.getTrangthai(), x.getSanpham().getTen()));
+            }
+        }
+        return listv;
+    }
 
 }

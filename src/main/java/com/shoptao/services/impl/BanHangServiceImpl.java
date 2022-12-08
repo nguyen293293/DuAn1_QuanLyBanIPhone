@@ -11,10 +11,14 @@ import com.shoptao.repositories.KhachHangRepository;
 import com.shoptao.repositories.NhanVienRepository;
 import com.shoptao.repositories.SanPhamRepository;
 import com.shoptao.services.BanHangService;
+import com.shoptao.viewmodel.HDCTBanHangViewModel;
+import com.shoptao.viewmodel.HoaDonBanHangViewModel;
 import com.shoptao.viewmodel.HoaDonChiTietViewModel;
 import com.shoptao.viewmodel.HoaDonViewModel;
+import com.shoptao.viewmodel.SanPhamBanHangViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,48 +42,45 @@ public class BanHangServiceImpl implements BanHangService {
     }
 
     @Override
-    public List<HoaDonViewModel> getListHoaDon() {
-        List<HoaDonViewModel> list = new ArrayList<>();
+    public List<HoaDonBanHangViewModel> getListHoaDon() {
+        List<HoaDonBanHangViewModel> list = new ArrayList<>();
         for (HoaDon hoaDon : hoaDonRepository.getList()) {
             if (hoaDon.getTrangthai() == 0) {
-                list.add(new HoaDonViewModel(hoaDon.getMa(), hoaDon.getNgaytao(),
-                        hoaDon.getNgaythanhtoan(), hoaDon.getTrangthai(),
-                        hoaDon.getKhachhang().getHoten(), hoaDon.getNhanvien().getHoten()));
+                list.add(new HoaDonBanHangViewModel(hoaDon.getMa(), hoaDon.getNhanvien().getHoten(),
+                        hoaDon.getNgaytao(), hoaDon.getTrangthai()));
             }
         }
         return list;
     }
 
     @Override
-    public boolean addHoaDon(HoaDonViewModel hd, String maNhanVien, String maKhachHang) {
+    public boolean addHoaDon(HoaDonBanHangViewModel hd, String maNhanVien, String maKhachHang) {
         NhanVien nhanVien = this.nhanVienRepository.getOne(maNhanVien);
         KhachHang khachHang = this.khachHangRepository.getOne(maKhachHang);
         HoaDon hoaDon = new HoaDon(null, genmahd(), hd.getNgaytao(),
-                hd.getNgaythanhtoan(), 0, khachHang, nhanVien);
+                new Date(), 0, khachHang, nhanVien);
         return this.hoaDonRepository.save(hoaDon);
     }
 
     private String genmahd() {
-        List<HoaDonViewModel> list = new ArrayList<>();
+        List<HoaDonBanHangViewModel> list = new ArrayList<>();
         for (HoaDon hoaDon : hoaDonRepository.getList()) {
-            list.add(new HoaDonViewModel(hoaDon.getMa(), hoaDon.getNgaytao(),
-                    hoaDon.getNgaythanhtoan(), hoaDon.getTrangthai(),
-                    hoaDon.getKhachhang().getHoten(),
-                    hoaDon.getNhanvien().getHoten()));
+            list.add(new HoaDonBanHangViewModel(hoaDon.getMa(), hoaDon.getNhanvien().getHoten(),
+                    hoaDon.getNgaytao(), hoaDon.getTrangthai()));
         }
         if (list.size() == 0) {
             return "HD0001";
         } else {
-            int num = Integer.valueOf(list.get(list.size() - 1).getMa().substring(2)) + 1;
+            int num = Integer.valueOf(list.get(0).getMahoadon().substring(2)) + 1;
             return "HD" + (String.format("%04d", num));
         }
     }
 
     @Override
-    public boolean updateHoaDon(HoaDonViewModel hd, String maKhachHang) {
+    public boolean updateHoaDon(HoaDonBanHangViewModel hd, String maKhachHang) {
         KhachHang khachHang = khachHangRepository.getOne(maKhachHang);
 
-        HoaDon hoaDon = hoaDonRepository.getOne(hd.getMa());
+        HoaDon hoaDon = hoaDonRepository.getOne(hd.getMahoadon());
         hoaDon.setKhachhang(khachHang);
         hoaDon.setTrangthai(hd.getTrangthai());
 
@@ -87,43 +88,61 @@ public class BanHangServiceImpl implements BanHangService {
     }
 
     @Override
-    public List<SanPhamViewModle> getListSanPham() {
-        List<SanPhamViewModle> listSPVM = new ArrayList<>();
+    public List<SanPhamBanHangViewModel> getListSanPham() {
+        List<SanPhamBanHangViewModel> listSPVM = new ArrayList<>();
 
         for (SanPham x : sanPhamRepository.getList()) {
             if (x.getTrangthai() == 1) {
-                listSPVM.add(new SanPhamViewModle(x.getId(), x.getMa(), x.getTen(),
-                        x.getDungluong(), x.getSoluongton(), x.getNambaohanh(),
-                        x.getGianhap(), x.getGiaban(), x.getMota(), x.getAnhsanpham(),
-                        x.getBarcode(), x.getTrangthai(), x.getDongsanpham().getTen(),
-                        x.getMausac().getTen()));
+                listSPVM.add(new SanPhamBanHangViewModel(x.getMa(),
+                        x.getTen(), x.getMausac().getTen(), x.getDungluong(),
+                        x.getNambaohanh(), x.getSoluongton(), x.getGiaban(), x.getBarcode()));
             }
         }
         return listSPVM;
     }
 
     @Override
-    public boolean updateSanPham(SanPhamViewModle sanPhamVM) {
-        SanPham sanPham = sanPhamRepository.getOne(sanPhamVM.getMa());
-        sanPham.setSoluongton(sanPhamVM.getSoluongton());
-        
-        return sanPhamRepository.update(sanPham).equals("Thanh cong");
+    public SanPhamBanHangViewModel getOneSanPham(String ma) {
+        SanPham sanPham = sanPhamRepository.getOne(ma);
+        return new SanPhamBanHangViewModel(sanPham.getMa(),
+                sanPham.getTen(), sanPham.getMausac().getTen(), sanPham.getDungluong(),
+                sanPham.getNambaohanh(), sanPham.getSoluongton(), sanPham.getGiaban(), sanPham.getBarcode());
     }
 
     @Override
-    public List<HoaDonChiTietViewModel> getListHDCT(String maHD) {
-        List<HoaDonChiTietViewModel> list = new ArrayList<>();
-        for (HoaDonChiTiet x : hoaDonChiTietRepository.getListbyMaHD(maHD)) {
-            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
-         list.add(hd);
+    public List<SanPhamBanHangViewModel> searchSanPham(String ma) {
+        List<SanPhamBanHangViewModel> list = new ArrayList<>();
+        for (SanPhamBanHangViewModel x : getListSanPham()) {
+            if (x.getTensanpham().substring(7).toLowerCase().startsWith(ma.toLowerCase())) {
+                list.add(x);
+            }
         }
         return list;
     }
 
     @Override
-    public boolean addHDCT(String maHD, HoaDonChiTietViewModel hdctVM) {
+    public boolean updateSanPham(SanPhamBanHangViewModel sanPhamVM) {
+        SanPham sanPham = sanPhamRepository.getOne(sanPhamVM.getMasanpham());
+        sanPham.setSoluongton(sanPhamVM.getSoluong());
+
+        return sanPhamRepository.update(sanPham).equals("Thanh cong");
+    }
+
+    @Override
+    public List<HDCTBanHangViewModel> getListHDCT(String maHD) {
+        List<HDCTBanHangViewModel> list = new ArrayList<>();
+        for (HoaDonChiTiet x : hoaDonChiTietRepository.getListbyMaHD(maHD)) {
+            HDCTBanHangViewModel hd = new HDCTBanHangViewModel(x.getId(), x.getSanpham().getMa(), x.getSanpham().getTen(),
+                    x.getDongia(), x.getSoluong());
+            list.add(hd);
+        }
+        return list;
+    }
+
+    @Override
+    public boolean addHDCT(String maHD, HDCTBanHangViewModel hdctVM) {
         HoaDon hoaDon = hoaDonRepository.getOne(maHD);
-        SanPham sanPham = sanPhamRepository.getOne(hdctVM.getMaSanPham());
+        SanPham sanPham = sanPhamRepository.getOne(hdctVM.getMasanpham());
 
         HoaDonChiTiet hdct = new HoaDonChiTiet(hdctVM.getId(), hoaDon, sanPham, hdctVM.getSoluong(), hdctVM.getDongia());
 
@@ -136,8 +155,8 @@ public class BanHangServiceImpl implements BanHangService {
         hdct.setSoluong(soLuong);
 
         return hoaDonChiTietRepository.update(hdct);
-    }   
-    
+    }
+
     @Override
     public boolean updateHDCT(String id, int soLuong) {
         HoaDonChiTiet hdct = hoaDonChiTietRepository.getOne(id);
@@ -157,10 +176,10 @@ public class BanHangServiceImpl implements BanHangService {
     }
 
     @Override
-    public String checkSPisEmpty(String maHoaDon, int indexSanPham) {
-        SanPhamViewModle sanPham = getListSanPham().get(indexSanPham);
-        for (HoaDonChiTietViewModel x : getListHDCT(maHoaDon)) {
-            if(sanPham.getMa().equals(x.getMaSanPham())){
+    public String checkSPisEmpty(String maHoaDon, String maSanPham) {
+        SanPhamBanHangViewModel sanPham = getOneSanPham(maSanPham);
+        for (HDCTBanHangViewModel x : getListHDCT(maHoaDon)) {
+            if (sanPham.getMasanpham().equals(x.getMasanpham())) {
                 return x.getId();
             }
         }
@@ -168,26 +187,13 @@ public class BanHangServiceImpl implements BanHangService {
     }
 
     @Override
-    public List<SanPhamViewModle> searchSanPham(String ma) {
-        List<SanPhamViewModle> list = new ArrayList<>();
-        for (SanPhamViewModle x : getListSanPham()) {
-            if(x.getTen().substring(7).toLowerCase().startsWith(ma.toLowerCase())){
-                list.add(x);
+    public SanPhamBanHangViewModel getSanPhambyBarcode(String barcode) {
+        for (SanPhamBanHangViewModel x : getListSanPham()) {
+            if(x.getBarcode().equals(barcode) && x.getSoluong() > 0){
+                return x;
             }
         }
-        return list;
-    }
-
-    @Override
-    public int getSanPhambyBarcode(String barcode) {
-        for (int i = 0; i < getListSanPham().size(); i++) {
-            Object sp = getListSanPham().get(i);
-            if(getListSanPham().get(i).getBarcode().equalsIgnoreCase(barcode)){
-                return i;
-            }
-            
-        }
-        return -1;
+        return null;
     }
 
 }

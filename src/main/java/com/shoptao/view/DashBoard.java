@@ -1,4 +1,4 @@
-package com.shoptao.view;
+ package com.shoptao.view;
 
 import com.github.sarxos.webcam.Webcam;
 import com.shoptao.utilities.DialogHelper;
@@ -254,11 +254,11 @@ public class DashBoard extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTopLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(5, 5, 5)
                         .addGroup(pnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(lblTitle))))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         getContentPane().add(pnlTop, java.awt.BorderLayout.PAGE_START);

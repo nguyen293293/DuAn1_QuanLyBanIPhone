@@ -1,8 +1,8 @@
 package com.shoptao.services;
 
-import com.shoptao.viewmodel.HoaDonChiTietViewModel;
-import com.shoptao.viewmodel.HoaDonViewModel;
-import com.shoptao.viewmodel.SanPhamViewModle;
+import com.shoptao.viewmodel.HDCTBanHangViewModel;
+import com.shoptao.viewmodel.HoaDonBanHangViewModel;
+import com.shoptao.viewmodel.SanPhamBanHangViewModel;
 import java.util.List;
 
 /**
@@ -11,23 +11,25 @@ import java.util.List;
  */
 public interface BanHangService {
 
-    List<HoaDonViewModel> getListHoaDon();
+    List<HoaDonBanHangViewModel> getListHoaDon();
 
-    boolean addHoaDon(HoaDonViewModel hoaDon, String maNhanVien, String maKhachHang);
+    boolean addHoaDon(HoaDonBanHangViewModel hoaDon, String maNhanVien, String maKhachHang);
 
-    boolean updateHoaDon(HoaDonViewModel hoaDon, String maKhachHang);
+    boolean updateHoaDon(HoaDonBanHangViewModel hoaDon, String maKhachHang);
 
-    List<SanPhamViewModle> getListSanPham();
-
-    List<SanPhamViewModle> searchSanPham(String ma);
+    List<SanPhamBanHangViewModel> getListSanPham();
     
-    int getSanPhambyBarcode(String barcode);
+    SanPhamBanHangViewModel getOneSanPham(String ma);
 
-    boolean updateSanPham(SanPhamViewModle sanPham);
+    List<SanPhamBanHangViewModel> searchSanPham(String ma);
 
-    List<HoaDonChiTietViewModel> getListHDCT(String maHD);
+    SanPhamBanHangViewModel getSanPhambyBarcode(String barcode);
 
-    boolean addHDCT(String maHD, HoaDonChiTietViewModel hdct);
+    boolean updateSanPham(SanPhamBanHangViewModel sanPham);
+
+    List<HDCTBanHangViewModel> getListHDCT(String maHD);
+
+    boolean addHDCT(String maHD, HDCTBanHangViewModel hdct);
 
     boolean updateHDCT(int index, int soLuong);
 
@@ -37,5 +39,5 @@ public interface BanHangService {
 
     boolean deleteAllHDCT(String maHD);
 
-    String checkSPisEmpty(String maHoaDon, int indexSanPham);
+    String checkSPisEmpty(String maHoaDon, String maSanPham);
 }
