@@ -83,7 +83,7 @@ public class ImeiService implements ChungServices<ImeiViewModel> {
     public List<ImeiViewModel> searchImeiByMa(String maSanPham) {
         List<ImeiViewModel> listv = new ArrayList<>();
         for (Imei x : imeiRepository.getList()) {
-            if (x.getSanpham().getId().equals(maSanPham)) {
+            if (x.getSanpham().getMa().equals(maSanPham)) {
                 listv.add(new ImeiViewModel(x.getMaimei(), x.getTrangthai(), x.getSanpham().getTen()));
             }
         }

@@ -83,9 +83,17 @@ public class KhachHangViewModel {
         this.trangthai = trangthai;
     }
     
+    public String getTenTrangThai() {
+        if (trangthai == 0) {
+            return "Đang hoạt động";
+        }else{
+            return "Ngừng hoạt động";
+        }
+    }
+    
     public Object[] toDataRow(){
         return new Object[]{
-            ma, hoten, ngaysinh, sdt, diachi, trangthai
+            ma, hoten, ngaysinh, sdt, diachi, getTenTrangThai()
         };
     }
 }

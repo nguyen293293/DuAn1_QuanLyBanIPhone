@@ -4,6 +4,7 @@ import com.shoptao.services.impl.DongSanPhamService;
 import com.shoptao.utilities.DialogHelper;
 import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.DongSanPhamViewModle;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +28,7 @@ public class DongSPDialog extends javax.swing.JDialog {
         
         setTitle("Dòng sản phẩm");
         setLocationRelativeTo(null);
-
+        txtSeacrch.setOpaque(false);
         list = dongSanPhamService.getList();
         loadData(list);
     }
@@ -336,7 +337,14 @@ public class DongSPDialog extends javax.swing.JDialog {
 
     private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
         // TODO add your handling code here:
-
+    String tenDsp = txtSeacrch.getText();
+        List<DongSanPhamViewModle> list = new ArrayList<>();
+        if (tenDsp.isEmpty()) {
+            list = dongSanPhamService.getList();
+        } else {
+            list = dongSanPhamService.search(tenDsp);
+        }
+        loadData(list);
     }//GEN-LAST:event_txtSeacrchCaretUpdate
 
     private void txtSeacrchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchMouseClicked

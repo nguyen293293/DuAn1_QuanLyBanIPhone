@@ -54,7 +54,7 @@ public class HDCTBanHangViewModel {
     
     public Object[] toDataRow(JTable tbl){
         return new Object[]{tbl.getRowCount() + 1,
-            masanpham, tensanpham, dongia, soluong, thanhtien
+            masanpham, tensanpham, dongia, soluong, getThanhtien()
         };
     }
 }

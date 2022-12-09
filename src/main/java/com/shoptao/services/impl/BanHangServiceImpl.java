@@ -177,9 +177,9 @@ public class BanHangServiceImpl implements BanHangService {
 
     @Override
     public String checkSPisEmpty(String maHoaDon, String maSanPham) {
-        SanPhamBanHangViewModel sanPham = getOneSanPham(maSanPham);
+//        SanPhamBanHangViewModel sanPham = getOneSanPham(maSanPham);
         for (HDCTBanHangViewModel x : getListHDCT(maHoaDon)) {
-            if (sanPham.getMasanpham().equals(x.getMasanpham())) {
+            if (maSanPham.equals(x.getMasanpham())) {
                 return x.getId();
             }
         }

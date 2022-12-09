@@ -8,7 +8,7 @@ import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.NhanVienViewModel;
 import java.awt.CardLayout;
 import javax.swing.ImageIcon;
-import javax.swing.UIManager;
+import com.shoptao.services.ChungServices;
 
 /**
  *
@@ -16,10 +16,9 @@ import javax.swing.UIManager;
  */
 public class LoginForm extends javax.swing.JFrame {
 
-    NhanVienService nhanVienService;
+    private ChungServices<NhanVienViewModel> nhanVienService;
     private int maXacNhan;
     CardLayout card;
-
     public LoginForm() {
         initComponents();
         setLocationRelativeTo(null);
@@ -428,7 +427,7 @@ public class LoginForm extends javax.swing.JFrame {
                 new String(txtPfPass.getPassword()))) {
             return;
         }
-
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -440,7 +439,7 @@ public class LoginForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         new DashBoard().setVisible(true);
-
+        
         this.dispose();
     }//GEN-LAST:event_btnSignUpActionPerformed
 

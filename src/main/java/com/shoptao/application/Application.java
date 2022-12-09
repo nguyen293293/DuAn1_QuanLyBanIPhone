@@ -1,5 +1,6 @@
 package com.shoptao.application;
 
+import com.shoptao.view.DashBoard;
 import com.shoptao.view.LoginForm;
 
 

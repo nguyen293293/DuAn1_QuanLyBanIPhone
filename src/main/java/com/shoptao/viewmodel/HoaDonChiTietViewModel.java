@@ -19,8 +19,8 @@ import lombok.Setter;
 public class HoaDonChiTietViewModel {
 
     private String id;
-    
- private String maHoaDon;
+
+    private String maHoaDon;
 
     private String maSanPham;
 
@@ -29,12 +29,10 @@ public class HoaDonChiTietViewModel {
     private Date ngaytao;
 
     private int soluong;
-    
-      private BigDecimal gianhap;
+
+    private BigDecimal gianhap;
 
     private BigDecimal dongia;
-    
-  
 
     private BigDecimal tongTien;
 
@@ -43,9 +41,10 @@ public class HoaDonChiTietViewModel {
     }
 
     private int trangThai;
-
+    
     public Object[] toDataRow(JTable table) {
         return new Object[]{table.getRowCount() + 1, maSanPham, tenSanPham,
             soluong, dongia, tongTien};
     }
+
 }

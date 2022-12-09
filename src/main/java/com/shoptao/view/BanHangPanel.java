@@ -44,7 +44,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  * @author nguyen293
  */
 public class BanHangPanel extends javax.swing.JPanel{
-    //banhang
+    
     private int indexHoaDon = -1;
     private int indexHoaDonChiTiet = -1;
     private int indexSanPham = -1;
@@ -60,12 +60,15 @@ public class BanHangPanel extends javax.swing.JPanel{
     private List<SanPhamBanHangViewModel> listSanPham = new ArrayList<>();
     public List<HDCTBanHangViewModel> listHDCT = new ArrayList<>();
 
+    private DefaultTableModel tableModelHoaDon;
+    private DefaultTableModel tableModelSanPham;
+    private DefaultTableModel tableModelCTHD;
+    
     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 
     public BanHangPanel() {
         initComponents();
         init();
-//        initWebcam();
 
         this.banHangService = new BanHangServiceImpl();
         this.imeiDaBanService = new ImeiDaBanService();
@@ -650,7 +653,8 @@ public class BanHangPanel extends javax.swing.JPanel{
 
         btnHuy.setEnabled(true);
 
-        listHDCT = banHangService.getListHDCT(tbHoaDonCho.getValueAt(indexHoaDon, 1) + "");
+        listHDCT = banHangService.getListHDCT(maHoaDon);
+        System.out.println(listHDCT.size());
         loadDataHoaDonChiTiet(listHDCT);
     }//GEN-LAST:event_tbHoaDonChoMouseClicked
 
@@ -686,7 +690,7 @@ public class BanHangPanel extends javax.swing.JPanel{
         }
         listHDCT = banHangService.getListHDCT(maHoaDon);
 
-        ImeiBHDialog imeiBHDialog = new ImeiBHDialog(null, true, this, maSanPham, idHDCT);
+        ImeiBanHangDialog imeiBHDialog = new ImeiBanHangDialog(null, true, this, maSanPham, idHDCT);
         imeiBHDialog.setVisible(true);
     }
 
@@ -706,7 +710,8 @@ public class BanHangPanel extends javax.swing.JPanel{
             loadDataHoaDon(listHoaDon);
             clearForm();
 
-            tbChiTietHoaDon.removeAll();
+            tableModelCTHD.setRowCount(0);
+            setTTImei();
             
             JasperReports.exportToPdf(maHoaDon);
             maHoaDon = null;
@@ -714,6 +719,14 @@ public class BanHangPanel extends javax.swing.JPanel{
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
+    private void setTTImei(){
+        for (HDCTBanHangViewModel hDCT : listHDCT) {
+            ImeiBanHangDialog imeiBHDialog = new ImeiBanHangDialog(null,
+                    true, this, hDCT.getMasanpham(), hDCT.getId());
+            imeiBHDialog.setTrangThaiImei();
+        }
+    }
+    
     private BigDecimal tinhTongTien(List<HDCTBanHangViewModel> listHDCT) {
         BigDecimal tongTien = BigDecimal.valueOf(0);
         listHDCT = banHangService.getListHDCT(maHoaDon);
@@ -925,7 +938,7 @@ public class BanHangPanel extends javax.swing.JPanel{
     // End of variables declaration//GEN-END:variables
 
     private void loadDataHoaDon(List<HoaDonBanHangViewModel> listHoaDon) {
-        DefaultTableModel tableModelHoaDon = (DefaultTableModel) tbHoaDonCho.getModel();
+        tableModelHoaDon = (DefaultTableModel) tbHoaDonCho.getModel();
         tableModelHoaDon.setRowCount(0);
         for (HoaDonBanHangViewModel x : listHoaDon) {
             tableModelHoaDon.addRow(x.toDataRow(tbHoaDonCho));
@@ -934,7 +947,7 @@ public class BanHangPanel extends javax.swing.JPanel{
     }
 
     public void loadDataSanPham(List<SanPhamBanHangViewModel> listSanPham) {
-        DefaultTableModel tableModelSanPham = (DefaultTableModel) tbSanPham.getModel();
+        tableModelSanPham = (DefaultTableModel) tbSanPham.getModel();
         tableModelSanPham.setRowCount(0);
         for (SanPhamBanHangViewModel x : listSanPham) {
             if (x.getSoluong() > 0) {
@@ -943,12 +956,14 @@ public class BanHangPanel extends javax.swing.JPanel{
 
         }
     }
-
+    
     public void loadDataHoaDonChiTiet(List<HDCTBanHangViewModel> listHDCT) {
-        DefaultTableModel tableModelSanPham = (DefaultTableModel) tbChiTietHoaDon.getModel();
-        tableModelSanPham.setRowCount(0);
+        tableModelCTHD = (DefaultTableModel) tbChiTietHoaDon.getModel();
+        tableModelCTHD.setRowCount(0);
         for (HDCTBanHangViewModel x : listHDCT) {
-            tableModelSanPham.addRow(x.toDataRow(tbChiTietHoaDon));
+            if(x.getSoluong() > 0){
+                tableModelCTHD.addRow(x.toDataRow(tbChiTietHoaDon));
+            }
         }
         if (!listHDCT.isEmpty()) {
             setTientoForm(listHDCT);

@@ -15,23 +15,9 @@ import com.shoptao.viewmodel.ImeiDaBanViewModel;
 import com.shoptao.viewmodel.ImeiViewModel;
 import com.shoptao.viewmodel.SanPhamBanHangViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.AbstractCellEditor;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.event.CellEditorListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -111,11 +97,8 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         cboImei = new javax.swing.JComboBox<>();
         btnAdd = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbImeiDaBan = new javax.swing.JTable();
-        btnXoa = new javax.swing.JButton();
-        btnXoaTatCa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -149,6 +132,24 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel5.setText("Imei");
 
+        tbImeiDaBan.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        tbImeiDaBan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "STT", "Mã imei"
+            }
+        ));
+        tbImeiDaBan.setRowHeight(22);
+        jScrollPane1.setViewportView(tbImeiDaBan);
+        if (tbImeiDaBan.getColumnModel().getColumnCount() > 0) {
+            tbImeiDaBan.getColumnModel().getColumn(0).setMaxWidth(65);
+        }
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -156,8 +157,9 @@ public class ImeiBHDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cboImei, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboImei, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdd))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -171,7 +173,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
                                 .addGap(44, 44, 44)
                                 .addComponent(lblSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5))
-                        .addGap(0, 9, Short.MAX_VALUE)))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -191,91 +193,26 @@ public class ImeiBHDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboImei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
-
-        tbImeiDaBan.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        tbImeiDaBan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "STT", "Mã imei"
-            }
-        ));
-        tbImeiDaBan.setRowHeight(22);
-        jScrollPane1.setViewportView(tbImeiDaBan);
-        if (tbImeiDaBan.getColumnModel().getColumnCount() > 0) {
-            tbImeiDaBan.getColumnModel().getColumn(0).setMaxWidth(65);
-        }
-
-        btnXoa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btnXoaTatCa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnXoaTatCa.setText("Xóa tất cả");
-        btnXoaTatCa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaTatCaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnXoaTatCa)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnXoa)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                 .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoa)
-                    .addComponent(btnXoaTatCa))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -328,47 +265,6 @@ public class ImeiBHDialog extends javax.swing.JDialog {
         banHangPanel.loadDataSanPham(banHangService.getListSanPham());
     }//GEN-LAST:event_formWindowClosing
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        removeImeiDaban(tbImeiDaBan.getSelectedRow());
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void btnXoaTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaTatCaActionPerformed
-
-        if (listImeiDaBan.isEmpty()) {
-            return;
-        }
-
-        for (ImeiDaBanViewModel x : listImeiDaBan) {
-            ImeiViewModel imei = new ImeiViewModel();
-            imei.setMaimei(x.getMaimei());
-            imei.setTrangthai(0);
-            imeiService.update(imei);
-        }
-
-        imeiDaBanService.deleteByIdHDCT(idHDCT);
-
-        listImei = imeiService.searchImeiByMa(sanPham.getMasanpham());
-        loadDataComboBox(listImei);
-
-        int soluongimei = 0;
-        for (ImeiViewModel imei : listImei) {
-            if (imei.getTrangthai() == 0) {
-                soluongimei += 1;
-            }
-        }
-        sanPham.setSoluong(soluongimei);
-        banHangService.updateSanPham(sanPham);
-
-        listImeiDaBan = imeiDaBanService.search(idHDCT);
-        loadDataTable(listImeiDaBan);
-
-        int soLuong = listImeiDaBan.size();
-        banHangService.updateHDCT(idHDCT, soLuong);
-
-        banHangPanel.loadDataHoaDonChiTiet(banHangService.getListHDCT(banHangPanel.maHoaDon));
-        banHangPanel.loadDataSanPham(banHangService.getListSanPham());
-    }//GEN-LAST:event_btnXoaTatCaActionPerformed
-
     public void removeAll(String maHoaDon) {
         List<HDCTBanHangViewModel> listHoaDonChiTiet = banHangService.getListHDCT(maHoaDon);
         for (HDCTBanHangViewModel hdct : listHoaDonChiTiet) {
@@ -401,14 +297,11 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnXoa;
-    private javax.swing.JButton btnXoaTatCa;
     private javax.swing.JComboBox<String> cboImei;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSanPham;
     private javax.swing.JLabel lblSoLuong;
@@ -417,7 +310,6 @@ public class ImeiBHDialog extends javax.swing.JDialog {
 
     private void loadDataComboBox(List<ImeiViewModel> list) {
         cboImei.removeAllItems();
-
         for (ImeiViewModel x : list) {
             if (x.getTrangthai() == 0) {
                 cboImei.addItem(x.getMaimei());
@@ -426,7 +318,7 @@ public class ImeiBHDialog extends javax.swing.JDialog {
     }
 
     private void showDetail(SanPhamBanHangViewModel sp) {
-        lblSanPham.setText(sp.getTensanpham()+ " - " + sp.getSoluong()+ " - " + sp.getTenmausac());
+        lblSanPham.setText(sp.getTensanpham()+ " - " + sp.getTenmausac()+ " - " + sp.getDungluong());
         lblSoLuong.setText(sp.getSoluong()+ "");
     }
 
@@ -484,63 +376,3 @@ public class ImeiBHDialog extends javax.swing.JDialog {
     }
 
 }
-
-/*
-class ButtonColumn extends AbstractCellEditor
-        implements TableCellRenderer, TableCellEditor, ActionListener {
-
-    JTable table;
-    JButton renderButton;
-    JButton editButton;
-    String text;
-
-    public ButtonColumn(JTable table, int column) {
-        super();
-        this.table = table;
-        renderButton = new JButton();
-
-        editButton = new JButton("Xóa");
-        editButton.setFocusPainted(false);
-        editButton.addActionListener(this);
-
-        TableColumnModel columnModel = table.getColumnModel();
-        columnModel.getColumn(column).setCellRenderer(this);
-        columnModel.getColumn(column).setCellEditor(this);
-    }
-
-    public Component getTableCellRendererComponent(
-            JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        if (hasFocus) {
-            renderButton.setForeground(table.getForeground());
-            renderButton.setBackground(UIManager.getColor("Button.background"));
-        } else if (isSelected) {
-            renderButton.setForeground(table.getSelectionForeground());
-            renderButton.setBackground(table.getSelectionBackground());
-        } else {
-            renderButton.setForeground(table.getForeground());
-            renderButton.setBackground(UIManager.getColor("Button.background"));
-        }
-
-        renderButton.setText((value == null) ? "" : value.toString());
-        return renderButton;
-    }
-
-    public Component getTableCellEditorComponent(
-            JTable table, Object value, boolean isSelected, int row, int column) {
-        text = (value == null) ? "" : value.toString();
-        editButton.setText("Xóa");
-        return editButton;
-    }
-
-    public Object getCellEditorValue() {
-        return text;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        fireEditingStopped();
-        System.out.println(e.getActionCommand() + " : " + table.getSelectedRow());
-        ImeiBHDialog imeiBHDialog = new ImeiBHDialog();
-        imeiBHDialog.removeImeiDaban(table.getSelectedRow());
-    }
-}
- */
