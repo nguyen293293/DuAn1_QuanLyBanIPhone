@@ -25,7 +25,7 @@ public class JasperReports {
     public static void exportToPdf(String maHoaDon) {
         Connection con = null;
         try {
-            String source = "src\\main\\java\\com\\shoptao\\view\\HoaDonReport.jrxml";
+            String source = "src\\main\\java\\com\\shoptao\\view\\HoaDonReport_1.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(source);
             
             Map<String, Object> params = new HashMap<String, Object>();

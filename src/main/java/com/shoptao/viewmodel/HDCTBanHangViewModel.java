@@ -23,6 +23,8 @@ public class HDCTBanHangViewModel {
     
     private BigDecimal giamgia;
     
+    private int hinhthuc;
+    
     private int soluong;
     
     private BigDecimal thanhtien;
@@ -52,9 +54,17 @@ public class HDCTBanHangViewModel {
         this.giamgia = giamgia;
     }
     
+    public String getGiaTriGiam(){
+        if(hinhthuc == 0){
+            return giamgia + " VND";
+        }else{
+            return giamgia + " %";
+        }
+    }
+    
     public Object[] toDataRow(JTable tbl){
         return new Object[]{tbl.getRowCount() + 1,
-            masanpham, tensanpham, dongia, soluong, getThanhtien()
+            masanpham, tensanpham, dongia, getGiaTriGiam(), soluong, getThanhtien()
         };
     }
 }

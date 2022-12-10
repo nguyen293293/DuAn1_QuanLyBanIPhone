@@ -136,7 +136,6 @@ public class BanHangPanel extends javax.swing.JPanel{
         lblLoiTien = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        pnlWebcam = new javax.swing.JPanel();
 
         mnuThemOrXoa.setText("Thêm hoặc xóa");
         mnuThemOrXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +192,7 @@ public class BanHangPanel extends javax.swing.JPanel{
             pnlHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHoaDonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         pnlHoaDonLayout.setVerticalGroup(
@@ -212,11 +211,11 @@ public class BanHangPanel extends javax.swing.JPanel{
 
             },
             new String [] {
-                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Thành tiền"
+                "STT", "Mã sản phẩm", "Tên sản phẩm", "Đơn giá", "Giảm giá/sp", "Số lượng", "Thành tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -253,7 +252,7 @@ public class BanHangPanel extends javax.swing.JPanel{
             .addGroup(pnlChiTietHoaDonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlChiTietHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE)
                     .addGroup(pnlChiTietHoaDonLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txtBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -298,6 +297,8 @@ public class BanHangPanel extends javax.swing.JPanel{
             tbSanPham.getColumnModel().getColumn(0).setMaxWidth(55);
             tbSanPham.getColumnModel().getColumn(1).setMinWidth(130);
             tbSanPham.getColumnModel().getColumn(1).setMaxWidth(130);
+            tbSanPham.getColumnModel().getColumn(4).setMinWidth(100);
+            tbSanPham.getColumnModel().getColumn(4).setMaxWidth(100);
             tbSanPham.getColumnModel().getColumn(5).setMinWidth(65);
             tbSanPham.getColumnModel().getColumn(5).setMaxWidth(150);
             tbSanPham.getColumnModel().getColumn(6).setMinWidth(65);
@@ -525,7 +526,7 @@ public class BanHangPanel extends javax.swing.JPanel{
                 .addComponent(jLabel8)
                 .addGap(25, 25, 25)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 20, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(pnlThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnlThanhToanLayout.createSequentialGroup()
@@ -533,7 +534,7 @@ public class BanHangPanel extends javax.swing.JPanel{
                             .addComponent(btnTaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lblMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -570,18 +571,7 @@ public class BanHangPanel extends javax.swing.JPanel{
                 .addGroup(pnlThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHuy)
                     .addComponent(btnResfresh))
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pnlWebcamLayout = new javax.swing.GroupLayout(pnlWebcam);
-        pnlWebcam.setLayout(pnlWebcamLayout);
-        pnlWebcamLayout.setHorizontalGroup(
-            pnlWebcamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 314, Short.MAX_VALUE)
-        );
-        pnlWebcamLayout.setVerticalGroup(
-            pnlWebcamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -592,11 +582,8 @@ public class BanHangPanel extends javax.swing.JPanel{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnlChiTietHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlWebcam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlHoaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -608,10 +595,8 @@ public class BanHangPanel extends javax.swing.JPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnlThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnlHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlWebcam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(pnlChiTietHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -702,6 +687,8 @@ public class BanHangPanel extends javax.swing.JPanel{
         HoaDonBanHangViewModel hoaDon = new HoaDonBanHangViewModel();
         hoaDon.setMahoadon(lblMaHoaDon.getText());
         hoaDon.setTrangthai(1);
+        hoaDon.setTongtien(tinhTongTien(listHDCT));
+        hoaDon.setTienkhachdua(BigDecimal.valueOf(Double.valueOf(txtTienKhachDua.getText())));
 
         if (banHangService.updateHoaDon(hoaDon, khachHang.getMa())) {
             DialogHelper.alert(null, "Thanh toán thành công", "Thông báo");
@@ -927,7 +914,6 @@ public class BanHangPanel extends javax.swing.JPanel{
     private javax.swing.JPanel pnlHoaDon;
     private javax.swing.JPanel pnlSanPham;
     private javax.swing.JPanel pnlThanhToan;
-    private javax.swing.JPanel pnlWebcam;
     private javax.swing.JPopupMenu popupMnuHDCT;
     private javax.swing.JTable tbChiTietHoaDon;
     private javax.swing.JTable tbHoaDonCho;

@@ -34,6 +34,8 @@ public interface BanHangService {
     boolean updateHDCT(int index, int soLuong);
 
     boolean updateHDCT(String id, int soLuong);
+    
+    HDCTBanHangViewModel getOne(String id);
 
     boolean deleteHDCT(int index);
 

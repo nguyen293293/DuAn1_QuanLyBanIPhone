@@ -25,6 +25,17 @@ public class HoaDonBanHangViewModel {
     
     private int trangthai;
     
+    private BigDecimal tongtien;
+    
+    private BigDecimal tienkhachdua;
+
+    public HoaDonBanHangViewModel(String mahoadon, String tennhanvien, Date ngaytao, int trangthai) {
+        this.mahoadon = mahoadon;
+        this.tennhanvien = tennhanvien;
+        this.ngaytao = ngaytao;
+        this.trangthai = trangthai;
+    }
+    
     public Object[] toDataRow(JTable tbl){
         return new Object[]{tbl.getRowCount() + 1,
             mahoadon, tennhanvien, new SimpleDateFormat("dd-MM-yyyy hh:mm").format(ngaytao)

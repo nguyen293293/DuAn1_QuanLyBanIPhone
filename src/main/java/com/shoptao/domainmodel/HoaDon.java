@@ -1,6 +1,7 @@
 package com.shoptao.domainmodel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +40,10 @@ public class HoaDon implements Serializable {
     private Date ngaythanhtoan;
 
     private int trangthai;
+    
+    private BigDecimal tongtien;
+    
+    private BigDecimal tienkhachdua;
 
     @ManyToOne
     @JoinColumn(name = "idkhachhang")

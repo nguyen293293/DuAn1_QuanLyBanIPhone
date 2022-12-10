@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import com.shoptao.services.ChungServices;
+import com.shoptao.viewmodel.KhuyenMaiBanHangViewModel;
+import java.math.BigDecimal;
 
 /**
  *
@@ -50,8 +52,14 @@ public class SanPhamKhuyenMaiService implements ChungServices<SanPhamKhuyenMaiVi
     }
 
     @Override
-    public List<SanPhamKhuyenMaiViewModle> search(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<SanPhamKhuyenMaiViewModle> search(String maSanPham) {
+        List<SanPhamKhuyenMaiViewModle> list = new ArrayList<>();
+        for (SanPhamKhuyenMai x : sanPhamKhuyenMaiRepository.getList()) {
+            if (x.getSanpham().getMa().equals(maSanPham)) {
+                list.add(new SanPhamKhuyenMaiViewModle(x.getId(), x.getSanpham().getTen(), x.getKhuyenmai().getTen(), x.getDongia(), x.getSotienconlai(), x.getTrangthai()));
+            }
+        }
+        return list;
     }
 
     @Override
@@ -77,6 +85,17 @@ public class SanPhamKhuyenMaiService implements ChungServices<SanPhamKhuyenMaiVi
         } else {
             return "Xóa thất bại";
         }
+    }
+    
+    public List<KhuyenMaiBanHangViewModel> getListKMBH(String maSanPham){
+        List<KhuyenMaiBanHangViewModel> list = new ArrayList<>();
+        for (SanPhamKhuyenMai x : sanPhamKhuyenMaiRepository.getList()) {
+            list.add(new KhuyenMaiBanHangViewModel(x.getSanpham().getMa(),
+                    x.getSanpham().getTen(), x.getKhuyenmai().getTen(),
+                    x.getSanpham().getGiaban(), BigDecimal.valueOf(x.getKhuyenmai().getGiatri()),
+                    x.getKhuyenmai().getHinhthucgiamgia()));
+        }
+        return list;
     }
 
 }

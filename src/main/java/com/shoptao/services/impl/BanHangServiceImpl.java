@@ -58,7 +58,7 @@ public class BanHangServiceImpl implements BanHangService {
         NhanVien nhanVien = this.nhanVienRepository.getOne(maNhanVien);
         KhachHang khachHang = this.khachHangRepository.getOne(maKhachHang);
         HoaDon hoaDon = new HoaDon(null, genmahd(), hd.getNgaytao(),
-                new Date(), 0, khachHang, nhanVien);
+                new Date(), 0, hd.getTongtien(), hd.getTienkhachdua(), khachHang, nhanVien);
         return this.hoaDonRepository.save(hoaDon);
     }
 
@@ -83,6 +83,8 @@ public class BanHangServiceImpl implements BanHangService {
         HoaDon hoaDon = hoaDonRepository.getOne(hd.getMahoadon());
         hoaDon.setKhachhang(khachHang);
         hoaDon.setTrangthai(hd.getTrangthai());
+        hoaDon.setTongtien(hd.getTongtien());
+        hoaDon.setTienkhachdua(hd.getTienkhachdua());
 
         return hoaDonRepository.update(hoaDon);
     }
@@ -164,7 +166,7 @@ public class BanHangServiceImpl implements BanHangService {
 
         return hoaDonChiTietRepository.update(hdct);
     }
-
+    
     @Override
     public boolean deleteHDCT(int index) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -194,6 +196,13 @@ public class BanHangServiceImpl implements BanHangService {
             }
         }
         return null;
+    }
+
+    @Override
+    public HDCTBanHangViewModel getOne(String id) {
+        HoaDonChiTiet hdct = hoaDonChiTietRepository.getOne(id);
+        return new HDCTBanHangViewModel(hdct.getId(), hdct.getSanpham().getMa(), hdct.getSanpham().getTen(),
+                    hdct.getDongia(), hdct.getSoluong());
     }
 
 }
