@@ -34,7 +34,7 @@ public class SanPhamKhuyenMaiService implements ChungServices<SanPhamKhuyenMaiVi
         List<SanPhamKhuyenMaiViewModle> list = new ArrayList<>();
 
         for (SanPhamKhuyenMai x : sanPhamKhuyenMaiRepository.getList()) {
-            list.add(new SanPhamKhuyenMaiViewModle(x.getId(), x.getSanpham().getTen(), x.getKhuyenmai().getTen(), x.getDongia(), x.getSotienconlai(), x.getTrangthai()));
+            list.add(new SanPhamKhuyenMaiViewModle(x.getId(),x.getSanpham().getMa(), x.getSanpham().getTen(),x.getKhuyenmai().getMa(), x.getKhuyenmai().getTen(),x.getKhuyenmai().getTrangthai(), x.getDongia(), x.getSotienconlai(), x.getTrangthai()));
         }
         return list;
     }
@@ -43,10 +43,25 @@ public class SanPhamKhuyenMaiService implements ChungServices<SanPhamKhuyenMaiVi
     public String update(SanPhamKhuyenMaiViewModle t, Object... obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+     public String updatevs2(SanPhamKhuyenMaiViewModle t) {
+       
+               SanPhamKhuyenMai sanPhamKhuyenMai = sanPhamKhuyenMaiRepository.getOne(t.getId());
+        sanPhamKhuyenMai.setSotienconlai(t.getSotienconlai());
+        
+        boolean isUpdate = sanPhamKhuyenMaiRepository.update(sanPhamKhuyenMai);
+        if (isUpdate) {
+            return "Cap nhat thành công";
+        } else {
+            return "Cap nhat thất bại";
+        }
+    }
 
     @Override
-    public SanPhamKhuyenMaiViewModle getOne(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public SanPhamKhuyenMaiViewModle getOne(String id) {
+       SanPhamKhuyenMai x = sanPhamKhuyenMaiRepository.getOne(id);
+        SanPhamKhuyenMaiViewModle sanPhamKhuyenMaiViewModle = new SanPhamKhuyenMaiViewModle(x.getId(),x.getSanpham().getMa(), x.getSanpham().getTen(),x.getKhuyenmai().getMa(), x.getKhuyenmai().getTen(),x.getKhuyenmai().getTrangthai(), x.getDongia(), x.getSotienconlai(), x.getTrangthai());
+        return sanPhamKhuyenMaiViewModle;
     }
 
     @Override

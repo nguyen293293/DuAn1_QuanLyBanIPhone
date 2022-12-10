@@ -4,6 +4,7 @@
  */
 package com.shoptao.view;
 
+import com.shoptao.domainmodel.SanPham;
 import com.shoptao.services.impl.KhuyenMaiService;
 import com.shoptao.services.impl.SanPhamKhuyenMaiService;
 import com.shoptao.services.impl.SanPhamService;
@@ -32,6 +33,8 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
     private DefaultTableModel defaultTableModel = new DefaultTableModel();
     private DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel();
 
+    SanPhamPanel sppl = new SanPhamPanel();
+
     List<SanPhamViewModle> listSP = new ArrayList<>();
     List<SanPhamKhuyenMaiViewModle> listSPMKM = new ArrayList<>();
     List<KhuyenMaiViewModle> listKM = new ArrayList<>();
@@ -48,7 +51,7 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
 
         loadDataSP(listSP);
         loadDataSPKM(listSPMKM);
-        loadDataKM(listKM);
+        loadDataKM(listKmApDung(listKM));
     }
 
     public void loadDataSP(List<SanPhamViewModle> listSPVM) {
@@ -75,7 +78,7 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
                 khuyenMaiViewModle.getMa(),
                 khuyenMaiViewModle.getTen(),
                 khuyenMaiViewModle.getHinhthucgiamgia() == 0 ? "Giảm giá theo số tiền" : "Giảm giá theo %",
-                khuyenMaiViewModle.getHinhthucgiamgia() == 0 ? khuyenMaiViewModle.getGiatri() : ((-100 * khuyenMaiViewModle.getGiatri()) + 100) + "%" ,
+                khuyenMaiViewModle.getHinhthucgiamgia() == 0 ? khuyenMaiViewModle.getGiatri() : ((-100 * khuyenMaiViewModle.getGiatri()) + 100) + "%",
                 simpleDateFormat.format(khuyenMaiViewModle.getNgaybatdau()),
                 simpleDateFormat.format(khuyenMaiViewModle.getNgayketthuc()),
                 khuyenMaiViewModle.getTrangthai() == 2 ? "Đã hết hạn" : khuyenMaiViewModle.getTrangthai() == 1 ? "Đang được áp dụng" : "Chưa được áp dụng"
@@ -108,6 +111,17 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
             }
         }
         return listSelect;
+    }
+
+    public List<KhuyenMaiViewModle> listKmApDung(List<KhuyenMaiViewModle> listInput) {
+        List<KhuyenMaiViewModle> listOutput = new ArrayList<>();
+        for (KhuyenMaiViewModle x : listInput) {
+            if (x.getTrangthai() == 1) {
+                listOutput.add(x);
+            }
+        }
+        return listOutput;
+
     }
 
     public String getId() {
@@ -301,7 +315,7 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
                         .addGap(300, 300, 300)
                         .addComponent(jLabel8))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(9, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_serachKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_searchSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -402,17 +416,17 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+//validate
         if (tb_khuyenMai.getSelectedRow() < 0) {
             DialogHelper.alert(null, "Chọn khuyến mại muốn thêm", "Thông báo");
             return;
         }
-        
+
         if (tb_sanPham.getSelectedRow() < 0) {
-            DialogHelper.alert(null, "Chọn sản phẩm muốnt thêm khuyến mại", "Thông báo");
+            DialogHelper.alert(null, "Chọn sản phẩm muốn thêm khuyến mại", "Thông báo");
             return;
         }
-        
+//ádasd
         KhuyenMaiViewModle khuyenMai = khuyenMaiService.getList().get(indexKhuyenMai);
         List<Integer> listSelectSP = getModelListSanPham();
         List<SanPhamViewModle> list = sanPhamService.getList();
@@ -428,25 +442,49 @@ public class SanPhamKhuyenMaiPanel extends javax.swing.JPanel {
                 sotienconlai = list.get(i).getGiaban().multiply(giatri);
             }
             BigDecimal dongia = list.get(i).getGiaban();
-            SanPhamKhuyenMaiViewModle spkmvm = new SanPhamKhuyenMaiViewModle("", list.get(i).getTen(), khuyenMai.getTen(), dongia, sotienconlai, list.get(i).getTrangthai());
-//            SanPhamViewModle sanPhamViewModle = list.get(i);
-//            sanPhamViewModle.setGiaban(sotienconlai);
-//            sanPhamService.update(sanPhamViewModle);
+            SanPhamKhuyenMaiViewModle spkmvm = new SanPhamKhuyenMaiViewModle("", list.get(i).getMa(), list.get(i).getTen(), khuyenMai.getMa(), khuyenMai.getTen(), khuyenMai.getTrangthai(), dongia, sotienconlai, list.get(i).getTrangthai());
             sanPhamKhuyenMaiService.add(spkmvm, i, indexKhuyenMai);
+            SanPhamViewModle spvm = sanPhamService.getOne(list.get(i).getMa());
+            spvm.setGiaban(sotienconlai);
+            sanPhamService.updatevs2(spvm);
+
+            sppl.loadData(sanPhamService.getList());
+
         }
         loadDataSPKM(sanPhamKhuyenMaiService.getList());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
-        // TODO add your handling code here:
+        //validate
         if (tb_sanPhamKhuyenMai.getSelectedRow() < 0) {
             DialogHelper.alert(null, "Chọn sản phẩm khuyến mại muốn xoá", "Thông báo");
             return;
         }
+        //fsaf
+        SanPhamKhuyenMaiViewModle spkmvm = sanPhamKhuyenMaiService.getOne(sanPhamKhuyenMaiService.getList().get(tb_sanPhamKhuyenMai.getSelectedRow()).getId());
+        SanPhamViewModle spvm = sanPhamService.getOne(spkmvm.getMasanpham());
+        KhuyenMaiViewModle kmvm = khuyenMaiService.getOne(spkmvm.getMakhuyenmai());
+        BigDecimal giatri = BigDecimal.valueOf(kmvm.getGiatri());
+        BigDecimal sotienconlai;
+
+        if (kmvm.getHinhthucgiamgia() == 0) {
+            sotienconlai = spkmvm.getSotienconlai().add(giatri);
+        } else {
+            sotienconlai = spkmvm.getSotienconlai().divide(giatri);
+        }
+
+        spkmvm.setSotienconlai(sotienconlai);
+        spvm.setGiaban(sotienconlai);
+        sanPhamService.updatevs2(spvm);
+        sanPhamKhuyenMaiService.updatevs2(spkmvm);
+
         JOptionPane.showMessageDialog(this, sanPhamKhuyenMaiService.delete(getId()));
-        
+
         List<SanPhamKhuyenMaiViewModle> list = sanPhamKhuyenMaiService.getList();
         loadDataSPKM(list);
+
+        sppl.loadData(sanPhamService.getList());
+
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void tb_khuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_khuyenMaiMouseClicked

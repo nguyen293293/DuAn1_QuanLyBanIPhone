@@ -20,9 +20,16 @@ import lombok.Setter;
 @Setter
 public class SanPhamKhuyenMaiViewModle {
      private String id;
+     
+     private String masanpham;
+     
     private String tensanpham;
+    
+    private String makhuyenmai;
 
     private String tenkhuyenmai;
+    
+    private int trangthaikhuyenmai;
     
     private BigDecimal dongia;
 

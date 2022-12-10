@@ -9,6 +9,7 @@ import com.shoptao.repositories.SanPhamRepository;
 import com.shoptao.services.InterfaceHoaDonChiTietService;
 import com.shoptao.viewmodel.HoaDonChiTietViewModel;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,11 +29,11 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
     }
 
     @Override
-      public List<HoaDonChiTietViewModel> getList(String maHD) {
+    public List<HoaDonChiTietViewModel> getList(String maHD) {
         List<HoaDonChiTietViewModel> list = new ArrayList<>();
         for (HoaDonChiTiet x : repository.getListbyMaHD(maHD)) {
-            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
-         list.add(hd);
+            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null);
+            list.add(hd);
         }
         return list;
     }
@@ -71,17 +72,31 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
     @Override
     public HoaDonChiTietViewModel getOne(String id) {
         HoaDonChiTiet x = repository.getOne(id);
-            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
-         return hd;
+        HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null);
+        return hd;
     }
 
     @Override
-    public List<HoaDonChiTietViewModel> getListHDCT() {
-         List<HoaDonChiTietViewModel> list = new ArrayList<>();
-        for (HoaDonChiTiet x : repository.getListHDCT()) {
-            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
-         list.add(hd);
-        }
-        return list;
+    public List<Object[]> getListThongKeSP() {
+        return repository.getListThongKeSP();
     }
+
+    @Override
+    public List<Object[]> getListThongKeSPDay(int day,int month,int year, int trangthai) {
+        return repository.getListThongKeSPDay(day,month,year, trangthai);
+
+    }
+
+    @Override
+    public List<Object[]> getListThongKeSPMonth(int month, int year, int trangthai) {
+        return repository.getListThongKeSPMonth(month, year, trangthai);
+
+    }
+
+    @Override
+    public List<Object[]> getListThongKeSPYear(int year, int trangthai) {
+        return repository.getListThongKeSPYear(year, trangthai);
+
+    }
+
 }

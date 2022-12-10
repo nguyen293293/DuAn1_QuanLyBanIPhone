@@ -21,20 +21,20 @@ import com.shoptao.services.ChungServices;
  * @author haih7
  */
 public class SanPhamService implements ChungServices<SanPhamViewModle> {
-
+    
     public SanPhamRepository sanPhamRepository = new SanPhamRepository();
     public DongSanPhamRepository dongSanPhamRepository = new DongSanPhamRepository();
     public MauSacRepository mauSacRepository = new MauSacRepository();
-
+    
     public SanPhamService() {
-
+        
     }
-
+    
     @Override
     public List<SanPhamViewModle> getList() {
-
+        
         List<SanPhamViewModle> listSPVM = new ArrayList<>();
-
+        
         for (SanPham sanPham : sanPhamRepository.getList()) {
 //            listSPVM.add(new SanPhamViewModle(sanPham.getId(), sanPham.getMa(),
 //                    sanPham.getTen(), sanPham.getDungluong(), sanPham.getSoluongton(),
@@ -46,29 +46,38 @@ public class SanPhamService implements ChungServices<SanPhamViewModle> {
         }
         return listSPVM;
     }
-
+    
     @Override
     public String add(SanPhamViewModle t, Object... ob) {
-
+        
         DongSanPham ds = dongSanPhamRepository.getList().get((int) ob[0]);
         MauSac ms = mauSacRepository.getList().get((int) ob[1]);
-        SanPham sanPham = new SanPham(null, t.getMa(), t.getTen(), t.getDungluong(), t.getSoluongton(), t.getNambaohanh(), t.getGianhap(), t.getGiaban(), "", t.getAnhsanpham(), t.getBarcode(), t.getTrangthai(), ds, ms);
-        System.out.println(t.getMa());
+        SanPham sanPham = new SanPham(null, genmahd(), t.getTen(), t.getDungluong(), t.getSoluongton(), t.getNambaohanh(), t.getGianhap(), t.getGiaban(), "", t.getAnhsanpham(), t.getBarcode(), t.getTrangthai(), ds, ms);
         String isSave = sanPhamRepository.add(sanPham);
         if (isSave.equals("Thanh cong")) {
             return "Thêm thành công";
         } else {
             return "Thêm thất bại";
         }
-
+        
     }
-
+    
+        private String genmahd() {
+        List<SanPham> list = sanPhamRepository.getList();
+        if (list.size() == 0) {
+            return "SP001";
+        } else {
+            int num = list.size() + 1;
+            return "SP" + (String.format("%03d", num));
+        }
+    }
+    
     @Override
     public String update(SanPhamViewModle t, Object... ob) {
         DongSanPham ds = dongSanPhamRepository.getList().get((int) ob[0]);
         MauSac ms = mauSacRepository.getList().get((int) ob[1]);
         SanPham sanPham = new SanPham();
-
+        
         sanPham.setMa(t.getMa());
         sanPham.setTen(t.getTen());
         sanPham.setDungluong(t.getDungluong());
@@ -81,7 +90,7 @@ public class SanPhamService implements ChungServices<SanPhamViewModle> {
         sanPham.setTrangthai(t.getTrangthai());
         sanPham.setDongsanpham(ds);
         sanPham.setMausac(ms);
-
+        
         for (SanPham x : sanPhamRepository.getList()) {
             if (x.getMa().equals(sanPham.getMa())) {
                 sanPham.setId(x.getId());
@@ -93,20 +102,40 @@ public class SanPhamService implements ChungServices<SanPhamViewModle> {
         } else {
             return "Cap nhat thất bại";
         }
-
+        
     }
 
+    public String updatevs2(SanPhamViewModle t) {
+        
+        SanPham sanPham = sanPhamRepository.getOne(t.getMa());
+        sanPham.setGiaban(t.getGiaban());
+        
+        String isUpdate = sanPhamRepository.update(sanPham);
+        if (isUpdate.equals("Thanh cong")) {
+            return "Cap nhat thành công";
+        } else {
+            return "Cap nhat thất bại";
+        }
+        
+    }
+    
     @Override
     public SanPhamViewModle getOne(String ma) {
         SanPham x = sanPhamRepository.getOne(ma);
         SanPhamViewModle sanPhamViewModle = new SanPhamViewModle(x.getId(), x.getMa(), x.getTen(), x.getDungluong(), x.getSoluongton(), x.getNambaohanh(), x.getGiaban(), x.getGianhap(), x.getMota(), x.getAnhsanpham(), x.getBarcode(), x.getTrangthai(), x.getDongsanpham().getTen(), x.getMausac().getTen());
         return sanPhamViewModle;
     }
-
+    
+    public SanPhamViewModle getOnebyId(String id) {
+        SanPham x = sanPhamRepository.getOnebyId(id);
+        SanPhamViewModle sanPhamViewModle = new SanPhamViewModle(x.getId(), x.getMa(), x.getTen(), x.getDungluong(), x.getSoluongton(), x.getNambaohanh(), x.getGiaban(), x.getGianhap(), x.getMota(), x.getAnhsanpham(), x.getBarcode(), x.getTrangthai(), x.getDongsanpham().getTen(), x.getMausac().getTen());
+        return sanPhamViewModle;
+    }
+    
     @Override
     public List<SanPhamViewModle> search(String ma) {
         List<SanPhamViewModle> listSPVM = new ArrayList<>();
-
+        
         for (SanPhamViewModle x : getList()) {
             if (x.getMa().startsWith(ma)) {
                 listSPVM.add(x);
@@ -114,10 +143,10 @@ public class SanPhamService implements ChungServices<SanPhamViewModle> {
         }
         return listSPVM;
     }
-
+    
     @Override
     public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }

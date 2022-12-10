@@ -23,9 +23,9 @@ public class DongSPDialog extends javax.swing.JDialog {
     public DongSPDialog(java.awt.Frame parent, boolean modal, SanPhamPanel sp) {
         super(parent, modal);
         initComponents();
-        
+
         this.sp = sp;
-        
+
         setTitle("Dòng sản phẩm");
         setLocationRelativeTo(null);
         txtSeacrch.setOpaque(false);
@@ -47,30 +47,31 @@ public class DongSPDialog extends javax.swing.JDialog {
         this.sp.loadCBDongSanPham(list);
     }
 
-    public void showDetail() {
-        int index = tblDongSanPham.getSelectedRow();
-        List<DongSanPhamViewModle> list = dongSanPhamService.getList();
-        DongSanPhamViewModle dongSanPhamViewModle = list.get(index);
-        txtMa.setText(dongSanPhamViewModle.getMa());
+    public void showDetail(int index) {
+
+        DongSanPhamViewModle dongSanPhamViewModle = dongSanPhamService.getList().get(index);
+
         txtTen.setText(dongSanPhamViewModle.getTen());
+        lbl_ma.setText(dongSanPhamViewModle.getMa());
+
     }
 
     public DongSanPhamViewModle getModel() {
-
-        DongSanPhamViewModle x = new DongSanPhamViewModle(txtMa.getText(), txtTen.getText());
+        DongSanPhamViewModle x = new DongSanPhamViewModle(lbl_ma.getText(), txtTen.getText());
         return x;
     }
 
     public void clear() {
-        txtMa.setText("");
         txtTen.setText("");
+        lbl_ma.setText("");
+
     }
-    
-    private boolean validation(){
-        if(!Validation.CheckTrongText(txtMa, txtTen)){
+
+    private boolean validation() {
+        if (!Validation.CheckTrongText(txtTen)) {
             return false;
         }
-        
+
         return true;
     }
 
@@ -79,10 +80,10 @@ public class DongSPDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtMa = new javax.swing.JTextField();
         txtTen = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        lbl_ma = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDongSanPham = new javax.swing.JTable();
@@ -97,43 +98,43 @@ public class DongSPDialog extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Mã");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Tên");
 
-        txtMa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-
         txtTen.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setText("Mã");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(63, 63, 63)
+                        .addComponent(lbl_ma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(55, 55, 55)
+                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(lbl_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(31, 31, 31))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
@@ -299,16 +300,16 @@ public class DongSPDialog extends javax.swing.JDialog {
 
     private void tblDongSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDongSanPhamMouseClicked
         // TODO add your handling code here:
-
-        showDetail();
+        int index = tblDongSanPham.getSelectedRow();
+        showDetail(index);
     }//GEN-LAST:event_tblDongSanPhamMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if(!validation()) return;
-        
-        if(Validation.checkTrungMaDSP(txtMa.getText())) return;
-        
+        if (!validation()) {
+            return;
+        }
+
         JOptionPane.showMessageDialog(this, dongSanPhamService.add(getModel()));
         list = dongSanPhamService.getList();
         loadData(list);
@@ -317,13 +318,15 @@ public class DongSPDialog extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        if(tblDongSanPham.getSelectedRow() < 0){
+        if (tblDongSanPham.getSelectedRow() < 0) {
             DialogHelper.alert(null, "Chọn dòng sản phẩm cần sửa", "Thông báo");
             return;
         }
-        
-        if(!validation()) return;
-        
+
+        if (!validation()) {
+            return;
+        }
+
         JOptionPane.showMessageDialog(this, dongSanPhamService.update(getModel()));
         list = dongSanPhamService.getList();
         loadData(list);
@@ -337,7 +340,7 @@ public class DongSPDialog extends javax.swing.JDialog {
 
     private void txtSeacrchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSeacrchCaretUpdate
         // TODO add your handling code here:
-    String tenDsp = txtSeacrch.getText();
+        String tenDsp = txtSeacrch.getText();
         List<DongSanPhamViewModle> list = new ArrayList<>();
         if (tenDsp.isEmpty()) {
             list = dongSanPhamService.getList();
@@ -401,15 +404,15 @@ public class DongSPDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_ma;
     private javax.swing.JTable tblDongSanPham;
-    private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtSeacrch;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables

@@ -40,9 +40,6 @@ public class HoaDonChiTietViewModel {
         return dongia.multiply(BigDecimal.valueOf(soluong));
     }
 
-    private int trangThai;
-    
-    
     public Object[] toDataRow(JTable table) {
         return new Object[]{table.getRowCount() + 1, maSanPham, tenSanPham,
             soluong, dongia, tongTien};

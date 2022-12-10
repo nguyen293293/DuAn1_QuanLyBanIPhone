@@ -114,7 +114,7 @@ public class BanHangServiceImpl implements BanHangService {
     public List<HoaDonChiTietViewModel> getListHDCT(String maHD) {
         List<HoaDonChiTietViewModel> list = new ArrayList<>();
         for (HoaDonChiTiet x : hoaDonChiTietRepository.getListbyMaHD(maHD)) {
-            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null, x.getHoadon().getTrangthai());
+            HoaDonChiTietViewModel hd = new HoaDonChiTietViewModel(null, x.getHoadon().getMa(), x.getSanpham().getMa(), x.getSanpham().getTen(), x.getHoadon().getNgaytao(), x.getSoluong(), x.getSanpham().getGianhap(), x.getSanpham().getGiaban(), null);
          list.add(hd);
         }
         return list;

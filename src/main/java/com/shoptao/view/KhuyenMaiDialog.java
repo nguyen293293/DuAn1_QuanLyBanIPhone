@@ -92,9 +92,8 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
     public KhuyenMaiViewModle getModelKM() {
         Float giatri = kmtheogiatri();
         Float dieukiengiamgia = Float.parseFloat(txt_dieuKienGiamGia.getText());
-
         KhuyenMaiViewModle km = new KhuyenMaiViewModle();
-        km.setMa(txt_ma.getText());
+        km.setMa(lbl_ma.getText());
         km.setTen(txt_ten.getText());
         km.setGiatri(giatri);
         km.setDieukiengiamgia(dieukiengiamgia);
@@ -110,7 +109,7 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
         int index = tb_khuyenmai.getSelectedRow();
 
         KhuyenMaiViewModle kmvm = khuyenMaiService.getList().get(index);
-        txt_ma.setText(kmvm.getMa());
+        lbl_ma.setText(kmvm.getMa());
         txt_ten.setText(kmvm.getTen());
         txt_giaTri.setText(String.valueOf(kmvm.getGiatri()));
         txt_dieuKienGiamGia.setText(String.valueOf(kmvm.getDieukiengiamgia()));
@@ -120,7 +119,7 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
     }
 
     public void refresh() {
-        txt_ma.setText("");
+        lbl_ma.setText("");
         txt_ten.setText("");
         txt_giaTri.setText("");
         txt_dieuKienGiamGia.setText("");
@@ -130,14 +129,14 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
         jdc_ngayKetThuc.setDate(date);
     }
 
-    private boolean validation(){
-        if(!Validation.CheckTrongText(txt_ma, txt_ten, txt_giaTri, txt_dieuKienGiamGia)){
+    private boolean validation() {
+        if (!Validation.CheckTrongText(txt_ten, txt_giaTri, txt_dieuKienGiamGia)) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,7 +148,6 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txt_ma = new javax.swing.JTextField();
         txt_giaTri = new javax.swing.JTextField();
         cb_hinhThucGiamGia = new javax.swing.JComboBox<>();
         txt_ten = new javax.swing.JTextField();
@@ -169,6 +167,7 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_khuyenmai = new javax.swing.JTable();
         txt_serachKhuyenMai = new javax.swing.JTextField();
+        lbl_ma = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -176,8 +175,6 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Tên");
-
-        txt_ma.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         txt_giaTri.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
@@ -315,9 +312,9 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel3))
                                 .addGap(41, 41, 41)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_ten, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                    .addComponent(lbl_ma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(cb_hinhThucGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,11 +346,11 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
                                     .addComponent(jLabel3)
                                     .addComponent(txt_dieuKienGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
+                                .addGap(48, 48, 48)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
-                                    .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))))
+                                    .addComponent(jLabel4)
+                                    .addComponent(lbl_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel12)
@@ -409,8 +406,10 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_tenActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        if(!validation()) return;
-        
+        if (!validation()) {
+            return;
+        }
+
         JOptionPane.showMessageDialog(this, khuyenMaiService.add(getModelKM()));
         refresh();
         List<KhuyenMaiViewModle> listv = khuyenMaiService.getList();
@@ -420,13 +419,15 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
-        if(tb_khuyenmai.getSelectedRow() < 0) {
+
+        if (tb_khuyenmai.getSelectedRow() < 0) {
             DialogHelper.alert(null, "Chọn nhân viên cần sửa", "Thông báo");
             return;
         }
-        if(!validation()) return;
-        
+        if (!validation()) {
+            return;
+        }
+
         JOptionPane.showMessageDialog(this, khuyenMaiService.update(getModelKM()));
         refresh();
         List<KhuyenMaiViewModle> listv = khuyenMaiService.getList();
@@ -483,10 +484,10 @@ public class KhuyenMaiDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private com.toedter.calendar.JDateChooser jdc_ngayBatDau;
     private com.toedter.calendar.JDateChooser jdc_ngayKetThuc;
+    private javax.swing.JLabel lbl_ma;
     private javax.swing.JTable tb_khuyenmai;
     private javax.swing.JTextField txt_dieuKienGiamGia;
     private javax.swing.JTextField txt_giaTri;
-    private javax.swing.JTextField txt_ma;
     private javax.swing.JTextField txt_serachKhuyenMai;
     private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables
