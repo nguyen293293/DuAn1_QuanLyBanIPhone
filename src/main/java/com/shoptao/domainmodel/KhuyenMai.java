@@ -47,8 +47,18 @@ public class KhuyenMai implements Serializable {
     private Date ngayketthuc;
 
     private int trangthai;
-//    
-//    @OneToMany(mappedBy = "KhuyenMai", cascade=CascadeType.ALL)
-//private Set<SanPhamKhuyenMai> sanPhamKhuyenMais = new HashSet<>();
 
+    
+    
+    
+    
+    @Override
+    public String toString() {
+        if(hinhthucgiamgia == 0){
+            return "Giảm " + giatri + " VND" + " (Tổng tiền >= " + dieukiengiamgia + ")";
+        }else{
+            return "Giảm " + giatri + "%" + " (Tổng tiền >= " + dieukiengiamgia + ")";
+        }
+        
+    }
 }

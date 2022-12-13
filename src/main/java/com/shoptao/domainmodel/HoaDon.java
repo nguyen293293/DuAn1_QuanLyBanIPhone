@@ -52,4 +52,8 @@ public class HoaDon implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idnhanvien")
     private NhanVien nhanvien;
+    
+    @ManyToOne
+    @JoinColumn(name = "idkhuyenmai")
+    private KhuyenMai khuyenmai;
 }

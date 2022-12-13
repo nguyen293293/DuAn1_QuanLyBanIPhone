@@ -36,10 +36,20 @@ public class MauSacService implements ChungServices<MauSacViewModel>{
     public String add(MauSacViewModel t, Object ...obj) {
         
        
-         boolean isSave = mauSacRepository.add(new MauSac("", t.getMa(), t.getTen()));
+         boolean isSave = mauSacRepository.add(new MauSac("", genmahd(), t.getTen()));
        return isSave ? "Thêm thành công" : "Thêm thất bại";
     
     } 
+    
+     private String genmahd() {
+        List<MauSac> list = mauSacRepository.getList();
+        if (list.size() == 0) {
+            return "MS001";
+        } else {
+            int num = list.size() + 1;
+            return "MS" + (String.format("%03d", num));
+        }
+    }
 
     @Override
     public String update(MauSacViewModel t, Object ...obj) {

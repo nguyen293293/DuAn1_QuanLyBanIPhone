@@ -30,7 +30,7 @@ public class ImeiSPDialog extends javax.swing.JDialog {
     public ImeiSPDialog(java.awt.Frame parent, boolean modal, SanPhamPanel sp, int indexsp) {
         super(parent, modal);
         initComponents();
-
+        
         this.sp = sp;
         this.indexsp = indexsp;
         setTitle("Imei");
@@ -41,6 +41,8 @@ public class ImeiSPDialog extends javax.swing.JDialog {
     }
 
     public void loadData(List<ImeiViewModel> list) {
+  
+        
         defaultTableModel = (DefaultTableModel) tbImei.getModel();
         defaultTableModel.setRowCount(0);
         int i = 0;
@@ -52,9 +54,6 @@ public class ImeiSPDialog extends javax.swing.JDialog {
                 });
             }
         }
-        this.sp.loadCBSoLuongImei(list);
-//        this.sp.loadData(sanPhamService.getList());
-
     }
 
     public ImeiViewModel getModel() {
@@ -269,16 +268,13 @@ public class ImeiSPDialog extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         List<String> listImei = ReadExcelHelper.ReadExcel();
-        if (!listImei.isEmpty()) {
             for (String string : listImei) {
                 ImeiViewModel imvm = new ImeiViewModel();
                 imvm.setMaimei(string);
                 imeiService.add(imvm, indexsp);
             }
 
-        }
         this.sp.setSoLuongAndUpdateSp(sizeList());
-
         List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());
         loadData(list);
     }//GEN-LAST:event_jButton1ActionPerformed

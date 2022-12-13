@@ -3,17 +3,18 @@ package com.shoptao.services.impl;
 import com.shoptao.domainmodel.HoaDon;
 import com.shoptao.domainmodel.HoaDonChiTiet;
 import com.shoptao.domainmodel.KhachHang;
+import com.shoptao.domainmodel.KhuyenMai;
 import com.shoptao.domainmodel.NhanVien;
 import com.shoptao.domainmodel.SanPham;
 import com.shoptao.repositories.HoaDonChiTietRepository;
 import com.shoptao.repositories.HoaDonRepository;
 import com.shoptao.repositories.KhachHangRepository;
+import com.shoptao.repositories.KhuyenMaiRepository;
 import com.shoptao.repositories.NhanVienRepository;
 import com.shoptao.repositories.SanPhamRepository;
 import com.shoptao.services.BanHangService;
 import com.shoptao.viewmodel.HDCTBanHangViewModel;
 import com.shoptao.viewmodel.HoaDonBanHangViewModel;
-import com.shoptao.viewmodel.HoaDonChiTietViewModel;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import com.shoptao.viewmodel.SanPhamBanHangViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
@@ -58,7 +59,7 @@ public class BanHangServiceImpl implements BanHangService {
         NhanVien nhanVien = this.nhanVienRepository.getOne(maNhanVien);
         KhachHang khachHang = this.khachHangRepository.getOne(maKhachHang);
         HoaDon hoaDon = new HoaDon(null, genmahd(), hd.getNgaytao(),
-                new Date(), 0, hd.getTongtien(), hd.getTienkhachdua(), khachHang, nhanVien);
+                new Date(), 0, hd.getTongtien(), hd.getTienkhachdua(), khachHang, nhanVien, null);
         return this.hoaDonRepository.save(hoaDon);
     }
 
@@ -77,15 +78,20 @@ public class BanHangServiceImpl implements BanHangService {
     }
 
     @Override
-    public boolean updateHoaDon(HoaDonBanHangViewModel hd, String maKhachHang) {
+    public boolean updateHoaDon(HoaDonBanHangViewModel hd, String maKhachHang, String maKhuyenMai) {
         KhachHang khachHang = khachHangRepository.getOne(maKhachHang);
-
+        KhuyenMai khuyenMai = null;
+        if(maKhachHang != null){
+            khuyenMai = new KhuyenMaiRepository().getOne(maKhuyenMai);
+        }
+        
         HoaDon hoaDon = hoaDonRepository.getOne(hd.getMahoadon());
         hoaDon.setKhachhang(khachHang);
         hoaDon.setTrangthai(hd.getTrangthai());
         hoaDon.setTongtien(hd.getTongtien());
         hoaDon.setTienkhachdua(hd.getTienkhachdua());
-
+        hoaDon.setKhuyenmai(khuyenMai);
+        
         return hoaDonRepository.update(hoaDon);
     }
 
@@ -166,7 +172,7 @@ public class BanHangServiceImpl implements BanHangService {
 
         return hoaDonChiTietRepository.update(hdct);
     }
-    
+
     @Override
     public boolean deleteHDCT(int index) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -191,7 +197,7 @@ public class BanHangServiceImpl implements BanHangService {
     @Override
     public SanPhamBanHangViewModel getSanPhambyBarcode(String barcode) {
         for (SanPhamBanHangViewModel x : getListSanPham()) {
-            if(x.getBarcode().equals(barcode) && x.getSoluong() > 0){
+            if (x.getBarcode().equals(barcode) && x.getSoluong() > 0) {
                 return x;
             }
         }
@@ -202,7 +208,7 @@ public class BanHangServiceImpl implements BanHangService {
     public HDCTBanHangViewModel getOne(String id) {
         HoaDonChiTiet hdct = hoaDonChiTietRepository.getOne(id);
         return new HDCTBanHangViewModel(hdct.getId(), hdct.getSanpham().getMa(), hdct.getSanpham().getTen(),
-                    hdct.getDongia(), hdct.getSoluong());
+                hdct.getDongia(), hdct.getSoluong());
     }
 
 }

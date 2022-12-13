@@ -56,6 +56,16 @@ public class SanPhamKhuyenMaiRepository {
         }
 
     }
+       public SanPhamKhuyenMai getOne(String id) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Transaction trans = session.beginTransaction();
+            Query query = session.createQuery("FROM SanPhamKhuyenMai where id = :id");
+            query.setParameter("id", id);
+            SanPhamKhuyenMai sanPhamKhuyenMai = (SanPhamKhuyenMai) query.getResultList().get(0);
+            trans.commit();
+            return sanPhamKhuyenMai;
+        }
+    }
     
     public boolean delete(String id) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession()) {

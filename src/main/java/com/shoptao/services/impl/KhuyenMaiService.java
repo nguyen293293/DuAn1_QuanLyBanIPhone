@@ -37,9 +37,18 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle> {
 
     @Override
     public String add(KhuyenMaiViewModle t, Object... obj) {
-        KhuyenMai km = modelMapper.map(t, KhuyenMai.class);
+       KhuyenMai km = new KhuyenMai(t.getId(), genmahd(), t.getTen(), t.getGiatri(),t.getHinhthucgiamgia(), t.getDieukiengiamgia(), t.getNgaybatdau(), t.getNgayketthuc(), t.getTrangthai());
         boolean isSave = khuyenMaiRepository.add(km);
         return isSave ? "Thêm thành công" : "Thêm thất bại";
+    }
+        private String genmahd() {
+        List<KhuyenMai> list = khuyenMaiRepository.getList();
+        if (list.size() == 0) {
+            return "KM001";
+        } else {
+            int num = list.size() + 1;
+            return "KM" + (String.format("%03d", num));
+        }
     }
 
     @Override
@@ -57,7 +66,12 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle> {
 
     @Override
     public KhuyenMaiViewModle getOne(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        KhuyenMai khuyenmai = khuyenMaiRepository.getOne(ma);
+        KhuyenMaiViewModle khuyenMaiViewModle = new KhuyenMaiViewModle(khuyenmai.getId(),
+                khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(),
+                khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(),
+                khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(), khuyenmai.getTrangthai());
+        return khuyenMaiViewModle;
     }
 
     @Override
@@ -76,5 +90,5 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle> {
     public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }

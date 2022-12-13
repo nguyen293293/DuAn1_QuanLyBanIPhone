@@ -35,11 +35,20 @@ public class NhanVienService implements ChungServices<NhanVienViewModel> {
 
     @Override
     public String add(NhanVienViewModel t, Object ...obj) {
-        NhanVien nhanVien = new NhanVien(null, t.getMa(), t.getHoten(), t.getGioitinh(),
+        NhanVien nhanVien = new NhanVien(null, genmahd(), t.getHoten(), t.getGioitinh(),
                 t.getNgaysinh(), t.getSdt(), t.getEmail(), t.getDiachi(), t.getMatkhau(),
                 t.getVaitro(), t.getTrangthai());
         boolean isAdd = nhanVienRepository.save(nhanVien);
         return isAdd ? "Thêm thành công" : "Thêm thất bại";
+    }
+    
+    private String genmahd() {
+        if (getList().size() == 0) {
+            return "NV01";
+        } else {
+            int num = Integer.valueOf(getList().get(getList().size() - 1).getMa().substring(2)) + 1;
+            return "NV" + (String.format("%02d", num));
+        }
     }
 
     @Override
@@ -81,5 +90,18 @@ public class NhanVienService implements ChungServices<NhanVienViewModel> {
     @Override
     public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public List<NhanVienViewModel> searchtrangthai(int trangthai) {
+        List<NhanVienViewModel> listNhanVienVM = new ArrayList<>();
+
+        for (NhanVien x : nhanVienRepository.getList()) {
+            if (x.getTrangthai() == trangthai) {
+                listNhanVienVM.add(new NhanVienViewModel(x.getMa(), x.getHoten(), x.getGioitinh(),
+                        x.getNgaysinh(), x.getSdt(), x.getEmail(), x.getDiachi(), x.getMatkhau(),
+                        x.getVaitro(), x.getTrangthai()));
+            }
+        }
+        return listNhanVienVM;
     }
 }

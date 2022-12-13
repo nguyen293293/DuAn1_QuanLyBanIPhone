@@ -17,7 +17,7 @@ import com.shoptao.services.ChungServices;
  */
 public class NhanVienPanel extends javax.swing.JPanel {
 
-    private final ChungServices chungService;
+    private final NhanVienService chungService;
     private List<NhanVienViewModel> listNhanVien;
     private DefaultTableModel tableModel;
 
@@ -178,16 +178,16 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 txtSeacrchMouseClicked(evt);
             }
         });
-        txtSeacrch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSeacrchActionPerformed(evt);
-            }
-        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/searchbar1.png"))); // NOI18N
 
         cboTrangthai.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cboTrangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboTrangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Đang làm", "Đã nghỉ" }));
+        cboTrangthai.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboTrangthaiItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -218,9 +218,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtSeacrch)
                         .addGap(5, 5, 5))
-                    .addComponent(cboTrangthai, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cboTrangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
 
@@ -238,6 +240,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Ngày sinh");
 
+        txtMa.setEditable(false);
         txtMa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         txtHoTen.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -445,7 +448,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         if(!validation()) return;
         
-        if(Validation.checkTrungMaNhanVien(txtMa.getText())) return;
+//        if(Validation.checkTrungMaNhanVien(txtMa.getText())) return;
         
         if(Validation.checkTrungSDTNV(txtSdt.getText())) return;
         
@@ -470,9 +473,19 @@ public class NhanVienPanel extends javax.swing.JPanel {
         DialogHelper.alert(null, message, "Thông báo");
     }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void txtSeacrchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSeacrchActionPerformed
+    private void cboTrangthaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTrangthaiItemStateChanged
+        String trangthai = cboTrangthai.getSelectedItem()+"";
+        if(cboTrangthai.equals("Tất cả")){
+            listNhanVien = chungService.getList();
+            loadDataToTable(listNhanVien);
+        }else if(cboTrangthai.equals("Đang làm")){
+            listNhanVien = chungService.searchtrangthai(0);
+            loadDataToTable(listNhanVien);
+        }else{
+            listNhanVien = chungService.searchtrangthai(1);
+            loadDataToTable(listNhanVien);
+        }
+    }//GEN-LAST:event_cboTrangthaiItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -556,7 +569,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }
     
     private boolean validation(){
-        if(!Validation.CheckTrongText(txtMa, txtHoTen, txtDiaChi, txtSdt, txtEmail, txtPassword)){
+        if(!Validation.CheckTrongText(txtHoTen, txtDiaChi, txtSdt, txtEmail, txtPassword)){
             return false;
         }
         

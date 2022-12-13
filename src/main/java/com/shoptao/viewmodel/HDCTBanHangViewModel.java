@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
  *
  * @author nguyen293
  */
+
 @NoArgsConstructor
 @Data
 public class HDCTBanHangViewModel {
@@ -20,10 +21,6 @@ public class HDCTBanHangViewModel {
     private String tensanpham;
     
     private BigDecimal dongia;
-    
-    private BigDecimal giamgia;
-    
-    private int hinhthuc;
     
     private int soluong;
     
@@ -38,33 +35,18 @@ public class HDCTBanHangViewModel {
         this.soluong = soluong;
     }
 
+    
     public BigDecimal getThanhtien() {
-        return dongia.multiply(new BigDecimal(soluong));
+            return dongia.multiply(new BigDecimal(soluong));
     }
-
+    
     public void setThanhtien(BigDecimal thanhtien) {
         this.thanhtien = thanhtien;
     }
 
-    public BigDecimal getGiamgia() {
-        return giamgia;
-    }
-
-    public void setGiamgia(BigDecimal giamgia) {
-        this.giamgia = giamgia;
-    }
-    
-    public String getGiaTriGiam(){
-        if(hinhthuc == 0){
-            return giamgia + " VND";
-        }else{
-            return giamgia + " %";
-        }
-    }
-    
     public Object[] toDataRow(JTable tbl){
         return new Object[]{tbl.getRowCount() + 1,
-            masanpham, tensanpham, dongia, getGiaTriGiam(), soluong, getThanhtien()
+            masanpham, tensanpham, dongia, soluong, getThanhtien()
         };
     }
 }

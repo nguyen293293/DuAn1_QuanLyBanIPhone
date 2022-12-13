@@ -40,11 +40,25 @@ public class HoaDonChiTietViewModel {
         return dongia.multiply(BigDecimal.valueOf(soluong));
     }
 
+    public HoaDonChiTietViewModel(String id, String maHoaDon, String maSanPham, String tenSanPham, Date ngaytao, int soluong, BigDecimal gianhap, BigDecimal dongia, BigDecimal tongTien) {
+        this.id = id;
+        this.maHoaDon = maHoaDon;
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+        this.ngaytao = ngaytao;
+        this.soluong = soluong;
+        this.gianhap = gianhap;
+        this.dongia = dongia;
+        this.tongTien = tongTien;
+    }
+
+    
+    
     private int trangThai;
     
     public Object[] toDataRow(JTable table) {
         return new Object[]{table.getRowCount() + 1, maSanPham, tenSanPham,
-            soluong, dongia, tongTien};
+            soluong, dongia, getTongTien()};
     }
 
 }

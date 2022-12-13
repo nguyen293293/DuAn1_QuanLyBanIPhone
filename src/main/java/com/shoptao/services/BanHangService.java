@@ -15,7 +15,7 @@ public interface BanHangService {
 
     boolean addHoaDon(HoaDonBanHangViewModel hoaDon, String maNhanVien, String maKhachHang);
 
-    boolean updateHoaDon(HoaDonBanHangViewModel hoaDon, String maKhachHang);
+    boolean updateHoaDon(HoaDonBanHangViewModel hoaDon, String maKhachHang, String maKhuyenMai);
 
     List<SanPhamBanHangViewModel> getListSanPham();
     

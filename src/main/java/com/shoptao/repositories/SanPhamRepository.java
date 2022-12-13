@@ -21,10 +21,10 @@ public class SanPhamRepository {
     public List<SanPham> getList() {
         List<SanPham> listSP = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From SanPham");
+            Query query = session.createQuery("From SanPham  ORDER BY ma");
             listSP = query.getResultList();
         }
-       
+
         return listSP;
     }
 
@@ -68,8 +68,19 @@ public class SanPhamRepository {
         }
     }
 
+    public SanPham getOnebyId(String id) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Transaction trans = session.beginTransaction();
+            Query query = session.createQuery("FROM SanPham where id = :id");
+            query.setParameter("id", id);
+            SanPham sanPham = (SanPham) query.getResultList().get(0);
+            trans.commit();
+            return sanPham;
+        }
+    }
+
     public List<SanPham> search(String search) {
-      try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Transaction trans = session.beginTransaction();
             if (search == null) {
                 search = "%";
@@ -82,31 +93,13 @@ public class SanPhamRepository {
 //            query.setParameter("search", search);
 //            query.setParameter("search", search);
             List<SanPham> x = query.getResultList();
-          
+
             trans.commit();
             session.close();
             return x;
-        }  
+        }
 
-}
-    
+    }
+
     //getList chứa km và notkm
-    
-     public List<SanPham> getListKM(){
-        List<SanPham> list = new ArrayList<>();
-        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From SanPham where idkhuyenmai is not null");
-            list = query.getResultList();
-        }
-        return list;
-    }
-     
-         public List<SanPham> getListNotKM(){
-        List<SanPham> list = new ArrayList<>();
-        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From SanPham where idkhuyenmai is null");
-            list = query.getResultList();
-        }
-        return list;
-    }
 }

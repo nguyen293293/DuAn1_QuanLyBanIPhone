@@ -4,6 +4,7 @@
  */
 package com.shoptao.viewmodel;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -23,19 +24,36 @@ public class HoaDonViewModel {
     private String tenKhachHang;
     
     private String tenNhanVien;
+    
+    private BigDecimal tongTien;
+    
+    private BigDecimal tienKhachDua;
 
     public HoaDonViewModel() {
     }
 
-    public HoaDonViewModel(String ma, Date ngaytao, Date ngaythanhtoan, int trangthai, String tenKhachHang, String tenNhanVien) {
+//    public HoaDonViewModel(String ma, Date ngaytao, Date ngaythanhtoan, int trangthai, String tenKhachHang, String tenNhanVien) {
+//        this.ma = ma;
+//        this.ngaytao = ngaytao;
+//        this.ngaythanhtoan = ngaythanhtoan;
+//        this.trangthai = trangthai;
+//        this.tenKhachHang = tenKhachHang;
+//        this.tenNhanVien = tenNhanVien;
+//    }
+
+    public HoaDonViewModel(String ma, Date ngaytao, Date ngaythanhtoan, int trangthai, String tenKhachHang, String tenNhanVien, BigDecimal tongTien, BigDecimal tienKhachDua) {
         this.ma = ma;
         this.ngaytao = ngaytao;
         this.ngaythanhtoan = ngaythanhtoan;
         this.trangthai = trangthai;
         this.tenKhachHang = tenKhachHang;
         this.tenNhanVien = tenNhanVien;
+        this.tongTien = tongTien;
+        this.tienKhachDua = tienKhachDua;
     }
 
+    
+    
     public String getMa() {
         return ma;
     }
@@ -83,7 +101,6 @@ public class HoaDonViewModel {
     public void setTenNhanVien(String tenNhanVien) {
         this.tenNhanVien = tenNhanVien;
     }
-    
     
     public String getTenTrangThai() {
         if (trangthai == 0) {

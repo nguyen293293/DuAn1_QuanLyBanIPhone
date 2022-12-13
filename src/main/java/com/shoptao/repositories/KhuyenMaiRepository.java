@@ -20,7 +20,7 @@ public class KhuyenMaiRepository {
       public List<KhuyenMai> getList() {
         List<KhuyenMai> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("FROM KhuyenMai");
+            Query query = session.createQuery("FROM KhuyenMai  ORDER BY ma");
             list = query.getResultList();
         }
         return list;
@@ -54,16 +54,16 @@ public class KhuyenMaiRepository {
 
     }
 
-//    public MauSac getOne(String ma) {
-//        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-//            Transaction trans = session.beginTransaction();
-//            Query query = session.createQuery("FROM SanPham where ma =: ma");
-//            query.setParameter("ma", ma);
-//            MauSac mauSac = (MauSac) query.getSingleResult();
-//            trans.commit();
-//            return mauSac;
-//        }
-//    }
+    public KhuyenMai getOne(String ma) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Transaction trans = session.beginTransaction();
+            Query query = session.createQuery("FROM KhuyenMai where ma = :ma");
+            query.setParameter("ma", ma);
+            KhuyenMai khuyenMai = (KhuyenMai) query.getSingleResult();
+            trans.commit();
+            return khuyenMai;
+        }
+    }
 
     public List<KhuyenMai> Search(String search) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

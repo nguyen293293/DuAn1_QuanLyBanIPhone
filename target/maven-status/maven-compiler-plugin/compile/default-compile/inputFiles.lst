@@ -3,6 +3,7 @@ E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\ChungServi
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\MauSac.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\Imei.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\Validation.java
+E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\BieuDoThongKeDoanhThuNamDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\SanPhamKhuyenMaiViewModle.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\HoaDonBanHangViewModel.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\LoginHelper.java
@@ -33,8 +34,9 @@ E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\impl\Khach
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\impl\HoaDonService.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\impl\NhanVienService.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\InterfaceImeiDaBanService.java
-E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\test.java
+E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\ImeiBanHangDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\DongSanPhamRepository.java
+E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\BieuDoThongKeDoanhThu10NamDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\HoaDonChiTietRepository.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\JasperReports.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\KhuyenMaiRepository.java
@@ -60,11 +62,14 @@ E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\MauSac
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\BanHangPanel.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\impl\MauSacService.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\ImageHelper.java
+E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\BanThanDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\ImeiViewModel.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\utilities\ReadExcelHelper.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\SanPhamViewModle.java
+E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\BieuDoThongKeDSPThangDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\HoaDonChiTietViewModel.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\HoaDonViewModel.java
+E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\KhuyenMaiBHDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\SanPhamKhuyenMaiRepository.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\ImeiSPDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\impl\ImeiDaBanService.java
@@ -74,7 +79,9 @@ E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\NhanVienPanel.
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\impl\KhuyenMaiService.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\domainmodel\NhanVien.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\services\impl\SanPhamKhuyenMaiService.java
+E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\BieuDoThongKeDSPNamDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\repositories\HoaDonRepository.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\MauSacViewModel.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\view\DongSPDialog.java
 E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\DongSanPhamViewModle.java
+E:\DuAn1\bbb\DuAn1_QuanLyBanIPhone\src\main\java\com\shoptao\viewmodel\KhuyenMaiBanHangViewModel.java

@@ -182,6 +182,11 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
         });
         tblHoaDonChiTiet.setRowHeight(24);
         jScrollPane1.setViewportView(tblHoaDonChiTiet);
+        if (tblHoaDonChiTiet.getColumnModel().getColumnCount() > 0) {
+            tblHoaDonChiTiet.getColumnModel().getColumn(0).setMaxWidth(65);
+            tblHoaDonChiTiet.getColumnModel().getColumn(3).setMinWidth(100);
+            tblHoaDonChiTiet.getColumnModel().getColumn(3).setMaxWidth(100);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -206,9 +211,9 @@ public class HoaDonChiTietDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

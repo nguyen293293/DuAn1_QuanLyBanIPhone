@@ -21,7 +21,7 @@ public class DongSanPhamRepository {
     public List<DongSanPham> getList() {
         List<DongSanPham> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From DongSanPham");
+            Query query = session.createQuery("From DongSanPham ORDER BY ma");
             list = query.getResultList();
         }
         return list;

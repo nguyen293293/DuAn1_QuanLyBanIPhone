@@ -1,4 +1,4 @@
- package com.shoptao.view;
+package com.shoptao.view;
 
 import com.github.sarxos.webcam.Webcam;
 import com.shoptao.utilities.DialogHelper;
@@ -23,7 +23,13 @@ public class DashBoard extends javax.swing.JFrame {
         initComponents();
         init();
         lblTenNhanVien.setText(UserHelper.USER.getHoten());
-
+        lblTitle.setText("Bán hàng");
+        jPanel2.removeAll();
+        jPanel2.add(new BanHangPanel());
+        jPanel2.validate();
+        if (UserHelper.USER.getVaitro().equals("Nhân viên")) {
+            jPanel3.remove(4);
+        }
     }
 
     private void init() {
@@ -42,17 +48,8 @@ public class DashBoard extends javax.swing.JFrame {
         btnClose.setBorderPainted(false);
 
         HibernateUtil.getSessionFactory();
-        
-        addMouseHover();
 
-//        cardLayout = (CardLayout) jPanel2.getLayout();
-//        jPanel2.add("banhang", new BanHangPanel());
-//        jPanel2.add("hoadon", new HoaDonPanel());
-//        jPanel2.add("sanpham", new SanPhamPanel());
-//        jPanel2.add("nhanvien", new NhanVienPanel());
-//        jPanel2.add("khachhang", new KhachHangPanel());
-//        jPanel2.add("thongke", new ThongKePanel());
-//        jPanel2.add("khuyenmai", new SanPhamKhuyenMaiPanel());
+        addMouseHover();
     }
 
     @SuppressWarnings("unchecked")
@@ -304,7 +301,7 @@ public class DashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
-        if(UserHelper.isLogin() == false) {
+        if (UserHelper.isLogin() == false) {
             DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
             jPanel2.removeAll();
             return;
@@ -316,89 +313,85 @@ public class DashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
-        if(UserHelper.isLogin() == false) {
+        if (UserHelper.isLogin() == false) {
             DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
             jPanel2.removeAll();
             return;
         }
         lblTitle.setText("Hoá đơn");
         jPanel2.removeAll();
-        Webcam.getWebcams().get(0).close();
         jPanel2.add(new HoaDonPanel());
         jPanel2.validate();
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
-        if(UserHelper.isLogin() == false) {
+        if (UserHelper.isLogin() == false) {
             DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
             jPanel2.removeAll();
             return;
         }
         lblTitle.setText("Sản phẩm");
-        Webcam.getWebcams().get(0).close();
         jPanel2.removeAll();
         jPanel2.add(new SanPhamPanel());
         jPanel2.validate();
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
-        if(UserHelper.isLogin() == false) {
+        if (UserHelper.isLogin() == false) {
             DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
             jPanel2.removeAll();
             return;
         }
         lblTitle.setText("Khuyến mãi");
-        Webcam.getWebcams().get(0).close();
         jPanel2.removeAll();
-        jPanel2.add(new SanPhamKhuyenMaiPanel());
+        jPanel2.add(new KhuyenMaiPanel());
         jPanel2.validate();
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
-        if(UserHelper.isLogin() == false) {
+        if (UserHelper.isLogin() == false) {
             DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
             jPanel2.removeAll();
             return;
         }
-        if(!UserHelper.USER.getVaitro().equals("Quản lý")){
+        if (!UserHelper.USER.getVaitro().equals("Quản lý")) {
             DialogHelper.alert(this, "Vui lòng sử dụng tài khoản quản lý", "Lỗi");
             return;
         }
         lblTitle.setText("Nhân viên");
-        Webcam.getWebcams().get(0).close();
         jPanel2.removeAll();
         jPanel2.add(new NhanVienPanel());
         jPanel2.validate();
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
-        if(UserHelper.isLogin() == false) {
+        if (UserHelper.isLogin() == false) {
             DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
             jPanel2.removeAll();
             return;
         }
         lblTitle.setText("Khách hàng");
-        Webcam.getWebcams().get(0).close();
         jPanel2.removeAll();
         jPanel2.add(new KhachHangPanel());
         jPanel2.validate();
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
-        if(UserHelper.isLogin() == false) {
+        if (UserHelper.isLogin() == false) {
             DialogHelper.alert(this, "Vui lòng đăng nhập", "Lỗi");
             jPanel2.removeAll();
             return;
         }
         lblTitle.setText("Thống kê");
-        Webcam.getWebcams().get(0).close();
         jPanel2.removeAll();
         jPanel2.add(new ThongKePanel());
         jPanel2.validate();
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void btnDangXUatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXUatActionPerformed
-        Webcam.getWebcams().get(0).close();
+        if (!DialogHelper.confirm(null, "Bạn có muốn đăng xuất không ?", "Đăng xuất")) {
+            return;
+        }
         this.dispose();
         UserHelper.logout();
         new LoginForm().setVisible(true);
