@@ -463,7 +463,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblTongTien" max="32767" attributes="0"/>
-                              <Component id="lblTongTien1" max="32767" attributes="0"/>
+                              <Component id="lblGiamGia" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -568,7 +568,7 @@
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblTongTien1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="lblGiamGia" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -846,7 +846,7 @@
             <Property name="text" type="java.lang.String" value="Gi&#x1ea3;m gi&#xe1;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblTongTien1">
+        <Component class="javax.swing.JLabel" name="lblGiamGia">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="ff" red="cc" type="rgb"/>

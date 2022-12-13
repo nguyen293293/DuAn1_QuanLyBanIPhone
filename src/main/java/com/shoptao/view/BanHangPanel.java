@@ -33,8 +33,8 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  *
  * @author nguyen293
  */
-public class BanHangPanel extends javax.swing.JPanel{
-    
+public class BanHangPanel extends javax.swing.JPanel {
+
     private int indexHoaDon = -1;
     private int indexHoaDonChiTiet = -1;
     private int indexSanPham = -1;
@@ -54,13 +54,13 @@ public class BanHangPanel extends javax.swing.JPanel{
     private DefaultTableModel tableModelHoaDon;
     private DefaultTableModel tableModelSanPham;
     private DefaultTableModel tableModelCTHD;
-    
+
     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 
     private BigDecimal tongTien = BigDecimal.ZERO;
     private BigDecimal tienThanhToan = BigDecimal.ZERO;
     private BigDecimal giamGia = BigDecimal.ZERO;
-    
+
     public BanHangPanel() {
         initComponents();
         init();
@@ -85,7 +85,7 @@ public class BanHangPanel extends javax.swing.JPanel{
 
         khachHang = new KhachHangService().getOne("KH00");
         lblKhachHang.setText(khachHang.getHoten());
-        
+
         loadCBBKhuyenMai(BigDecimal.ZERO);
     }
 
@@ -133,7 +133,7 @@ public class BanHangPanel extends javax.swing.JPanel{
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        lblTongTien1 = new javax.swing.JLabel();
+        lblGiamGia = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cboKhuyenMai = new javax.swing.JComboBox<>();
@@ -446,11 +446,11 @@ public class BanHangPanel extends javax.swing.JPanel{
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel4.setText("Giảm giá");
 
-        lblTongTien1.setBackground(new java.awt.Color(204, 255, 204));
-        lblTongTien1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblTongTien1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lblTongTien1.setText("0");
-        lblTongTien1.setOpaque(true);
+        lblGiamGia.setBackground(new java.awt.Color(204, 255, 204));
+        lblGiamGia.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblGiamGia.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblGiamGia.setText("0");
+        lblGiamGia.setOpaque(true);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel15.setText("VND");
@@ -493,7 +493,7 @@ public class BanHangPanel extends javax.swing.JPanel{
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThanhToanLayout.createSequentialGroup()
                         .addGroup(pnlThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTongTien1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(24, 24, 24)
                         .addGroup(pnlThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel15)
@@ -574,7 +574,7 @@ public class BanHangPanel extends javax.swing.JPanel{
                 .addComponent(jLabel4)
                 .addGap(5, 5, 5)
                 .addGroup(pnlThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTongTien1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -677,7 +677,7 @@ public class BanHangPanel extends javax.swing.JPanel{
 
         listHDCT = banHangService.getListHDCT(maHoaDon);
         loadDataHoaDonChiTiet(listHDCT);
-        
+
         loadCBBKhuyenMai(tinhTongTien(listHDCT));
     }//GEN-LAST:event_tbHoaDonChoMouseClicked
 
@@ -691,23 +691,23 @@ public class BanHangPanel extends javax.swing.JPanel{
         if (Integer.valueOf(tbSanPham.getValueAt(indexSanPham, 6) + "") <= 0) {
             return;
         }
-        addImei(tbSanPham.getValueAt(indexSanPham, 1)+"");
+        addImei(tbSanPham.getValueAt(indexSanPham, 1) + "");
     }//GEN-LAST:event_tbSanPhamMouseClicked
 
     public void addImei(String maSanPham) {
         SanPhamBanHangViewModel sanPham = banHangService.getOneSanPham(maSanPham);
         SanPham sanPhamDM = new SanPhamRepository().getOne(maSanPham);
-        if(sanPhamDM.getTrangthai() != 1){
+        if (sanPhamDM.getTrangthai() != 1) {
             DialogHelper.alert(null, "Sản phẩm đã ngừng bán", "Thông báo");
             return;
         }
-        if(sanPham.getSoluong() <= 0){
+        if (sanPham.getSoluong() <= 0) {
             DialogHelper.alert(null, "Sản phẩm đã hết", "Thông báo");
             return;
         }
-        
+
         String idHDCT = banHangService.checkSPisEmpty(maHoaDon, maSanPham);
-       
+
         if (idHDCT == null) {
             idHDCT = UUID.randomUUID().toString();
 
@@ -736,9 +736,9 @@ public class BanHangPanel extends javax.swing.JPanel{
         hoaDon.setTrangthai(1);
         hoaDon.setTongtien(tinhTongTien(listHDCT));
         hoaDon.setTienkhachdua(BigDecimal.valueOf(Double.valueOf(txtTienKhachDua.getText())));
-        
+
         KhuyenMai khuyenmai = (KhuyenMai) cboKhuyenMai.getSelectedItem();
-        
+
         if (banHangService.updateHoaDon(hoaDon, khachHang.getMa(), khuyenmai.getMa())) {
             DialogHelper.alert(null, "Thanh toán thành công", "Thông báo");
 
@@ -748,21 +748,21 @@ public class BanHangPanel extends javax.swing.JPanel{
 
             tableModelCTHD.setRowCount(0);
             setTTImei();
-            
+
             JasperReports.exportToPdf(maHoaDon);
             maHoaDon = null;
             return;
         }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
-    private void setTTImei(){
+    private void setTTImei() {
         for (HDCTBanHangViewModel hDCT : listHDCT) {
             ImeiBanHangDialog imeiBHDialog = new ImeiBanHangDialog(null,
                     true, this, hDCT.getMasanpham(), hDCT.getId());
             imeiBHDialog.setTrangThaiImei();
         }
     }
-    
+
     private BigDecimal tinhTongTien(List<HDCTBanHangViewModel> listHDCT) {
         BigDecimal tongTien = BigDecimal.valueOf(0);
         listHDCT = banHangService.getListHDCT(maHoaDon);
@@ -774,7 +774,7 @@ public class BanHangPanel extends javax.swing.JPanel{
 
     private void setTientoForm(List<HDCTBanHangViewModel> listHDCT) {
         tongTien = tinhTongTien(listHDCT);
-        tienThanhToan = tinhTongTien(listHDCT) - giamGia;
+        tienThanhToan = tinhTongTien(listHDCT).subtract(giamGia);
         lblTongTien.setText(decimalFormat.format(tinhTongTien(listHDCT)));
         lblThanhToan.setText(decimalFormat.format(tinhTongTien(listHDCT)));
         loadCBBKhuyenMai(tinhTongTien(listHDCT));
@@ -839,7 +839,7 @@ public class BanHangPanel extends javax.swing.JPanel{
 
         tbHoaDonCho.setRowSelectionInterval(0, 0);
         showHoaDon();
-        
+
         maHoaDon = lblMaHoaDon.getText().trim();
 
         btnHuy.setEnabled(true);
@@ -875,7 +875,7 @@ public class BanHangPanel extends javax.swing.JPanel{
         int indexHDCT = tbChiTietHoaDon.getSelectedRow();
         String maSanPham = tbChiTietHoaDon.getValueAt(indexHDCT, 1).toString();
 //        int indexSP = getIndexSanPham(maSanPham);
-    if (maSanPham.isEmpty()) {
+        if (maSanPham.isEmpty()) {
             return;
         }
         addImei(maSanPham);
@@ -920,18 +920,30 @@ public class BanHangPanel extends javax.swing.JPanel{
 
     private void txtBarcodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarcodeKeyPressed
         String barcode = txtBarcode.getText();
-        
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             SanPhamBanHangViewModel sanPham = banHangService.getSanPhambyBarcode(barcode);
             addImei(sanPham.getMasanpham());
         }
     }//GEN-LAST:event_txtBarcodeKeyPressed
 
     private void cboKhuyenMaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboKhuyenMaiItemStateChanged
-        if(cboKhuyenMai.getSelectedIndex() == 0) return;
-        String maKhuyenMai = cboKhuyenMai.getSelectedItem().toString().substring(0, 5);
-        KhuyenMaiViewModle khuyenMai = khuyenMaiService.getOne(maKhuyenMai);
-        
+        if (!cboKhuyenMai.getSelectedItem().equals("--Chọn khuyến mãi--")) {
+            String maKhuyenMai = cboKhuyenMai.getSelectedItem().toString().substring(0, 5);
+            KhuyenMaiViewModle khuyenMai = khuyenMaiService.getOne(maKhuyenMai);
+            String txtGiamGia;
+            if (khuyenMai.getHinhthucgiamgia() == 0) {
+                giamGia = BigDecimal.valueOf(khuyenMai.getGiatri());
+            } else {
+                giamGia = BigDecimal.valueOf(tongTien.doubleValue() * (khuyenMai.getGiatri() / 100));
+            }
+            lblGiamGia.setText(decimalFormat.format(giamGia));
+            setTientoForm(listHDCT);
+        } else {
+
+        }
+
+
     }//GEN-LAST:event_cboKhuyenMaiItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -959,13 +971,13 @@ public class BanHangPanel extends javax.swing.JPanel{
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblGiamGia;
     private javax.swing.JLabel lblKhachHang;
     private javax.swing.JLabel lblLoiTien;
     private javax.swing.JLabel lblMaHoaDon;
     private javax.swing.JLabel lblThanhToan;
     private javax.swing.JLabel lblTienThua;
     private javax.swing.JLabel lblTongTien;
-    private javax.swing.JLabel lblTongTien1;
     private javax.swing.JMenuItem mnuThemOrXoa;
     private javax.swing.JMenuItem mnuXoaTatCa;
     private javax.swing.JPanel pnlChiTietHoaDon;
@@ -1000,12 +1012,12 @@ public class BanHangPanel extends javax.swing.JPanel{
 
         }
     }
-    
+
     public void loadDataHoaDonChiTiet(List<HDCTBanHangViewModel> listHDCT) {
         tableModelCTHD = (DefaultTableModel) tbChiTietHoaDon.getModel();
         tableModelCTHD.setRowCount(0);
         for (HDCTBanHangViewModel x : listHDCT) {
-            if(x.getSoluong() > 0){
+            if (x.getSoluong() > 0) {
                 tableModelCTHD.addRow(x.toDataRow(tbChiTietHoaDon));
             }
         }
@@ -1022,16 +1034,17 @@ public class BanHangPanel extends javax.swing.JPanel{
         lblMaHoaDon.setText((String) tbHoaDonCho.getValueAt(indexHoaDon, 1));
     }
 
-    private void loadCBBKhuyenMai(BigDecimal tongTien){
+    private void loadCBBKhuyenMai(BigDecimal tongTien) {
+        cboKhuyenMai.addItem("--Chọn khuyến mãi--");
         cboKhuyenMai.removeAllItems();
         cboKhuyenMai.addItem("--Chọn khuyến mãi--");
         for (KhuyenMaiViewModle x : new KhuyenMaiService().getList()) {
-            if(tongTien.compareTo(BigDecimal.valueOf(Double.valueOf(x.getDieukiengiamgia()))) >= 0){
-                String item = x.getMa() + " - " + x.getGiatri() 
+            if (tongTien.compareTo(BigDecimal.valueOf(Double.valueOf(x.getDieukiengiamgia()))) >= 0) {
+                String item = x.getMa() + " - " + x.getGiatri()
                         + (x.getHinhthucgiamgia() == 0 ? "VND" : "%")
                         + "(>= " + x.getDieukiengiamgia() + "VND)";
                 cboKhuyenMai.addItem(item);
-            }else{
+            } else {
                 cboKhuyenMai.removeItem(x);
             }
         }
