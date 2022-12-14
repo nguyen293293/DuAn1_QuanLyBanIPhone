@@ -184,17 +184,17 @@ public class LoginForm extends javax.swing.JFrame {
                                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(110, Short.MAX_VALUE))))
+                                .addContainerGap(137, Short.MAX_VALUE))))
                     .addGroup(pnlLoginLayout.createSequentialGroup()
                         .addGap(0, 92, Short.MAX_VALUE)
                         .addComponent(lblQuenMatKhau)
                         .addGap(18, 18, 18)
                         .addComponent(btnSignUp)
                         .addGap(45, 45, 45))))
-            .addGroup(pnlLoginLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(152, 152, 152))
         );
         pnlLoginLayout.setVerticalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,19 +262,15 @@ public class LoginForm extends javax.swing.JFrame {
 
         txtMail.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         txtMail.setBorder(null);
-        txtMail.setOpaque(false);
 
         txtMaXacNhan.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         txtMaXacNhan.setBorder(null);
-        txtMaXacNhan.setOpaque(false);
 
         txtMatKhauMoi.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         txtMatKhauMoi.setBorder(null);
-        txtMatKhauMoi.setOpaque(false);
 
         txtXacNhan.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         txtXacNhan.setBorder(null);
-        txtXacNhan.setOpaque(false);
 
         lblDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblDangNhap.setForeground(new java.awt.Color(0, 153, 204));

@@ -410,12 +410,10 @@
                       <Component id="rd_nam" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jdc_ngay" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jyc_year" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cb_month" alignment="0" pref="125" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jdc_ngay" alignment="0" pref="173" max="32767" attributes="0"/>
+                      <Component id="cb_month" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jyc_year" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="157" max="32767" attributes="0"/>
               </Group>

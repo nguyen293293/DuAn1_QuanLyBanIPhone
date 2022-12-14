@@ -928,20 +928,20 @@ public class BanHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBarcodeKeyPressed
 
     private void cboKhuyenMaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboKhuyenMaiItemStateChanged
-        if (!cboKhuyenMai.getSelectedItem().equals("--Chọn khuyến mãi--")) {
-            String maKhuyenMai = cboKhuyenMai.getSelectedItem().toString().substring(0, 5);
-            KhuyenMaiViewModle khuyenMai = khuyenMaiService.getOne(maKhuyenMai);
-            String txtGiamGia;
-            if (khuyenMai.getHinhthucgiamgia() == 0) {
-                giamGia = BigDecimal.valueOf(khuyenMai.getGiatri());
-            } else {
-                giamGia = BigDecimal.valueOf(tongTien.doubleValue() * (khuyenMai.getGiatri() / 100));
-            }
-            lblGiamGia.setText(decimalFormat.format(giamGia));
-            setTientoForm(listHDCT);
-        } else {
-
-        }
+//        if (!cboKhuyenMai.getSelectedItem().equals("--Chọn khuyến mãi--")) {
+//            String maKhuyenMai = cboKhuyenMai.getSelectedItem().toString().substring(0, 5);
+//            KhuyenMaiViewModle khuyenMai = khuyenMaiService.getOne(maKhuyenMai);
+//            String txtGiamGia;
+//            if (khuyenMai.getHinhthucgiamgia() == 0) {
+//                giamGia = BigDecimal.valueOf(khuyenMai.getGiatri());
+//            } else {
+//                giamGia = BigDecimal.valueOf(tongTien.doubleValue() * (khuyenMai.getGiatri() / 100));
+//            }
+//            lblGiamGia.setText(decimalFormat.format(giamGia));
+//            setTientoForm(listHDCT);
+//        } else {
+//
+//        }
 
 
     }//GEN-LAST:event_cboKhuyenMaiItemStateChanged
