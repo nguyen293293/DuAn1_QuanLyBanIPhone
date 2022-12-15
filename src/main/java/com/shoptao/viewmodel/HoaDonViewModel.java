@@ -111,6 +111,15 @@ public class HoaDonViewModel {
             return "Đã huỷ";
         }
     }
+
+    public BigDecimal getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(BigDecimal tongTien) {
+        this.tongTien = tongTien;
+    }
+    
     
     public Object[] toDataRow(){
         return new Object[]{ma, tenNhanVien, tenKhachHang, ngaytao, getTenTrangThai()};

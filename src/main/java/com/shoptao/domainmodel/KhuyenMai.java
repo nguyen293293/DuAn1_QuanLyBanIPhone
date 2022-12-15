@@ -45,7 +45,9 @@ public class KhuyenMai implements Serializable {
     private Date ngaybatdau;
 
     private Date ngayketthuc;
-
+    
+    private int hieuluc;
+    
     private int trangthai;
 
     

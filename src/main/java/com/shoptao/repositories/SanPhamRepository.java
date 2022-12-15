@@ -21,7 +21,7 @@ public class SanPhamRepository {
     public List<SanPham> getList() {
         List<SanPham> listSP = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From SanPham  ORDER BY ma");
+            Query query = session.createQuery("From SanPham  ORDER BY ma desc");
             listSP = query.getResultList();
         }
 
@@ -101,5 +101,25 @@ public class SanPhamRepository {
 
     }
 
-    //getList chứa km và notkm
+    public List<SanPham> getListSPByMaDSP(String ma) {
+        List<SanPham> listSP = new ArrayList<>();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("From SanPham  where dongsanpham.ma = :ma ORDER BY ma desc");
+            query.setParameter("ma", ma);
+            listSP = query.getResultList();
+        }
+
+        return listSP;
+    }
+
+    public List<SanPham> getListSPByMaMS(String ma) {
+        List<SanPham> listSP = new ArrayList<>();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("From SanPham  where mausac.ma = :ma ORDER BY ma desc");
+            query.setParameter("ma", ma);
+            listSP = query.getResultList();
+        }
+
+        return listSP;
+    }
 }

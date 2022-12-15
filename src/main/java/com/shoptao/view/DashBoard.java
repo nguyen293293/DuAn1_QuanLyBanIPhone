@@ -344,7 +344,7 @@ public class DashBoard extends javax.swing.JFrame {
         }
         lblTitle.setText("Khuyến mãi");
         jPanel2.removeAll();
-        jPanel2.add(new KhuyenMaiPanel());
+        jPanel2.add(new KhuyenMaiMainPanel());
         jPanel2.validate();
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 

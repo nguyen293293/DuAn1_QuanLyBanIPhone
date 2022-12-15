@@ -34,6 +34,8 @@ private String id;
     
     private Date ngayketthuc;
     
+      private int hieuluc;
+    
     private int trangthai;
 
 }

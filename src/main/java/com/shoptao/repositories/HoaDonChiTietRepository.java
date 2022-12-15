@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -107,16 +108,17 @@ public class HoaDonChiTietRepository {
         }
         return result;
     }
+      public List<Object[]> getListThongKeSPDay(Date datebd, Date datekt, int trangthai) {
 
-    public List<Object[]> getListThongKeSPDay(int day,int month,int year, int trangthai) {
-        List<Object[]> result = new ArrayList<>();
+            List<Object[]> result = new ArrayList<>();
+
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            String hql = "SELECT SUM(hdct.soluong),SUM(hdct.dongia * hdct.soluong),SUM(sanpham.gianhap * hdct.soluong) ,sanpham.id FROM HoaDonChiTiet hdct where YEAR(hoadon.ngaythanhtoan) = :year and  MONTH(hoadon.ngaythanhtoan) = :month and DAY(hoadon.ngaythanhtoan) = :day and hoadon.trangthai = :trangthai  GROUP BY sanpham.id";
+            String hql = "SELECT SUM(hdct.soluong),SUM(hdct.dongia * hdct.soluong),SUM(sanpham.gianhap * hdct.soluong) ,sanpham.id FROM HoaDonChiTiet hdct where hoadon.ngaythanhtoan between :datebd and :datekt and hoadon.trangthai = :trangthai   GROUP BY sanpham.id";
             Query query = session.createQuery(hql);
-            query.setParameter("day", day);
-            query.setParameter("month", month);
-            query.setParameter("year", year);
+            query.setParameter("datebd", datebd, TemporalType.DATE);
+            query.setParameter("datekt", datekt, TemporalType.DATE);
             query.setParameter("trangthai", trangthai);
+
             result = query.getResultList();
         }
         return result;

@@ -251,12 +251,14 @@ public class KhachHangPanel extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel13.setText("Trạng thái");
 
+        rdDangHD.setBackground(new java.awt.Color(204, 255, 204));
         buttonGroup1.add(rdDangHD);
         rdDangHD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdDangHD.setSelected(true);
         rdDangHD.setText("Đang hoạt động");
         rdDangHD.setPreferredSize(null);
 
+        rdNgungHD.setBackground(new java.awt.Color(204, 255, 204));
         buttonGroup1.add(rdNgungHD);
         rdNgungHD.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         rdNgungHD.setText("Ngừng hoạt động");

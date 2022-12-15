@@ -42,7 +42,7 @@ public class BieuDoThongKeDSPNamDialog extends javax.swing.JDialog {
 
     int year;
 
-    public BieuDoThongKeDSPNamDialog(java.awt.Frame parent, boolean modal,int year) {
+    public BieuDoThongKeDSPNamDialog(java.awt.Frame parent, boolean modal, int year) {
 
         super(parent, modal);
         this.year = year;
@@ -63,40 +63,21 @@ public class BieuDoThongKeDSPNamDialog extends javax.swing.JDialog {
         return listOuput;
     }
 
-//    public List<Object[]> getTenDSP() {
-//        List<Object[]> listOutput = new ArrayList<>();
-//        List<Object[]> listInput = hoaDonChiTietService.getListThongKeSPYear(year, 1);
-//
-//        for (int i = 0; i < listInput.size(); i++) {
-//            Object[] row = (Object[]) listInput.get(i);
-//            listOutput.add(row);
-//
-//        }
-//        return listOutput;
-//    }
-//
-//    public List<Integer> getSoLuongDSP() {
-//        List<Integer> listOutput = new ArrayList<>();
-//        List<Object[]> listInput = hoaDonChiTietService.getListThongKeSPMonth(month, year, 1);
-//
-//        for (int i = 0; i < listInput.size(); i++) {
-//            Object[] row = (Object[]) listInput.get(i);
-//
-//            listOutput.add(Integer.parseInt((String) row[0]));
-//        }
-//        return listOutput;
-//    }
-
     private void loadBieuDo(String nam) {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
         List<Object[]> listInput = hoaDonChiTietService.getListThongKeSPYear(year, 1);
 
         for (int i = 0; i < listInput.size(); i++) {
             Object[] row = (Object[]) listInput.get(i);
-            String tenDongSP = sanPhamService.getOnebyId(String.valueOf(row[3])).getTen();
-            pieDataset.setValue(tenDongSP, (Number) row[0]);
+//            String tenDongSP = sanPhamService.getOnebyId(String.valueOf(row[3])).getTen();
+        
+            String ten = sanPhamService.getOnebyId(String.valueOf(row[3])).getTen();
+            String dungLuong = sanPhamService.getOnebyId(String.valueOf(row[3])).getDungluong();
+            String tenMauSac = sanPhamService.getOnebyId(String.valueOf(row[3])).getTenmausac();
+
+            pieDataset.setValue( ten + "," + tenMauSac + "," + dungLuong, (Number) row[0]);
         }
-        JFreeChart barChart = ChartFactory.createPieChart3D("Biểu đồ thống kê dòng sản phẩm năm "+nam, pieDataset, true, true, true);
+        JFreeChart barChart = ChartFactory.createPieChart3D("BIỂU ĐỒ THỐNG KÊ SẢN PHẨM TRONG NĂM " + nam, pieDataset, true, true, true);
         PiePlot3D plot = (PiePlot3D) barChart.getPlot();
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new java.awt.Dimension(pnbieudo.getWidth() - 10, pnbieudo.getHeight() - 10));

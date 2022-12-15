@@ -185,17 +185,16 @@ public class Validation {
         return false;
     }
     
-    public static boolean checkTrungMaSP(String ma){
+   public static boolean checkTrungTenSP(String ten){
         ChungServices<SanPhamViewModle> service = new SanPhamService();
         for (SanPhamViewModle x : service.getList()) {
-            if(x.getMa().equals(ma)){
-                DialogHelper.alert(null, "Mã sản phẩm đã tồn tại", "Lỗi!");
+            if(x.getTen().equals(ten)){
+                DialogHelper.alert(null, " Sản phẩm đã tồn tại", "Lỗi!");
                 return true;
             }
         }
         return false;
     }
-    
     public static boolean checkTrungMaKM(String ma){
         ChungServices<KhuyenMaiViewModle> service = new KhuyenMaiService();
         for (KhuyenMaiViewModle x : service.getList()) {
@@ -207,22 +206,33 @@ public class Validation {
         return false;
     }
     
-    public static boolean checkTrungMaDSP(String ma){
+    public static boolean checkTrungTenDSP(String ten){
         ChungServices<DongSanPhamViewModle> service = new DongSanPhamService();
         for (DongSanPhamViewModle x : service.getList()) {
-            if(x.getMa().equals(ma)){
-                DialogHelper.alert(null, "Mã dòng sản phẩm đã tồn tại", "Lỗi!");
+            if(x.getTen().equals(ten)){
+                DialogHelper.alert(null, "Dòng sản phẩm đã tồn tại", "Lỗi!");
                 return true;
             }
         }
         return false;
     }
     
-    public static boolean checkTrungMaMS(String ma){
+    public static boolean checkTrungTenMS(String ten){
         ChungServices<MauSacViewModel> service = new MauSacService();
         for (MauSacViewModel x : service.getList()) {
-            if(x.getMa().equals(ma)){
+            if(x.getTen().equals(ten)){
                 DialogHelper.alert(null, "Mã màu sắc đã tồn tại", "Lỗi!");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+       public static boolean checkTrungTenKM(String ten){
+        ChungServices<KhuyenMaiViewModle> service = new KhuyenMaiService();
+        for (KhuyenMaiViewModle x : service.getList()) {
+            if(x.getTen().equals(ten)){
+                DialogHelper.alert(null, "Khuyến mại đã tồn tại", "Lỗi!");
                 return true;
             }
         }

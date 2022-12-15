@@ -43,28 +43,31 @@ public class BieuDoThongKeDSPThangDialog extends javax.swing.JDialog {
     int year;
     int month;
 
-    public BieuDoThongKeDSPThangDialog(java.awt.Frame parent, boolean modal,int month,int year) {
+    public BieuDoThongKeDSPThangDialog(java.awt.Frame parent, boolean modal, int month, int year) {
 
         super(parent, modal);
         this.year = year;
         this.month = month;
 
         initComponents();
-        loadBieuDo((this.month),(this.year));
+        loadBieuDo((this.month), (this.year));
         this.setLocationRelativeTo(null);
 
     }
 
-    private void loadBieuDo(int month,int year) {
+    private void loadBieuDo(int month, int year) {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
-        List<Object[]> listInput = hoaDonChiTietService.getListThongKeSPMonth(month,year, 1);
+        List<Object[]> listInput = hoaDonChiTietService.getListThongKeSPMonth(month, year, 1);
 
         for (int i = 0; i < listInput.size(); i++) {
             Object[] row = (Object[]) listInput.get(i);
-            String tenDongSP = sanPhamService.getOnebyId(String.valueOf(row[3])).getTen();
-            pieDataset.setValue(tenDongSP, (Number) row[0]);
+            String ten = sanPhamService.getOnebyId(String.valueOf(row[3])).getTen();
+            String dungLuong = sanPhamService.getOnebyId(String.valueOf(row[3])).getDungluong();
+            String tenMauSac = sanPhamService.getOnebyId(String.valueOf(row[3])).getTenmausac();
+       
+            pieDataset.setValue( ten + "," + tenMauSac + "," + dungLuong, (Number) row[0]);
         }
-        JFreeChart barChart = ChartFactory.createPieChart3D("Biểu đồ thống kê dòng sản phẩm tháng "+ month + " năm " +year, pieDataset, true, true, true);
+        JFreeChart barChart = ChartFactory.createPieChart3D("BIỂU ĐỒ THÔNG KÊ SẢN PHẨM THÁNG " + month + " NĂM " + year, pieDataset, true, true, true);
         PiePlot3D plot = (PiePlot3D) barChart.getPlot();
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new java.awt.Dimension(pnbieudo.getWidth() - 10, pnbieudo.getHeight() - 10));

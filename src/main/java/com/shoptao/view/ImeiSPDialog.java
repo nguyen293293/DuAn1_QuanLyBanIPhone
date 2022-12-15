@@ -1,12 +1,14 @@
 package com.shoptao.view;
 
+import com.shoptao.services.ChungServices;
 import com.shoptao.services.impl.ImeiService;
 import com.shoptao.services.impl.SanPhamService;
-import com.shoptao.utilities.ReadExcelHelper;
+import com.shoptao.utilities.ReadAndWrriteExcelHelper;
 import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.ImeiViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +32,7 @@ public class ImeiSPDialog extends javax.swing.JDialog {
     public ImeiSPDialog(java.awt.Frame parent, boolean modal, SanPhamPanel sp, int indexsp) {
         super(parent, modal);
         initComponents();
-        
+
         this.sp = sp;
         this.indexsp = indexsp;
         setTitle("Imei");
@@ -41,8 +43,7 @@ public class ImeiSPDialog extends javax.swing.JDialog {
     }
 
     public void loadData(List<ImeiViewModel> list) {
-  
-        
+
         defaultTableModel = (DefaultTableModel) tbImei.getModel();
         defaultTableModel.setRowCount(0);
         int i = 0;
@@ -51,6 +52,7 @@ public class ImeiSPDialog extends javax.swing.JDialog {
                 defaultTableModel.addRow(new Object[]{
                     i = i + 1,
                     ImeiViewModel.getMaimei()
+
                 });
             }
         }
@@ -78,7 +80,6 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         int soLuong = (listImvm.size());
         return soLuong;
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -91,7 +92,7 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbImei = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btnThem = new javax.swing.JButton();
+        btnThem1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -102,6 +103,8 @@ public class ImeiSPDialog extends javax.swing.JDialog {
 
         txtMa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-xls-35.png"))); // NOI18N
         jButton1.setText("File excel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,23 +118,24 @@ public class ImeiSPDialog extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel1)
+                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(24, 24, 24))
+                .addGap(27, 27, 27))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
@@ -172,9 +176,9 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,11 +190,13 @@ public class ImeiSPDialog extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
 
-        btnThem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnThem1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_save_60px.png"))); // NOI18N
+        btnThem1.setText("Thêm");
+        btnThem1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnThem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnThem1ActionPerformed(evt);
             }
         });
 
@@ -198,17 +204,21 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+            .addGap(0, 197, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(btnThem1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(btnThem)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 172, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(51, 51, 51)
+                    .addComponent(btnThem1)
+                    .addContainerGap(52, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,13 +227,13 @@ public class ImeiSPDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -245,15 +255,42 @@ public class ImeiSPDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tbImeiMouseClicked
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        ChungServices<ImeiViewModel> service = new ImeiService();
+        
+        Collection<String> listOne = ReadAndWrriteExcelHelper.ReadExcel();
+        Collection<String> listTwo = new ArrayList();
+        
+        for (ImeiViewModel x : service.getList()) {
+            listTwo.add(x.getMaimei());
+        }
+
+        List<String> sourceList = new ArrayList<String>(listOne);
+        List<String> destinationList = new ArrayList<String>(listTwo);
+
+        sourceList.removeAll(listTwo);
+        if (!sourceList.isEmpty()) {
+            for (String string : sourceList) {
+                ImeiViewModel imvm = new ImeiViewModel();
+                imvm.setMaimei(string);
+                imeiService.add(imvm, indexsp);
+            }
+
+        }
+        this.sp.setSoLuongAndUpdateSp(sizeList());
+
+        List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());
+        loadData(list);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         if (!Validation.CheckTrongText(txtMa)) {
             return;
         }
         if (Validation.checkTrungMaIMEI(txtMa.getText())) {
             return;
         }
-//        int index = new SanPhamPanel().getindexsp();
         JOptionPane.showMessageDialog(this, imeiService.add(getModel(), indexsp));
         List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());
 
@@ -261,27 +298,11 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         this.sp.setSoLuongAndUpdateSp(sizeList());
 
         refesh();
-
-
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        List<String> listImei = ReadExcelHelper.ReadExcel();
-            for (String string : listImei) {
-                ImeiViewModel imvm = new ImeiViewModel();
-                imvm.setMaimei(string);
-                imeiService.add(imvm, indexsp);
-            }
-
-        this.sp.setSoLuongAndUpdateSp(sizeList());
-        List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());
-        loadData(list);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnThem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThem1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

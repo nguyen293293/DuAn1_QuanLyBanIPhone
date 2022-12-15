@@ -21,7 +21,7 @@ public class MauSacRepository {
     public List<MauSac> getList() {
         List<MauSac> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From MauSac  ORDER BY ma");
+            Query query = session.createQuery("From MauSac  ORDER BY ma desc");
             list = query.getResultList();
         }
         return list;

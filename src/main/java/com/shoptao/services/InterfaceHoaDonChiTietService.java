@@ -29,7 +29,7 @@ public interface InterfaceHoaDonChiTietService {
 
     List<Object[]> getListThongKeSP();
 
-    List<Object[]> getListThongKeSPDay(int day,int month,int year, int trangthai);
+    List<Object[]> getListThongKeSPDay(Date datebd, Date datekt,int trangthai);
 
     List<Object[]> getListThongKeSPMonth(int month, int year, int trangthai);
 

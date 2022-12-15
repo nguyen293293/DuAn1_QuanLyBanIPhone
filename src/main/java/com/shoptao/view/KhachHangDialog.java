@@ -20,8 +20,8 @@ public class KhachHangDialog extends javax.swing.JDialog {
 
     public KhachHangDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
         setLocationRelativeTo(null);
+         initComponents();
 
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -24,7 +24,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author Admin
  */
-public class BieuDoThongKeDoanhThuNamDialog extends javax.swing.JDialog {
+public class BieuDoThongKeDoanhThuThangTrongNamDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form ThongK
@@ -38,7 +38,7 @@ public class BieuDoThongKeDoanhThuNamDialog extends javax.swing.JDialog {
 
     int year;
 
-    public BieuDoThongKeDoanhThuNamDialog(java.awt.Frame parent, boolean modal, int year) {
+    public BieuDoThongKeDoanhThuThangTrongNamDialog(java.awt.Frame parent, boolean modal, int year) {
 
         super(parent, modal);
         this.year = year;
@@ -74,7 +74,6 @@ public class BieuDoThongKeDoanhThuNamDialog extends javax.swing.JDialog {
 
         SimpleDateFormat format2 = new SimpleDateFormat("MM");
         SimpleDateFormat format3 = new SimpleDateFormat("yyyy");
-        List<HoaDonViewModel> listOutput = new ArrayList<>();
         BigDecimal tong1Thang = new BigDecimal(0);
         for (HoaDonViewModel x : getListHoaDonThanhToan()) {
             String yearHoaDon = String.valueOf(this.year);
@@ -89,7 +88,7 @@ public class BieuDoThongKeDoanhThuNamDialog extends javax.swing.JDialog {
 
     private void loadBieuDo(String nam) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        String str = "Doanh thu bán sản phẩm theo tháng trong năm " + nam;
+        String str = "Doanh thu bán sản phẩm các tháng trong năm " + nam;
         dataset.addValue(doangThuThang(1), str, "1");
         dataset.addValue(doangThuThang(2), str, "2");
         dataset.addValue(doangThuThang(3), str, "3");
@@ -103,7 +102,7 @@ public class BieuDoThongKeDoanhThuNamDialog extends javax.swing.JDialog {
         dataset.addValue(doangThuThang(11), str, "11");
         dataset.addValue(doangThuThang(12), str, "12");
         System.out.println(doangThuThang(12));
-        JFreeChart barChart = ChartFactory.createBarChart("BIỂU ĐỒ THỐNG KÊ DOANH THU THEO NĂM " + nam, "Tháng", "Tiền (VND)", dataset, PlotOrientation.VERTICAL, true, true, true);
+        JFreeChart barChart = ChartFactory.createBarChart("BIỂU ĐỒ THỐNG KÊ DOANH THU CÁC THÁNG TRONG NĂM  " + nam, "Tháng", "Tiền (VND)", dataset, PlotOrientation.VERTICAL, true, true, true);
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new java.awt.Dimension(pnbieudo.getWidth() - 10, pnbieudo.getHeight() - 10));
         pnbieudo.setLayout(new java.awt.BorderLayout());
@@ -175,13 +174,13 @@ public class BieuDoThongKeDoanhThuNamDialog extends javax.swing.JDialog {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(BieuDoThongKeDoanhThuNamDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(BieuDoThongKeDoanhThuThangTrongNamDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(BieuDoThongKeDoanhThuNamDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(BieuDoThongKeDoanhThuThangTrongNamDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(BieuDoThongKeDoanhThuNamDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(BieuDoThongKeDoanhThuThangTrongNamDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(BieuDoThongKeDoanhThuNamDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(BieuDoThongKeDoanhThuThangTrongNamDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //        //</editor-fold>
@@ -191,7 +190,7 @@ public class BieuDoThongKeDoanhThuNamDialog extends javax.swing.JDialog {
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new BieuDoThongKeDoanhThuNamDialog().setVisible(true);
+//                new BieuDoThongKeDoanhThuThangTrongNamDialog().setVisible(true);
 //            }
 //        });
 //    }

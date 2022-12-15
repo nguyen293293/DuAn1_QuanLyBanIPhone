@@ -16,7 +16,7 @@ import com.shoptao.services.ChungServices;
  *
  * @author haih7
  */
-public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle> {
+public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle>,com.shoptao.services.KhuyenMaiService {
 
     public KhuyenMaiService() {
     }
@@ -30,14 +30,14 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle> {
         List<KhuyenMaiViewModle> list = new ArrayList<>();
 
         for (KhuyenMai khuyenmai : khuyenMaiRepository.getList()) {
-            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(), khuyenmai.getTrangthai()));
+            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(),khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
         }
         return list;
     }
 
     @Override
     public String add(KhuyenMaiViewModle t, Object... obj) {
-       KhuyenMai km = new KhuyenMai(t.getId(), genmahd(), t.getTen(), t.getGiatri(),t.getHinhthucgiamgia(), t.getDieukiengiamgia(), t.getNgaybatdau(), t.getNgayketthuc(), t.getTrangthai());
+       KhuyenMai km = new KhuyenMai(t.getId(), genmahd(), t.getTen(), t.getGiatri(),t.getHinhthucgiamgia(), t.getDieukiengiamgia(), t.getNgaybatdau(), t.getNgayketthuc(),t.getHieuluc(), t.getTrangthai());
         boolean isSave = khuyenMaiRepository.add(km);
         return isSave ? "Thêm thành công" : "Thêm thất bại";
     }
@@ -70,16 +70,16 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle> {
         KhuyenMaiViewModle khuyenMaiViewModle = new KhuyenMaiViewModle(khuyenmai.getId(),
                 khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(),
                 khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(),
-                khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(), khuyenmai.getTrangthai());
+                khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(),khuyenmai.getHieuluc(), khuyenmai.getTrangthai());
         return khuyenMaiViewModle;
     }
 
     @Override
-    public List<KhuyenMaiViewModle> search(String ma) {
+    public List<KhuyenMaiViewModle> search(String ten) {
         List<KhuyenMaiViewModle> listKMVM = new ArrayList<>();
 
         for (KhuyenMaiViewModle x : getList()) {
-            if (x.getMa().startsWith(ma)) {
+            if (x.getTen().startsWith(ten)) {
                 listKMVM.add(x);
             }
         }
@@ -89,6 +89,26 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle> {
     @Override
     public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<KhuyenMaiViewModle> fillterTrangThai(int trangThai) {
+         List<KhuyenMaiViewModle> list = new ArrayList<>();
+
+        for (KhuyenMai khuyenmai : khuyenMaiRepository.fillterTrangThai(trangThai)) {
+            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(),khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
+        }
+        return list;
+    }
+
+    @Override
+    public List<KhuyenMaiViewModle> fillterHieuLuc(int hieuLuc) {
+          List<KhuyenMaiViewModle> list = new ArrayList<>();
+
+        for (KhuyenMai khuyenmai : khuyenMaiRepository.fillterHieuLuc(hieuLuc)) {
+            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(),khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
+        }
+        return list;
     }
     
 }

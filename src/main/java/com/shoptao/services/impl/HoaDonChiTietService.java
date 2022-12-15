@@ -84,8 +84,9 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
     }
 
     @Override
-    public List<Object[]> getListThongKeSPDay(int day, int month, int year, int trangthai) {
-        return repository.getListThongKeSPDay(day, month, year, trangthai);
+    public List<Object[]> getListThongKeSPDay(Date datebd, Date datekt,int trangthai) {
+       
+        return repository.getListThongKeSPDay(datebd,datekt,trangthai);
 
     }
 

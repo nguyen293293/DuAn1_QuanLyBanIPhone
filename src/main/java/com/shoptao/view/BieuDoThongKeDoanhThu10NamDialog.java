@@ -47,7 +47,6 @@ public class BieuDoThongKeDoanhThu10NamDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
 
     }
-
     public List<HoaDonViewModel> getListHoaDonThanhToan() {
         List<HoaDonViewModel> listOuput = new ArrayList<>();
         for (HoaDonViewModel x : hoaDonService.getList()) {
@@ -57,7 +56,6 @@ public class BieuDoThongKeDoanhThu10NamDialog extends javax.swing.JDialog {
         }
         return listOuput;
     }
-
     public BigDecimal getTongTienGiaBantrong1HoaDon(HoaDonViewModel hdvm) {
 
         listhdctvm = hoaDonChiTietService.getList(hdvm.getMa());
@@ -69,22 +67,18 @@ public class BieuDoThongKeDoanhThu10NamDialog extends javax.swing.JDialog {
         }
         return tongTien;
     }
-
     private BigDecimal doangThuThang(int year) {
-
-        SimpleDateFormat format2 = new SimpleDateFormat("MM");
         SimpleDateFormat format3 = new SimpleDateFormat("yyyy");
-        List<HoaDonViewModel> listOutput = new ArrayList<>();
-        BigDecimal tong1Thang = new BigDecimal(0);
+        BigDecimal tong1Nam = new BigDecimal(0);
         for (HoaDonViewModel x : getListHoaDonThanhToan()) {
             String yearHoaDon = String.valueOf(year);
 
             if (format3.format(x.getNgaythanhtoan()).compareTo(yearHoaDon) == 0) {
-                tong1Thang = tong1Thang.add(getTongTienGiaBantrong1HoaDon(x));
+                tong1Nam = tong1Nam.add(getTongTienGiaBantrong1HoaDon(x));
             }
         }
 
-        return tong1Thang;
+        return tong1Nam;
     }
 
     private void loadBieuDo(int year) {
@@ -104,7 +98,7 @@ public class BieuDoThongKeDoanhThu10NamDialog extends javax.swing.JDialog {
         dataset.addValue(doangThuThang(yearNow - 1), str, yearNow - 1);
         dataset.addValue(doangThuThang(yearNow), str, yearNow);
 
-        JFreeChart barChart = ChartFactory.createBarChart("BIỂU ĐỒ THỐNG KÊ DOANH THU THEO NĂM " + (yearNow - 9) + " đến " + yearNow, "Tháng", "Tiền (VND)", dataset, PlotOrientation.VERTICAL, true, true, true);
+        JFreeChart barChart = ChartFactory.createBarChart("BIỂU ĐỒ THỐNG KÊ DOANH THU THEO NĂM " + (yearNow - 9) + " ĐẾN " + yearNow, "Tháng", "Tiền (VND)", dataset, PlotOrientation.VERTICAL, true, true, true);
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new java.awt.Dimension(pnbieudo.getWidth() - 10, pnbieudo.getHeight() - 10));
         pnbieudo.setLayout(new java.awt.BorderLayout());

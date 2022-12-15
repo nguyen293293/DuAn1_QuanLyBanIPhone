@@ -17,10 +17,11 @@ import org.hibernate.Transaction;
  * @author haih7
  */
 public class KhuyenMaiRepository {
-      public List<KhuyenMai> getList() {
+
+    public List<KhuyenMai> getList() {
         List<KhuyenMai> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("FROM KhuyenMai  ORDER BY ma");
+            Query query = session.createQuery("FROM KhuyenMai  ORDER BY ma desc");
             list = query.getResultList();
         }
         return list;
@@ -32,8 +33,8 @@ public class KhuyenMaiRepository {
             trans.begin();
             session.save(t);
             trans.commit();
-           return true;
-        }catch(Exception e){
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -46,8 +47,8 @@ public class KhuyenMaiRepository {
 
             session.update(t);
             trans.commit();
-          return true;
-        }catch(Exception e){
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -65,7 +66,26 @@ public class KhuyenMaiRepository {
         }
     }
 
-    public List<KhuyenMai> Search(String search) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<KhuyenMai> fillterTrangThai(int trangThai) {
+        List<KhuyenMai> list = new ArrayList<>();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("FROM KhuyenMai km where km.trangthai = :trangthai  ORDER BY ma desc");
+            query.setParameter("trangthai", trangThai);
+
+            list = query.getResultList();
+        }
+        return list;
+    }
+    
+    
+    public List<KhuyenMai> fillterHieuLuc(int hieuluc) {
+        List<KhuyenMai> list = new ArrayList<>();
+        try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("FROM KhuyenMai km where km.hieuluc = :hieuluc  ORDER BY ma desc");
+            query.setParameter("hieuluc", hieuluc);
+
+            list = query.getResultList();
+        }
+        return list;
     }
 }

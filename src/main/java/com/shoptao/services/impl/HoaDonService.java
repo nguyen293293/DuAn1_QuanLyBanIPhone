@@ -2,19 +2,17 @@ package com.shoptao.services.impl;
 
 import com.shoptao.domainmodel.HoaDon;
 import com.shoptao.repositories.HoaDonRepository;
-import com.shoptao.services.BanHangService;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import com.shoptao.services.ChungServices;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  *
  * @author nguyen293
  */
-public class HoaDonService implements ChungServices<HoaDonViewModel> {
+public class HoaDonService implements ChungServices<HoaDonViewModel>,com.shoptao.services.HoaDonService {
 
     private final HoaDonRepository hoaDonRepository;
 
@@ -82,6 +80,46 @@ public class HoaDonService implements ChungServices<HoaDonViewModel> {
             if(x.getTrangthai() == trangthai){
                 list.add(x);
             }
+        }
+        return list;
+    }
+    
+     @Override
+    public List<HoaDonViewModel> getListHoaDonTheoNgay(Date datebd,Date datekt, int trangthai) {
+          List<HoaDonViewModel> list = new ArrayList<>();
+        for (HoaDon x : hoaDonRepository.getListHoaDonTheoNgay(datebd,datekt,trangthai)) {
+               list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
+                    x.getKhachhang().getHoten(), x.getNhanvien().getHoten(), x.getTongtien(), x.getTienkhachdua()));
+        }
+        return list;
+    }
+
+    @Override
+    public List<HoaDonViewModel> getListHoaDonTheoThang(int month, int year, int trangthai) {
+         List<HoaDonViewModel> list = new ArrayList<>();
+        for (HoaDon x : hoaDonRepository.getListHoaDonTheoThang(month, year, trangthai)) {
+              list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
+                    x.getKhachhang().getHoten(), x.getNhanvien().getHoten(), x.getTongtien(), x.getTienkhachdua()));
+        }
+        return list;
+    }
+
+    @Override
+    public List<HoaDonViewModel> getListHoaDonTheoNam(int year, int trangthai) {
+          List<HoaDonViewModel> list = new ArrayList<>();
+        for (HoaDon x : hoaDonRepository.getListHoaDonTheoNam(year, trangthai)) {
+              list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
+                    x.getKhachhang().getHoten(), x.getNhanvien().getHoten(), x.getTongtien(), x.getTienkhachdua()));
+        }
+        return list;
+    }
+
+    @Override
+    public List<HoaDonViewModel> getListHoaDonTheoMaKM(String maKM) {
+       List<HoaDonViewModel> list = new ArrayList<>();
+        for (HoaDon x : hoaDonRepository.getListHoaDonTheoMaKM(maKM)) {
+              list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
+                    x.getKhachhang().getHoten(), x.getNhanvien().getHoten(), x.getTongtien(), x.getTienkhachdua()));
         }
         return list;
     }
