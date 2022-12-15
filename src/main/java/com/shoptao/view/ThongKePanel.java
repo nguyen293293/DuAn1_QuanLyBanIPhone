@@ -563,8 +563,6 @@ public class ThongKePanel extends javax.swing.JPanel {
         jdc_ngaybd.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jdc_ngaybd.setMaxSelectableDate(new java.util.Date(253370743302000L));
 
-        jyc_year.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
         cb_month.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cb_month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
@@ -753,7 +751,7 @@ public class ThongKePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
