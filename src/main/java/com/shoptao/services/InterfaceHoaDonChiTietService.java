@@ -35,4 +35,6 @@ public interface InterfaceHoaDonChiTietService {
 
     List<Object[]> getListThongKeSPYear(int year, int trangthai);
 
+    List<HDCTBanHangViewModel> getAllList();
+    
 }

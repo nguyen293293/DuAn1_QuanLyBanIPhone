@@ -28,7 +28,7 @@ public class ImeiDaBanService implements InterfaceImeiDaBanService {
     public boolean add(ImeiDaBanViewModel t) {
         HoaDonChiTiet hdct = hDCTRepository.getOne(t.getIdHDCT());
         ImeiDaBan imeiDaBan = new ImeiDaBan(null,
-                t.getMaimei(), 0, hdct);
+                t.getMaimei(), t.getTrangthai(), hdct);
 
         return imeiDaBanRepository.add(imeiDaBan);
     }

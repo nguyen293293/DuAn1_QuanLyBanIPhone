@@ -946,8 +946,8 @@ public class SanPhamPanel extends javax.swing.JPanel {
 
     private void QuanLyImeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuanLyImeiActionPerformed
         // TODO add your handling code here:
-
-        ImeiSPDialog imeiDialog = new ImeiSPDialog(null, true, this, indexsp);
+        String masp = tblSanPham.getValueAt(tblSanPham.getSelectedRow(), 1)+"";
+        ImeiSPDialog imeiDialog = new ImeiSPDialog(null, true, this, indexsp, masp);
         imeiDialog.setVisible(true);
 
     }//GEN-LAST:event_QuanLyImeiActionPerformed

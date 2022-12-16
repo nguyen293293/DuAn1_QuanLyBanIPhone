@@ -17,7 +17,7 @@ public class NhanVienRepository {
     public List<NhanVien> getList(){
         List<NhanVien> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From NhanVien");
+            Query query = session.createQuery("From NhanVien order by ma");
             list = query.getResultList();
         }
         return list;

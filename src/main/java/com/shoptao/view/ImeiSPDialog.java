@@ -29,7 +29,7 @@ public class ImeiSPDialog extends javax.swing.JDialog {
     SanPhamPanel sp;
     int indexsp;
 
-    public ImeiSPDialog(java.awt.Frame parent, boolean modal, SanPhamPanel sp, int indexsp) {
+    public ImeiSPDialog(java.awt.Frame parent, boolean modal, SanPhamPanel sp, int indexsp, String maSP) {
         super(parent, modal);
         initComponents();
 
@@ -37,7 +37,8 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         this.indexsp = indexsp;
         setTitle("Imei");
         setLocationRelativeTo(null);
-        listImeiOfIdSanPham = imeiService.search(sanPhamService.getList().get(indexsp).getId());
+        listImeiOfIdSanPham = imeiService.searchImeiByMa(maSP);
+//        listImeiOfIdSanPham = imeiService.search(sanPhamService.getList().get(indexsp).getId());
         loadData(listImeiOfIdSanPham);
 
     }

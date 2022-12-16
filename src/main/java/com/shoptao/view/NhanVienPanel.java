@@ -548,8 +548,8 @@ public class NhanVienPanel extends javax.swing.JPanel {
         txtPassword.setText(tblNhanVien.getValueAt(index, 7)+"");
         rdNam.setSelected(tblNhanVien.getValueAt(index, 2).equals("Nam"));
         rdNu.setSelected(!tblNhanVien.getValueAt(index, 2).equals("Nam"));
-        rdDangLam.setSelected(tblNhanVien.getValueAt(index, 9).equals(0));
-        rdDaNghi.setSelected(!tblNhanVien.getValueAt(index, 9).equals(0));
+        rdDangLam.setSelected(tblNhanVien.getValueAt(index, 9).equals("Đang làm"));
+        rdDaNghi.setSelected(!tblNhanVien.getValueAt(index, 9).equals("Đang làm"));
         cboVaiTro.setSelectedItem(tblNhanVien.getValueAt(index, 8)+"");
     }
     

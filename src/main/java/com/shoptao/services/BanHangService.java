@@ -3,6 +3,7 @@ package com.shoptao.services;
 import com.shoptao.viewmodel.HDCTBanHangViewModel;
 import com.shoptao.viewmodel.HoaDonBanHangViewModel;
 import com.shoptao.viewmodel.SanPhamBanHangViewModel;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -42,4 +43,6 @@ public interface BanHangService {
     boolean deleteAllHDCT(String maHD);
 
     String checkSPisEmpty(String maHoaDon, String maSanPham);
+    
+    List<SanPhamBanHangViewModel> searchSPbyGia(Double giaMin, Double giaMax);
 }

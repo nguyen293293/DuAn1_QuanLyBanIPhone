@@ -56,4 +56,21 @@ public class HoaDon implements Serializable {
     @ManyToOne
     @JoinColumn(name = "idkhuyenmai")
     private KhuyenMai khuyenmai;
+
+    private BigDecimal giamgia;
+    
+    public HoaDon(String id, String ma, Date ngaytao, Date ngaythanhtoan, int trangthai, BigDecimal tongtien, BigDecimal tienkhachdua, KhachHang khachhang, NhanVien nhanvien, KhuyenMai khuyenmai) {
+        this.id = id;
+        this.ma = ma;
+        this.ngaytao = ngaytao;
+        this.ngaythanhtoan = ngaythanhtoan;
+        this.trangthai = trangthai;
+        this.tongtien = tongtien;
+        this.tienkhachdua = tienkhachdua;
+        this.khachhang = khachhang;
+        this.nhanvien = nhanvien;
+        this.khuyenmai = khuyenmai;
+    }
+    
+    
 }

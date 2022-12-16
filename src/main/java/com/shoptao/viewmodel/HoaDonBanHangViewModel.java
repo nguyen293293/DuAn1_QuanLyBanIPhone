@@ -28,6 +28,8 @@ public class HoaDonBanHangViewModel {
     private BigDecimal tongtien;
     
     private BigDecimal tienkhachdua;
+    
+    private BigDecimal giamgia;
 
     public HoaDonBanHangViewModel(String mahoadon, String tennhanvien, Date ngaytao, int trangthai) {
         this.mahoadon = mahoadon;
@@ -35,6 +37,15 @@ public class HoaDonBanHangViewModel {
         this.ngaytao = ngaytao;
         this.trangthai = trangthai;
     }
+
+    public HoaDonBanHangViewModel(String mahoadon, String tennhanvien, Date ngaytao, int trangthai, BigDecimal giamgia) {
+        this.mahoadon = mahoadon;
+        this.tennhanvien = tennhanvien;
+        this.ngaytao = ngaytao;
+        this.trangthai = trangthai;
+        this.giamgia = giamgia;
+    }
+    
     
     public Object[] toDataRow(JTable tbl){
         return new Object[]{tbl.getRowCount() + 1,

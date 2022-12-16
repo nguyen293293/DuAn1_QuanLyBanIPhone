@@ -84,7 +84,7 @@ public class KhachHangViewModel {
     }
     
     public String getTenTrangThai() {
-        if (trangthai == 0) {
+        if (trangthai == 0 || trangthai == 2) {
             return "Đang hoạt động";
         }else{
             return "Ngừng hoạt động";

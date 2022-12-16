@@ -37,10 +37,19 @@ public class KhachHangService implements ChungServices<KhachHangViewModel>{
 
     @Override
     public String add(KhachHangViewModel t, Object ...obj) {
-        KhachHang khachHang = new KhachHang(null, t.getMa(), t.getHoten(),
+        KhachHang khachHang = new KhachHang(null, genmahd(), t.getHoten(),
                 t.getNgaysinh(), t.getSdt(), t.getDiachi(), t.getTrangthai());
         boolean isAdd = khachHangRepository.save(khachHang);
         return isAdd ? "Thêm thành công" : "Thêm thất bại";
+    }
+    
+    private String genmahd() {
+        if (getList().size() == 0) {
+            return "KH01";
+        } else {
+            int num = Integer.valueOf(getList().get(getList().size() - 1).getMa().substring(2)) + 1;
+            return "KH" + (String.format("%02d", num));
+        }
     }
 
     @Override

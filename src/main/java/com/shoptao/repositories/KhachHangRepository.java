@@ -20,7 +20,7 @@ public class KhachHangRepository {
     public List<KhachHang> getList(){
         List<KhachHang> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
-            Query query = session.createQuery("From KhachHang");
+            Query query = session.createQuery("From KhachHang order by ma desc");
             list = query.getResultList();
         }
         return list;

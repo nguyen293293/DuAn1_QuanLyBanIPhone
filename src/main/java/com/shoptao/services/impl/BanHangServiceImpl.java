@@ -18,6 +18,7 @@ import com.shoptao.viewmodel.HoaDonBanHangViewModel;
 import com.shoptao.viewmodel.HoaDonViewModel;
 import com.shoptao.viewmodel.SanPhamBanHangViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -81,7 +82,7 @@ public class BanHangServiceImpl implements BanHangService {
     public boolean updateHoaDon(HoaDonBanHangViewModel hd, String maKhachHang, String maKhuyenMai) {
         KhachHang khachHang = khachHangRepository.getOne(maKhachHang);
         KhuyenMai khuyenMai = null;
-        if(maKhachHang != null){
+        if(maKhuyenMai != null){
             khuyenMai = new KhuyenMaiRepository().getOne(maKhuyenMai);
         }
         
@@ -91,6 +92,7 @@ public class BanHangServiceImpl implements BanHangService {
         hoaDon.setTongtien(hd.getTongtien());
         hoaDon.setTienkhachdua(hd.getTienkhachdua());
         hoaDon.setKhuyenmai(khuyenMai);
+        hoaDon.setGiamgia(hd.getGiamgia());
         
         return hoaDonRepository.update(hoaDon);
     }
@@ -209,6 +211,23 @@ public class BanHangServiceImpl implements BanHangService {
         HoaDonChiTiet hdct = hoaDonChiTietRepository.getOne(id);
         return new HDCTBanHangViewModel(hdct.getId(), hdct.getSanpham().getMa(), hdct.getSanpham().getTen(),
                 hdct.getDongia(), hdct.getSoluong());
+    }
+
+    @Override
+    public List<SanPhamBanHangViewModel> searchSPbyGia(Double giaMin, Double giaMax) {
+        if(giaMin == null){
+            giaMin = 0.0;
+        }
+        if(giaMax == null){
+            giaMax = 999999999.0;
+        }
+        List<SanPhamBanHangViewModel> list = new ArrayList<>();
+        for (SanPhamBanHangViewModel sp : getListSanPham()) {
+            if(giaMin <= sp.getGiaban().doubleValue() && sp.getGiaban().doubleValue() <= giaMax){
+                list.add(sp);
+            }
+        }
+        return list;
     }
 
 }

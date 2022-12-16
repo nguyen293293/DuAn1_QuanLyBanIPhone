@@ -20,8 +20,8 @@ public class KhachHangDialog extends javax.swing.JDialog {
 
     public KhachHangDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setLocationRelativeTo(null);
-         initComponents();
+        setLocation(650, 200);
+        initComponents();
 
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,12 +46,10 @@ public class KhachHangDialog extends javax.swing.JDialog {
         tbKhachHang = new javax.swing.JTable();
         btnXacNhan = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtMa = new javax.swing.JTextField();
         txtHoTen = new javax.swing.JTextField();
         txtSoDienThoai = new javax.swing.JTextField();
         txtDiaChi = new javax.swing.JTextField();
@@ -63,7 +61,7 @@ public class KhachHangDialog extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        tbKhachHang.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        tbKhachHang.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tbKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -83,7 +81,7 @@ public class KhachHangDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        tbKhachHang.setRowHeight(22);
+        tbKhachHang.setRowHeight(28);
         jScrollPane1.setViewportView(tbKhachHang);
         if (tbKhachHang.getColumnModel().getColumnCount() > 0) {
             tbKhachHang.getColumnModel().getColumn(0).setMinWidth(95);
@@ -123,9 +121,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Chọn khách hàng", jPanel2);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Mã");
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Họ tên");
 
@@ -137,8 +132,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Địa chỉ");
-
-        txtMa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         txtHoTen.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
@@ -162,6 +155,7 @@ public class KhachHangDialog extends javax.swing.JDialog {
             }
         });
 
+        jdcNgaySinh.setDateFormatString("dd - MM - yyyy");
         jdcNgaySinh.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -178,14 +172,12 @@ public class KhachHangDialog extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2))
                         .addGap(71, 71, 71)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMa)
                             .addComponent(txtHoTen)
                             .addComponent(txtSoDienThoai)
                             .addComponent(txtDiaChi)
@@ -195,27 +187,23 @@ public class KhachHangDialog extends javax.swing.JDialog {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jdcNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdcNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(56, 56, 56)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh)
                     .addComponent(btnThemKhachHang))
@@ -232,7 +220,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        txtMa.setText("");
         txtHoTen.setText("");
         txtSoDienThoai.setText("");
         txtDiaChi.setText("");
@@ -240,7 +227,7 @@ public class KhachHangDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKhachHangActionPerformed
-        if (!Validation.CheckTrongText(txtMa, txtDiaChi, txtHoTen, txtSoDienThoai)) {
+        if (!Validation.CheckTrongText(txtDiaChi, txtHoTen, txtSoDienThoai)) {
             return;
         }
 
@@ -249,10 +236,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
         }
 
         if (!Validation.checkSoDT(txtSoDienThoai)) {
-            return;
-        }
-
-        if (Validation.checkTrungMaKhachHang(txtMa.getText())) {
             return;
         }
 
@@ -334,7 +317,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnThemKhachHang;
     private javax.swing.JButton btnXacNhan;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -348,7 +330,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
     private javax.swing.JTable tbKhachHang;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtHoTen;
-    private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtSoDienThoai;
     // End of variables declaration//GEN-END:variables
 
@@ -364,7 +345,6 @@ public class KhachHangDialog extends javax.swing.JDialog {
 
     private KhachHangViewModel getModel() {
         KhachHangViewModel khachHang = new KhachHangViewModel();
-        khachHang.setMa(txtMa.getText());
         khachHang.setHoten(txtHoTen.getText());
         khachHang.setNgaysinh(jdcNgaySinh.getDate());
         khachHang.setSdt(txtSoDienThoai.getText());

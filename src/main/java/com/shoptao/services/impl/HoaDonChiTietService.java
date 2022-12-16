@@ -84,9 +84,9 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
     }
 
     @Override
-    public List<Object[]> getListThongKeSPDay(Date datebd, Date datekt,int trangthai) {
-       
-        return repository.getListThongKeSPDay(datebd,datekt,trangthai);
+    public List<Object[]> getListThongKeSPDay(Date datebd, Date datekt, int trangthai) {
+
+        return repository.getListThongKeSPDay(datebd, datekt, trangthai);
 
     }
 
@@ -105,6 +105,17 @@ public class HoaDonChiTietService implements InterfaceHoaDonChiTietService {
     @Override
     public List<HDCTBanHangViewModel> getListBH(String maHD, String maKhuyenMai) {
         return null;
+    }
+
+    @Override
+    public List<HDCTBanHangViewModel> getAllList() {
+        List<HDCTBanHangViewModel> list = new ArrayList<>();
+        for (HoaDonChiTiet x : repository.getListHDCT()) {
+            HDCTBanHangViewModel hd = new HDCTBanHangViewModel(x.getId(), x.getSanpham().getMa(), x.getSanpham().getTen(),
+                    x.getDongia(), x.getSoluong());
+            list.add(hd);
+        }
+        return list;
     }
 
 }

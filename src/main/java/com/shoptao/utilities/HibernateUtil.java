@@ -33,7 +33,7 @@ public class HibernateUtil {
         properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=DATABASE_NHOM6_SHOPTAO");
         properties.put(Environment.USER, "sa");
         properties.put(Environment.PASS, "123");
-        properties.put(Environment.SHOW_SQL, "true");
+//        properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
         conf.addAnnotatedClass(DongSanPham.class);
