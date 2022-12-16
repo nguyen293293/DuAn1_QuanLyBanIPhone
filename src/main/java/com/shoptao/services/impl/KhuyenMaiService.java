@@ -16,7 +16,7 @@ import com.shoptao.services.ChungServices;
  *
  * @author haih7
  */
-public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle>,com.shoptao.services.KhuyenMaiService {
+public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle>, com.shoptao.services.KhuyenMaiService {
 
     public KhuyenMaiService() {
     }
@@ -30,24 +30,33 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle>,com.s
         List<KhuyenMaiViewModle> list = new ArrayList<>();
 
         for (KhuyenMai khuyenmai : khuyenMaiRepository.getList()) {
-            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(),khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
+            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(), khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
         }
         return list;
     }
 
     @Override
     public String add(KhuyenMaiViewModle t, Object... obj) {
-       KhuyenMai km = new KhuyenMai(t.getId(), genmahd(), t.getTen(), t.getGiatri(),t.getHinhthucgiamgia(), t.getDieukiengiamgia(), t.getNgaybatdau(), t.getNgayketthuc(),t.getHieuluc(), t.getTrangthai());
+        KhuyenMai km = new KhuyenMai(t.getId(), genmahd(), t.getTen(), t.getGiatri(), t.getHinhthucgiamgia(), t.getDieukiengiamgia(), t.getNgaybatdau(), t.getNgayketthuc(), t.getHieuluc(), t.getTrangthai());
         boolean isSave = khuyenMaiRepository.add(km);
         return isSave ? "Thêm thành công" : "Thêm thất bại";
     }
-        private String genmahd() {
+
+    private String genmahd() {
         List<KhuyenMai> list = khuyenMaiRepository.getList();
         if (list.size() == 0) {
             return "KM001";
         } else {
             int num = list.size() + 1;
-            return "KM" + (String.format("%03d", num));
+            String hh = "KM" + (String.format("%03d", num));
+            for (KhuyenMai km : list) {
+                int maInt = Integer.parseInt(hh.substring(2));
+                if (num < maInt) {
+                    num = maInt;
+                }
+            }
+            String hhh = "KM" + (String.format("%03d", num + 1));
+            return hhh;
         }
     }
 
@@ -70,7 +79,7 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle>,com.s
         KhuyenMaiViewModle khuyenMaiViewModle = new KhuyenMaiViewModle(khuyenmai.getId(),
                 khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(),
                 khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(),
-                khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(),khuyenmai.getHieuluc(), khuyenmai.getTrangthai());
+                khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(), khuyenmai.getHieuluc(), khuyenmai.getTrangthai());
         return khuyenMaiViewModle;
     }
 
@@ -87,28 +96,29 @@ public class KhuyenMaiService implements ChungServices<KhuyenMaiViewModle>,com.s
     }
 
     @Override
-    public String delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String delete(String ma) {
+        boolean isUpdate = khuyenMaiRepository.delete(ma);
+        return isUpdate ? "Xóa thành công" : "Xóa thất bại";
     }
 
     @Override
     public List<KhuyenMaiViewModle> fillterTrangThai(int trangThai) {
-         List<KhuyenMaiViewModle> list = new ArrayList<>();
+        List<KhuyenMaiViewModle> list = new ArrayList<>();
 
         for (KhuyenMai khuyenmai : khuyenMaiRepository.fillterTrangThai(trangThai)) {
-            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(),khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
+            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(), khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
         }
         return list;
     }
 
     @Override
     public List<KhuyenMaiViewModle> fillterHieuLuc(int hieuLuc) {
-          List<KhuyenMaiViewModle> list = new ArrayList<>();
+        List<KhuyenMaiViewModle> list = new ArrayList<>();
 
         for (KhuyenMai khuyenmai : khuyenMaiRepository.fillterHieuLuc(hieuLuc)) {
-            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(),khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
+            list.add(new KhuyenMaiViewModle(khuyenmai.getId(), khuyenmai.getMa(), khuyenmai.getTen(), khuyenmai.getGiatri(), khuyenmai.getHinhthucgiamgia(), khuyenmai.getDieukiengiamgia(), khuyenmai.getNgaybatdau(), khuyenmai.getNgayketthuc(), khuyenmai.getHieuluc(), khuyenmai.getTrangthai()));
         }
         return list;
     }
-    
+
 }

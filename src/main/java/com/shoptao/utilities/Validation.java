@@ -140,6 +140,16 @@ public class Validation {
             return false;
         }
     }
+    
+        public static boolean checkString(JTextField filed) {
+        try {
+            Long so = Long.parseLong(filed.getText());
+            return true;
+        } catch (Exception e) {
+            DialogHelper.warring(null, "Nhập số", "Lỗi!!!");
+            return false;
+        }
+    }
 
     public static boolean checkEmail(JTextField filed) {
         Pattern pt = Pattern.compile("\\w+@\\w+(\\.\\w+){1,2}");
@@ -185,10 +195,10 @@ public class Validation {
         return false;
     }
     
-   public static boolean checkTrungTenSP(String ten){
+   public static boolean checkTrungSP(String ten,String dungluong,String tendongsanpham , String tenmausac){
         ChungServices<SanPhamViewModle> service = new SanPhamService();
         for (SanPhamViewModle x : service.getList()) {
-            if(x.getTen().equals(ten)){
+            if(x.getTen().equals(ten) && x.getTendongsanpham().equals(tendongsanpham) && x.getTenmausac().equals(tenmausac) && x.getDungluong().equals(dungluong)){
                 DialogHelper.alert(null, " Sản phẩm đã tồn tại", "Lỗi!");
                 return true;
             }

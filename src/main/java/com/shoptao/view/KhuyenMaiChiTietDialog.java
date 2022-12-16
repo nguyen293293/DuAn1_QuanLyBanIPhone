@@ -13,10 +13,13 @@ import com.shoptao.viewmodel.KhuyenMaiViewModle;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -53,6 +56,7 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
         maKM = listKM.get(indexkm).getMa();
         showDetail(listKM.get(indexkm));
         loadDataLichSuKM();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -61,7 +65,7 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
 
         defaultTableModel = (DefaultTableModel) tb_lichSuKm.getModel();
         defaultTableModel.setRowCount(0);
-        
+
         KhuyenMaiViewModle khuyenMaiViewModle = listKM.get(indexkm);
         for (HoaDonViewModel x : hoaDonService.getListHoaDonTheoMaKM(maKM)) {
             BigDecimal giaTriKM = x.getTongTien().multiply(BigDecimal.valueOf(khuyenMaiViewModle.getGiatri()));
@@ -113,7 +117,7 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
         jPanel5.setBackground(new java.awt.Color(204, 255, 204));
 
         jdc_ngayKetThuc.setDateFormatString("dd-MM-yyyy");
-        jdc_ngayKetThuc.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jdc_ngayKetThuc.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setText("Ngày kết thúc");
@@ -122,7 +126,7 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
         jLabel10.setText("Ngày bắt đầu");
 
         jdc_ngayBatDau.setDateFormatString("dd-MM-yyyy");
-        jdc_ngayBatDau.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jdc_ngayBatDau.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Trạng thái");
@@ -151,7 +155,7 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(jdc_ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jdc_ngayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(60, 60, 60)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -160,8 +164,8 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
                                 .addComponent(jLabel2)
                                 .addGap(25, 25, 25)
                                 .addComponent(lbl_setTrangThai))
-                            .addComponent(jdc_ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(242, Short.MAX_VALUE))
+                            .addComponent(jdc_ngayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(268, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,11 +434,12 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
         Date ngayketthuc = jdc_ngayKetThuc.getDate();
         Date ngayhientai = new Date();
         if (ngaybatdau.before(ngayhientai) && ngayketthuc.after(ngayhientai)) {
-            return 0;//dang ap dung
+            return 0;
         } else {
-            return 1;//da het han 
+            return 1;
         }
     }
+
     public KhuyenMaiViewModle getModelKM() {
         Float giatri = kmtheogiatri();
         KhuyenMaiViewModle km = new KhuyenMaiViewModle();
@@ -456,6 +461,7 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
 
         return km;
     }
+
     private boolean validation() {
         if (!Validation.CheckTrongText(txt_ten, txt_giaTri)) {
             return false;
@@ -464,25 +470,35 @@ public class KhuyenMaiChiTietDialog extends javax.swing.JDialog {
         return true;
     }
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-        if (!validation()) {
-            return;
-        }
-        SimpleDateFormat spl = new SimpleDateFormat("dd-MM-yyyy");
-        String date = spl.format(jdc_ngayBatDau.getDate());
-        String date2 = spl.format(jdc_ngayKetThuc.getDate());
+     
+            if (!validation()) {
+                return;
+            }
+            
+            SimpleDateFormat spl = new SimpleDateFormat("dd-MM-yyyy");
+            String datevl = spl.format(jdc_ngayBatDau.getDate());
+            String datevc = spl.format(jdc_ngayKetThuc.getDate());
 
-        if (date2.compareTo(date) < 0) {
-            DialogHelper.alert(null, "Ngày kết thúc phải sau ngày bắt đầu", "Lỗi!");
-            return;
-        }
-        JOptionPane.showMessageDialog(this, khuyenMaiService.update(getModelKM()));
-        List<KhuyenMaiViewModle> listv = khuyenMaiService.getList();
-        List<KhuyenMaiViewModle> list = khuyenMaiService.getList();
-        this.kmm.loadDataKM(list);
+            if (datevl.compareTo(datevc) == 1) {
+                DialogHelper.alert(null, "Ngày kết thúc phải sau ngày bắt đầu", "Lỗi!");
+                return;
+            }
+            
+            
+            JOptionPane.showMessageDialog(this, khuyenMaiService.update(getModelKM()));
+            List<KhuyenMaiViewModle> listv = khuyenMaiService.getList();
+            List<KhuyenMaiViewModle> list = khuyenMaiService.getList();
+            this.kmm.loadDataKM(list);
+
+       
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, khuyenMaiService.delete(maKM));
+        dispose();
+        List<KhuyenMaiViewModle> list = khuyenMaiService.getList();
+        this.kmm.loadDataKM(list);
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void tb_lichSuKmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_lichSuKmMouseClicked

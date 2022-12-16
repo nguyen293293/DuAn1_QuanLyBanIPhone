@@ -1,9 +1,11 @@
 package com.shoptao.view;
 
+import static com.microsoft.sqlserver.jdbc.StringUtils.isEmpty;
 import com.shoptao.services.ChungServices;
 import com.shoptao.services.impl.ImeiService;
 import com.shoptao.services.impl.SanPhamService;
-import com.shoptao.utilities.ReadAndWrriteExcelHelper;
+import com.shoptao.utilities.DialogHelper;
+import com.shoptao.utilities.ReadAndWriteExcelHelper;
 import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.ImeiViewModel;
 import com.shoptao.viewmodel.SanPhamViewModle;
@@ -80,6 +82,37 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         int soLuong = (listImvm.size());
         return soLuong;
     }
+
+    //Check Imei
+    int sumDig(int n) {
+        int a = 0;
+        while (n > 0) {
+            a = a + n % 10;
+            n = n / 10;
+        }
+        return a;
+    }
+
+    boolean isValidIMEI(long n) {
+        String s = String.valueOf(n);
+        int len = s.length();
+
+        if (len != 15) {
+            return false;
+        }
+
+        int sum = 0;
+        for (int i = len; i >= 1; i--) {
+            int d = (int) (n % 10);
+            if (i % 2 == 0) {
+                d = 2 * d;
+            }
+            sum += sumDig(d);
+            n = n / 10;
+        }
+        return (sum % 10 == 0);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -258,10 +291,10 @@ public class ImeiSPDialog extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         ChungServices<ImeiViewModel> service = new ImeiService();
-        
-        Collection<String> listOne = ReadAndWrriteExcelHelper.ReadExcel();
+
+        Collection<String> listOne = ReadAndWriteExcelHelper.ReadExcel();
         Collection<String> listTwo = new ArrayList();
-        
+
         for (ImeiViewModel x : service.getList()) {
             listTwo.add(x.getMaimei());
         }
@@ -288,14 +321,34 @@ public class ImeiSPDialog extends javax.swing.JDialog {
         if (!Validation.CheckTrongText(txtMa)) {
             return;
         }
+        Long checkImei;
+        try {
+            checkImei = Long.parseLong(txtMa.getText().trim());
+            if (!isValidIMEI(checkImei)) {
+                DialogHelper.alert(null, "Mã Imei không đúng định dạng", "Lỗi!");
+                return;
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(null, "Mã Imei không đúng định dạng", "Lỗi!");
+            return;
+
+        }
+
+        if (txtMa.getText() == null) {
+            return;
+        }
+
         if (Validation.checkTrungMaIMEI(txtMa.getText())) {
             return;
         }
-        JOptionPane.showMessageDialog(this, imeiService.add(getModel(), indexsp));
+        ImeiViewModel imvm = new ImeiViewModel();
+        imvm.setMaimei(txtMa.getText());
+        JOptionPane.showMessageDialog(this, imeiService.add(imvm, indexsp));
         List<ImeiViewModel> list = imeiService.search(sanPhamService.getList().get(indexsp).getId());
 
         loadData(list);
         this.sp.setSoLuongAndUpdateSp(sizeList());
+        this.sp.loadData(sanPhamService.getList());
 
         refesh();
     }//GEN-LAST:event_btnThem1ActionPerformed

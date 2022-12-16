@@ -89,26 +89,28 @@ public class SanPhamService implements ChungServices<SanPhamViewModle>,com.shopt
     public String update(SanPhamViewModle t, Object... ob) {
         DongSanPham ds = dongSanPhamRepository.getList().get((int) ob[0]);
         MauSac ms = mauSacRepository.getList().get((int) ob[1]);
-        SanPham sanPham = new SanPham();
+        SanPham sanPham = sanPhamRepository.getOne(t.getMa());
 
+        
         sanPham.setMa(t.getMa());
         sanPham.setTen(t.getTen());
+        sanPham.setNambaohanh(t.getNambaohanh());
         sanPham.setDungluong(t.getDungluong());
         sanPham.setSoluongton(t.getSoluongton());
         sanPham.setGianhap(t.getGianhap());
         sanPham.setGiaban(t.getGiaban());
-        sanPham.setBarcode(t.getBarcode());
+//        sanPham.setBarcode(t.getBarcode());
         sanPham.setAnhsanpham(t.getAnhsanpham());
         sanPham.setMota(t.getMota());
         sanPham.setTrangthai(t.getTrangthai());
         sanPham.setDongsanpham(ds);
         sanPham.setMausac(ms);
 
-        for (SanPham x : sanPhamRepository.getList()) {
-            if (x.getMa().equals(sanPham.getMa())) {
-                sanPham.setId(x.getId());
-            }
-        }
+//        for (SanPham x : sanPhamRepository.getList()) {
+//            if (x.getMa().equals(sanPham.getMa())) {
+//                sanPham.setId(x.getId());
+//            }
+//        }
         String isUpdate = sanPhamRepository.update(sanPham);
         if (isUpdate.equals("Thanh cong")) {
             return "Cap nhat thành công";

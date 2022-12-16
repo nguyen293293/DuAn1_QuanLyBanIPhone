@@ -53,8 +53,14 @@ public class ThongKePanel extends javax.swing.JPanel {
         listThongKe = hoaDonChiTietService.getListThongKeSP();
 
         selectRD();
+        seDate();
 
         loadDataThongKe(listThongKe);
+    }
+
+    public void seDate() {
+        jdc_ngaybd.setDate(new Date());
+        jdc_ngaykt.setDate(new Date());
     }
 
     public void selectRD() {
@@ -183,10 +189,8 @@ public class ThongKePanel extends javax.swing.JPanel {
         for (int i = 0; i < hoaDonChiTietService.getListThongKeSPDay(jdc_ngaybd.getDate(), jdc_ngaykt.getDate(), 1).size(); i++) {
             Object[] row = (Object[]) listInput.get(i);
             BigDecimal tongTien1HD = (BigDecimal) row[2];
-            System.out.println(row[2] + "1");//nhaapj
             tongTien = tongTien.add(tongTien1HD);
         }
-        System.out.println(tongTien + "tong");
         return tongTien;
     }
 
@@ -414,16 +418,16 @@ public class ThongKePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addGap(100, 100, 100))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel1))
+                        .addGap(22, 22, 22)
+                        .addComponent(lbl_lai, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(lbl_lai)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel1)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,8 +464,8 @@ public class ThongKePanel extends javax.swing.JPanel {
                 .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lb_tongHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addComponent(lb_tongHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,7 +473,7 @@ public class ThongKePanel extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(lb_tongHoaDon)
+                .addComponent(lb_tongHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -495,15 +499,13 @@ public class ThongKePanel extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1576, Short.MAX_VALUE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1542, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -513,7 +515,7 @@ public class ThongKePanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3547, 3547, 3547)
+                .addGap(3535, 3535, 3535)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1782, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -560,16 +562,27 @@ public class ThongKePanel extends javax.swing.JPanel {
         });
 
         jdc_ngaybd.setDateFormatString("dd-MM-yyyy");
-        jdc_ngaybd.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jdc_ngaybd.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jdc_ngaybd.setMaxSelectableDate(new java.util.Date(253370743302000L));
+        jdc_ngaybd.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdc_ngaybdPropertyChange(evt);
+            }
+        });
 
         cb_month.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cb_month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         jdc_ngaykt.setDateFormatString("dd-MM-yyyy");
-        jdc_ngaykt.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jdc_ngaykt.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jdc_ngaykt.setMaxSelectableDate(new java.util.Date(253370743302000L));
+        jdc_ngaykt.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdc_ngayktPropertyChange(evt);
+            }
+        });
 
+        rd_tatCa.setBackground(new java.awt.Color(204, 255, 204));
         rd_tatCa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         rd_tatCa.setSelected(true);
         rd_tatCa.setText("Tất cả");
@@ -586,26 +599,20 @@ public class ThongKePanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(rd_tatCa)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(rd_tatCa)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rd_ngay)
                             .addComponent(rd_thang)
                             .addComponent(rd_nam))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cb_month, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jyc_year, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jdc_ngaybd, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jdc_ngaykt, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)))))
-                .addContainerGap())
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jdc_ngaybd, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(cb_month, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jyc_year, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jdc_ngaykt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -652,7 +659,7 @@ public class ThongKePanel extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
@@ -724,7 +731,7 @@ public class ThongKePanel extends javax.swing.JPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_sanPham1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                    .addComponent(btn_sanPham1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                     .addComponent(btn_sanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_doanhThu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_doanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -748,10 +755,10 @@ public class ThongKePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1593, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
@@ -760,8 +767,8 @@ public class ThongKePanel extends javax.swing.JPanel {
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -782,29 +789,31 @@ public class ThongKePanel extends javax.swing.JPanel {
 
     private void rd_ngayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_ngayActionPerformed
         try {
-             BigDecimal tongTien = new BigDecimal(0);
-        SimpleDateFormat spl = new SimpleDateFormat("dd-MM-yyyy");
-        String date = spl.format(jdc_ngaybd.getDate());
-        String date2 = spl.format(jdc_ngaykt.getDate());
+            BigDecimal tongTien = new BigDecimal(0);
 
-       
-        if (date.equals("") || date2.equals(""))  {
-            DialogHelper.alert(null, "Vui lòng nhập ngày", "Lỗi!");
-            return;
-        }
-        if (date2.compareTo(date) < 0) {
-            DialogHelper.alert(null, "Ngày kết thúc phải sau ngày bắt đầu", "Lỗi!");
-            return;
-        }
-        loadDataThongKe(hoaDonChiTietService.getListThongKeSPDay(jdc_ngaybd.getDate(), jdc_ngaykt.getDate(), 1));
-        BigDecimal lai = (tongTienNgayDonGia().subtract(tongTienNgayGiaNhap()));
-        BigDecimal tongTienNgayDonGia = (tongTienNgayDonGia());
-        lbl_doanhThu.setText(decimalFormat.format(tongTienNgayDonGia) + " VND");
-        lbl_lai.setText(decimalFormat.format(lai) + " VND");
-        lb_tongHoaDon.setText(String.valueOf((getHoaDonDaThanhToanNgay() + getHoaDonDaHuyNgay())));
-        lbl_dtt.setText(String.valueOf(getHoaDonDaThanhToanNgay()));
-        lbl_dh.setText(String.valueOf(getHoaDonDaHuyNgay()));
+            if (jdc_ngaybd.getDate() == null || jdc_ngaykt.getDate() == null) {
+                DialogHelper.alert(null, "Vui lòng nhập ngày", "Lỗi!");
+                return;
+            }
+            SimpleDateFormat spl = new SimpleDateFormat("dd-MM-yyyy");
+            String datevl = spl.format(jdc_ngaybd.getDate());
+            String datevc = spl.format(jdc_ngaykt.getDate());
+
+            if (datevl.compareTo(datevc) == 1) {
+                DialogHelper.alert(null, "Ngày kết thúc phải sau ngày bắt đầu", "Lỗi!");
+                return;
+            }
+
+            loadDataThongKe(hoaDonChiTietService.getListThongKeSPDay(jdc_ngaybd.getDate(), jdc_ngaykt.getDate(), 1));
+            BigDecimal lai = (tongTienNgayDonGia().subtract(tongTienNgayGiaNhap()));
+            BigDecimal tongTienNgayDonGia = (tongTienNgayDonGia());
+            lbl_doanhThu.setText(decimalFormat.format(tongTienNgayDonGia) + " VND");
+            lbl_lai.setText(decimalFormat.format(lai) + " VND");
+            lb_tongHoaDon.setText(String.valueOf((getHoaDonDaThanhToanNgay() + getHoaDonDaHuyNgay())));
+            lbl_dtt.setText(String.valueOf(getHoaDonDaThanhToanNgay()));
+            lbl_dh.setText(String.valueOf(getHoaDonDaHuyNgay()));
         } catch (Exception e) {
+           
         }
     }//GEN-LAST:event_rd_ngayActionPerformed
 
@@ -866,7 +875,6 @@ public class ThongKePanel extends javax.swing.JPanel {
     private void btn_sanPham1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sanPham1ActionPerformed
         // TODO add your handling code here:
         BieuDoThongKeDSPThangDialog bdtkdsptd = new BieuDoThongKeDSPThangDialog(null, true, cb_month.getSelectedIndex() + 1, jyc_year.getYear());
-        System.out.println(cb_month.getSelectedIndex() + 1);
         bdtkdsptd.setVisible(true);
     }//GEN-LAST:event_btn_sanPham1ActionPerformed
 
@@ -882,6 +890,16 @@ public class ThongKePanel extends javax.swing.JPanel {
         loadDataThongKe(listThongKe);
 
     }//GEN-LAST:event_rd_tatCaActionPerformed
+
+    private void jdc_ngaybdPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdc_ngaybdPropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jdc_ngaybdPropertyChange
+
+    private void jdc_ngayktPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdc_ngayktPropertyChange
+
+
+    }//GEN-LAST:event_jdc_ngayktPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

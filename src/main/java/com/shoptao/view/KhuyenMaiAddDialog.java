@@ -34,17 +34,23 @@ public class KhuyenMaiAddDialog extends javax.swing.JDialog {
     String maKM;
     public KhuyenMaiMainPanel kmm;
 
-    public KhuyenMaiAddDialog(java.awt.Frame parent, boolean modal,KhuyenMaiMainPanel kmmp ) {
+    public KhuyenMaiAddDialog(java.awt.Frame parent, boolean modal, KhuyenMaiMainPanel kmm) {
         super(parent, modal);
         this.kmm = kmm;
         initComponents();
-        
-           setLocationRelativeTo(null);
+
+        setLocationRelativeTo(null);
+        seDate();
+    }
+
+    public void seDate() {
+        jdc_ngayBatDau.setDate(new Date());
+        jdc_ngayKetThuc.setDate(new Date());
     }
 
     @SuppressWarnings("unchecked")
 
-  
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -119,7 +125,7 @@ public class KhuyenMaiAddDialog extends javax.swing.JDialog {
                                 .addComponent(jLabel1)
                                 .addGap(26, 26, 26)
                                 .addComponent(lbl_setMa, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 370, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4)
                                 .addGap(25, 25, 25)
                                 .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -186,7 +192,7 @@ public class KhuyenMaiAddDialog extends javax.swing.JDialog {
                         .addComponent(txt_giaTri, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lbl_donVi)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,9 +240,9 @@ public class KhuyenMaiAddDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1063, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 705, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -256,7 +262,6 @@ public class KhuyenMaiAddDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     public float kmtheogiatri() {
         int hinhThucGiamGia = cb_hinhThucGiamGia.getSelectedIndex();
@@ -296,7 +301,7 @@ public class KhuyenMaiAddDialog extends javax.swing.JDialog {
         km.setHieuluc(hieuLucKM());
         return km;
     }
-    
+
     private boolean validation() {
         if (!Validation.CheckTrongText(txt_ten, txt_giaTri)) {
             return false;
@@ -305,23 +310,31 @@ public class KhuyenMaiAddDialog extends javax.swing.JDialog {
     }
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
 
-    if (!validation()) {
-            return;
-        }
-        if (Validation.checkTrungTenKM(txt_ten.getText())) {
-            return;
-        }
-        SimpleDateFormat spl = new SimpleDateFormat("dd-MM-yyyy");
-        String date = spl.format(jdc_ngayBatDau.getDate());
-        String date2 = spl.format(jdc_ngayKetThuc.getDate());
+        try {
+            if (!validation()) {
+                return;
+            }
+            if (Validation.checkTrungTenKM(txt_ten.getText())) {
+                return;
+            }
 
-        if (date2.compareTo(date) < 0) {
-            DialogHelper.alert(null, "Ngày kết thúc phải sau ngày bắt đầu", "Lỗi!");
-            return;
+            SimpleDateFormat spl = new SimpleDateFormat("dd-MM-yyyy");
+            String datevl = spl.format(jdc_ngayBatDau.getDate());
+            String datevc = spl.format(jdc_ngayKetThuc.getDate());
+
+            if (datevl.compareTo(datevc) == 1) {
+                DialogHelper.alert(null, "Ngày kết thúc phải sau ngày bắt đầu", "Lỗi!");
+                return;
+            }
+            JOptionPane.showMessageDialog(this, khuyenMaiService.add(getModelKM()));
+            List<KhuyenMaiViewModle> listv = khuyenMaiService.getList();
+
+            this.kmm.loadDataKM(listv);
+
+        } catch (Exception e) {
         }
-        JOptionPane.showMessageDialog(this, khuyenMaiService.add(getModelKM()));
-        List<KhuyenMaiViewModle> listv = khuyenMaiService.getList();
-        this.kmm.loadDataKM(listv);
+
+
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
