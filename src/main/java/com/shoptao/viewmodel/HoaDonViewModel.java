@@ -124,4 +124,8 @@ public class HoaDonViewModel {
     public Object[] toDataRow(){
         return new Object[]{ma, tenNhanVien, tenKhachHang, ngaytao, getTenTrangThai()};
     }
+    
+    public Object[] toDataRow2(){
+        return new Object[]{ma, tenNhanVien, tenKhachHang, ngaytao, tongTien, getTenTrangThai()};
+    }
 }

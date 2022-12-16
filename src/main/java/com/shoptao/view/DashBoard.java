@@ -320,7 +320,7 @@ public class DashBoard extends javax.swing.JFrame {
         }
         lblTitle.setText("Hoá đơn");
         jPanel2.removeAll();
-        jPanel2.add(new HoaDonPanel());
+        jPanel2.add(new HoaDonPanel1());
         jPanel2.validate();
     }//GEN-LAST:event_btnHoaDonActionPerformed
 

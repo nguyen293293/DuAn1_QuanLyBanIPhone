@@ -61,4 +61,9 @@ public class HoaDonChiTietViewModel {
             soluong, dongia, getTongTien()};
     }
 
+    public Object[] toDataRow2() {
+        return new Object[]{maSanPham, tenSanPham,
+            soluong, dongia, getTongTien()};
+    }
+    
 }

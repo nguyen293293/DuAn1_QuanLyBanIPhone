@@ -49,10 +49,6 @@ public class KhuyenMai implements Serializable {
     private int hieuluc;
     
     private int trangthai;
-
-    
-    
-    
     
     @Override
     public String toString() {
