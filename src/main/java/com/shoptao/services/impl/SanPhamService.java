@@ -14,6 +14,7 @@ import com.shoptao.viewmodel.SanPhamViewModle;
 import java.util.ArrayList;
 import java.util.List;
 import com.shoptao.services.ChungServices;
+import com.shoptao.viewmodel.ImeiViewModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -96,7 +97,15 @@ public class SanPhamService implements ChungServices<SanPhamViewModle>,com.shopt
         sanPham.setTen(t.getTen());
         sanPham.setNambaohanh(t.getNambaohanh());
         sanPham.setDungluong(t.getDungluong());
-        sanPham.setSoluongton(t.getSoluongton());
+        
+        int a = 0;
+        for (ImeiViewModel imeiViewModel : new ImeiService().searchImeiByMa(sanPham.getMa())) {
+            if(imeiViewModel.getTrangthai() == 0){
+                a++;
+            }
+        }
+        
+        sanPham.setSoluongton(a);
         sanPham.setGianhap(t.getGianhap());
         sanPham.setGiaban(t.getGiaban());
 //        sanPham.setBarcode(t.getBarcode());
