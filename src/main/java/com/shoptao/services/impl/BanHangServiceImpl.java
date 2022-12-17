@@ -82,10 +82,10 @@ public class BanHangServiceImpl implements BanHangService {
     public boolean updateHoaDon(HoaDonBanHangViewModel hd, String maKhachHang, String maKhuyenMai) {
         KhachHang khachHang = khachHangRepository.getOne(maKhachHang);
         KhuyenMai khuyenMai = null;
-        if(maKhuyenMai != null){
+        if (maKhuyenMai != null) {
             khuyenMai = new KhuyenMaiRepository().getOne(maKhuyenMai);
         }
-        
+
         HoaDon hoaDon = hoaDonRepository.getOne(hd.getMahoadon());
         hoaDon.setKhachhang(khachHang);
         hoaDon.setTrangthai(hd.getTrangthai());
@@ -93,7 +93,7 @@ public class BanHangServiceImpl implements BanHangService {
         hoaDon.setTienkhachdua(hd.getTienkhachdua());
         hoaDon.setKhuyenmai(khuyenMai);
         hoaDon.setGiamgia(hd.getGiamgia());
-        
+
         return hoaDonRepository.update(hoaDon);
     }
 
@@ -105,7 +105,7 @@ public class BanHangServiceImpl implements BanHangService {
             if (x.getTrangthai() == 1) {
                 listSPVM.add(new SanPhamBanHangViewModel(x.getMa(),
                         x.getTen(), x.getMausac().getTen(), x.getDungluong(),
-                        x.getNambaohanh(), x.getSoluongton(), x.getGiaban(), x.getBarcode()));
+                        x.getNambaohanh(), x.getSoluongton(), x.getGiaban(), x.getBarcode(), x.getTrangthai()));
             }
         }
         return listSPVM;
@@ -116,7 +116,8 @@ public class BanHangServiceImpl implements BanHangService {
         SanPham sanPham = sanPhamRepository.getOne(ma);
         return new SanPhamBanHangViewModel(sanPham.getMa(),
                 sanPham.getTen(), sanPham.getMausac().getTen(), sanPham.getDungluong(),
-                sanPham.getNambaohanh(), sanPham.getSoluongton(), sanPham.getGiaban(), sanPham.getBarcode());
+                sanPham.getNambaohanh(), sanPham.getSoluongton(), sanPham.getGiaban(), sanPham.getBarcode(),
+                sanPham.getTrangthai());
     }
 
     @Override
@@ -215,15 +216,15 @@ public class BanHangServiceImpl implements BanHangService {
 
     @Override
     public List<SanPhamBanHangViewModel> searchSPbyGia(Double giaMin, Double giaMax) {
-        if(giaMin == null){
+        if (giaMin == null) {
             giaMin = 0.0;
         }
-        if(giaMax == null){
+        if (giaMax == null) {
             giaMax = 999999999.0;
         }
         List<SanPhamBanHangViewModel> list = new ArrayList<>();
         for (SanPhamBanHangViewModel sp : getListSanPham()) {
-            if(giaMin <= sp.getGiaban().doubleValue() && sp.getGiaban().doubleValue() <= giaMax){
+            if (giaMin <= sp.getGiaban().doubleValue() && sp.getGiaban().doubleValue() <= giaMax) {
                 list.add(sp);
             }
         }

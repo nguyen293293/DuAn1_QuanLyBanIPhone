@@ -231,10 +231,8 @@ public class HoaDonPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void txtSeacrchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchMouseClicked
-        if (!txtSeacrch.getText().equals("Mã HD")) {
-            return;
-        }
-        txtSeacrch.setText("");
+        jdcTuNgay.setDate(null);
+        jdcDenNgay.setDate(null);
     }//GEN-LAST:event_txtSeacrchMouseClicked
 
     private void jdcTuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcTuNgayPropertyChange
@@ -245,6 +243,8 @@ public class HoaDonPanel extends javax.swing.JPanel {
             loadDataToTable(listHoaDon);
             return;
         }
+        txtSeacrch.setText("");
+        cboTrangThai.setSelectedIndex(0);
         loadDataToTable(service.searchbydate(ngaybd, ngaykt));
     }//GEN-LAST:event_jdcTuNgayPropertyChange
 
@@ -256,6 +256,8 @@ public class HoaDonPanel extends javax.swing.JPanel {
             loadDataToTable(listHoaDon);
             return;
         }
+        txtSeacrch.setText("");
+        cboTrangThai.setSelectedIndex(0);
         loadDataToTable(service.searchbydate(ngaybd, ngaykt));
     }//GEN-LAST:event_jdcDenNgayPropertyChange
 
@@ -269,6 +271,8 @@ public class HoaDonPanel extends javax.swing.JPanel {
         }else{
             loadDataToTable(service.searchbytrangthai(2));
         }
+        jdcTuNgay.setDate(null);
+        jdcDenNgay.setDate(null);
     }//GEN-LAST:event_cboTrangThaiItemStateChanged
 
 

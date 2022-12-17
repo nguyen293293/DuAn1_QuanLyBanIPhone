@@ -28,7 +28,7 @@ import org.hibernate.boot.model.source.internal.hbm.ModelBinder;
  *
  * @author haih7
  */
-public class ReadAndWrriteExcelHelper {
+public class ReadAndWriteExcelHelper {
 
     public static List<String> ReadExcel() {
         List<String> list = new ArrayList<>();
@@ -69,7 +69,7 @@ public class ReadAndWrriteExcelHelper {
     public static void exportExcel(List<SanPhamViewModle> listInput) {
         try {
             XSSFWorkbook wordbook = new XSSFWorkbook();
-            XSSFSheet sheet = wordbook.createSheet("danh sach");
+            XSSFSheet sheet = wordbook.createSheet("Danh sách sản phẩm ");
             XSSFRow row = null;
             Cell cell = null;
             row = sheet.createRow(0);
@@ -166,7 +166,8 @@ public class ReadAndWrriteExcelHelper {
                 cell.setCellValue(spvm.getTenmausac());
 
             }
-            File f = new File("D:\\danhsach.xlsx");
+            
+            File f = new File("D:\\DanhSachSanPham.xlsx");
             try {
                 FileOutputStream fos = new FileOutputStream(f);
 

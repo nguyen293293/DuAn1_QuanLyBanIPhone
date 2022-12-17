@@ -32,6 +32,7 @@ public class SanPhamBanHangViewModel {
     
     private String barcode;
     
+    private int trangthai;
     public Object[] toDataRow(JTable tbl){
         return new Object[]{
             tbl.getRowCount() + 1, masanpham, tensanpham, tenmausac, dungluong, nambaohanh,

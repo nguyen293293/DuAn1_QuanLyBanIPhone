@@ -477,10 +477,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     private void cboTrangthaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTrangthaiItemStateChanged
         String trangthai = cboTrangthai.getSelectedItem()+"";
-        if(cboTrangthai.equals("Tất cả")){
+        if(trangthai.equals("Tất cả")){
             listNhanVien = chungService.getList();
             loadDataToTable(listNhanVien);
-        }else if(cboTrangthai.equals("Đang làm")){
+        }else if(trangthai.equals("Đang làm")){
             listNhanVien = chungService.searchtrangthai(0);
             loadDataToTable(listNhanVien);
         }else{

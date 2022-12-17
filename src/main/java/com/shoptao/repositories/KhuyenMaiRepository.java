@@ -55,6 +55,21 @@ public class KhuyenMaiRepository {
 
     }
 
+    public boolean delete(String ma) {
+        try ( Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction trans = session.getTransaction();
+            trans.begin();
+            Query query = session.createQuery("delete KhuyenMai where ma = :ma");
+            query.setParameter("ma", ma);
+            query.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
     public KhuyenMai getOne(String ma) {
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {
             Transaction trans = session.beginTransaction();
@@ -76,8 +91,7 @@ public class KhuyenMaiRepository {
         }
         return list;
     }
-    
-    
+
     public List<KhuyenMai> fillterHieuLuc(int hieuluc) {
         List<KhuyenMai> list = new ArrayList<>();
         try ( Session session = HibernateUtil.getSessionFactory().openSession();) {

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -60,13 +61,11 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
     }
 
     public void selectRDTrangThai() {
-        buttonGroupTrangThai.add(rd_tatCaTheoTrangThai);
         buttonGroupTrangThai.add(rd_chuaApDung);
         buttonGroupTrangThai.add(rd_kichHoat);
     }
 
     public void selectRDHieLuc() {
-        buttonGroupTrangThai.add(rd_tatCaTheoTrangThai);
         buttonGroupHieuLuc.add(rd_ConHieuLuc);
         buttonGroupHieuLuc.add(rd_hetHieuLuc);
     }
@@ -104,6 +103,7 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
         rd_ConHieuLuc = new javax.swing.JRadioButton();
         rd_hetHieuLuc = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
         txt_search = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -115,8 +115,17 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
 
         rd_tatCaTheoTrangThai.setBackground(new java.awt.Color(255, 255, 255));
         rd_tatCaTheoTrangThai.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        rd_tatCaTheoTrangThai.setSelected(true);
         rd_tatCaTheoTrangThai.setText("Tất cả");
+        rd_tatCaTheoTrangThai.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                rd_tatCaTheoTrangThaiStateChanged(evt);
+            }
+        });
+        rd_tatCaTheoTrangThai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rd_tatCaTheoTrangThaiMouseClicked(evt);
+            }
+        });
         rd_tatCaTheoTrangThai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rd_tatCaTheoTrangThaiActionPerformed(evt);
@@ -170,45 +179,45 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rd_kichHoat)
-                            .addComponent(rd_chuaApDung)
-                            .addComponent(jLabel3)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(rd_tatCaTheoTrangThai))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rd_ConHieuLuc)
-                            .addComponent(jLabel1)
-                            .addComponent(rd_hetHieuLuc)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(rd_tatCaTheoTrangThai)
+                    .addComponent(rd_kichHoat)
+                    .addComponent(rd_chuaApDung)
+                    .addComponent(jLabel3)
+                    .addComponent(rd_ConHieuLuc)
+                    .addComponent(jLabel1)
+                    .addComponent(rd_hetHieuLuc))
+                .addContainerGap(90, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(33, 33, 33)
                 .addComponent(rd_tatCaTheoTrangThai)
-                .addGap(30, 30, 30)
+                .addGap(15, 15, 15)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(30, 30, 30)
                 .addComponent(rd_kichHoat)
                 .addGap(30, 30, 30)
                 .addComponent(rd_chuaApDung)
-                .addGap(38, 38, 38)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addComponent(rd_ConHieuLuc)
                 .addGap(30, 30, 30)
                 .addComponent(rd_hetHieuLuc)
-                .addGap(40, 40, 40))
+                .addGap(46, 46, 46))
         );
 
         txt_search.addCaretListener(new javax.swing.event.CaretListener() {
@@ -330,11 +339,17 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
 
     private void rd_tatCaTheoTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_tatCaTheoTrangThaiActionPerformed
         // TODO add your handling code here:
-
+        
+         buttonGroupHieuLuc.clearSelection();
+         buttonGroupTrangThai.clearSelection();
+          
+        
         loadDataKM(listKM);
     }//GEN-LAST:event_rd_tatCaTheoTrangThaiActionPerformed
 
     private void rd_kichHoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_kichHoatActionPerformed
+        rd_tatCaTheoTrangThai.setSelected(false);
+
         List<KhuyenMaiViewModle> listKichHoat = khuyenMaiService.fillterTrangThai(1);
         List<KhuyenMaiViewModle> listFillter = new ArrayList<>();
         List<String> listMaKichHoat = new ArrayList<>();
@@ -374,6 +389,8 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rd_kichHoatActionPerformed
 
     private void rd_chuaApDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_chuaApDungActionPerformed
+        rd_tatCaTheoTrangThai.setSelected(false);
+
         List<KhuyenMaiViewModle> listChuaApDung = khuyenMaiService.fillterTrangThai(0);
         List<KhuyenMaiViewModle> listFillter = new ArrayList<>();
         List<String> listMaKichHoat = new ArrayList<>();
@@ -413,6 +430,7 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
 
     private void rd_ConHieuLucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_ConHieuLucActionPerformed
 
+        rd_tatCaTheoTrangThai.setSelected(false);
         List<KhuyenMaiViewModle> listFillter = new ArrayList<>();
         List<KhuyenMaiViewModle> listHieuLuc = khuyenMaiService.fillterHieuLuc(1);
         List<String> listMaKichHoat = new ArrayList<>();
@@ -451,6 +469,8 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rd_ConHieuLucActionPerformed
 
     private void rd_hetHieuLucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_hetHieuLucActionPerformed
+        rd_tatCaTheoTrangThai.setSelected(false);
+
         List<KhuyenMaiViewModle> listFillter = new ArrayList<>();
         List<KhuyenMaiViewModle> listHetHieuLuc = khuyenMaiService.fillterHieuLuc(0);
         List<String> listMaKichHoat = new ArrayList<>();
@@ -489,14 +509,25 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rd_hetHieuLucActionPerformed
 
     private void txt_searchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txt_searchCaretUpdate
-   String maKM = txt_search.getText();
+        String maKM = txt_search.getText();
         if (maKM.isEmpty()) {
             listKM = khuyenMaiService.getList();
         } else {
             listKM = khuyenMaiService.search(maKM);
         }
-        loadDataKM(listKM);        
+        loadDataKM(listKM);
     }//GEN-LAST:event_txt_searchCaretUpdate
+
+    private void rd_tatCaTheoTrangThaiStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rd_tatCaTheoTrangThaiStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rd_tatCaTheoTrangThaiStateChanged
+
+    private void rd_tatCaTheoTrangThaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rd_tatCaTheoTrangThaiMouseClicked
+        // TODO add your handling code here:
+
+       
+
+    }//GEN-LAST:event_rd_tatCaTheoTrangThaiMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -508,6 +539,7 @@ public class KhuyenMaiMainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JRadioButton rd_ConHieuLuc;
     private javax.swing.JRadioButton rd_chuaApDung;
     private javax.swing.JRadioButton rd_hetHieuLuc;

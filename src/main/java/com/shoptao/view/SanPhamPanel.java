@@ -7,7 +7,7 @@ import com.shoptao.services.impl.MauSacService;
 import com.shoptao.services.impl.SanPhamService;
 import com.shoptao.utilities.DialogHelper;
 import com.shoptao.utilities.ImageHelper;
-import com.shoptao.utilities.ReadAndWrriteExcelHelper;
+import com.shoptao.utilities.ReadAndWriteExcelHelper;
 import com.shoptao.utilities.Validation;
 import com.shoptao.viewmodel.DongSanPhamViewModle;
 import com.shoptao.viewmodel.ImeiViewModel;
@@ -810,7 +810,8 @@ public class SanPhamPanel extends javax.swing.JPanel {
         if (!validation()) {
             return;
         }
-        if (Validation.checkTrungTenSP(txt_ten.getText())) {
+        
+        if (Validation.checkTrungSP(txt_ten.getText(), txt_dungLuong.getText(), String.valueOf(cb_dongSP.getSelectedItem()), String.valueOf(cb_mauSac.getSelectedItem()))) {
             return;
         }
         int indexDongSP = cb_dongSP.getSelectedIndex();
@@ -1014,7 +1015,7 @@ public class SanPhamPanel extends javax.swing.JPanel {
 
     private void btn_inExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inExcelActionPerformed
         // TODO add your handling code here:
-        ReadAndWrriteExcelHelper.exportExcel(listSPVM);
+        ReadAndWriteExcelHelper.exportExcel(listSPVM);
 
     }//GEN-LAST:event_btn_inExcelActionPerformed
 

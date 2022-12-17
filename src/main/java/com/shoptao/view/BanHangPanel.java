@@ -466,6 +466,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         lblTienThua.setText("0");
         lblTienThua.setOpaque(true);
 
+        btnTaoHoaDon.setBackground(new java.awt.Color(102, 255, 102));
         btnTaoHoaDon.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnTaoHoaDon.setText("Tạo hóa đơn");
         btnTaoHoaDon.setToolTipText("");
@@ -492,6 +493,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel17.setText("VND");
 
+        btnThanhToan.setBackground(new java.awt.Color(102, 255, 102));
         btnThanhToan.setFont(new java.awt.Font("Tahoma", 1, 33)); // NOI18N
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -500,6 +502,7 @@ public class BanHangPanel extends javax.swing.JPanel {
             }
         });
 
+        btnHuy.setBackground(new java.awt.Color(102, 255, 102));
         btnHuy.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnHuy.setText("Hủy hóa đơn");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -1069,7 +1072,7 @@ public class BanHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_mnuXoaTatCaActionPerformed
 
     private void txtTienMatCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienMatCaretUpdate
-        if (maHoaDon.isEmpty()) {
+        if (maHoaDon == null) {
             return;
         }
 
@@ -1078,7 +1081,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         }
 
         String tienKhach = txtTienMat.getText();
-        if (tienKhach.isEmpty()) {
+        if (tienKhach.isEmpty() || tienKhach == null) {
             lblLoiTien.setText("");
             lblTienThua.setText("0");
 //            btnThanhToan.setEnabled(false);
@@ -1109,7 +1112,15 @@ public class BanHangPanel extends javax.swing.JPanel {
         String barcode = txtBarcode.getText();
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if(maHoaDon == null){
+                return;
+            }
+            
             SanPhamBanHangViewModel sanPham = banHangService.getSanPhambyBarcode(barcode);
+            if(sanPham.getTrangthai() != 1){
+                DialogHelper.alert(null, "Sản phầm đã ngừng bán", "Thông báo");
+                return;
+            }
             addImei(sanPham.getMasanpham());
         }
     }//GEN-LAST:event_txtBarcodeKeyPressed
@@ -1158,7 +1169,7 @@ public class BanHangPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cboKhuyenMaiActionPerformed
 
     private void txtChuyenKhoanCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtChuyenKhoanCaretUpdate
-        if (maHoaDon.isEmpty()) {
+        if (maHoaDon == null) {
             return;
         }
 
@@ -1167,7 +1178,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         }
 
         String tienKhach = txtChuyenKhoan.getText();
-        if (tienKhach.isEmpty()) {
+        if (tienKhach.isEmpty() || tienKhach == null) {
             lblLoiTien.setText("");
             lblTienThua.setText("0");
 //            btnThanhToan.setEnabled(false);
@@ -1261,8 +1272,11 @@ public class BanHangPanel extends javax.swing.JPanel {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int row = tbChiTietHoaDon.getSelectedRow();
         String maSanPham1 = tbChiTietHoaDon.getValueAt(row, 1)+"";
-        ImeiBanHangDialog1 ibhd = new ImeiBanHangDialog1(null, true, this, maHoaDon, maSanPham1);
-        ibhd.removeSP(banHangService.checkSPisEmpty(maHoaDon, maSanPham1));
+        if(maSanPham1.isEmpty()){
+            return;
+        }
+        ImeiBanHangDialog1 ibhd = new ImeiBanHangDialog1(null, true, this, maSanPham1, banHangService.checkSPisEmpty(maHoaDon, maSanPham1));
+        ibhd.removeSP(maSanPham1,maHoaDon);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public BigDecimal getTienKhachDua() {

@@ -5,6 +5,7 @@
 package com.shoptao.viewmodel;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -126,6 +127,6 @@ public class HoaDonViewModel {
     }
     
     public Object[] toDataRow2(){
-        return new Object[]{ma, tenNhanVien, tenKhachHang, ngaytao, tongTien, getTenTrangThai()};
+        return new Object[]{ma, tenNhanVien, tenKhachHang, new SimpleDateFormat("dd-MM-yyyy hh:mm").format(ngaytao), tongTien, getTenTrangThai()};
     }
 }

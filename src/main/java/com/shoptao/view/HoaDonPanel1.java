@@ -358,10 +358,9 @@ public class HoaDonPanel1 extends javax.swing.JPanel {
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void txtSeacrchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSeacrchMouseClicked
-        if (!txtSeacrch.getText().equals("Mã HD")) {
-            return;
-        }
-        txtSeacrch.setText("");
+        
+        jdcTuNgay.setDate(null);
+        jdcDenNgay.setDate(null);
     }//GEN-LAST:event_txtSeacrchMouseClicked
 
     private void jdcTuNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcTuNgayPropertyChange
@@ -375,6 +374,8 @@ public class HoaDonPanel1 extends javax.swing.JPanel {
         loadDataHoaDon(service.searchbydate(ngaybd, ngaykt));
         loadDataHDCT(null);
         loadDataImeiDaBan(null);
+        txtSeacrch.setText("");
+        cboTrangThai.setSelectedIndex(0);
     }//GEN-LAST:event_jdcTuNgayPropertyChange
 
     private void jdcDenNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcDenNgayPropertyChange
@@ -388,6 +389,8 @@ public class HoaDonPanel1 extends javax.swing.JPanel {
         loadDataHoaDon(service.searchbydate(ngaybd, ngaykt));
         loadDataHDCT(null);
         loadDataImeiDaBan(null);
+        txtSeacrch.setText("");
+        cboTrangThai.setSelectedIndex(0);
     }//GEN-LAST:event_jdcDenNgayPropertyChange
 
     private void cboTrangThaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTrangThaiItemStateChanged
@@ -402,6 +405,9 @@ public class HoaDonPanel1 extends javax.swing.JPanel {
         }
         loadDataHDCT(null);
         loadDataImeiDaBan(null);
+        
+        jdcTuNgay.setDate(null);
+        jdcDenNgay.setDate(null);
     }//GEN-LAST:event_cboTrangThaiItemStateChanged
 
     private void tbHDCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDCTMouseClicked

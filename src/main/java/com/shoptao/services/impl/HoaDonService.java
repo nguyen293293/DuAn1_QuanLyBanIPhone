@@ -6,13 +6,17 @@ import com.shoptao.viewmodel.HoaDonViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import com.shoptao.services.ChungServices;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author nguyen293
  */
-public class HoaDonService implements ChungServices<HoaDonViewModel>,com.shoptao.services.HoaDonService {
+public class HoaDonService implements ChungServices<HoaDonViewModel>, com.shoptao.services.HoaDonService {
 
     private final HoaDonRepository hoaDonRepository;
 
@@ -52,7 +56,7 @@ public class HoaDonService implements ChungServices<HoaDonViewModel>,com.shoptao
     public List<HoaDonViewModel> search(String ma) {
         List<HoaDonViewModel> list = new ArrayList<>();
         for (HoaDonViewModel x : getList()) {
-            if(x.getMa().startsWith(ma.toUpperCase())){
+            if (x.getMa().startsWith(ma.toUpperCase())) {
                 list.add(x);
             }
         }
@@ -63,32 +67,53 @@ public class HoaDonService implements ChungServices<HoaDonViewModel>,com.shoptao
     public String delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public List<HoaDonViewModel> searchbydate(Date ngaybd, Date ngaykt) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         List<HoaDonViewModel> list = new ArrayList<>();
+
+        if (ngaybd == null) {
+            try {
+                ngaybd = sdf.parse("22-2-2002");
+            } catch (ParseException ex) {
+                Logger.getLogger(HoaDonService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(ngaykt == null ){
+            try {
+                ngaykt = sdf.parse("22-2-2099");
+            } catch (ParseException ex) {
+                Logger.getLogger(HoaDonService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         for (HoaDonViewModel x : getList()) {
-            if(x.getNgaytao().compareTo(ngaybd) >= 0 && x.getNgaytao().compareTo(ngaykt) <= 0){
+//            if (x.getNgaytao().compareTo(ngaybd) >= 0 && x.getNgaytao().compareTo(ngaykt) <= 0) {
+//                list.add(x);
+//            }
+            if (x.getNgaytao().getTime() >= ngaybd.getTime() 
+                    && x.getNgaytao().getTime() <= ngaykt.getTime()) {
                 list.add(x);
             }
         }
         return list;
     }
-    
+
     public List<HoaDonViewModel> searchbytrangthai(int trangthai) {
         List<HoaDonViewModel> list = new ArrayList<>();
         for (HoaDonViewModel x : getList()) {
-            if(x.getTrangthai() == trangthai){
+            if (x.getTrangthai() == trangthai) {
                 list.add(x);
             }
         }
         return list;
     }
-    
-     @Override
-    public List<HoaDonViewModel> getListHoaDonTheoNgay(Date datebd,Date datekt, int trangthai) {
-          List<HoaDonViewModel> list = new ArrayList<>();
-        for (HoaDon x : hoaDonRepository.getListHoaDonTheoNgay(datebd,datekt,trangthai)) {
-               list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
+
+    @Override
+    public List<HoaDonViewModel> getListHoaDonTheoNgay(Date datebd, Date datekt, int trangthai) {
+        List<HoaDonViewModel> list = new ArrayList<>();
+        for (HoaDon x : hoaDonRepository.getListHoaDonTheoNgay(datebd, datekt, trangthai)) {
+            list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
                     x.getKhachhang().getHoten(), x.getNhanvien().getHoten(), x.getTongtien(), x.getTienkhachdua()));
         }
         return list;
@@ -96,9 +121,9 @@ public class HoaDonService implements ChungServices<HoaDonViewModel>,com.shoptao
 
     @Override
     public List<HoaDonViewModel> getListHoaDonTheoThang(int month, int year, int trangthai) {
-         List<HoaDonViewModel> list = new ArrayList<>();
+        List<HoaDonViewModel> list = new ArrayList<>();
         for (HoaDon x : hoaDonRepository.getListHoaDonTheoThang(month, year, trangthai)) {
-              list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
+            list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
                     x.getKhachhang().getHoten(), x.getNhanvien().getHoten(), x.getTongtien(), x.getTienkhachdua()));
         }
         return list;
@@ -106,9 +131,9 @@ public class HoaDonService implements ChungServices<HoaDonViewModel>,com.shoptao
 
     @Override
     public List<HoaDonViewModel> getListHoaDonTheoNam(int year, int trangthai) {
-          List<HoaDonViewModel> list = new ArrayList<>();
+        List<HoaDonViewModel> list = new ArrayList<>();
         for (HoaDon x : hoaDonRepository.getListHoaDonTheoNam(year, trangthai)) {
-              list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
+            list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
                     x.getKhachhang().getHoten(), x.getNhanvien().getHoten(), x.getTongtien(), x.getTienkhachdua()));
         }
         return list;
@@ -116,9 +141,9 @@ public class HoaDonService implements ChungServices<HoaDonViewModel>,com.shoptao
 
     @Override
     public List<HoaDonViewModel> getListHoaDonTheoMaKM(String maKM) {
-       List<HoaDonViewModel> list = new ArrayList<>();
+        List<HoaDonViewModel> list = new ArrayList<>();
         for (HoaDon x : hoaDonRepository.getListHoaDonTheoMaKM(maKM)) {
-              list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
+            list.add(new HoaDonViewModel(x.getMa(), x.getNgaytao(), x.getNgaythanhtoan(), x.getTrangthai(),
                     x.getKhachhang().getHoten(), x.getNhanvien().getHoten(), x.getTongtien(), x.getTienkhachdua()));
         }
         return list;
