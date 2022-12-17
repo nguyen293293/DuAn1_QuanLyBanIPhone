@@ -79,11 +79,6 @@ public class HoaDonPanel1 extends javax.swing.JPanel {
 
         cboTrangThai.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Đã thanh toán", "Đã hủy" }));
-        cboTrangThai.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboTrangThaiItemStateChanged(evt);
-            }
-        });
         cboTrangThai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTrangThaiActionPerformed(evt);
@@ -398,18 +393,6 @@ public class HoaDonPanel1 extends javax.swing.JPanel {
         cboTrangThai.setSelectedIndex(0);
     }//GEN-LAST:event_jdcDenNgayPropertyChange
 
-    private void cboTrangThaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTrangThaiItemStateChanged
-        String trangthai = cboTrangThai.getSelectedItem() + "";
-        if (cboTrangThai.getSelectedIndex() == 0) {
-            listHoaDon = service.getList();
-            loadDataHoaDon(listHoaDon);
-        } else if (cboTrangThai.getSelectedIndex() == 1) {
-            loadDataHoaDon(service.searchbytrangthai(1));
-        } else {
-            loadDataHoaDon(service.searchbytrangthai(2));
-        }
-    }//GEN-LAST:event_cboTrangThaiItemStateChanged
-
     private void tbHDCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbHDCTMouseClicked
         int rowHD = tblHoaDon.getSelectedRow();
         String maHD = tblHoaDon.getValueAt(rowHD, 0) + "";
@@ -424,19 +407,19 @@ public class HoaDonPanel1 extends javax.swing.JPanel {
 
     private void cboTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTrangThaiActionPerformed
         String trangthai = cboTrangThai.getSelectedItem() + "";
-        if (cboTrangThai.getSelectedIndex() == 0) {
+        if (cboTrangThai.getSelectedIndex() == 1) {
+            loadDataHoaDon(service.searchbytrangthai(1));
+        } else if(cboTrangThai.getSelectedIndex() == 2){
+            loadDataHoaDon(service.searchbytrangthai(2));
+        }  else{
             listHoaDon = service.getList();
             loadDataHoaDon(listHoaDon);
-        } else if (cboTrangThai.getSelectedIndex() == 1) {
-            loadDataHoaDon(service.searchbytrangthai(1));
-        } else {
-            loadDataHoaDon(service.searchbytrangthai(2));
         }
-        loadDataHDCT(null);
-        loadDataImeiDaBan(null);
-
-        jdcTuNgay.setDate(null);
-        jdcDenNgay.setDate(null);
+//        loadDataHDCT(null);
+//        loadDataImeiDaBan(null);
+//
+//        jdcTuNgay.setDate(null);
+//        jdcDenNgay.setDate(null);
     }//GEN-LAST:event_cboTrangThaiActionPerformed
 
 
@@ -464,6 +447,7 @@ public class HoaDonPanel1 extends javax.swing.JPanel {
     private void loadDataHoaDon(List<HoaDonViewModel> listHoaDon) {
         tableModel = (DefaultTableModel) tblHoaDon.getModel();
         tableModel.setRowCount(0);
+        System.out.println("1");
         for (HoaDonViewModel x : listHoaDon) {
             if (x.getTrangthai() != 0) {
                 tableModel.addRow(x.toDataRow2());

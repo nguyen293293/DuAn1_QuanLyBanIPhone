@@ -13,21 +13,21 @@ import java.util.Date;
  * @author nguyen293
  */
 public class HoaDonViewModel {
-    
+
     private String ma;
-    
+
     private Date ngaytao;
-    
+
     private Date ngaythanhtoan;
-    
+
     private int trangthai;
-    
+
     private String tenKhachHang;
-    
+
     private String tenNhanVien;
-    
+
     private BigDecimal tongTien;
-    
+
     private BigDecimal tienKhachDua;
 
     public HoaDonViewModel() {
@@ -41,7 +41,6 @@ public class HoaDonViewModel {
 //        this.tenKhachHang = tenKhachHang;
 //        this.tenNhanVien = tenNhanVien;
 //    }
-
     public HoaDonViewModel(String ma, Date ngaytao, Date ngaythanhtoan, int trangthai, String tenKhachHang, String tenNhanVien, BigDecimal tongTien, BigDecimal tienKhachDua) {
         this.ma = ma;
         this.ngaytao = ngaytao;
@@ -53,8 +52,6 @@ public class HoaDonViewModel {
         this.tienKhachDua = tienKhachDua;
     }
 
-    
-    
     public String getMa() {
         return ma;
     }
@@ -102,13 +99,11 @@ public class HoaDonViewModel {
     public void setTenNhanVien(String tenNhanVien) {
         this.tenNhanVien = tenNhanVien;
     }
-    
+
     public String getTenTrangThai() {
-        if (trangthai == 0) {
-            return "Chưa thanh toán";
-        }else if(trangthai == 1){
+        if (trangthai == 1) {
             return "Đã thanh toán";
-        }else{
+        } else {
             return "Đã huỷ";
         }
     }
@@ -120,13 +115,12 @@ public class HoaDonViewModel {
     public void setTongTien(BigDecimal tongTien) {
         this.tongTien = tongTien;
     }
-    
-    
-    public Object[] toDataRow(){
+
+    public Object[] toDataRow() {
         return new Object[]{ma, tenNhanVien, tenKhachHang, ngaytao, getTenTrangThai()};
     }
-    
-    public Object[] toDataRow2(){
+
+    public Object[] toDataRow2() {
         return new Object[]{ma, tenNhanVien, tenKhachHang, new SimpleDateFormat("dd-MM-yyyy hh:mm").format(ngaytao), tongTien, getTenTrangThai()};
     }
 }
