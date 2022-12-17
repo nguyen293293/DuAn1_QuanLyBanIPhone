@@ -42,13 +42,15 @@ public class KhachHangService implements ChungServices<KhachHangViewModel>{
         boolean isAdd = khachHangRepository.save(khachHang);
         return isAdd ? "Thêm thành công" : "Thêm thất bại";
     }
-    
+
+
     private String genmahd() {
-        if (getList().size() == 0) {
-            return "KH01";
+        List<KhachHang> list = khachHangRepository.getList();
+        if (list.size() == 0) {
+            return "KH001";
         } else {
-            int num = Integer.valueOf(getList().get(getList().size() - 1).getMa().substring(2)) + 1;
-            return "KH" + (String.format("%02d", num));
+            int num = list.size() + 1;
+            return "KH" + (String.format("%03d", num));
         }
     }
 
@@ -92,4 +94,15 @@ public class KhachHangService implements ChungServices<KhachHangViewModel>{
     }
     
     
+    public List<KhachHangViewModel> searchtrangthai(int trangthai) {
+        List<KhachHangViewModel> listKhachHangVM = new ArrayList<>();
+
+        for (KhachHang x : khachHangRepository.getList()) {
+            if (x.getTrangthai() == trangthai) {
+                listKhachHangVM.add(new KhachHangViewModel(x.getMa(), x.getHoten(),
+                        x.getNgaysinh(), x.getSdt(), x.getDiachi(), x.getTrangthai()));
+            }
+        }
+        return listKhachHangVM;
+    }
 }
